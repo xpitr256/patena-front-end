@@ -1,0 +1,10 @@
+{
+  "views": {
+    "home": {
+      "welcomeMessage": "Bienvenido a Patena"
+    },
+    "about": {
+      "title": "Sobre nosotros"
+    }
+  }
+}
