@@ -1,0 +1,144 @@
+<template>
+  <div id="header" class="header-fixed">
+    <div class="container">
+      <div class="logo">
+        <a>
+          <router-link to="/"
+            ><img src="./../assets/logo.png" alt="Patena"
+          /></router-link>
+        </a>
+      </div>
+      <div class="site-nav">
+        <ul>
+          <li>
+            <router-link to="/about">{{
+              $t("views.navBar.menu.about")
+            }}</router-link>
+          </li>
+          <li>
+            <router-link to="/analyze">{{
+              $t("views.navBar.menu.analyze")
+            }}</router-link>
+          </li>
+          <li>
+            <router-link to="/design">{{
+              $t("views.navBar.menu.design")
+            }}</router-link>
+          </li>
+          <li>
+            <router-link to="/results">{{
+              $t("views.navBar.menu.results")
+            }}</router-link>
+          </li>
+          <li>
+            <router-link to="/contact">{{
+              $t("views.navBar.menu.contact")
+            }}</router-link>
+          </li>
+          <li>
+            <a href="#" v-on:click="showInSpanish">ES</a>
+          </li>
+          <li class="last">
+            <a href="#" v-on:click="showInEnglish">EN</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "NavBar",
+  methods: {
+    showInEnglish: function() {
+      this["$i18n"].locale = "en";
+    },
+    showInSpanish: function() {
+      import("@/lang/es.json").then(msgs => {
+        this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
+        this.$i18n.locale = "es";
+      });
+    }
+  }
+};
+</script>
+<style scoped>
+#header {
+  position: relative;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.18);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.18);
+  margin-bottom: 25px;
+  height: 67px !important;
+}
+#header.header-fixed {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  top: 0;
+}
+#header .logo {
+  padding: 20px 0;
+  float: left;
+  margin-right: 50px;
+  top: -20px;
+  position: absolute;
+  z-index: 999;
+}
+#header .logo img {
+  height: 67px;
+  transition: all;
+  transition-duration: 0.4s;
+  transition: all 0.4s !important;
+}
+#header .logo.scroll img {
+  transform: scale(0.85);
+}
+#header .site-nav {
+  position: relative;
+  float: right;
+  margin-right: 0px;
+}
+#header .site-nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 67px;
+  overflow: hidden;
+}
+#header .site-nav > ul > li {
+  float: left;
+  border-left: 1px solid #eee;
+  overflow: hidden;
+}
+#header .site-nav > ul > li > a {
+  font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+  letter-spacing: 1px !important;
+  text-decoration: none;
+  display: block;
+  padding: 21px 20px 13px 20px;
+  font-size: 21px;
+  color: #333333;
+  transition: all;
+  transition-duration: 0.4s;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-bottom: 3px solid #fff;
+  letter-spacing: 0px;
+}
+#header .site-nav .last {
+  border-right: 1px solid #eee;
+}
+.site-nav .active {
+  background-color: #f7f7f7;
+  color: #333333 !important;
+  border-bottom: 3px solid #f7f7f7 !important;
+}
+#header .site-nav > ul > li > a:hover {
+  background-color: #f2f2f2;
+  color: #000000;
+  border-bottom: 3px solid rgb(243, 112, 33) !important;
+}
+</style>

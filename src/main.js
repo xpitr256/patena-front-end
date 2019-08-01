@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import VueI18n from "vue-i18n";
 import en from "@/lang/en.json";
+import "./assets/app.scss";
 
 Vue.config.productionTip = false;
 

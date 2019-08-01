@@ -1,5 +1,14 @@
 {
   "views": {
+    "navBar": {
+      "menu": {
+        "about" : "About us",
+        "analyze": "Analyze Linker",
+        "design": "Design Linker",
+        "results": "See Results",
+        "contact": "Contact us"
+      }
+    },
     "home": {
       "welcomeMessage": "Welcome to Patena"
     },
