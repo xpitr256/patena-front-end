@@ -11,27 +11,27 @@
       <div class="site-nav">
         <ul>
           <li>
-            <router-link to="/about">{{
+            <router-link to="/about" v-bind:class="getClass('/about')">{{
               $t("views.navBar.menu.about")
             }}</router-link>
           </li>
           <li>
-            <router-link to="/analyze">{{
+            <router-link to="/analyze" v-bind:class="getClass('/analyze')">{{
               $t("views.navBar.menu.analyze")
             }}</router-link>
           </li>
           <li>
-            <router-link to="/design">{{
+            <router-link to="/design" v-bind:class="getClass('/design')">{{
               $t("views.navBar.menu.design")
             }}</router-link>
           </li>
           <li>
-            <router-link to="/results">{{
+            <router-link to="/results" v-bind:class="getClass('/results')">{{
               $t("views.navBar.menu.results")
             }}</router-link>
           </li>
           <li>
-            <router-link to="/contact">{{
+            <router-link to="/contact" v-bind:class="getClass('/contact')">{{
               $t("views.navBar.menu.contact")
             }}</router-link>
           </li>
@@ -51,6 +51,9 @@
 export default {
   name: "NavBar",
   methods: {
+    getClass(property) {
+      return property === this.$route.path ? 'active' : '';
+    },
     showInEnglish: function() {
       this["$i18n"].locale = "en";
     },

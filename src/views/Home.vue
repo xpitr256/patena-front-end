@@ -1,21 +1,20 @@
 <template>
-  <div class="home">
-    <img alt="Patena logo" src="../assets/logo.png" />
-    <HomeBody />
-    <Textbox />
+  <div class="container wrapper">
+
+  <home-body></home-body>
+
   </div>
 </template>
 
 <script>
-import HomeBody from "@/components/HomeBody.vue";
-import Textbox from "@/components/Textbox.vue";
 
+import HomeBody from "../components/HomeBody";
 export default {
   name: "home",
-  components: {
-    HomeBody,
-    // eslint-disable-next-line vue/no-unused-components
-    Textbox
-  }
+  components: {HomeBody}
 };
 </script>
+
+<style scoped>
+
+</style>

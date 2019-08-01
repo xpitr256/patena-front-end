@@ -10,8 +10,10 @@
       }
     },
     "home": {
-      "welcomeMessage": "Welcome to Patena",
-      "welcomeDescription": "The tool allows to perform on the sequences to detect desired and undesired characteristics during the \n iterative design process. It is explained in general what is the objective of applying each \n none of the methods and the fundamentals in which The details of how the different resources are integrated in the context of our application are presented, representing their results in the scoring scheme of our ḿetodo. \n \nThe set of evaluations described corresponds to this first version of our Therefore, it does not represent an exhaustive or final set, but rather a first stage that should be analyzed and modified in a logical way according to the results obtained."
+      "welcomeMessage": "Welcome to Patena!",
+      "welcomeDescription": "The tool allows to perform on the sequences to detect desired and undesired characteristics during the \n iterative design process. It is explained in general what is the objective of applying each \n none of the methods and the fundamentals in which The details of how the different resources are integrated in the context of our application are presented, representing their results in the scoring scheme of our method. \n \nThe set of evaluations described corresponds to this first version of our Therefore, it does not represent an exhaustive or final set, but rather a first stage that should be analyzed and modified in a logical way according to the results obtained.",
+      "moreMessage": "To know in more details about the process, click the button below",
+      "seeMore": "Learn More"
     },
     "about": {
       "title": "About us",
