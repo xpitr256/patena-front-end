@@ -10,10 +10,12 @@
       }
     },
     "home": {
-      "welcomeMessage": "Bienvenido a Patena"
+      "welcomeMessage": "Bienvenido a Patena",
+      "welcomeDescription": "La herramienta permite realizar sobre las secuencias para detectar caracteŕısticas deseadas y no deseadas durante el\nproceso iterativo de diseno. Se explica en general cúal es el objetivo de aplicar cada\nuno de los ḿetodos y los fundamentos en los que se basan. Se detalla ćomo se\nintegran los distintos recursos en el contexto de nuestra aplicaci ́on, representando\nsus resultados en el esquema de puntajes propio de nuestro ḿetodo.\n\nEl conjunto de evaluaciones que se describen corresponde a esta primera versíon de nuestra herramienta. Por lo tanto no representa un conjunto exhaustivo ni\ndefinitivo, sino una primera etapa que deber ́a ser analizada y modificada de forma\niterativa en funcíon de los resultados obtenidos."
     },
     "about": {
-      "title": "Sobre nosotros"
+      "title": "Quiénes  Somos",
+      "description": "La Comunidad Patena es un grupo formado por dos instituciones: La Universidad de Buenos Aires, la Universidad de la Plata.\n\nQuienes trabajamos aquí lo hacemos guiados por los principios y valores que nos transmitió nuestro fundador, y movilizados por la única finalidad trascendente que marca el rumbo de nuestras Instituciones."
     }
   }
 }
