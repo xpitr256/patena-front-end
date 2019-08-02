@@ -1,6 +1,6 @@
 <template>
-    <div class="title">
-        <h1>{{ $t("views.contact.title") }}</h1>
+    <div class="container wrapper">
+        <h1 class="display-4">{{ $t("views.contact.title") }}</h1>
     </div>
 </template>
 

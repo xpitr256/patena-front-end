@@ -1,18 +1,25 @@
 <template>
-    <div class="title">
-        <h1>{{ $t("views.about.title") }}</h1>
+    <div class="container wrapper">
+        <h1 class="display-4">{{ $t("views.about.title") }}</h1>
+        <h3>{{ $t("views.about.description") }}</h3>
     </div>
 </template>
 
 <script>
     export default {
-        name: "AboutBody"
+        name: "about"
     }
 </script>
 
 <style scoped>
-    h1 {
+    h3 {
         font-variant: small-caps;
+        background-color: lightgrey;
+        width: 800px;
+        border: 5px solid green;
+        padding: 30px;
+        margin: 20px;
     }
+
 
 </style>

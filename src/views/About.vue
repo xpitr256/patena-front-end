@@ -1,20 +1,18 @@
 <template>
-  <div class="about">
+  <div class="container wrapper">
     <AboutBody/>
-    <AboutTextbox/>
   </div>
 </template>
 
 <script>
 
-  import AboutTextbox from "@/components/AboutTextbox.vue";
+
   import AboutBody from "@/components/AboutBody";
 
   export default {
     name: "about",
     components: {
       AboutBody,
-      AboutTextbox
     }
   };
 </script>

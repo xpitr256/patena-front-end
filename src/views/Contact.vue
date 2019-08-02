@@ -1,5 +1,5 @@
 <template>
-    <div class="contact">
+    <div class="container wrapper">
         <ContactBody/>
     </div>
 </template>
