@@ -8,6 +8,7 @@ import "bootstrap";
 import "jquery";
 import "popper.js";
 
+
 Vue.config.productionTip = false;
 
 Vue.use(VueI18n);

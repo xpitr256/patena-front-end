@@ -23,7 +23,7 @@
       "title": "Contact",
       "name": "Full Name",
       "mail": "E-mail",
-      "message": "Message"
+      "send": "Send"
     }
   }
 }
