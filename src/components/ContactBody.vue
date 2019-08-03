@@ -19,12 +19,10 @@
                 <div class="form-group col">
                     <label for="message">{{ $t("views.contact.message") }}</label>
                     <textarea class="form-control" rows="5" id="message"></textarea>
-
                 </div>
-
             </div>
-
             <button type="submit" class="btn btn-primary">{{ $t("views.contact.send") }}</button>
+            <hr class="my-4">
         </form>
     </div>
 </template>

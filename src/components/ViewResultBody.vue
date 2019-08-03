@@ -11,7 +11,6 @@
                                :placeholder="$t('views.result.placeholder')">
                         <small id="orderNumberHelp" class="form-text text-muted">{{ $t("views.result.help") }}</small>
                     </div>
-
                 </div>
                 <button type="submit" class="btn btn-primary">{{ $t("views.result.btSearch") }}</button>
                 <hr class="my-4">
