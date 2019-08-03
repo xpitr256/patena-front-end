@@ -25,6 +25,13 @@
       "mail": "Email",
       "message" : "Your message",
       "send": "Send"
+    },
+    "result": {
+      "title": "View Result",
+      "label": "Enter your order number to continue",
+      "placeholder" : "Order number",
+      "help": "Example: AKWX-1234-JPQ",
+      "btSearch": "Search"
     }
   }
 }

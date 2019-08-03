@@ -25,6 +25,13 @@
       "mail": "Correo Electronico",
       "message" : "Su Mensaje",
       "send": "Enviar"
+    },
+    "result": {
+      "title": "Ver Resultado",
+      "label": "Ingrese su número de orden para continuar",
+      "placeholder" : "Número de orden",
+      "help": "Ejemplo: AKWX-1234-JPQ",
+      "btSearch": "Buscar"
     }
   }
 }

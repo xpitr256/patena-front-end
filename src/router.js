@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Contact from "./views/Contact";
+import ViewResult from "./views/ViewResult";
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
       path: "/contact",
       name: "contact",
       component:Contact
+    },
+    {
+      path: "/results",
+      name: "results",
+      component:ViewResult
     }
   ]
 });
