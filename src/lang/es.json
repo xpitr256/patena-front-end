@@ -23,6 +23,7 @@
       "title": "Contacto",
       "name": "Nombre Completo",
       "mail": "Correo Electronico",
+      "message" : "Su Mensaje",
       "send": "Enviar"
     }
   }

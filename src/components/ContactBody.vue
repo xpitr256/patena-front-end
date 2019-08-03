@@ -1,54 +1,38 @@
 <template>
     <div class="container wrapper">
         <h1 class="display-4">{{ $t("views.contact.title") }}</h1>
-        <div class="row">
-            <div class="column">
-                <div class="form-group">
-                    <label for="inputName">{{ $t("views.contact.name") }}:</label>
-                    <input type="email" class="form-control" id="inputName" aria-describedby="emailHelp" >
+
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputName">{{ $t("views.contact.name") }}</label>
+                    <input type="text" class="form-control" id="inputName"
+                           :placeholder="$t('views.contact.name')">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
                 </div>
             </div>
-            <div class="columnSeparete"></div>
-            <div class="column">
-                <div class="form-group">
-                    <label for="inputEmail">{{ $t("views.contact.mail") }}:</label>
-                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" >
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="message">{{ $t("views.contact.message") }}</label>
+                    <textarea class="form-control" rows="5" id="message"></textarea>
+
                 </div>
+
             </div>
-        </div>
-        <br/>
-        <div class="row" >
-            <div class="form-group">
-            <textarea class="form-control" v-model="message" cols="70" rows="10"></textarea>
-            </div>
-        </div>
-        <br/>
-        <div class="container">
-            <a class="btn btn-primary btn-md" href="#" role="button">{{ $t("views.contact.send") }}</a>
-        </div>
+
+            <button type="submit" class="btn btn-primary">{{ $t("views.contact.send") }}</button>
+        </form>
     </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                text: ''
-            }
-        }
-    }
+  export default {
+  }
 </script>
 
 <style scoped>
-    h1 {
-        font-variant: small-caps;
-    }
-    .column {
-        float: left;
-        width: 25%;
-    }
-    .columnSeparete {
-        float: left;
-        width: 5%;
-    }
 </style>
