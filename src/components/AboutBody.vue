@@ -1,7 +1,10 @@
 <template>
-    <div class="container wrapper">
-        <h1 class="display-4">{{ $t("views.about.title") }}</h1>
-        <h3>{{ $t("views.about.description") }}</h3>
+    <div class="jumbotron mt-5">
+        <div class="container wrapper">
+            <h1 class="display-4">{{ $t("views.about.title") }}</h1>
+            <p class="lead">{{ $t("views.about.description") }}</p>
+            <hr class="my-4">
+        </div>
     </div>
 </template>
 
