@@ -32,6 +32,13 @@
       "placeholder" : "Order number",
       "help": "Example: AKWX-1234-JPQ",
       "btSearch": "Search"
+    },
+    "analyze": {
+      "title": "Analyze Linker",
+      "placeholder": "Enter your file .fasta",
+      "mail": "Mail",
+      "btSearch": "Search",
+      "btAnalyze": "Analyze"
     }
   }
 }

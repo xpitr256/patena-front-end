@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Contact from "./views/Contact";
 import ViewResult from "./views/ViewResult";
+import Analyze from "./views/Analize";
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ export default new Router({
       path: "/results",
       name: "results",
       component:ViewResult
+    },
+    {
+      path: "/analyze",
+      name: "Analyze",
+      component:Analyze
     }
   ]
 });

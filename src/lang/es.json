@@ -32,6 +32,13 @@
       "placeholder" : "Número de orden",
       "help": "Ejemplo: AKWX-1234-JPQ",
       "btSearch": "Buscar"
+    },
+    "analyze": {
+      "title": "Analizar Linker",
+      "placeholder" : "Elija su archivo .fasta",
+      "mail": "Correo Electronico",
+      "btSearch": "Buscar",
+      "btAnalyze": "Analizar"
     }
   }
 }
