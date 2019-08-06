@@ -24,7 +24,8 @@
       "name": "Nombre Completo",
       "mail": "Correo Electronico",
       "message" : "Su Mensaje",
-      "send": "Enviar"
+      "send": "Enviar",
+      "sendFailed": "Enviar para que falle"
     },
     "result": {
       "title": "Ver Resultado",
@@ -39,6 +40,9 @@
       "mail": "Correo Electronico",
       "btSearch": "Buscar",
       "btAnalyze": "Analizar"
+    },
+    "design": {
+      "title": "Diseñar un linker"
     }
   }
 }

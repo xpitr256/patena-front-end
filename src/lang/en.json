@@ -24,7 +24,8 @@
       "name": "Full Name",
       "mail": "Email",
       "message" : "Your message",
-      "send": "Send"
+      "send": "Send",
+      "sendFailed": "Send to be failed"
     },
     "result": {
       "title": "View Result",
@@ -39,6 +40,9 @@
       "mail": "Mail",
       "btSearch": "Search",
       "btAnalyze": "Analyze"
+    },
+    "design": {
+      "title": "Design a linker"
     }
   }
 }

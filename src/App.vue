@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
+    <notifications group="notifications" position="bottom right"/>
     <router-view />
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 

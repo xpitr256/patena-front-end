@@ -1,6 +1,5 @@
 <template>
-
-  <div class="jumbotron mt-5">
+  <div class="jumbotron mt-3">
     <h1 class="display-4">{{ $t("views.home.welcomeMessage") }}</h1>
     <p class="lead">{{ $t("views.home.welcomeDescription") }}</p>
     <hr class="my-4">
