@@ -43,6 +43,9 @@
 </template>
 
 <script>
+
+  import BackendService from '../services/BackendService'
+
   export default {
     data () {
       return {
@@ -50,41 +53,39 @@
       }
     },
     methods: {
-      sendForm: function() {
-        this.$Progress.start();
-        this.submitInProgress = true;
+      clearNotifications : function() {
         this.$notify({
           group: 'notifications',
           clean: true
         });
-        setTimeout(() => {
-          this.$Progress.finish();
-          this.$notify({
-            group: 'notifications',
-            type: 'success',
-            title: 'Success',
-            text: 'Data is correct!'
-          });
-          this.submitInProgress = false;
-        }, 1000);
       },
-      sendFailedForm: function() {
+      sendForm: async function() {
         this.$Progress.start();
         this.submitInProgress = true;
+        this.clearNotifications();
+        await BackendService.sendContactInformation();
+        this.$Progress.finish();
         this.$notify({
           group: 'notifications',
-          clean: true
+          type: 'success',
+          title: 'Success',
+          text: 'Data is correct!'
         });
-        setTimeout(() => {
-          this.$Progress.fail();
-          this.$notify({
-            group: 'notifications',
-            type: 'error',
-            title: 'Error',
-            text: 'There was an error. Please try again later.'
-          });
-          this.submitInProgress = false;
-        }, 1000);
+        this.submitInProgress = false;
+      },
+      sendFailedForm: async function() {
+        this.$Progress.start();
+        this.submitInProgress = true;
+        this.clearNotifications();
+        let response = await BackendService.failedSendContactInformation();
+        this.$Progress.fail();
+        this.$notify({
+          group: 'notifications',
+          type: 'error',
+          title: 'Error',
+          text: response.errors[0].message
+        });
+        this.submitInProgress = false;
       }
     }
   }
