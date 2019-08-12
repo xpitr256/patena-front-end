@@ -25,7 +25,8 @@
       "mail": "Correo Electronico",
       "message" : "Su Mensaje",
       "send": "Enviar",
-      "sendFailed": "Enviar para que falle"
+      "sendFailed": "Enviar para que falle",
+      "errorMail": "El campo de correo electrónico debe ser un correo electrónico válido"
     },
     "result": {
       "title": "Ver Resultado",

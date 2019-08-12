@@ -8,9 +8,10 @@
                     <input type="text" class="form-control" id="inputName"
                            :placeholder="$t('views.contact.name')">
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                <div class="form-group col-md-6" :class="{error: errors.has('email')}">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Email" v-validate="'required|email'" v-model="email">
+                    <span class="error" v-if="errors.has('email')">{{errors.first('email')}}</span>
                 </div>
             </div>
 
@@ -49,7 +50,9 @@
   export default {
     data () {
       return {
-        submitInProgress: false
+        submitInProgress: false,
+        emailValue: '',
+        reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
       }
     },
     methods: {
@@ -86,7 +89,14 @@
           text: response.errors[0].message
         });
         this.submitInProgress = false;
-      }
+      },
     }
   }
+
 </script>
+
+<style>
+    span.error {
+        color: #9F3A38;
+    }
+</style>

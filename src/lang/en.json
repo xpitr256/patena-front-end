@@ -25,7 +25,8 @@
       "mail": "Email",
       "message" : "Your message",
       "send": "Send",
-      "sendFailed": "Send to be failed"
+      "sendFailed": "Send to be failed",
+      "errorMail": "The email field must be a valid email"
     },
     "result": {
       "title": "View Result",
