@@ -9,7 +9,9 @@ import "jquery";
 import "popper.js";
 import Notifications from 'vue-notification'
 import VueProgressBar from 'vue-progressbar'
+import VeeValidate from 'vee-validate';
 
+Vue.use(VeeValidate);
 Vue.config.productionTip = false;
 Vue.use(Notifications);
 Vue.use(VueI18n);
@@ -27,5 +29,5 @@ const i18n = new VueI18n({
 new Vue({
   router,
   i18n,
-  render: h => h(App)
+  render: h=>h(App)
 }).$mount("#app");

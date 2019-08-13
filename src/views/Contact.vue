@@ -4,20 +4,42 @@
         <form class="mt-4">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputName">{{ $t("views.contact.name") }}</label>
-                    <input type="text" class="form-control" id="inputName"
+                    <label for="fullName">{{ $t("views.contact.name") }}</label>
+                    <input type="text" class="form-control" id="fullName"
+                           v-validate="'required|alpha_spaces'" name="fullName"
+                           v-bind:class="{'is-invalid': errors.has('fullName')}"
                            :placeholder="$t('views.contact.name')">
+                    <div class="invalid-feedback">
+                        {{ errors.first('fullName') }}
+                    </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    <label>Email</label>
+                    <input class="form-control"
+                           v-bind:class="{'is-invalid': errors.has('email')}"
+                           v-validate="'required|email'"
+                           placeholder="Email"
+                           name="email"
+                           type="email">
+                    <div class="invalid-feedback">
+                        {{ errors.first('email') }}
+                    </div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col">
                     <label for="message">{{ $t("views.contact.message") }}</label>
-                    <textarea class="form-control" rows="5" id="message"></textarea>
+                    <textarea class="form-control"
+                              rows="5"
+                              id="message"
+                              v-bind:class="{'is-invalid': errors.has('message')}"
+                              v-validate="'required|min:10'"
+                              name="message"
+                    ></textarea>
+                    <div class="invalid-feedback">
+                        {{ errors.first('message') }}
+                    </div>
                 </div>
             </div>
 
@@ -25,7 +47,7 @@
                 <div class="form-group col">
                     <button type="button"
                             v-on:click="sendForm"
-                            :disabled="submitInProgress"
+                            :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
                         {{ $t("views.contact.send") }}
                     </button>
@@ -60,18 +82,21 @@
         });
       },
       sendForm: async function() {
-        this.$Progress.start();
-        this.submitInProgress = true;
-        this.clearNotifications();
-        await BackendService.sendContactInformation();
-        this.$Progress.finish();
-        this.$notify({
-          group: 'notifications',
-          type: 'success',
-          title: 'Success',
-          text: 'Data is correct!'
-        });
-        this.submitInProgress = false;
+        let formIsValid = await this.$validator.validate();
+        if (formIsValid) {
+          this.$Progress.start();
+          this.submitInProgress = true;
+          this.clearNotifications();
+          await BackendService.sendContactInformation();
+          this.$Progress.finish();
+          this.$notify({
+            group: 'notifications',
+            type: 'success',
+            title: 'Success',
+            text: 'Data is correct!'
+          });
+          this.submitInProgress = false;
+        }
       },
       sendFailedForm: async function() {
         this.$Progress.start();
@@ -86,7 +111,8 @@
           text: response.errors[0].message
         });
         this.submitInProgress = false;
-      }
+      },
     }
   }
 </script>
+
