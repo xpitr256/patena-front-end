@@ -10,8 +10,9 @@ import "popper.js";
 import Notifications from 'vue-notification'
 import VueProgressBar from 'vue-progressbar'
 import VeeValidate from 'vee-validate';
+import spanishValidationMessages from "vee-validate/dist/locale/es";
+import englishValidationMessages from "vee-validate/dist/locale/en";
 
-Vue.use(VeeValidate);
 Vue.config.productionTip = false;
 Vue.use(Notifications);
 Vue.use(VueI18n);
@@ -24,6 +25,15 @@ Vue.use(VueProgressBar, {
 const i18n = new VueI18n({
   locale: "en",
   messages: { en }
+});
+
+Vue.use(VeeValidate,{
+  i18nRootKey: 'validations',
+  i18n,
+  dictionary: {
+    en: englishValidationMessages,
+    es: spanishValidationMessages
+  },
 });
 
 new Vue({
