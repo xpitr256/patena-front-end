@@ -32,13 +32,16 @@
                     </button>
                     <button type="button"
                             v-on:click="sendNumberOrderUnknown"
-                            :disabled="submitInProgress"
+                            :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-warning ml-2">
                         {{ "Send Unknown" }}
                     </button>
                 </div>
             </div>
         </form>
+        <div class="alert alert-danger" role="alert" v-bind:style="{ width: '50%', color: activeColor, fontSize:'20px', visibility:showAlert}" >
+            Order number not found :(
+        </div>
     </div>
 </template>
 
@@ -48,8 +51,10 @@
     export default {
         data () {
             return {
-                submitInProgress: false
-            }
+                submitInProgress: false,
+                activeColor: 'red',
+                showAlert: 'hidden'
+                }
         },
         methods: {
             clearNotifications : function() {
@@ -57,6 +62,7 @@
                     group: 'notifications',
                     clean: true
                 });
+                this.showAlert='hidden';
             },
             sendForm: async function() {
                 let formIsValid = await this.$validator.validate();
@@ -105,6 +111,7 @@
                     });
                 }
                 this.submitInProgress = false;
+                this.showAlert=''
             },
         }
     }
