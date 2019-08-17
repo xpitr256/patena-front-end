@@ -32,7 +32,7 @@
       "title": "Ver Resultado",
       "label": "Ingrese su número de orden para continuar",
       "placeholder" : "Número de orden",
-      "help": "Ejemplo: AKWX-1234-JPQ",
+      "help": "Ejemplo: 550e8400-e29b-41d4-a716-446655440000",
       "btSearch": "Buscar"
     },
     "analyze": {

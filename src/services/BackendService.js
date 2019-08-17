@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 function timeout() {
   return new Promise(resolve => setTimeout(resolve, 1000));
 }
