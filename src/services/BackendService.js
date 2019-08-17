@@ -11,6 +11,24 @@ export default {
     };
   },
 
+  async sendOrderNumber() {
+    await timeout();
+    return {
+      status: 'ok'
+    };
+  },
+  async sendOrderNumberUnknown() {
+    await timeout();
+    return {
+      status: 'failed',
+      errors: [
+        {
+          message: "Order number not found"
+        }
+      ]
+    };
+  },
+
   async failedSendContactInformation() {
     await timeout();
     return {
