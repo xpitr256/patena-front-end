@@ -78,6 +78,7 @@
                         title: 'Success',
                         text: 'Order Number is correct!'
                     });
+                    this.$router.push('/results/download');
                     this.submitInProgress = false;
                 }
             },

@@ -35,6 +35,12 @@
       "help": "Ejemplo: 550e8400-e29b-41d4-a716-446655440000",
       "btSearch": "Buscar"
     },
+    "download": {
+      "title": "Descargar Resultado",
+      "subtitle": "Resultado",
+      "report" : "Número de orden:...",
+      "btDownload": "Descargar"
+    },
     "analyze": {
       "title": "Analizar Linker",
       "placeholder" : "Elija su archivo .fasta",
