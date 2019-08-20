@@ -1,30 +1,71 @@
 <template>
     <div class="container wrapper">
-        <h1 class="display-4">{{ $t("views.analyze.title") }}</h1>
-        <form class="mt-4">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" id="inputFile"
-                           :placeholder="$t('views.analyze.placeholder')">
-                </div>
-                <div class="form-group col-md-6">
-                    <button type="submit" class="btn btn-primary">{{ $t("views.analyze.btSearch") }}</button>
-                </div>
-                <hr class="my-4">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" >
-                </div>
+
+        <vue-dropzone id="drop1"
+                      ref="dropzone"
+                      :options="dropzoneOptions"
+                      :useCustomSlot=true
+                      @vdropzone-complete="afterComplete">
+            <div class="dropzone-custom-content">
+                <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+                <div class="subtitle">...or click to select a file from your computer</div>
             </div>
-            <br>
-            <button type="button" class="btn btn-primary btn-lg">{{ $t("views.analyze.btAnalyze") }}</button>
-        </form>
+        </vue-dropzone>
+
     </div>
 </template>
 
 <script>
-    export default {
+  import vue2Dropzone from 'vue2-dropzone'
+  import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
+  export default {
+    name: 'app',
+    components: {
+      vueDropzone: vue2Dropzone
+    },
+    methods: {
+      afterComplete(file) {
+        if (!file.accepted) {
+          this.$refs.dropzone.removeFile(file);
+        }
+      }
+  },
+    data: function () {
+      return {
+        dropzoneOptions: {
+          url: 'https://httpbin.org/post',
+          thumbnailWidth: 150,
+          thumbnailHeight: 150,
+          maxFilesize: 2, // MB
+          acceptedFiles: '.fasta',
+          addRemoveLinks: true,
+          accept: function(file, done) {
+            this.files.forEach((aFile) => {
+              if (aFile.status !== 'added'){
+                this.removeFile(aFile);
+              }
+            });
+            done();
+          }
+        }
+      }
     }
+  }
 </script>
-
+<style scoped>
+    .dropzone-custom-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .dropzone-custom-title {
+        margin-top: 0;
+        color: #00b782;
+    }
+    .subtitle {
+        color: #314b5f;
+    }
+</style>
