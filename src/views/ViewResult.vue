@@ -5,7 +5,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputOrderNumber">{{ $t("views.result.label") }}</label>
-                    <input type="text" class="form-control" id="inputOrderNumber"
+                    <input type="text" class="form-control" id="inputOrderNumber" ref="inputOrderNumber"
                            v-bind:class="{'is-invalid': errors.has('inputOrderNumber')}"
                            v-validate="'required|min:36'"
                            name="inputOrderNumber"
@@ -53,7 +53,8 @@
             return {
                 submitInProgress: false,
                 activeColor: 'red',
-                showAlert: 'hidden'
+                showAlert: 'hidden',
+                orderNumber: ''
                 }
         },
         methods: {
@@ -79,6 +80,8 @@
                         text: 'Order Number is correct!'
                     });
                     this.$router.push('/results/download');
+                    this.$route.params.id=this.$refs.inputOrderNumber.value;
+                    console.log(this.orderNumber);
                     this.submitInProgress = false;
                 }
             },

@@ -38,7 +38,7 @@
     "download": {
       "title": "Download Result",
       "subtitle": "Result",
-      "report" : "Order number:...",
+      "report" : "Order number:",
       "btDownload": "Download"
     },
     "analyze": {
