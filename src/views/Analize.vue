@@ -1,71 +1,97 @@
 <template>
     <div class="container wrapper">
 
-        <vue-dropzone id="drop1"
-                      ref="dropzone"
-                      :options="dropzoneOptions"
-                      :useCustomSlot=true
-                      @vdropzone-complete="afterComplete">
-            <div class="dropzone-custom-content">
-                <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-                <div class="subtitle">...or click to select a file from your computer</div>
+        <h1 class="display-4">{{ $t("views.analyze.title") }}</h1>
+
+        <form class="mt-4">
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <fasta-uploader name="fasta"
+                                    v-validate="'required'"
+                                    v-model="fastaFile"
+                                    :error="errors.first('fasta')"
+                    >
+                    </fasta-uploader>
+                </div>
             </div>
-        </vue-dropzone>
+
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Email</label>
+                    <input class="form-control"
+                           v-bind:class="{'is-invalid': errors.has('email')}"
+                           v-validate="'required|email'"
+                           placeholder="Email"
+                           name="email"
+                           type="email">
+                    <div class="invalid-feedback">
+                        {{ errors.first('email') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <button type="button"
+                            v-on:click="sendForm"
+                            :disabled="submitInProgress || errors.items.length > 0"
+                            class="btn btn-lg btn-primary">
+                        {{ $t("views.contact.send") }}
+                    </button>
+                </div>
+
+            </div>
+        </form>
+
 
     </div>
 </template>
 
 <script>
-  import vue2Dropzone from 'vue2-dropzone'
-  import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
+  import FastaUploader from "../components/FastaUploader";
+  import BackendService from '../services/BackendService'
+  import { ValidationProvider } from 'vee-validate';
 
   export default {
-    name: 'app',
+    name: "analyze",
     components: {
-      vueDropzone: vue2Dropzone
+      FastaUploader,
+      ValidationProvider
     },
     methods: {
-      afterComplete(file) {
-        if (!file.accepted) {
-          this.$refs.dropzone.removeFile(file);
+      clearNotifications : function() {
+        this.$notify({
+          group: 'notifications',
+          clean: true
+        });
+      },
+      sendForm: async function() {
+        let formIsValid = await this.$validator.validate();
+        if (formIsValid) {
+          this.$Progress.start();
+          this.submitInProgress = true;
+          this.clearNotifications();
+          await BackendService.sendContactInformation();
+          this.$Progress.finish();
+          this.$notify({
+            group: 'notifications',
+            type: 'success',
+            title: 'Success',
+            text: 'Data is correct!'
+          });
+          this.submitInProgress = false;
         }
-      }
-  },
+      },
+    },
     data: function () {
       return {
-        dropzoneOptions: {
-          url: 'https://httpbin.org/post',
-          thumbnailWidth: 150,
-          thumbnailHeight: 150,
-          maxFilesize: 2, // MB
-          acceptedFiles: '.fasta',
-          addRemoveLinks: true,
-          accept: function(file, done) {
-            this.files.forEach((aFile) => {
-              if (aFile.status !== 'added'){
-                this.removeFile(aFile);
-              }
-            });
-            done();
-          }
-        }
+        fastaFile: null,
+        submitInProgress: false
       }
     }
   }
 </script>
 <style scoped>
-    .dropzone-custom-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-    .dropzone-custom-title {
-        margin-top: 0;
-        color: #00b782;
-    }
-    .subtitle {
-        color: #314b5f;
-    }
 </style>

@@ -12,27 +12,27 @@
         <ul>
           <li>
             <router-link to="/about" v-bind:class="getClass('/about')">{{
-              $t("views.navBar.menu.about")
+              $t("views.components.navBar.menu.about")
             }}</router-link>
           </li>
           <li>
             <router-link to="/analyze" v-bind:class="getClass('/analyze')">{{
-              $t("views.navBar.menu.analyze")
+              $t("views.components.navBar.menu.analyze")
             }}</router-link>
           </li>
           <li>
             <router-link to="/design" v-bind:class="getClass('/design')">{{
-              $t("views.navBar.menu.design")
+              $t("views.components.navBar.menu.design")
             }}</router-link>
           </li>
           <li>
             <router-link to="/results" v-bind:class="getClass('/results')">{{
-              $t("views.navBar.menu.results")
+              $t("views.components.navBar.menu.results")
             }}</router-link>
           </li>
           <li>
             <router-link to="/contact" v-bind:class="getClass('/contact')">{{
-              $t("views.navBar.menu.contact")
+              $t("views.components.navBar.menu.contact")
             }}</router-link>
           </li>
           <li>

@@ -1,12 +1,18 @@
 {
   "views": {
-    "navBar": {
-      "menu": {
-        "about" : "About us",
-        "analyze": "Analyze Linker",
-        "design": "Design Linker",
-        "results": "See Results",
-        "contact": "Contact us"
+    "components": {
+      "navBar": {
+        "menu": {
+          "about" : "About us",
+          "analyze": "Analyze Linker",
+          "design": "Design Linker",
+          "results": "See Results",
+          "contact": "Contact us"
+        }
+      },
+      "fastaUploader": {
+        "title": "Drag and drop to upload .fasta file!",
+        "subtitle": "...or click to select a .fasta file from your computer"
       }
     },
     "home": {
