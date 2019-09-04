@@ -1,5 +1,6 @@
 {
   "views": {
+    "getBack": "Back",
     "navBar": {
       "menu": {
         "about" : "About us",
@@ -25,7 +26,7 @@
       "mail": "Email",
       "message" : "Your message",
       "send": "Send",
-      "sendFailed": "Send to be failed",
+      "sendFailed": "Send (failed)",
       "errorMail": "The email field must be a valid email"
     },
     "result": {
@@ -33,20 +34,23 @@
       "label": "Enter your order number to continue",
       "placeholder" : "Order number",
       "help": "Example: 550e8400-e29b-41d4-a716-446655440000",
-      "btSearch": "Search"
+      "btnSearch": "Search",
+      "btnFailed": "Search (failed)",
+      "btnUnknown": "Search (invalid order number)",
+      "unknownOrderNumber": "The requested order number was not found. Please try another one."
     },
     "download": {
       "title": "Download Result",
       "subtitle": "Result",
       "report" : "Order number:",
-      "btDownload": "Download"
+      "btnDownload": "Download"
     },
     "analyze": {
       "title": "Analyze Linker",
       "placeholder": "Enter your file .fasta",
       "mail": "Mail",
-      "btSearch": "Search",
-      "btAnalyze": "Analyze"
+      "btnSearch": "Search",
+      "btnAnalyze": "Analyze"
     },
     "design": {
       "title": "Design a linker"

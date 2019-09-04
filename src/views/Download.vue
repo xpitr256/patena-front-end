@@ -6,11 +6,14 @@
             <div class="card-body">
                 <h6 class="card-title">{{$t("views.download.report")}}</h6>
                 <p class="card-text" ><small>{{ id }}</small></p>
-                <a href="#" class="btn btn-primary">{{$t('views.download.btDownload')}}</a>
+                <a href="#" class="btn btn-lg btn-primary">
+                    <i class="fas fa-download"></i> {{$t('views.download.btnDownload')}}</a>
             </div>
         </div>
         <br>
-        <a href="#" class="btn btn-primary" v-on:click="navigate()">Volver</a>
+        <a href="#" class="btn btn-lg btn-light" v-on:click="navigate()">
+            <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
+        </a>
     </div>
 </template>
 
@@ -33,7 +36,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

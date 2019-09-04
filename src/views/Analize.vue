@@ -8,7 +8,7 @@
                            :placeholder="$t('views.analyze.placeholder')">
                 </div>
                 <div class="form-group col-md-6">
-                    <button type="submit" class="btn btn-primary">{{ $t("views.analyze.btSearch") }}</button>
+                    <button type="submit" class="btn btn-primary">{{ $t("views.analyze.btnSearch") }}</button>
                 </div>
                 <hr class="my-4">
                 <div class="form-group col-md-6">
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <br>
-            <button type="button" class="btn btn-primary btn-lg">{{ $t("views.analyze.btAnalyze") }}</button>
+            <button type="button" class="btn btn-primary btn-lg">{{ $t("views.analyze.btnAnalyze") }}</button>
         </form>
     </div>
 </template>

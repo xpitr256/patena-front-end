@@ -22,26 +22,28 @@
                             v-on:click="sendForm"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
-                        {{ $t("views.result.btSearch") }}
+                        {{ $t("views.result.btnSearch") }}
                     </button>
                     <button type="button"
                             v-on:click="sendFailedForm"
                             :disabled="submitInProgress"
                             class="btn btn-lg btn-outline-danger ml-2">
-                        {{ $t("views.contact.sendFailed") }}
+                        {{ $t("views.result.btnFailed") }}
                     </button>
                     <button type="button"
                             v-on:click="sendNumberOrderUnknown"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-warning ml-2">
-                        {{ "Send Unknown" }}
+                        {{ $t("views.result.btnUnknown") }}
                     </button>
                 </div>
             </div>
         </form>
-        <div class="alert alert-danger" role="alert" v-bind:style="{ width: '50%', color: activeColor, fontSize:'20px', visibility:showAlert}" >
-            Order number not found :(
+
+        <div class="alert alert-danger" role="alert" v-if="showErrorMessage">
+            <i class="fas fa-exclamation-circle"></i>   {{ $t("views.result.unknownOrderNumber") }}
         </div>
+
     </div>
 </template>
 
@@ -52,8 +54,7 @@
         data () {
             return {
                 submitInProgress: false,
-                activeColor: 'red',
-                showAlert: 'hidden',
+                showErrorMessage: false,
                 orderNumber: ''
                 }
         },
@@ -63,7 +64,7 @@
                     group: 'notifications',
                     clean: true
                 });
-                this.showAlert='hidden';
+                this.showErrorMessage = false;
             },
             sendForm: async function() {
                 let formIsValid = await this.$validator.validate();
@@ -115,7 +116,7 @@
                     });
                 }
                 this.submitInProgress = false;
-                this.showAlert=''
+                this.showErrorMessage = true;
             },
         }
     }

@@ -1,5 +1,6 @@
 {
   "views": {
+    "getBack": "Volver",
     "navBar": {
       "menu": {
         "about" : "Nosotros",
@@ -25,7 +26,7 @@
       "mail": "Correo Electronico",
       "message" : "Su Mensaje",
       "send": "Enviar",
-      "sendFailed": "Enviar para que falle",
+      "sendFailed": "Enviar (fallando)",
       "errorMail": "El campo de correo electrónico debe ser un correo electrónico válido"
     },
     "result": {
@@ -33,20 +34,23 @@
       "label": "Ingrese su número de orden para continuar",
       "placeholder" : "Número de orden",
       "help": "Ejemplo: 550e8400-e29b-41d4-a716-446655440000",
-      "btSearch": "Buscar"
+      "btnSearch": "Buscar",
+      "btnFailed": "Buscar (fallando)",
+      "btnUnknown": "Buscar (número de orden inválido)",
+      "unknownOrderNumber": "El número de orden solicitado no fue encontrado. Intente con otro por favor."
     },
     "download": {
       "title": "Descargar Resultado",
       "subtitle": "Resultado",
       "report" : "Número de orden:",
-      "btDownload": "Descargar"
+      "btnDownload": "Descargar"
     },
     "analyze": {
       "title": "Analizar Linker",
       "placeholder" : "Elija su archivo .fasta",
       "mail": "Correo Electronico",
-      "btSearch": "Buscar",
-      "btAnalyze": "Analizar"
+      "btnSearch": "Buscar",
+      "btnAnalyze": "Analizar"
     },
     "design": {
       "title": "Diseñar un linker"
