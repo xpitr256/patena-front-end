@@ -22,18 +22,21 @@
                             v-on:click="sendForm"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
+                        <i class="fas fa-search"></i>
                         {{ $t("views.result.btnSearch") }}
                     </button>
                     <button type="button"
                             v-on:click="sendFailedForm"
                             :disabled="submitInProgress"
                             class="btn btn-lg btn-outline-danger ml-2">
+                        <i class="fas fa-search"></i>
                         {{ $t("views.result.btnFailed") }}
                     </button>
                     <button type="button"
                             v-on:click="sendNumberOrderUnknown"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-warning ml-2">
+                        <i class="fas fa-search"></i>
                         {{ $t("views.result.btnUnknown") }}
                     </button>
                 </div>

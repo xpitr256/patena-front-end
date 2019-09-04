@@ -1,13 +1,19 @@
 {
   "views": {
     "getBack": "Volver",
-    "navBar": {
-      "menu": {
-        "about" : "Nosotros",
-        "analyze": "Analizar Linker",
-        "design": "Diseñar Linker",
-        "results": "Ver Resultados",
-        "contact": "Contacto"
+    "components": {
+      "navBar": {
+        "menu": {
+          "about" : "Nosotros",
+          "analyze": "Analizar Linker",
+          "design": "Diseñar Linker",
+          "results": "Ver Resultados",
+          "contact": "Contacto"
+        }
+      },
+      "fastaUploader": {
+        "title": "Arrastre su archivo .fasta aquí!",
+        "subtitle": "...o haga click para seleccionar un archivo .fasta desde su ordenador."
       }
     },
     "home": {
