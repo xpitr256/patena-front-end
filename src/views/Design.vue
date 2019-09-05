@@ -23,8 +23,8 @@
                             v-on:click="sendForm"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
-                        <i class="fas fa-chevron-right"></i>
                         {{ $t("views.design.next") }}
+                        <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
 
