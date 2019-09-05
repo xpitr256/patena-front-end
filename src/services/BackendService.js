@@ -18,6 +18,13 @@ export default {
     };
   },
 
+  async designLinker() {
+    await timeout();
+    return {
+      calculateDistance: '101'
+    };
+  },
+
   async sendOrderNumber() {
     await timeout();
     return {

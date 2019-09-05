@@ -1,0 +1,40 @@
+<template>
+    <div class="container wrapper">
+        <h1 class="display-4">{{ $t("views.designSuccess.title") }}</h1>
+        <div class="alert alert-success mt-4" role="alert">
+            <p>
+                {{ $t("views.designSuccess.calculateDistance") }} <span class="font-weight-bold">{{calculateDistance}}</span>
+            </p>
+            <hr>
+            <p class="mb-0">{{ $t("views.designSuccess.suggestion") }}</p>
+        </div>
+
+        <a href="#" class="btn btn-lg btn-light mt-4" v-on:click="navigate()">
+            <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
+        </a>
+    </div>
+</template>
+
+<script>
+    import router from '../router'
+    export default {
+        name: "DesignSuccess",
+        data () {
+            return {
+                calculateDistance: 0
+            }
+        },
+        created() {
+            this.calculateDistance = this.$route.params.calculateDistance;
+        },
+        methods: {
+            navigate() {
+                router.go(-1);
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

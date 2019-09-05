@@ -8,6 +8,7 @@ import Design from "./views/Design";
 import About from "./views/About";
 import Download from "./views/Download";
 import AnalyzeSuccess from "./views/AnalyzeSuccess";
+import DesignSuccess from "./views/DesignSuccess";
 
 Vue.use(Router);
 
@@ -54,6 +55,12 @@ export default new Router({
       path: "/design",
       name: "Design",
       component: Design
+    },
+    {
+      path: "/design/success",
+      name: "DesignSuccess",
+      component: DesignSuccess
     }
+
   ]
 });

@@ -68,7 +68,16 @@
       "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
     },
     "design": {
-      "title": "Design a linker"
+      "title": "Design a linker",
+      "label": "Length calculation",
+      "placeholder" : "Enter the distance",
+      "help": "The unit of measure: Armstrong",
+      "next": "Next"
+    },
+    "designSuccess": {
+      "title": "Design a linker",
+      "calculateDistance": "The calculated distance is:",
+      "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
     }
   }
 }
