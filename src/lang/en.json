@@ -58,6 +58,15 @@
       "btnSearch": "Search",
       "btnAnalyze": "Analyze"
     },
+    "analyzeSuccess": {
+      "title": "Analyze Linker",
+      "alertTitle": "Well done!",
+      "fileReceived": "We have successfully received your file ",
+      "emailSent": "In addition we just sent an email to ",
+      "orderNumber": "with the following order number ",
+      "notify": "When your request is done you will received a notification email in order to see the results.",
+      "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
+    },
     "design": {
       "title": "Design a linker"
     }

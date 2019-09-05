@@ -9,6 +9,7 @@
                            v-bind:class="{'is-invalid': errors.has('inputOrderNumber')}"
                            v-validate="'required|min:36'"
                            name="inputOrderNumber"
+                           v-model="inputOrderNumber"
                            :placeholder="$t('views.result.placeholder')">
                     <div class="invalid-feedback">
                         {{ errors.first('inputOrderNumber') }}
@@ -84,8 +85,7 @@
                         text: 'Order Number is correct!'
                     });
                     this.$router.push('/results/download');
-                    this.$route.params.id=this.$refs.inputOrderNumber.value;
-                    console.log(this.orderNumber);
+                    this.$route.params.orderNumber = this.inputOrderNumber;
                     this.submitInProgress = false;
                 }
             },

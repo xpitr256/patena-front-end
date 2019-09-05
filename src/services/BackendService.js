@@ -11,6 +11,13 @@ export default {
     };
   },
 
+  async analyzeLinker() {
+    await timeout();
+    return {
+      orderNumber: '3cf3e00f-4d72-4c5d-9d5f-aff4582d6ad8'
+    };
+  },
+
   async sendOrderNumber() {
     await timeout();
     return {

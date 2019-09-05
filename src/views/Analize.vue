@@ -24,6 +24,7 @@
                            v-validate="'required|email'"
                            placeholder="Email"
                            name="email"
+                           v-model="email"
                            type="email">
                     <div class="invalid-feedback">
                         {{ errors.first('email') }}
@@ -37,6 +38,7 @@
                             v-on:click="sendForm"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
+                        <i class="fas fa-paper-plane mr-1"></i>
                         {{ $t("views.contact.send") }}
                     </button>
                 </div>
@@ -73,7 +75,7 @@
           this.$Progress.start();
           this.submitInProgress = true;
           this.clearNotifications();
-          await BackendService.sendContactInformation();
+          let response = await BackendService.analyzeLinker();
           this.$Progress.finish();
           this.$notify({
             group: 'notifications',
@@ -81,6 +83,10 @@
             title: 'Success',
             text: 'Data is correct!'
           });
+          this.$router.push('/analyze/success');
+          this.$route.params.orderNumber = response.orderNumber;
+          this.$route.params.email = this.email;
+          this.$route.params.fastaName = this.fastaFile.name;
           this.submitInProgress = false;
         }
       },
