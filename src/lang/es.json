@@ -1,12 +1,19 @@
 {
   "views": {
-    "navBar": {
-      "menu": {
-        "about" : "Nosotros",
-        "analyze": "Analizar Linker",
-        "design": "Diseñar Linker",
-        "results": "Ver Resultados",
-        "contact": "Contacto"
+    "getBack": "Volver",
+    "components": {
+      "navBar": {
+        "menu": {
+          "about" : "Nosotros",
+          "analyze": "Analizar Linker",
+          "design": "Diseñar Linker",
+          "results": "Ver Resultados",
+          "contact": "Contacto"
+        }
+      },
+      "fastaUploader": {
+        "title": "Arrastre su archivo .fasta aquí!",
+        "subtitle": "...o haga click para seleccionar un archivo .fasta desde su ordenador."
       }
     },
     "home": {
@@ -25,22 +32,40 @@
       "mail": "Correo Electronico",
       "message" : "Su Mensaje",
       "send": "Enviar",
-      "sendFailed": "Enviar para que falle",
+      "sendFailed": "Enviar (fallando)",
       "errorMail": "El campo de correo electrónico debe ser un correo electrónico válido"
     },
     "result": {
       "title": "Ver Resultado",
       "label": "Ingrese su número de orden para continuar",
       "placeholder" : "Número de orden",
-      "help": "Ejemplo: AKWX-1234-JPQ",
-      "btSearch": "Buscar"
+      "help": "Ejemplo: 550e8400-e29b-41d4-a716-446655440000",
+      "btnSearch": "Buscar",
+      "btnFailed": "Buscar (fallando)",
+      "btnUnknown": "Buscar (número de orden inválido)",
+      "unknownOrderNumber": "El número de orden solicitado no fue encontrado. Intente con otro por favor."
+    },
+    "download": {
+      "title": "Descargar Resultado",
+      "subtitle": "Resultado",
+      "report" : "Número de orden:",
+      "btnDownload": "Descargar"
     },
     "analyze": {
       "title": "Analizar Linker",
       "placeholder" : "Elija su archivo .fasta",
       "mail": "Correo Electronico",
-      "btSearch": "Buscar",
-      "btAnalyze": "Analizar"
+      "btnSearch": "Buscar",
+      "btnAnalyze": "Analizar"
+    },
+    "analyzeSuccess": {
+      "title": "Analizar Linker",
+      "alertTitle": "¡Bien hecho!",
+      "fileReceived": "Hemos recibido correctamente su archivo ",
+      "emailSent": "Le comentamos también que hemos enviado un mail a ",
+      "orderNumber": "con el siguiente número de orden ",
+      "notify": "Cuando su solicitud esté lista recibirá otro mail de notificación para poder ver los resultados.",
+      "suggestion": "Le recomendamos guardar el número de orden y agradecemos que haya confiado en PATENA."
     },
     "design": {
       "title": "Diseñar un linker"

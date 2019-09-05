@@ -6,6 +6,8 @@ import ViewResult from "./views/ViewResult";
 import Analyze from "./views/Analize";
 import Design from "./views/Design";
 import About from "./views/About";
+import Download from "./views/Download";
+import AnalyzeSuccess from "./views/AnalyzeSuccess";
 
 Vue.use(Router);
 
@@ -34,9 +36,19 @@ export default new Router({
       component: ViewResult
     },
     {
+      path: "/results/download",
+      name: "download",
+      component: Download
+    },
+    {
       path: "/analyze",
       name: "Analyze",
       component: Analyze
+    },
+    {
+      path: "/analyze/success",
+      name: "AnalyzeSuccess",
+      component: AnalyzeSuccess
     },
     {
       path: "/design",

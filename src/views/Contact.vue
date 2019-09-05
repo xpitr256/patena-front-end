@@ -49,6 +49,7 @@
                             v-on:click="sendForm"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
+                        <i class="fas fa-paper-plane mr-1"></i>
                         {{ $t("views.contact.send") }}
                     </button>
                     <button type="button"

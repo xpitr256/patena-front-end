@@ -4,7 +4,9 @@
     <p class="lead">{{ $t("views.home.welcomeDescription") }}</p>
     <hr class="my-4">
     <p>{{ $t("views.home.moreMessage") }}</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">{{ $t("views.home.seeMore") }}</a>
+    <router-link to="/about">
+      <a class="btn btn-primary btn-lg" href="#" role="button">{{ $t("views.home.seeMore") }} <i class="fas fa-chevron-right"></i></a>
+    </router-link>
   </div>
 
 </template>

@@ -1,12 +1,19 @@
 {
   "views": {
-    "navBar": {
-      "menu": {
-        "about" : "About us",
-        "analyze": "Analyze Linker",
-        "design": "Design Linker",
-        "results": "See Results",
-        "contact": "Contact us"
+    "getBack": "Back",
+    "components": {
+      "navBar": {
+        "menu": {
+          "about" : "About us",
+          "analyze": "Analyze Linker",
+          "design": "Design Linker",
+          "results": "See Results",
+          "contact": "Contact us"
+        }
+      },
+      "fastaUploader": {
+        "title": "Drag and drop to upload .fasta file!",
+        "subtitle": "...or click to select a .fasta file from your computer"
       }
     },
     "home": {
@@ -25,22 +32,40 @@
       "mail": "Email",
       "message" : "Your message",
       "send": "Send",
-      "sendFailed": "Send to be failed",
+      "sendFailed": "Send (failed)",
       "errorMail": "The email field must be a valid email"
     },
     "result": {
       "title": "View Result",
       "label": "Enter your order number to continue",
       "placeholder" : "Order number",
-      "help": "Example: AKWX-1234-JPQ",
-      "btSearch": "Search"
+      "help": "Example: 550e8400-e29b-41d4-a716-446655440000",
+      "btnSearch": "Search",
+      "btnFailed": "Search (failed)",
+      "btnUnknown": "Search (invalid order number)",
+      "unknownOrderNumber": "The requested order number was not found. Please try another one."
+    },
+    "download": {
+      "title": "Download Result",
+      "subtitle": "Result",
+      "report" : "Order number:",
+      "btnDownload": "Download"
     },
     "analyze": {
       "title": "Analyze Linker",
       "placeholder": "Enter your file .fasta",
       "mail": "Mail",
-      "btSearch": "Search",
-      "btAnalyze": "Analyze"
+      "btnSearch": "Search",
+      "btnAnalyze": "Analyze"
+    },
+    "analyzeSuccess": {
+      "title": "Analyze Linker",
+      "alertTitle": "Well done!",
+      "fileReceived": "We have successfully received your file ",
+      "emailSent": "In addition we just sent an email to ",
+      "orderNumber": "with the following order number ",
+      "notify": "When your request is done you will received a notification email in order to see the results.",
+      "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
     },
     "design": {
       "title": "Design a linker"

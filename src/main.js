@@ -10,8 +10,19 @@ import "popper.js";
 import Notifications from 'vue-notification'
 import VueProgressBar from 'vue-progressbar'
 import VeeValidate from 'vee-validate';
+import spanishValidationMessages from "vee-validate/dist/locale/es";
+import englishValidationMessages from "vee-validate/dist/locale/en";
 
-Vue.use(VeeValidate);
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas);
+library.add(faSpinner);
+import { dom } from '@fortawesome/fontawesome-svg-core'
+dom.watch();
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.config.productionTip = false;
 Vue.use(Notifications);
 Vue.use(VueI18n);
@@ -26,8 +37,17 @@ const i18n = new VueI18n({
   messages: { en }
 });
 
+Vue.use(VeeValidate, {
+  i18nRootKey: "validations",
+  i18n,
+  dictionary: {
+    en: englishValidationMessages,
+    es: spanishValidationMessages
+  }
+});
+
 new Vue({
   router,
   i18n,
-  render: h=>h(App)
+  render: h => h(App)
 }).$mount("#app");
