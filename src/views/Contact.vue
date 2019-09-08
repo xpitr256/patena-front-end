@@ -1,12 +1,18 @@
 <template>
     <div class="container wrapper">
         <h1 class="display-4">{{ $t("views.contact.title") }}</h1>
-        <form class="mt-4">
+        <form class="mt-4" v-on:submit.prevent="onSubmit">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="fullName">{{ $t("views.contact.name") }}</label>
-                    <input type="text" class="form-control" id="fullName"
-                           v-validate="'required|alpha_spaces'" name="fullName"
+                    <input type="text"
+                           class="form-control"
+                           v-on:keypress="onEnterKeypress"
+                           id="fullName"
+                           name="fullName"
+                           ref="fullName"
+                           v-model="fullName"
+                           v-validate="'required|alpha_spaces'"
                            v-bind:class="{'is-invalid': errors.has('fullName')}"
                            :placeholder="$t('views.contact.name')">
                     <div class="invalid-feedback">
@@ -20,6 +26,9 @@
                            v-validate="'required|email'"
                            placeholder="Email"
                            name="email"
+                           v-on:keypress="onEnterKeypress"
+                           ref="email"
+                           v-model="email"
                            type="email">
                     <div class="invalid-feedback">
                         {{ errors.first('email') }}
@@ -36,6 +45,7 @@
                               v-bind:class="{'is-invalid': errors.has('message')}"
                               v-validate="'required|min:10'"
                               name="message"
+                              ref="message"
                     ></textarea>
                     <div class="invalid-feedback">
                         {{ errors.first('message') }}
@@ -68,14 +78,37 @@
 <script>
 
   import BackendService from '../services/BackendService'
+  import { ValidationProvider } from 'vee-validate';
 
   export default {
+    name: "Contact",
+    components: {
+      ValidationProvider
+    },
     data () {
       return {
+        fullName: null,
+        email: null,
+        message: null,
         submitInProgress: false
       }
     },
+    created: function() {
+      setTimeout(() => {
+        this.$nextTick(() => this.setFocus());
+      }, 100);
+    },
     methods: {
+      onEnterKeypress: function(event) {
+        if(event.key === "Enter") {
+          this.sendForm();
+        }
+      },
+      onSubmit: function() {
+      },
+      setFocus: function() {
+        this.$refs.fullName.focus();
+      },
       clearNotifications : function() {
         this.$notify({
           group: 'notifications',

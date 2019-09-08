@@ -1,18 +1,18 @@
 <template>
     <div class="container wrapper">
         <h1 class="display-4">{{ $t("views.result.title") }}</h1>
-        <form class="mt-4">
+        <form class="mt-4" v-on:submit.prevent="onSubmit">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputOrderNumber">{{ $t("views.result.label") }}</label>
-                    <input type="text" class="form-control" id="inputOrderNumber" ref="inputOrderNumber"
-                           v-bind:class="{'is-invalid': errors.has('inputOrderNumber')}"
+                    <label for="orderNumber">{{ $t("views.result.label") }}</label>
+                    <input type="text" class="form-control" id="orderNumber" ref="orderNumber"
+                           v-bind:class="{'is-invalid': errors.has('orderNumber')}"
                            v-validate="'required|min:36'"
-                           name="inputOrderNumber"
-                           v-model="inputOrderNumber"
+                           name="orderNumber"
+                           v-model="orderNumber"
                            :placeholder="$t('views.result.placeholder')">
                     <div class="invalid-feedback">
-                        {{ errors.first('inputOrderNumber') }}
+                        {{ errors.first('orderNumber') }}
                     </div>
                     <small id="orderNumberHelp" class="form-text text-muted">{{ $t("views.result.help") }}</small>
                 </div>
@@ -59,16 +59,27 @@
             return {
                 submitInProgress: false,
                 showErrorMessage: false,
-                orderNumber: ''
+                orderNumber: null
                 }
         },
+        created: function() {
+            setTimeout(() => {
+                this.$nextTick(() => this.setFocus());
+            }, 100);
+        },
         methods: {
+            setFocus: function() {
+                this.$refs.orderNumber.focus();
+            },
             clearNotifications : function() {
                 this.$notify({
                     group: 'notifications',
                     clean: true
                 });
                 this.showErrorMessage = false;
+            },
+            onSubmit: function() {
+              this.sendForm();
             },
             sendForm: async function() {
                 let formIsValid = await this.$validator.validate();
@@ -85,7 +96,7 @@
                         text: 'Order Number is correct!'
                     });
                     this.$router.push('/results/download');
-                    this.$route.params.orderNumber = this.inputOrderNumber;
+                    this.$route.params.orderNumber = this.orderNumber;
                     this.submitInProgress = false;
                 }
             },

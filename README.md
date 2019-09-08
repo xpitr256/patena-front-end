@@ -15,6 +15,12 @@ npm run serve
 npm run build
 ```
 
+### Fix code style
+```
+./node_modules/.bin/eslint --fix src/**.*
+```
+
+
 ### Run your tests
 ```
 npm run test

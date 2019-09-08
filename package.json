@@ -26,7 +26,8 @@
     "@fortawesome/vue-fontawesome": "^0.1.7",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
-    "vue2-dropzone": "^3.6.0"
+    "vue2-dropzone": "^3.6.0",
+    "vue-resource": "^1.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",

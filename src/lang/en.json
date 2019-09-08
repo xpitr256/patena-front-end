@@ -68,7 +68,15 @@
       "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
     },
     "design": {
-      "title": "Design a linker"
+      "title": "Design a linker",
+      "label": "Length calculation",
+      "placeholder" : "Enter the distance",
+      "next": "Next"
+    },
+    "designSuccess": {
+      "title": "Design a linker",
+      "length": "The required length is:",
+      "suggestion": "Thank you for using PATENA"
     }
   }
 }
