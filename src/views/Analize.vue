@@ -3,7 +3,7 @@
 
         <h1 class="display-4">{{ $t("views.analyze.title") }}</h1>
 
-        <form class="mt-4">
+        <form class="mt-4" v-on:submit.prevent="onSubmit">
 
             <div class="form-row">
                 <div class="form-group col">
@@ -23,6 +23,7 @@
                            v-bind:class="{'is-invalid': errors.has('email')}"
                            v-validate="'required|email'"
                            placeholder="Email"
+                           ref="email"
                            name="email"
                            v-model="email"
                            type="email">
@@ -62,12 +63,23 @@
       FastaUploader,
       ValidationProvider
     },
+    created: function() {
+      setTimeout(() => {
+        this.$nextTick(() => this.setFocus());
+      }, 100);
+    },
     methods: {
       clearNotifications : function() {
         this.$notify({
           group: 'notifications',
           clean: true
         });
+      },
+      onSubmit: function() {
+        this.sendForm();
+      },
+      setFocus: function() {
+        this.$refs.email.focus();
       },
       sendForm: async function() {
         let formIsValid = await this.$validator.validate();
@@ -94,6 +106,7 @@
     data: function () {
       return {
         fastaFile: null,
+        email: null,
         submitInProgress: false
       }
     }

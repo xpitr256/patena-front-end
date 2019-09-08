@@ -71,13 +71,12 @@
       "title": "Diseñar un linker",
       "label": "Cálculo de longitud",
       "placeholder" : "Ingrese la distancia",
-      "help": "La unidad de medida: Armstrong",
       "next": "Siguiente"
     },
     "designSuccess": {
       "title": "Diseñar un linker",
-      "calculateDistance": "La distancia calculada es: ",
-      "suggestion": "Le recomendamos guardar el número de orden y agradecemos que haya confiado en PATENA."
+      "length": "La longitud necesaria es: ",
+      "suggestion": "Gracias por utilizar PATENA."
     }
   }
 }

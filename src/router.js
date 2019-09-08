@@ -61,6 +61,5 @@ export default new Router({
       name: "DesignSuccess",
       component: DesignSuccess
     }
-
   ]
 });

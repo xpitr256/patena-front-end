@@ -1,20 +1,27 @@
 <template>
     <div class="container wrapper">
         <h1 class="display-4">{{ $t("views.design.title") }}</h1>
-        <form class="mt-4">
+        <form class="mt-4" v-on:submit.prevent="onSubmit">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputDistance">{{ $t("views.design.label") }}</label>
-                    <input type="text" class="form-control" id="inputDistance" ref="inputDistance"
-                           v-bind:class="{'is-invalid': errors.has('inputDistance')}"
-                           v-validate="'required|numeric|min:1|max:3|'"
-                           name="inputDistance"
-                           v-model="inputDistance"
-                           :placeholder="$t('views.design.placeholder')">
-                    <div class="invalid-feedback">
-                        {{ errors.first('inputDistance') }}
+                    <label for="distance">{{ $t("views.design.label") }}</label>
+                    <div class="input-group mb-3">
+                        <input type="text"
+                               class="form-control"
+                               id="distance"
+                               ref="distance"
+                               v-bind:class="{'is-invalid': errors.has('distance')}"
+                               v-validate="'required|numeric|min:1|max:3|'"
+                               name="distance"
+                               v-model="distance"
+                               :placeholder="$t('views.design.placeholder')">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">&#8491;</span>
+                        </div>
+                        <div class="invalid-feedback">
+                            {{ errors.first('distance') }}
+                        </div>
                     </div>
-                    <small id="distanceHelp" class="form-text text-muted">{{ $t("views.design.help") }}</small>
                 </div>
             </div>
             <div class="form-row">
@@ -50,35 +57,50 @@
                     clean: true
                 });
             },
+            onSubmit: function() {
+                this.sendForm();
+            },
             sendForm: async function() {
                 let formIsValid = await this.$validator.validate();
                 if (formIsValid) {
                     this.$Progress.start();
                     this.submitInProgress = true;
                     this.clearNotifications();
-                    let response = await BackendService.designLinker();
-                    this.$Progress.finish();
-                    this.$notify({
+                    try {
+                      let response = await BackendService.calculateLength(this.distance);
+                      this.$Progress.finish();
+                      this.$notify({
                         group: 'notifications',
                         type: 'success',
-                        title: 'Success',
-                        text: 'Data is correct!'
-                    });
-                    this.$router.push('/design/success');
-                    this.$route.params.calculateDistance = response.calculateDistance;
+                        title: 'Success'
+                      });
+                      this.$router.push('/design/success');
+                      this.$route.params.length = response.length;
+                    } catch (error) {
+                      this.$Progress.fail();
+                      this.$notify({
+                        group: 'notifications',
+                        type: 'error',
+                        title: 'Error getting linker length'
+                      });
+                    }
                     this.submitInProgress = false;
                 }
             },
+            setFocus: function() {
+                this.$refs.distance.focus();
+            },
+        },
+        created: function() {
+          setTimeout(x => {
+            this.$nextTick(() => this.setFocus());
+          }, 100);
         },
         data: function () {
             return {
-                fastaFile: null,
-                submitInProgress: false
+              distance: null,
+              submitInProgress: false
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

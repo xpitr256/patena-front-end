@@ -3,7 +3,7 @@
         <h1 class="display-4">{{ $t("views.designSuccess.title") }}</h1>
         <div class="alert alert-success mt-4" role="alert">
             <p>
-                {{ $t("views.designSuccess.calculateDistance") }} <span class="font-weight-bold">{{calculateDistance}}</span>
+                {{ $t("views.designSuccess.length") }} <span class="font-weight-bold">{{length}}</span>
             </p>
             <hr>
             <p class="mb-0">{{ $t("views.designSuccess.suggestion") }}</p>
@@ -21,11 +21,11 @@
         name: "DesignSuccess",
         data () {
             return {
-                calculateDistance: 0
+              length: 0
             }
         },
         created() {
-            this.calculateDistance = this.$route.params.calculateDistance;
+            this.length = this.$route.params.length;
         },
         methods: {
             navigate() {

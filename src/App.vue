@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <notifications group="notifications" position="bottom right"/>
+    <notifications group="notifications" position="bottom right" />
     <router-view />
     <vue-progress-bar></vue-progress-bar>
   </div>
@@ -21,6 +21,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: justify;
   color: #2c3e50;
-  background: linear-gradient(to bottom, #F0F0F0, white);
+  background: linear-gradient(to bottom, #f0f0f0, white);
 }
 </style>
