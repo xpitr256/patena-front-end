@@ -76,7 +76,8 @@
     "designSuccess": {
       "title": "Diseñar un linker",
       "length": "La longitud necesaria es: ",
-      "suggestion": "Gracias por utilizar PATENA."
+      "suggestion": "Gracias por utilizar PATENA.",
+      "lengthUnit": " aminoácidos"
     }
   }
 }
