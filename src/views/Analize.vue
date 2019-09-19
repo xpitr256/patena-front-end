@@ -1,7 +1,7 @@
 <template>
     <div class="container wrapper">
 
-        <h1 class="display-4">{{ $t("views.analyze.title") }}</h1>
+        <h1 class="display-4 h-page-header">{{ $t("views.analyze.title") }}</h1>
 
         <form class="mt-4" v-on:submit.prevent="onSubmit">
 
