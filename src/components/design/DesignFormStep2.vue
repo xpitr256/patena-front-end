@@ -5,7 +5,7 @@
             {{ $t("views.design.label") }}
         </h2>
         <form class="mt-4" v-on:submit.prevent="onSubmit">
-            <div class="form-row">
+            <div class="form-row ml-4">
                 <div class="form-group col-md-6">
                     <div class="input-group mb-3">
                         <input type="text"
