@@ -1,6 +1,6 @@
 <template>
     <div>
-        <component :is="stepComponent" @radioChanged="manageStep"/>
+        <component :is="stepComponent" @goToNextStep="manageStep" />
         <hr />
     </div>
 </template>
@@ -9,8 +9,7 @@
   export default {
     name: "DesignForm",
     data: () => ({
-      currentStep: 1,
-      nextStepNumber: 1,
+      currentStep: 1
     }),
     computed: {
       stepComponent() {
@@ -20,10 +19,7 @@
     },
     methods: {
       manageStep(nextStep) {
-        this.nextStepNumber = nextStep;
-      },
-      next() {
-        this.currentStep = this.nextStepNumber;
+        this.currentStep = nextStep;
       }
     }
   };
