@@ -1,45 +1,32 @@
 <template>
     <div class="mt-4">
-        <div class="alert alert-warning mb-4" role="alert">
-            <i class="fas fa-exclamation-triangle"></i> By not having an initial sequence the system will assign a random sequence
-        </div>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
-            Which is the distance between the amino acid do you want to link ?
+            Which is your initial sequence ?
         </h2>
-        <form class="mt-4" v-on:submit.prevent="onSubmit">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Distance</label>
-                    <div class="input-group mb-3">
-                        <input type="text"
-                               class="form-control"
-                               id="distance"
-                               ref="distance"
-                               v-bind:class="{'is-invalid': errors.has('distance')}"
-                               v-validate="'required|numeric|min:1|max:3|'"
-                               name="distance"
-                               v-on:keypress="onEnterKeypress"
-                               v-model="distance"
-                               :placeholder="$t('views.design.placeholder')">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">&#8491;</span>
-                        </div>
-                        <div class="invalid-feedback">
-                            {{ errors.first('distance') }}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="form-group col-md-6">
+        <form class="mt-4" v-on:submit.prevent="onSubmit">
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <fasta-uploader name="fasta"
+                                    v-validate="'required'"
+                                    v-model="fastaFile"
+                                    :error="errors.first('fasta')"
+                    >
+                    </fasta-uploader>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-6">
                     <label>Email</label>
                     <input class="form-control"
                            v-bind:class="{'is-invalid': errors.has('email')}"
                            v-validate="'required|email'"
                            placeholder="Email"
-                           name="email"
-                           v-on:keypress="onEnterKeypress"
                            ref="email"
+                           name="email"
                            v-model="email"
                            type="email">
                     <div class="invalid-feedback">
@@ -69,12 +56,12 @@
 </template>
 
 <script>
-  import { ValidationProvider } from 'vee-validate';
+  import FastaUploader from "../../components/FastaUploader";
 
   export default {
-    name: "DesignFormStep4",
+    name: "DesignFormStep5",
     components: {
-      ValidationProvider
+      FastaUploader
     },
     methods: {
       getStepBack() {
@@ -109,19 +96,11 @@
           });
           this.submitInProgress = false;
         }
-      },
-      setFocus: function() {
-        this.$refs.distance.focus();
       }
-    },
-    created: function() {
-      setTimeout(x => {
-        this.$nextTick(() => this.setFocus());
-      }, 100);
     },
     data: function () {
       return {
-        distance: null,
+        fastaFile: null,
         email: null,
         submitInProgress: false
       }
