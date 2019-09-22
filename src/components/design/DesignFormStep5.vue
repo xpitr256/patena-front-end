@@ -1,7 +1,9 @@
 <template>
-    <div class="container wrapper">
-
-        <h1 class="display-4 h-page-header">{{ $t("views.analyze.title") }}</h1>
+    <div class="mt-4">
+        <h2 class="h-light mt-4">
+            <span class="badge badge-secondary">3</span>
+            Which is your initial sequence ?
+        </h2>
 
         <form class="mt-4" v-on:submit.prevent="onSubmit">
 
@@ -33,42 +35,38 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col">
+            <div class="d-flex">
+                <div>
+                    <a href="#" class="btn btn-light" v-on:click="getStepBack()">
+                        <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
+                    </a>
+                </div>
+                <div class="ml-auto">
                     <button type="button"
                             v-on:click="sendForm"
                             :disabled="submitInProgress || errors.items.length > 0"
-                            class="btn btn-lg btn-primary">
-                        <i class="fas fa-paper-plane mr-1"></i>
-                        {{ $t("views.contact.send") }}
+                            class="btn btn-primary">
+                        {{ $t("views.design.next") }}
+                        <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-
             </div>
         </form>
-
-
     </div>
 </template>
 
 <script>
-
-  import FastaUploader from "../components/FastaUploader";
-  import BackendService from '../services/BackendService'
-  import { ValidationProvider } from 'vee-validate';
+  import FastaUploader from "../../components/FastaUploader";
 
   export default {
-    name: "analyze",
+    name: "DesignFormStep5",
     components: {
-      FastaUploader,
-      ValidationProvider
-    },
-    created: function() {
-      setTimeout(() => {
-        this.$nextTick(() => this.setFocus());
-      }, 100);
+      FastaUploader
     },
     methods: {
+      getStepBack() {
+        this.$emit('goToNextStep',3);
+      },
       clearNotifications : function() {
         this.$notify({
           group: 'notifications',
@@ -78,8 +76,10 @@
       onSubmit: function() {
         this.sendForm();
       },
-      setFocus: function() {
-        this.$refs.email.focus();
+      onEnterKeypress: function(event) {
+        if(event.key === "Enter") {
+          this.sendForm();
+        }
       },
       sendForm: async function() {
         let formIsValid = await this.$validator.validate();
@@ -87,21 +87,16 @@
           this.$Progress.start();
           this.submitInProgress = true;
           this.clearNotifications();
-          let response = await BackendService.analyzeLinker();
+          //TODO call the confirmation modal windows.
           this.$Progress.finish();
           this.$notify({
             group: 'notifications',
             type: 'success',
-            title: 'Success',
-            text: 'Data is correct!'
+            title: 'Success'
           });
-          this.$router.push('/analyze/success');
-          this.$route.params.orderNumber = response.orderNumber;
-          this.$route.params.email = this.email;
-          this.$route.params.fastaName = this.fastaFile.name;
           this.submitInProgress = false;
         }
-      },
+      }
     },
     data: function () {
       return {
@@ -112,5 +107,7 @@
     }
   }
 </script>
+
 <style scoped>
+
 </style>
