@@ -6,68 +6,12 @@
 </template>
 
 <script>
-
-    import BackendService from '../services/BackendService'
-    import { ValidationProvider } from 'vee-validate';
-    import DesignForm from "../components/design/DesignForm";
+   import DesignForm from "../components/design/DesignForm";
 
     export default {
         name: "design",
         components: {
-          DesignForm,
-            ValidationProvider
+          DesignForm
         },
-        methods: {
-            clearNotifications : function() {
-                this.$notify({
-                    group: 'notifications',
-                    clean: true
-                });
-            },
-            onSubmit: function() {
-                this.sendForm();
-            },
-            sendForm: async function() {
-                let formIsValid = await this.$validator.validate();
-                if (formIsValid) {
-                    this.$Progress.start();
-                    this.submitInProgress = true;
-                    this.clearNotifications();
-                    try {
-                      let response = await BackendService.calculateLength(this.distance);
-                      this.$Progress.finish();
-                      this.$notify({
-                        group: 'notifications',
-                        type: 'success',
-                        title: 'Success'
-                      });
-                      this.$router.push('/design/success');
-                      this.$route.params.length = response.length;
-                    } catch (error) {
-                      this.$Progress.fail();
-                      this.$notify({
-                        group: 'notifications',
-                        type: 'error',
-                        title: 'Error getting linker length'
-                      });
-                    }
-                    this.submitInProgress = false;
-                }
-            },
-            setFocus: function() {
-                this.$refs.distance.focus();
-            },
-        },
-        created: function() {
-          setTimeout(x => {
-            this.$nextTick(() => this.setFocus());
-          }, 100);
-        },
-        data: function () {
-            return {
-              distance: null,
-              submitInProgress: false
-            }
-        }
     }
 </script>

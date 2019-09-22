@@ -33,7 +33,7 @@
 
         <div class="d-flex">
             <div>
-                <a href="#" class="btn btn-light" v-on:click="navigate()">
+                <a href="#" class="btn btn-light" v-on:click="getStepBack()">
                     <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
                 </a>
             </div>
@@ -54,7 +54,7 @@
   export default {
     name: "DesignFormStep3",
     methods: {
-      navigate() {
+      getStepBack() {
         this.$emit('goToNextStep',1);
       },
       next: function() {
