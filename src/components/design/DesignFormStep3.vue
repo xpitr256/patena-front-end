@@ -33,7 +33,7 @@
 
         <div class="d-flex">
             <div>
-                <a href="#" class="btn btn-light" v-on:click="getStepBack()">
+                <a href="#" class="btn btn-light" v-on:click="getStepBack">
                     <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
                 </a>
             </div>
@@ -53,6 +53,17 @@
 
   export default {
     name: "DesignFormStep3",
+    mounted() {
+      const self = this;
+      window.addEventListener('keyup', function(event) {
+        if(event.key === "Enter" && self.nextStep) {
+          self.next();
+        }
+        if (event.key === "Backspace") {
+          self.getStepBack();
+        }
+      });
+    },
     methods: {
       getStepBack() {
         this.$emit('goToNextStep',1);

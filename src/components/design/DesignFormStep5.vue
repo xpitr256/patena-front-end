@@ -33,6 +33,7 @@
                            placeholder="Email"
                            ref="email"
                            name="email"
+                           v-on:keypress="onEnterKeypress"
                            v-model="email"
                            type="email">
                     <div class="invalid-feedback">

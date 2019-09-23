@@ -29,6 +29,14 @@
 <script>
   export default {
     name: "DesignFormStep1",
+    mounted() {
+      const self = this;
+      window.addEventListener('keyup', function(event) {
+        if(event.key === "Enter" && self.nextStep) {
+          self.next();
+        }
+      });
+    },
     methods: {
       next: function() {
         this.$emit('goToNextStep',this.nextStep);

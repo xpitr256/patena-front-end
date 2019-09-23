@@ -47,6 +47,7 @@
                            ref="email"
                            name="email"
                            v-model="email"
+                           v-on:keypress="onEnterKeypress"
                            type="email">
                     <div class="invalid-feedback">
                         {{ errors.first('email') }}

@@ -67,6 +67,7 @@
                            v-validate="'required|email'"
                            placeholder="Email"
                            ref="email"
+                           v-on:keypress="onEnterKeypress"
                            name="email"
                            v-model="email"
                            type="email">
