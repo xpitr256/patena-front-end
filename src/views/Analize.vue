@@ -1,6 +1,12 @@
 <template>
     <div class="container wrapper">
 
+        <Confirmation-modal ref="modal"
+                            operation="Analyze linker"
+                            :email=email
+                            :sequence=fastaFileName
+                            @modalConfirmation="sendForm"></Confirmation-modal>
+
         <h1 class="display-4 h-page-header">{{ $t("views.analyze.title") }}</h1>
 
         <form class="mt-4" v-on:submit.prevent="onSubmit">
@@ -10,6 +16,7 @@
                     <fasta-uploader name="fasta"
                                     v-validate="'required'"
                                     v-model="fastaFile"
+                                    @input="updateFastaFileName"
                                     :error="errors.first('fasta')"
                     >
                     </fasta-uploader>
@@ -36,7 +43,7 @@
             <div class="form-row">
                 <div class="form-group col">
                     <button type="button"
-                            v-on:click="sendForm"
+                            v-on:click="launchConfirmationModal"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-lg btn-primary">
                         <i class="fas fa-paper-plane mr-1"></i>
@@ -56,12 +63,14 @@
   import FastaUploader from "../components/FastaUploader";
   import BackendService from '../services/BackendService'
   import { ValidationProvider } from 'vee-validate';
+  import ConfirmationModal from "../components/ConfirmationModal";
 
   export default {
     name: "analyze",
     components: {
       FastaUploader,
-      ValidationProvider
+      ValidationProvider,
+      ConfirmationModal
     },
     created: function() {
       setTimeout(() => {
@@ -69,6 +78,9 @@
       }, 100);
     },
     methods: {
+      updateFastaFileName: function() {
+        this.fastaFileName = this.fastaFile.name;
+      },
       clearNotifications : function() {
         this.$notify({
           group: 'notifications',
@@ -76,14 +88,18 @@
         });
       },
       onSubmit: function() {
-        this.sendForm();
+        this.launchConfirmationModal();
       },
       setFocus: function() {
         this.$refs.email.focus();
       },
-      sendForm: async function() {
+      launchConfirmationModal: async function() {
         let formIsValid = await this.$validator.validate();
         if (formIsValid) {
+          this.$refs.modal.show();
+        }
+      },
+      sendForm: async function() {
           this.$Progress.start();
           this.submitInProgress = true;
           this.clearNotifications();
@@ -100,14 +116,14 @@
           this.$route.params.email = this.email;
           this.$route.params.fastaName = this.fastaFile.name;
           this.submitInProgress = false;
-        }
       },
     },
     data: function () {
       return {
         fastaFile: null,
         email: null,
-        submitInProgress: false
+        submitInProgress: false,
+        fastaFileName: null
       }
     }
   }

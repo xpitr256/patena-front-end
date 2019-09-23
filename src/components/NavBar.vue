@@ -36,10 +36,14 @@
             }}</router-link>
           </li>
           <li>
-            <a href="#" v-on:click="showInSpanish">ES</a>
+            <a href="#" v-on:click="showInSpanish" title="Español">
+              <span class="flag-icon flag-icon-es"></span>
+            </a>
           </li>
           <li class="last">
-            <a href="#" v-on:click="showInEnglish">EN</a>
+            <a href="#" v-on:click="showInEnglish" title="English">
+              <span class="flag-icon flag-icon-gb"></span>
+            </a>
           </li>
         </ul>
       </div>
@@ -48,7 +52,9 @@
 </template>
 
 <script>
-export default {
+  import 'flag-icon-css/css/flag-icon.css'
+
+  export default {
   name: "NavBar",
   methods: {
     getClass(property) {

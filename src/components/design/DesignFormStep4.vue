@@ -1,5 +1,11 @@
 <template>
     <div class="mt-4">
+        <confirmation-modal ref="modal"
+                            operation="Design linker"
+                            :distance=distance
+                            :email=email
+                            :initialSequence="'-none-'"
+                            @modalConfirmation="sendForm"></confirmation-modal>
         <div class="alert alert-warning mb-4" role="alert">
             <i class="fas fa-exclamation-triangle"></i> By not having an initial sequence the system will assign a random sequence
         </div>
@@ -50,13 +56,13 @@
 
             <div class="d-flex">
                 <div>
-                    <a href="#" class="btn btn-light" v-on:click="getStepBack()">
+                    <a href="#" class="btn btn-light" v-on:click="getStepBack">
                         <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
                     </a>
                 </div>
                 <div class="ml-auto">
                     <button type="button"
-                            v-on:click="sendForm"
+                            v-on:click="launchConfirmationModal"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-primary">
                         {{ $t("views.design.next") }}
@@ -70,10 +76,12 @@
 
 <script>
   import { ValidationProvider } from 'vee-validate';
+  import ConfirmationModal from "../ConfirmationModal";
 
   export default {
     name: "DesignFormStep4",
     components: {
+      ConfirmationModal,
       ValidationProvider
     },
     methods: {
@@ -87,20 +95,23 @@
         });
       },
       onSubmit: function() {
-        this.sendForm();
+        this.launchConfirmationModal();
       },
       onEnterKeypress: function(event) {
         if(event.key === "Enter") {
-          this.sendForm();
+          this.launchConfirmationModal();
         }
       },
-      sendForm: async function() {
+      launchConfirmationModal: async function() {
         let formIsValid = await this.$validator.validate();
         if (formIsValid) {
+          this.$refs.modal.show();
+        }
+      },
+        sendForm: async function() {
           this.$Progress.start();
           this.submitInProgress = true;
           this.clearNotifications();
-          //TODO call the confirmation modal windows.
           this.$Progress.finish();
           this.$notify({
             group: 'notifications',
@@ -108,7 +119,6 @@
             title: 'Success'
           });
           this.submitInProgress = false;
-        }
       },
       setFocus: function() {
         this.$refs.distance.focus();

@@ -1,5 +1,13 @@
 <template>
     <div class="mt-4">
+        <confirmation-modal ref="modal"
+                            operation="Design linker"
+                            :email=email
+                            :distance=distance
+                            :initialSequence="'-none-'"
+                            :flankingSequence1=flankingFastaFile1Name
+                            :flankingSequence2=flankingFastaFile2Name
+                            @modalConfirmation="sendForm"></confirmation-modal>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
             Which are your flanking sequences ?
@@ -13,6 +21,7 @@
                     <fasta-uploader name="flankingFastaFile1"
                                     v-validate="'required'"
                                     v-model="flankingFastaFile1"
+                                    @input="updateFlankingFastaFile1Name"
                                     :error="errors.first('flankingFastaFile1')"
                     >
                     </fasta-uploader>
@@ -22,6 +31,7 @@
                     <fasta-uploader name="flankingFastaFile2"
                                     v-validate="'required'"
                                     v-model="flankingFastaFile2"
+                                    @input="updateFlankingFastaFile2Name"
                                     :error="errors.first('flankingFastaFile2')"
                     >
                     </fasta-uploader>
@@ -68,13 +78,13 @@
 
             <div class="d-flex">
                 <div>
-                    <a href="#" class="btn btn-light" v-on:click="getStepBack()">
+                    <a href="#" class="btn btn-light" v-on:click="getStepBack">
                         <i class="fas fa-chevron-left"></i> {{$t('views.getBack')}}
                     </a>
                 </div>
                 <div class="ml-auto">
                     <button type="button"
-                            v-on:click="sendForm"
+                            v-on:click="launchConfirmationModal"
                             :disabled="submitInProgress || errors.items.length > 0"
                             class="btn btn-primary">
                         {{ $t("views.design.next") }}
@@ -87,11 +97,13 @@
 </template>
 <script>
   import FastaUploader from "../../components/FastaUploader";
+  import ConfirmationModal from "../ConfirmationModal";
 
   export default {
     name: "DesignFormStep6",
     components: {
-      FastaUploader
+      FastaUploader,
+      ConfirmationModal
     },
     methods: {
       getStepBack() {
@@ -103,21 +115,30 @@
           clean: true
         });
       },
+      launchConfirmationModal: async function() {
+        let formIsValid = await this.$validator.validate();
+        if (formIsValid) {
+          this.$refs.modal.show();
+        }
+      },
       onSubmit: function() {
-        this.sendForm();
+        this.launchConfirmationModal();
       },
       onEnterKeypress: function(event) {
         if(event.key === "Enter") {
-          this.sendForm();
+          this.launchConfirmationModal();
         }
       },
+      updateFlankingFastaFile1Name: function() {
+        this.flankingFastaFile1Name = this.flankingFastaFile1.name;
+      },
+      updateFlankingFastaFile2Name: function() {
+        this.flankingFastaFile2Name = this.flankingFastaFile2.name;
+      },
       sendForm: async function() {
-        let formIsValid = await this.$validator.validate();
-        if (formIsValid) {
           this.$Progress.start();
           this.submitInProgress = true;
           this.clearNotifications();
-          //TODO call the confirmation modal windows.
           this.$Progress.finish();
           this.$notify({
             group: 'notifications',
@@ -125,13 +146,14 @@
             title: 'Success'
           });
           this.submitInProgress = false;
-        }
       }
     },
     data: function () {
       return {
         flankingFastaFile1: null,
+        flankingFastaFile1Name: null,
         flankingFastaFile2: null,
+        flankingFastaFile2Name: null,
         email: null,
         distance: null,
         submitInProgress: false
