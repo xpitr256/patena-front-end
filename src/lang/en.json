@@ -78,6 +78,18 @@
       "length": "The required length is:",
       "suggestion": "Thank you for using PATENA",
       "lengthUnit": " amino acid"
+    },
+    "confirmationModal": {
+      "title": "Confirm your information",
+      "operation": "Operation",
+      "initialSequence": "Initial sequence",
+      "flankingSequence1": "Flanking sequence 1",
+      "flankingSequence2": "Flanking sequence 2",
+      "sequence": "Sequence",
+      "distance": "Distance",
+      "email": "Email",
+      "btnCancel": "Cancel",
+      "btnConfirm": "Confirm"
     }
   }
 }

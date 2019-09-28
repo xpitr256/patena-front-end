@@ -78,6 +78,18 @@
       "length": "La longitud necesaria es: ",
       "suggestion": "Gracias por utilizar PATENA.",
       "lengthUnit": " aminoácidos"
+    },
+    "confirmationModal": {
+      "title": "Confirma tu información",
+      "operation": "Operación",
+      "initialSequence": "Secuencia Inicial",
+      "flankingSequence1": "Secuencia Flanqueante 1",
+      "flankingSequence2": "Secuencia Flanqueante 2",
+      "sequence": "Secuencia",
+      "distance": "Distancia",
+      "email": "Email",
+      "btnCancel": "Cancelar",
+      "btnConfirm": "Confirmar"
     }
   }
 }
