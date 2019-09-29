@@ -7,7 +7,7 @@
                             @modalConfirmation="sendForm"></confirmation-modal>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
-            Which is your initial sequence ?
+            {{$t("views.design.rdStepIS")}}
         </h2>
 
         <form class="mt-4" v-on:submit.prevent="onSubmit">

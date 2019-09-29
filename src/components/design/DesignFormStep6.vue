@@ -10,14 +10,14 @@
                             @modalConfirmation="sendForm"></confirmation-modal>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
-            Which are your flanking sequences ?
+            {{$t("views.design.rdStepFS")}}
         </h2>
 
         <form class="mt-4" v-on:submit.prevent="onSubmit">
 
             <div class="form-row">
                 <div class="form-group col-6">
-                    <label>Flanking sequence 1</label>
+                    <label>{{$t("views.design.rdStepLabelFS1")}}</label>
                     <fasta-uploader name="flankingFastaFile1"
                                     v-validate="'required'"
                                     v-model="flankingFastaFile1"
@@ -27,7 +27,7 @@
                     </fasta-uploader>
                 </div>
                 <div class="form-group col-6">
-                    <label>Flanking sequence 2</label>
+                    <label>{{$t("views.design.rdStepLabelFS2")}}</label>
                     <fasta-uploader name="flankingFastaFile2"
                                     v-validate="'required'"
                                     v-model="flankingFastaFile2"
@@ -40,7 +40,7 @@
 
             <div class="form-row">
                 <div class="form-group col-6">
-                    <label>Distance</label>
+                    <label>{{$t("views.design.rdStepDistanceFS")}}</label>
                     <div class="input-group mb-3">
                         <input type="text"
                                class="form-control"

@@ -7,16 +7,17 @@
                             :initialSequence="'-none-'"
                             @modalConfirmation="sendForm"></confirmation-modal>
         <div class="alert alert-warning mb-4" role="alert">
-            <i class="fas fa-exclamation-triangle"></i> By not having an initial sequence the system will assign a random sequence
+            <i class="fas fa-exclamation-triangle"></i>
+            {{$t("views.design.rdStepAlertNothing")}}
         </div>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
-            Which is the distance between the amino acid do you want to link ?
+            {{$t("views.design.rdStepNothing")}}
         </h2>
         <form class="mt-4" v-on:submit.prevent="onSubmit">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label>Distance</label>
+                    <label>{{$t("views.design.rdStepDistanceFS")}}</label>
                     <div class="input-group mb-3">
                         <input type="text"
                                class="form-control"

@@ -2,7 +2,7 @@
     <div class="mt-4">
         <h2 class="h-light">
             <span class="badge badge-secondary">2</span>
-            {{ $t("views.design.label") }}
+            {{ $t("views.design.ndStepLength") }}
         </h2>
         <form class="mt-4" v-on:submit.prevent="onSubmit">
             <div class="form-row ml-4">

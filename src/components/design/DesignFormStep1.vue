@@ -2,17 +2,17 @@
     <div class="mt-4">
         <h2 class="h-light">
             <span class="badge badge-secondary">1</span>
-            What would you like to design ?
+            {{$t("views.design.stStep")}}
         </h2>
 
         <div class="button-wrap mt-4">
             <input class="hidden radio-label" v-model="nextStep" v-bind:value="2" type="radio" id="length-button"/>
             <label class="button-label" for="length-button">
-                <span>Linker Length</span>
+                <span>{{$t("views.design.btnLinkerLenght")}}</span>
             </label>
             <input class="hidden radio-label" v-model="nextStep" v-bind:value="3" type="radio" id="sequence-button"/>
             <label class="button-label" for="sequence-button">
-                <span>Linker sequence</span>
+                <span>{{$t("views.design.btnLinkerSequence")}}</span>
             </label>
         </div>
 
