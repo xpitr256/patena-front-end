@@ -1,10 +1,10 @@
 <template>
     <div class="mt-4">
         <confirmation-modal ref="modal"
-                            operation="Design linker"
+                            :operation="$t('views.design.title')"
                             :distance=distance
                             :email=email
-                            :initialSequence="'-none-'"
+                            :initialSequence="$t('views.design.noInitialSequence')"
                             @modalConfirmation="sendForm"></confirmation-modal>
         <div class="alert alert-warning mb-4" role="alert">
             <i class="fas fa-exclamation-triangle"></i>

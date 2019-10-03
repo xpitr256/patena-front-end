@@ -1,7 +1,7 @@
 <template>
     <div class="mt-4">
         <confirmation-modal ref="modal"
-                            operation="Design linker"
+                            :operation="$t('views.design.title')"
                             :email=email
                             :initialSequence="fastaFileName"
                             :flankingSequence1=flankingFastaFile1Name

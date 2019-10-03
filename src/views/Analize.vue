@@ -2,7 +2,7 @@
     <div class="container wrapper">
 
         <Confirmation-modal ref="modal"
-                            operation="Analyze linker"
+                            :operation="$t('views.analyze.title')"
                             :email=email
                             :sequence=fastaFileName
                             @modalConfirmation="sendForm"></Confirmation-modal>

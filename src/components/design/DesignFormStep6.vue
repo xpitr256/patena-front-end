@@ -1,7 +1,7 @@
 <template>
     <div class="mt-4">
         <confirmation-modal ref="modal"
-                            operation="Design linker"
+                            :operation="$t('views.design.title')"
                             :email=email
                             :distance=distance
                             :initialSequence="'-none-'"

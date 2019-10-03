@@ -10,13 +10,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <read-only-field label="Operation" :value=operation></read-only-field>
-                        <read-only-field label="Initial sequence" :value=initialSequence highlight="true"></read-only-field>
-                        <read-only-field label="Flanking sequence 1" :value=flankingSequence1></read-only-field>
-                        <read-only-field label="Flanking sequence 2" :value=flankingSequence2></read-only-field>
-                        <read-only-field label="Sequence" :value=sequence highlight="true"></read-only-field>
-                        <read-only-field label="Distance" :value=distance></read-only-field>
-                        <read-only-field label="Email" :value=email></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.operation')" :value=operation></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.initialSequence')" :value=initialSequence highlight="true"></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.flankingSequence1')" :value=flankingSequence1></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.flankingSequence2')" :value=flankingSequence2></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.sequence')" :value=sequence highlight="true"></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.distance')" :value=distance></read-only-field>
+                        <read-only-field :label="$t('views.confirmationModal.email')" :value=email></read-only-field>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import $ from 'jquery'
+  import $$ from 'jquery'
   import ReadOnlyField from "./ReadOnlyField";
 
   export default {
@@ -47,10 +47,10 @@
     methods: {
       confirm: function() {
         this.$emit('modalConfirmation');
-        $('#confirmationModal').modal('hide')
+        $$('#confirmationModal').modal('hide')
       },
       show: function() {
-        $('#confirmationModal').modal('show')
+        $$('#confirmationModal').modal('show')
       },
     }
   }

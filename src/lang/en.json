@@ -89,7 +89,8 @@
       "placeholder" : "Enter the distance",
       "btnLinkerLenght": "Linker Lenght",
       "btnLinkerSequence": "Linker Sequence",
-      "next": "Next"
+      "next": "Next",
+      "noInitialSequence": "-none-"
     },
     "designSuccess": {
       "title": "Design a linker",
