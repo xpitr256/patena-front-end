@@ -1,13 +1,5 @@
 <template>
     <div class="mt-4">
-        <confirmation-modal ref="modal"
-                            :operation="$t('views.design.title')"
-                            :email=email
-                            :distance=distance
-                            :initialSequence="'-none-'"
-                            :flankingSequence1=flankingFastaFile1Name
-                            :flankingSequence2=flankingFastaFile2Name
-                            @modalConfirmation="sendForm"></confirmation-modal>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
             {{$t("views.design.rdStepFS")}}
@@ -18,21 +10,19 @@
             <div class="form-row">
                 <div class="form-group col-6">
                     <label>{{$t("views.design.rdStepLabelFS1")}}</label>
-                    <fasta-uploader name="flankingFastaFile1"
+                    <fasta-uploader name="flankingSequence1"
                                     v-validate="'required'"
-                                    v-model="flankingFastaFile1"
-                                    @input="updateFlankingFastaFile1Name"
-                                    :error="errors.first('flankingFastaFile1')"
+                                    v-model="flankingSequence1"
+                                    :error="errors.first('flankingSequence1')"
                     >
                     </fasta-uploader>
                 </div>
                 <div class="form-group col-6">
                     <label>{{$t("views.design.rdStepLabelFS2")}}</label>
-                    <fasta-uploader name="flankingFastaFile2"
+                    <fasta-uploader name="flankingSequence2"
                                     v-validate="'required'"
-                                    v-model="flankingFastaFile2"
-                                    @input="updateFlankingFastaFile2Name"
-                                    :error="errors.first('flankingFastaFile2')"
+                                    v-model="flankingSequence2"
+                                    :error="errors.first('flankingSequence2')"
                     >
                     </fasta-uploader>
                 </div>
@@ -47,7 +37,7 @@
                                id="distance"
                                ref="distance"
                                v-bind:class="{'is-invalid': errors.has('distance')}"
-                               v-validate="'required|numeric|min:1|max:3|'"
+                               v-validate="'required|numeric|min:1|max:3|min_value:1'"
                                name="distance"
                                v-on:keypress="onEnterKeypress"
                                v-model="distance"
@@ -85,8 +75,8 @@
                 </div>
                 <div class="ml-auto">
                     <button type="button"
-                            v-on:click="launchConfirmationModal"
-                            :disabled="submitInProgress || errors.items.length > 0"
+                            v-on:click="next"
+                            :disabled="errors.items.length > 0"
                             class="btn btn-primary">
                         {{ $t("views.design.next") }}
                         <i class="fas fa-chevron-right"></i>
@@ -98,66 +88,50 @@
 </template>
 <script>
   import FastaUploader from "../../components/FastaUploader";
-  import ConfirmationModal from "../ConfirmationModal";
 
   export default {
     name: "DesignFormStep6",
     components: {
-      FastaUploader,
-      ConfirmationModal
+      FastaUploader
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep',3);
-      },
-      clearNotifications : function() {
-        this.$notify({
-          group: 'notifications',
-          clean: true
+        this.$emit('goToNextStep', {
+          nextStep: 3
         });
       },
-      launchConfirmationModal: async function() {
+      next: async function() {
         let formIsValid = await this.$validator.validate();
         if (formIsValid) {
-          this.$refs.modal.show();
+          this.$emit('goToNextStep', {
+            nextStep: 'Final',
+            formData: {
+              stepFrom: 6,
+              email: this.email,
+              initialSequence: {
+                name: this.$t('views.design.noInitialSequence')
+              },
+              flankingSequence1: this.flankingSequence1,
+              flankingSequence2: this.flankingSequence1
+            }
+          });
         }
       },
       onSubmit: function() {
-        this.launchConfirmationModal();
+        this.next();
       },
       onEnterKeypress: function(event) {
         if(event.key === "Enter") {
-          this.launchConfirmationModal();
+          this.next();
         }
-      },
-      updateFlankingFastaFile1Name: function() {
-        this.flankingFastaFile1Name = this.flankingFastaFile1.name;
-      },
-      updateFlankingFastaFile2Name: function() {
-        this.flankingFastaFile2Name = this.flankingFastaFile2.name;
-      },
-      sendForm: async function() {
-          this.$Progress.start();
-          this.submitInProgress = true;
-          this.clearNotifications();
-          this.$Progress.finish();
-          this.$notify({
-            group: 'notifications',
-            type: 'success',
-            title: 'Success'
-          });
-          this.submitInProgress = false;
       }
     },
     data: function () {
       return {
-        flankingFastaFile1: null,
-        flankingFastaFile1Name: null,
-        flankingFastaFile2: null,
-        flankingFastaFile2Name: null,
+        flankingSequence1: null,
+        flankingSequence2: null,
         email: null,
-        distance: null,
-        submitInProgress: false
+        distance: null
       }
     }
   }

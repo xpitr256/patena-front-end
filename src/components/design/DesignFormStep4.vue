@@ -1,11 +1,5 @@
 <template>
     <div class="mt-4">
-        <confirmation-modal ref="modal"
-                            :operation="$t('views.design.title')"
-                            :distance=distance
-                            :email=email
-                            :initialSequence="$t('views.design.noInitialSequence')"
-                            @modalConfirmation="sendForm"></confirmation-modal>
         <div class="alert alert-warning mb-4" role="alert">
             <i class="fas fa-exclamation-triangle"></i>
             {{$t("views.design.rdStepAlertNothing")}}
@@ -24,7 +18,7 @@
                                id="distance"
                                ref="distance"
                                v-bind:class="{'is-invalid': errors.has('distance')}"
-                               v-validate="'required|numeric|min:1|max:3|'"
+                               v-validate="'required|numeric|min:1|max:3|min_value:1'"
                                name="distance"
                                v-on:keypress="onEnterKeypress"
                                v-model="distance"
@@ -63,8 +57,8 @@
                 </div>
                 <div class="ml-auto">
                     <button type="button"
-                            v-on:click="launchConfirmationModal"
-                            :disabled="submitInProgress || errors.items.length > 0"
+                            v-on:click="next"
+                            :disabled="errors.items.length > 0"
                             class="btn btn-primary">
                         {{ $t("views.design.next") }}
                         <i class="fas fa-chevron-right"></i>
@@ -77,50 +71,43 @@
 
 <script>
   import { ValidationProvider } from 'vee-validate';
-  import ConfirmationModal from "../ConfirmationModal";
 
   export default {
     name: "DesignFormStep4",
     components: {
-      ConfirmationModal,
       ValidationProvider
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep',3);
-      },
-      clearNotifications : function() {
-        this.$notify({
-          group: 'notifications',
-          clean: true
+        this.$emit('goToNextStep', {
+          nextStep: 3
         });
       },
       onSubmit: function() {
-        this.launchConfirmationModal();
+        this.next();
+      },
+      next: async function() {
+        let formIsValid = await this.$validator.validate();
+        if (formIsValid) {
+          this.$emit('goToNextStep', {
+            nextStep: 'Final',
+            formData: {
+              stepFrom: 4,
+              distance: this.distance,
+              email: this.email,
+              initialSequence: {
+                name: this.$t('views.design.noInitialSequence')
+              }
+            }
+          });
+        }
       },
       onEnterKeypress: function(event) {
         if(event.key === "Enter") {
-          this.launchConfirmationModal();
+          this.next();
         }
       },
-      launchConfirmationModal: async function() {
-        let formIsValid = await this.$validator.validate();
-        if (formIsValid) {
-          this.$refs.modal.show();
-        }
-      },
-        sendForm: async function() {
-          this.$Progress.start();
-          this.submitInProgress = true;
-          this.clearNotifications();
-          this.$Progress.finish();
-          this.$notify({
-            group: 'notifications',
-            type: 'success',
-            title: 'Success'
-          });
-          this.submitInProgress = false;
-      },
+
       setFocus: function() {
         this.$refs.distance.focus();
       }
@@ -133,8 +120,7 @@
     data: function () {
       return {
         distance: null,
-        email: null,
-        submitInProgress: false
+        email: null
       }
     }
   }

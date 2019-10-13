@@ -1,12 +1,5 @@
 <template>
     <div class="mt-4">
-        <confirmation-modal ref="modal"
-                            :operation="$t('views.design.title')"
-                            :email=email
-                            :initialSequence="fastaFileName"
-                            :flankingSequence1=flankingFastaFile1Name
-                            :flankingSequence2=flankingFastaFile2Name
-                            @modalConfirmation="sendForm"></confirmation-modal>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
             {{$t("views.design.rdStepISFS")}}
@@ -17,21 +10,19 @@
             <div class="form-row">
                 <div class="form-group col-6">
                     <label><strong>{{$t("views.design.rdStepLabelFS1")}}</strong></label>
-                    <fasta-uploader name="flankingFastaFile1"
+                    <fasta-uploader name="flankingSequence1"
                                     v-validate="'required'"
-                                    v-model="flankingFastaFile1"
-                                    @input="updateFlankingFastaFile1Name"
-                                    :error="errors.first('flankingFastaFile1')"
+                                    v-model="flankingSequence1"
+                                    :error="errors.first('flankingSequence1')"
                     >
                     </fasta-uploader>
                 </div>
                 <div class="form-group col-6">
                     <label><strong>{{$t("views.design.rdStepLabelFS2")}}</strong></label>
-                    <fasta-uploader name="flankingFastaFile2"
+                    <fasta-uploader name="flankingSequence2"
                                     v-validate="'required'"
-                                    v-model="flankingFastaFile2"
-                                    @input="updateFlankingFastaFile2Name"
-                                    :error="errors.first('flankingFastaFile2')"
+                                    v-model="flankingSequence2"
+                                    :error="errors.first('flankingSequence2')"
                     >
                     </fasta-uploader>
                 </div>
@@ -58,12 +49,10 @@
             <div class="form-row">
                 <div class="form-group col">
                     <label><strong>{{$t("views.design.rdStepLabelIS")}}</strong></label>
-                    <fasta-uploader name="fastaFile"
+                    <fasta-uploader name="initialSequence"
                                     v-validate="'required'"
-                                    v-model="fastaFile"
-                                    :error="errors.first('fastaFile')"
-                                    @input="updateFastaFileName"
-                    >
+                                    v-model="initialSequence"
+                                    :error="errors.first('initialSequence')">
                     </fasta-uploader>
                 </div>
             </div>
@@ -76,8 +65,8 @@
                 </div>
                 <div class="ml-auto">
                     <button type="button"
-                            v-on:click="launchConfirmationModal"
-                            :disabled="submitInProgress || errors.items.length > 0"
+                            v-on:click="next"
+                            :disabled="errors.items.length > 0"
                             class="btn btn-primary">
                         {{ $t("views.design.next") }}
                         <i class="fas fa-chevron-right"></i>
@@ -89,71 +78,49 @@
 </template>
 <script>
   import FastaUploader from "../../components/FastaUploader";
-  import ConfirmationModal from "../ConfirmationModal";
 
   export default {
     name: "DesignFormStep7",
     components: {
-      FastaUploader,
-      ConfirmationModal
+      FastaUploader
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep',3);
-      },
-      updateFlankingFastaFile1Name: function() {
-        this.flankingFastaFile1Name = this.flankingFastaFile1.name;
-      },
-      updateFlankingFastaFile2Name: function() {
-        this.flankingFastaFile2Name = this.flankingFastaFile2.name;
-      },
-      updateFastaFileName: function() {
-        this.fastaFileName = this.fastaFile.name;
-      },
-
-      clearNotifications : function() {
-        this.$notify({
-          group: 'notifications',
-          clean: true
+        this.$emit('goToNextStep', {
+          nextStep: 3
         });
       },
+
       onSubmit: function() {
-        this.launchConfirmationModal();
+        this.next();
       },
       onEnterKeypress: function(event) {
         if(event.key === "Enter") {
-          this.launchConfirmationModal();
+          this.next();
         }
       },
-      launchConfirmationModal: async function() {
+      next: async function() {
         let formIsValid = await this.$validator.validate();
         if (formIsValid) {
-          this.$refs.modal.show();
+          this.$emit('goToNextStep', {
+            nextStep: 'Final',
+            formData: {
+              stepFrom: 7,
+              email: this.email,
+              initialSequence: this.initialSequence,
+              flankingSequence1: this.flankingSequence1,
+              flankingSequence2: this.flankingSequence2
+            }
+          });
         }
       },
-      sendForm: async function() {
-          this.$Progress.start();
-          this.submitInProgress = true;
-          this.clearNotifications();
-          this.$Progress.finish();
-          this.$notify({
-            group: 'notifications',
-            type: 'success',
-            title: 'Success'
-          });
-          this.submitInProgress = false;
-        }
     },
     data: function () {
       return {
-        fastaFile: null,
-        fastaFileName: null,
-        flankingFastaFile1: null,
-        flankingFastaFile1Name: null,
-        flankingFastaFile2: null,
-        flankingFastaFile2Name: null,
-        email: null,
-        submitInProgress: false
+        initialSequence: null,
+        flankingSequence1: null,
+        flankingSequence2: null,
+        email: null
       }
     }
   }

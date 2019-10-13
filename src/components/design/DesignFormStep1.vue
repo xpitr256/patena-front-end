@@ -39,7 +39,9 @@
     },
     methods: {
       next: function() {
-        this.$emit('goToNextStep',this.nextStep);
+        this.$emit('goToNextStep', {
+          nextStep: this.nextStep
+        });
       }
     },
     data: function () {

@@ -1,10 +1,5 @@
 <template>
     <div class="mt-4">
-        <confirmation-modal ref="modal"
-                            :operation="$t('views.design.title')"
-                            :email=email
-                            :initialSequence=fastaFileName
-                            @modalConfirmation="sendForm"></confirmation-modal>
         <h2 class="h-light mt-4">
             <span class="badge badge-secondary">3</span>
             {{$t("views.design.rdStepIS")}}
@@ -14,11 +9,10 @@
 
             <div class="form-row">
                 <div class="form-group col">
-                    <fasta-uploader name="fasta"
+                    <fasta-uploader name="initialSequence"
                                     v-validate="'required'"
-                                    v-model="fastaFile"
-                                    @input="updateFastaFileName"
-                                    :error="errors.first('fasta')"
+                                    v-model="initialSequence"
+                                    :error="errors.first('initialSequence')"
                     >
                     </fasta-uploader>
                 </div>
@@ -50,8 +44,8 @@
                 </div>
                 <div class="ml-auto">
                     <button type="button"
-                            v-on:click="launchConfirmationModal"
-                            :disabled="submitInProgress || errors.items.length > 0"
+                            v-on:click="next"
+                            :disabled="errors.items.length > 0"
                             class="btn btn-primary">
                         {{ $t("views.design.next") }}
                         <i class="fas fa-chevron-right"></i>
@@ -64,60 +58,44 @@
 
 <script>
   import FastaUploader from "../../components/FastaUploader";
-  import ConfirmationModal from "../ConfirmationModal";
 
   export default {
     name: "DesignFormStep5",
     components: {
-      FastaUploader,
-      ConfirmationModal
+      FastaUploader
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep',3);
-      },
-      updateFastaFileName: function() {
-        this.fastaFileName = this.fastaFile.name;
-      },
-      clearNotifications : function() {
-        this.$notify({
-          group: 'notifications',
-          clean: true
+        this.$emit('goToNextStep', {
+          nextStep: 3
         });
       },
       onSubmit: function() {
-        this.launchConfirmationModal();
+        this.next();
       },
       onEnterKeypress: function(event) {
         if(event.key === "Enter") {
-          this.launchConfirmationModal();
+          this.next();
         }
       },
-      launchConfirmationModal: async function() {
+      next: async function() {
         let formIsValid = await this.$validator.validate();
         if (formIsValid) {
-          this.$refs.modal.show();
-        }
-      },
-      sendForm: async function() {
-          this.$Progress.start();
-          this.submitInProgress = true;
-          this.clearNotifications();
-          this.$Progress.finish();
-          this.$notify({
-            group: 'notifications',
-            type: 'success',
-            title: 'Success'
+          this.$emit('goToNextStep', {
+            nextStep: 'Final',
+            formData: {
+              stepFrom: 5,
+              email: this.email,
+              initialSequence: this.initialSequence
+            }
           });
-          this.submitInProgress = false;
+        }
       }
     },
     data: function () {
       return {
-        fastaFile: null,
-        fastaFileName: null,
-        email: null,
-        submitInProgress: false
+        initialSequence: null,
+        email: null
       }
     }
   }

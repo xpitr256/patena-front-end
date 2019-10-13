@@ -66,10 +66,14 @@
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep',1);
+        this.$emit('goToNextStep',{
+          nextStep: 1
+        });
       },
       next: function() {
-        this.$emit('goToNextStep',this.nextStep);
+        this.$emit('goToNextStep', {
+          nextStep: this.nextStep
+        });
       }
     },
     data: function () {

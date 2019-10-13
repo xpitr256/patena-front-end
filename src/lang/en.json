@@ -92,6 +92,9 @@
       "next": "Next",
       "noInitialSequence": "-none-"
     },
+    "patenaSettings": {
+      "title": "Patena's settings"
+    },
     "designSuccess": {
       "title": "Design a linker",
       "length": "The required length is:",

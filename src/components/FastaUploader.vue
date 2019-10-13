@@ -62,7 +62,7 @@
           thumbnailWidth: 150,
           thumbnailHeight: 150,
           maxFilesize: 2, // MB
-          acceptedFiles: '.fasta',
+          acceptedFiles: '.fasta,.txt',
           addRemoveLinks: true,
           accept: function(file, done) {
             this.files.forEach((aFile) => {

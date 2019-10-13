@@ -1,6 +1,6 @@
 <template>
     <div>
-        <component :is="stepComponent" @goToNextStep="manageStep" />
+        <component :is="stepComponent" @goToNextStep="manageStep" :formData="formData"  />
         <hr />
     </div>
 </template>
@@ -9,7 +9,8 @@
   export default {
     name: "DesignForm",
     data: () => ({
-      currentStep: 1
+      currentStep: 1,
+      formData: null
     }),
     computed: {
       stepComponent() {
@@ -18,8 +19,9 @@
       }
     },
     methods: {
-      manageStep(nextStep) {
-        this.currentStep = nextStep;
+      manageStep(data) {
+        this.currentStep = data.nextStep;
+        this.formData = data.formData;
       }
     }
   };

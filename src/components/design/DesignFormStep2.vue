@@ -13,7 +13,7 @@
                                id="distance"
                                ref="distance"
                                v-bind:class="{'is-invalid': errors.has('distance')}"
-                               v-validate="'required|numeric|min:1|max:3|'"
+                               v-validate="'required|numeric|min:1|max:3|min_value:1'"
                                name="distance"
                                v-model="distance"
                                :placeholder="$t('views.design.placeholder')">
@@ -60,7 +60,9 @@
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep',1);
+        this.$emit('goToNextStep', {
+          nextStep: 1
+        });
       },
       clearNotifications : function() {
         this.$notify({
