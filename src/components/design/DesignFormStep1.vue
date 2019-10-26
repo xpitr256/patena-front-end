@@ -1,6 +1,14 @@
 <template>
-    <div class="mt-4">
-        <h2 class="h-light">
+    <div class="mt-0">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">{{$t("views.design.breadcrumb.step1")}}</li>
+            </ol>
+        </nav>
+
+
+        <h2 class="h-light mt-5">
             <span class="badge badge-secondary">1</span>
             {{$t("views.design.stStep")}}
         </h2>
@@ -8,7 +16,7 @@
         <div class="button-wrap mt-4">
             <input class="hidden radio-label" v-model="nextStep" v-bind:value="2" type="radio" id="length-button"/>
             <label class="button-label" for="length-button">
-                <span>{{$t("views.design.btnLinkerLenght")}}</span>
+                <span>{{$t("views.design.btnLinkerLength")}}</span>
             </label>
             <input class="hidden radio-label" v-model="nextStep" v-bind:value="3" type="radio" id="sequence-button"/>
             <label class="button-label" for="sequence-button">
@@ -21,9 +29,8 @@
                 Next <i class="fas fa-chevron-right"></i>
             </button>
         </div>
-
-
     </div>
+
 </template>
 
 <script>

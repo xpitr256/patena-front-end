@@ -32,7 +32,6 @@
       "mail": "Email",
       "message" : "Your message",
       "send": "Send",
-      "sendFailed": "Send (failed)",
       "errorMail": "The email field must be a valid email"
     },
     "result": {
@@ -87,13 +86,22 @@
       "rdStepLabelIS":"Initial sequence",
       "label": "Length calculation",
       "placeholder" : "Enter the distance",
-      "btnLinkerLenght": "Linker Lenght",
+      "btnLinkerLength": "Linker Length",
       "btnLinkerSequence": "Linker Sequence",
       "next": "Next",
-      "noInitialSequence": "-none-"
+      "noInitialSequence": "-none-",
+      "breadcrumb": {
+        "step1": "Design choice",
+        "step2LinkerLength": "Linker length",
+        "step2InitialData": "Initial data choice",
+        "step3": "Data loading",
+        "step4": "Patena's settings"
+      }
     },
     "patenaSettings": {
-      "title": "Patena's settings"
+      "title": "Patena's settings",
+      "useDefaultSettings" : "Use default settings",
+      "useCustomSettings": "Use custom settings"
     },
     "designSuccess": {
       "title": "Design a linker",

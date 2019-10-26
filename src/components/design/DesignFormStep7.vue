@@ -1,6 +1,15 @@
 <template>
-    <div class="mt-4">
-        <h2 class="h-light mt-4">
+    <div class="mt-0">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="black-text" href="#" v-on:click="goToStep(1)">{{$t("views.design.breadcrumb.step1")}}</a></li>
+                <li class="breadcrumb-item"><a class="black-text" href="#" v-on:click="getStepBack">{{$t("views.design.breadcrumb.step2InitialData")}}</a></li>
+                <li class="breadcrumb-item active">{{$t("views.design.breadcrumb.step3")}}</li>
+            </ol>
+        </nav>
+
+        <h2 class="h-light mt-5">
             <span class="badge badge-secondary">3</span>
             {{$t("views.design.rdStepISFS")}}
         </h2>
@@ -85,11 +94,14 @@
       FastaUploader
     },
     methods: {
-      getStepBack() {
-        this.$emit('goToNextStep', {
-          nextStep: 3
-        });
-      },
+        getStepBack() {
+            this.goToStep(3)
+        },
+        goToStep(step) {
+            this.$emit('goToNextStep', {
+                nextStep: step
+            });
+        },
 
       onSubmit: function() {
         this.next();

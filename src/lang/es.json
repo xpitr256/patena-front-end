@@ -32,7 +32,6 @@
       "mail": "Correo Electronico",
       "message" : "Su Mensaje",
       "send": "Enviar",
-      "sendFailed": "Enviar (fallando)",
       "errorMail": "El campo de correo electrónico debe ser un correo electrónico válido"
     },
     "result": {
@@ -87,13 +86,22 @@
       "rdStepLabelIS": "Secuencia inicial",
       "label": "Cálculo de longitud",
       "placeholder" : "Ingrese la distancia",
-      "btnLinkerLenght": "Longitud del Linker",
+      "btnLinkerLength": "Longitud del Linker",
       "btnLinkerSequence": "Secuencia del Linker",
       "next": "Siguiente",
-      "noInitialSequence": "-ninguna-"
+      "noInitialSequence": "-ninguna-",
+      "breadcrumb": {
+        "step1": "Elección del tipo de diseño",
+        "step2LinkerLength": "Cálculo de longitud",
+        "step2InitialData": "Elección de datos iniciales",
+        "step3": "Carga de datos",
+        "step4": "Configuraciones del Patena"
+      }
     },
     "patenaSettings": {
-      "title": "Configuraciones del Patena"
+      "title": "Configuraciones del Patena",
+      "useDefaultSettings" : "Usar configuraciones por default",
+      "useCustomSettings": "Usar configuraciones propias"
     },
     "designSuccess": {
       "title": "Diseñar un linker",

@@ -43,7 +43,7 @@
                               rows="5"
                               id="message"
                               v-bind:class="{'is-invalid': errors.has('message')}"
-                              v-validate="'required|min:10'"
+                              v-validate="'required|min:50'"
                               name="message"
                               ref="message"
                     ></textarea>
@@ -61,12 +61,6 @@
                             class="btn btn-lg btn-primary">
                         <i class="fas fa-paper-plane mr-1"></i>
                         {{ $t("views.contact.send") }}
-                    </button>
-                    <button type="button"
-                            v-on:click="sendFailedForm"
-                            :disabled="submitInProgress"
-                            class="btn btn-lg btn-outline-danger ml-2">
-                        {{ $t("views.contact.sendFailed") }}
                     </button>
                 </div>
 

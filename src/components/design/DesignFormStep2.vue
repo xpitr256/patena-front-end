@@ -1,6 +1,15 @@
 <template>
-    <div class="mt-4">
-        <h2 class="h-light">
+    <div class="mt-0">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="black-text" href="#" v-on:click="getStepBack">{{$t("views.design.breadcrumb.step1")}}</a></li>
+                <li class="breadcrumb-item active">{{$t("views.design.breadcrumb.step2LinkerLength")}}</li>
+            </ol>
+        </nav>
+
+
+        <h2 class="h-light mt-5">
             <span class="badge badge-secondary">2</span>
             {{ $t("views.design.ndStepLength") }}
         </h2>

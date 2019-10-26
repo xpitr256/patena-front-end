@@ -1,10 +1,15 @@
 <template>
-    <div class="mt-4">
-        <div class="alert alert-warning mb-4" role="alert">
-            <i class="fas fa-exclamation-triangle"></i>
-            {{$t("views.design.rdStepAlertNothing")}}
-        </div>
-        <h2 class="h-light mt-4">
+    <div class="mt-0">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="black-text" href="#" v-on:click="goToStep(1)">{{$t("views.design.breadcrumb.step1")}}</a></li>
+                <li class="breadcrumb-item"><a class="black-text" href="#" v-on:click="getStepBack">{{$t("views.design.breadcrumb.step2InitialData")}}</a></li>
+                <li class="breadcrumb-item active">{{$t("views.design.breadcrumb.step3")}}</li>
+            </ol>
+        </nav>
+
+        <h2 class="h-light mt-5">
             <span class="badge badge-secondary">3</span>
             {{$t("views.design.rdStepNothing")}}
         </h2>
@@ -49,6 +54,12 @@
                 </div>
             </div>
 
+
+            <div class="alert alert-warning mb-4" role="alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                {{$t("views.design.rdStepAlertNothing")}}
+            </div>
+
             <div class="d-flex">
                 <div>
                     <a href="#" class="btn btn-light" v-on:click="getStepBack">
@@ -79,10 +90,13 @@
     },
     methods: {
       getStepBack() {
-        this.$emit('goToNextStep', {
-          nextStep: 3
-        });
+          this.goToStep(3)
       },
+        goToStep(step) {
+            this.$emit('goToNextStep', {
+                nextStep: step
+            });
+        },
       onSubmit: function() {
         this.next();
       },
