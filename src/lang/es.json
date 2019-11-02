@@ -101,7 +101,8 @@
     "patenaSettings": {
       "title": "Configuraciones del Patena",
       "useDefaultSettings" : "Usar configuraciones por default",
-      "useCustomSettings": "Usar configuraciones propias"
+      "useCustomSettings": "Usar configuraciones propias",
+      "aminoAcidFrequencies": "Frecuencias de aminoácidos"
     },
     "designSuccess": {
       "title": "Diseñar un linker",

@@ -28,7 +28,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "vue2-dropzone": "^3.6.0",
     "vue-resource": "^1.5.1",
-    "flag-icon-css": "^3.4.0"
+    "flag-icon-css": "^3.4.0",
+    "@chenfengyuan/vue-number-input": "^1.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",

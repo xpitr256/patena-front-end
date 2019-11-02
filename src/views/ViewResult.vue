@@ -26,20 +26,6 @@
                         <i class="fas fa-search"></i>
                         {{ $t("views.result.btnSearch") }}
                     </button>
-                    <button type="button"
-                            v-on:click="sendFailedForm"
-                            :disabled="submitInProgress"
-                            class="btn btn-lg btn-outline-danger ml-2">
-                        <i class="fas fa-search"></i>
-                        {{ $t("views.result.btnFailed") }}
-                    </button>
-                    <button type="button"
-                            v-on:click="sendNumberOrderUnknown"
-                            :disabled="submitInProgress || errors.items.length > 0"
-                            class="btn btn-lg btn-warning ml-2">
-                        <i class="fas fa-search"></i>
-                        {{ $t("views.result.btnUnknown") }}
-                    </button>
                 </div>
             </div>
         </form>
@@ -99,38 +85,6 @@
                     this.$route.params.orderNumber = this.orderNumber;
                     this.submitInProgress = false;
                 }
-            },
-            sendFailedForm: async function() {
-                this.$Progress.start();
-                this.submitInProgress = true;
-                this.clearNotifications();
-                let response = await BackendService.failedSendContactInformation();
-                this.$Progress.fail();
-                this.$notify({
-                    group: 'notifications',
-                    type: 'error',
-                    title: 'Error',
-                    text: response.errors[0].message
-                });
-                this.submitInProgress = false;
-            },
-            sendNumberOrderUnknown: async function() {
-                let formIsValid = await this.$validator.validate();
-                if (formIsValid) {
-                    this.$Progress.start();
-                    this.submitInProgress = true;
-                    this.clearNotifications();
-                    let response = await BackendService.sendOrderNumberUnknown();
-                    this.$Progress.fail();
-                    this.$notify({
-                        group: 'notifications',
-                        type: 'error',
-                        title: 'Error',
-                        text: response.errors[0].message
-                    });
-                }
-                this.submitInProgress = false;
-                this.showErrorMessage = true;
             },
         }
     }

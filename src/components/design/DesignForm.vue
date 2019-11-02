@@ -6,6 +6,8 @@
 </template>
 
 <script>
+    var $ = require('jquery');
+    window.jQuery = $;
   export default {
     name: "DesignForm",
     data: () => ({

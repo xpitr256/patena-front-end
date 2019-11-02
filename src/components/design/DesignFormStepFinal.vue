@@ -38,6 +38,28 @@
                 </label>
             </div>
 
+            <div class="ml-5">
+                <div class="form-row">
+                    <h4 class="h-light mt-5">
+                        {{$t("views.patenaSettings.aminoAcidFrequencies")}}
+                    </h4>
+                </div>
+
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3" v-for="(frequency, index) in frequencies" v-if="index < 3">
+                        <div class="form-row">
+                            <div class="form-group col-md-2 text-right">
+                                <span class="aminoAcid">{{ frequency.name }}:</span>
+                            </div>
+                            <div class="form-group col-md-10">
+                                <number-input v-model=frequencies[index].value :min="0" :max="1" :step="0.001" inline controls center size="small"></number-input>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
             <div class="d-flex">
                 <div>
@@ -60,11 +82,12 @@
 </template>
 
 <script>
-  import ConfirmationModal from "../ConfirmationModal";
+    import ConfirmationModal from "../ConfirmationModal";
+
   export default {
     name: "DesignFormStepFinal",
     components: {
-      ConfirmationModal
+      ConfirmationModal,
     },
     props:[
       'formData'
@@ -72,11 +95,19 @@
     data: function () {
       return {
         submitInProgress: false,
-        useDefaultSettings: null
+        useDefaultSettings: null,
+          frequencies: [
+              {name:'A', value: 0.825},
+              {name:'R', value: 0.553},
+              {name:'N', value: 0.406},
+              {name:'D', value: 0.545},
+              {name:'C', value: 0.137},
+              {name:'E', value: 0.393},
+
+          ]
       }
     },
     methods:{
-
         getStepBack() {
             this.goToStep(this.formData.stepFrom)
         },
@@ -121,7 +152,6 @@
     }
   }
 </script>
-
 
 <style scoped>
     @import url(https://fonts.googleapis.com/css?family=Lato:300,400,900);
@@ -185,4 +215,9 @@
         display: none;
     }
 
+
+    .aminoAcid{
+        font-variant: small-caps;
+        font-size: 1.3em;
+    }
 </style>

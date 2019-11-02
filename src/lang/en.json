@@ -101,7 +101,8 @@
     "patenaSettings": {
       "title": "Patena's settings",
       "useDefaultSettings" : "Use default settings",
-      "useCustomSettings": "Use custom settings"
+      "useCustomSettings": "Use custom settings",
+      "aminoAcidFrequencies": "Amino acid's frequency"
     },
     "designSuccess": {
       "title": "Design a linker",
