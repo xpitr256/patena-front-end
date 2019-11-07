@@ -1,12 +1,12 @@
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 @font-face {
-  font-family: 'BebasBook';
-  src: url('./fonts/BebasNeue.otf');
+  font-family: "BebasBook";
+  src: url("./fonts/BebasNeue.otf");
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('./fonts/Roboto-Light.ttf');
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Light.ttf");
 }
 
 .wrapper {
@@ -14,23 +14,28 @@
   position: relative;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #444444;
   font-family: "Roboto";
 }
-.h-light {font-weight: 300 !important;}
+.h-light {
+  font-weight: 300 !important;
+}
 
-
-.h-page-header:after{
+.h-page-header:after {
   content: "";
   width: 100%;
   display: block;
   height: 1px;
-  border-bottom: 1px solid #E3E3E3;
+  border-bottom: 1px solid #e3e3e3;
   margin: 15px 0 15px;
 }
 
 .breadcrumb {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
-

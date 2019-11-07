@@ -52,13 +52,13 @@
 </template>
 
 <script>
-  import 'flag-icon-css/css/flag-icon.css'
+import "flag-icon-css/css/flag-icon.css";
 
-  export default {
+export default {
   name: "NavBar",
   methods: {
     getClass(property) {
-      return property === this.$route.path ? 'active' : '';
+      return property === this.$route.path ? "active" : "";
     },
     showInEnglish: function() {
       this["$i18n"].locale = "en";

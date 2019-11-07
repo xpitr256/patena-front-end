@@ -4,7 +4,7 @@
     "components": {
       "navBar": {
         "menu": {
-          "about" : "About us",
+          "about": "About us",
           "analyze": "Analyze Linker",
           "design": "Design Linker",
           "results": "See Results",
@@ -30,14 +30,14 @@
       "title": "Contact us",
       "name": "Full Name",
       "mail": "Email",
-      "message" : "Your message",
+      "message": "Your message",
       "send": "Send",
       "errorMail": "The email field must be a valid email"
     },
     "result": {
       "title": "View Result",
       "label": "Enter your order number to continue",
-      "placeholder" : "Order number",
+      "placeholder": "Order number",
       "help": "Example: 550e8400-e29b-41d4-a716-446655440000",
       "btnSearch": "Search",
       "btnFailed": "Search (failed)",
@@ -47,7 +47,7 @@
     "download": {
       "title": "Download Result",
       "subtitle": "Result",
-      "report" : "Order number:",
+      "report": "Order number:",
       "btnDownload": "Download"
     },
     "analyze": {
@@ -75,17 +75,17 @@
       "ndStepSequenceIS": "Initial Sequence",
       "ndStepSequenceFS": "Flanking Sequences",
       "ndStepSequenceISFS": "Initial Sequence and Flanking Sequences",
-      "rdStepNothing":"Which is the distance between the amino acid do you want to link ?",
-      "rdStepAlertNothing":"By not having an initial sequence the system will assign a random sequence",
-      "rdStepIS":"Which is your initial sequence ?",
-      "rdStepFS":"Which are your flanking sequences ?",
-      "rdStepDistanceFS":"Distance",
-      "rdStepISFS":"Which are your flanking and initial sequences?",
-      "rdStepLabelFS1":"Flanking sequence 1",
-      "rdStepLabelFS2":"Flanking sequence 2",
-      "rdStepLabelIS":"Initial sequence",
+      "rdStepNothing": "Which is the distance between the amino acid do you want to link ?",
+      "rdStepAlertNothing": "By not having an initial sequence the system will assign a random sequence",
+      "rdStepIS": "Which is your initial sequence ?",
+      "rdStepFS": "Which are your flanking sequences ?",
+      "rdStepDistanceFS": "Distance",
+      "rdStepISFS": "Which are your flanking and initial sequences?",
+      "rdStepLabelFS1": "Flanking sequence 1",
+      "rdStepLabelFS2": "Flanking sequence 2",
+      "rdStepLabelIS": "Initial sequence",
       "label": "Length calculation",
-      "placeholder" : "Enter the distance",
+      "placeholder": "Enter the distance",
       "btnLinkerLength": "Linker Length",
       "btnLinkerSequence": "Linker Sequence",
       "next": "Next",
@@ -100,9 +100,15 @@
     },
     "patenaSettings": {
       "title": "Patena's settings",
-      "useDefaultSettings" : "Use default settings",
+      "useDefaultSettings": "Use default settings",
       "useCustomSettings": "Use custom settings",
-      "aminoAcidFrequencies": "Amino acid's frequency"
+      "aminoAcidFrequencies": "Amino acid's frequency",
+      "netCharge": "Net Charge",
+      "algorithms": "Algorithms",
+      "important": "Attention please: ",
+      "aminoAcidWarning": "Take into account that all frequencies must sum 10.000 together",
+      "totalFrequency": "Total frequency",
+      "restoreFrequencies": "Restore default frequencies"
     },
     "designSuccess": {
       "title": "Design a linker",

@@ -4,7 +4,7 @@
     "components": {
       "navBar": {
         "menu": {
-          "about" : "Nosotros",
+          "about": "Nosotros",
           "analyze": "Analizar Linker",
           "design": "Diseñar Linker",
           "results": "Ver Resultados",
@@ -30,14 +30,14 @@
       "title": "Contacto",
       "name": "Nombre Completo",
       "mail": "Correo Electronico",
-      "message" : "Su Mensaje",
+      "message": "Su Mensaje",
       "send": "Enviar",
       "errorMail": "El campo de correo electrónico debe ser un correo electrónico válido"
     },
     "result": {
       "title": "Ver Resultado",
       "label": "Ingrese su número de orden para continuar",
-      "placeholder" : "Número de orden",
+      "placeholder": "Número de orden",
       "help": "Ejemplo: 550e8400-e29b-41d4-a716-446655440000",
       "btnSearch": "Buscar",
       "btnFailed": "Buscar (fallando)",
@@ -47,12 +47,12 @@
     "download": {
       "title": "Descargar Resultado",
       "subtitle": "Resultado",
-      "report" : "Número de orden:",
+      "report": "Número de orden:",
       "btnDownload": "Descargar"
     },
     "analyze": {
       "title": "Analizar Linker",
-      "placeholder" : "Elija su archivo .fasta",
+      "placeholder": "Elija su archivo .fasta",
       "mail": "Correo Electronico",
       "btnSearch": "Buscar",
       "btnAnalyze": "Analizar"
@@ -75,8 +75,8 @@
       "ndStepSequenceIS": "Secuencia Inicial",
       "ndStepSequenceFS": "Secuencias flanqueantes",
       "ndStepSequenceISFS": "Secuencia Inicial y Secuencias flanqueantes",
-      "rdStepNothing":"¿Cuál es la distancia entre el aminoácido que desea vincular?",
-      "rdStepAlertNothing":"Al no tener una secuencia inicial, el sistema asignará una secuencia aleatoria",
+      "rdStepNothing": "¿Cuál es la distancia entre el aminoácido que desea vincular?",
+      "rdStepAlertNothing": "Al no tener una secuencia inicial, el sistema asignará una secuencia aleatoria",
       "rdStepIS": "¿Cuál es su secuencia inicial?",
       "rdStepFS": "¿Cuáles son sus secuencias de flanqueo?",
       "rdStepDistanceFS": "Distancia",
@@ -85,7 +85,7 @@
       "rdStepLabelFS2": "Secuencia flanqueante 2",
       "rdStepLabelIS": "Secuencia inicial",
       "label": "Cálculo de longitud",
-      "placeholder" : "Ingrese la distancia",
+      "placeholder": "Ingrese la distancia",
       "btnLinkerLength": "Longitud del Linker",
       "btnLinkerSequence": "Secuencia del Linker",
       "next": "Siguiente",
@@ -100,9 +100,15 @@
     },
     "patenaSettings": {
       "title": "Configuraciones del Patena",
-      "useDefaultSettings" : "Usar configuraciones por default",
+      "useDefaultSettings": "Usar configuraciones por default",
       "useCustomSettings": "Usar configuraciones propias",
-      "aminoAcidFrequencies": "Frecuencias de aminoácidos"
+      "aminoAcidFrequencies": "Frecuencias de aminoácidos",
+      "netCharge": "Carga neta",
+      "algorithms": "Algoritmos",
+      "important": "Atención: ",
+      "aminoAcidWarning": "Tenga en cuenta que todas las frecuencias deben sumar un total de 10.000",
+      "totalFrequency": "Frecuencia total",
+      "restoreFrequencies": "Reiniciar a las frequencias por defecto"
     },
     "designSuccess": {
       "title": "Diseñar un linker",
