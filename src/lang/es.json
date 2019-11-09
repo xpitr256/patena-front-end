@@ -108,7 +108,11 @@
       "important": "Atención: ",
       "aminoAcidWarning": "Tenga en cuenta que todas las frecuencias deben sumar un total de 10.000",
       "totalFrequency": "Frecuencia total",
-      "restoreFrequencies": "Reiniciar a las frequencias por defecto"
+      "restoreFrequencies": "Reiniciar frequencias",
+      "references": "Referencias",
+      "uvAminoAcidLabel": "Aminoácidos UV",
+      "actions": "Acciones",
+      "avoidAminoAcid": "Evitar aminoácidos UV"
     },
     "designSuccess": {
       "title": "Diseñar un linker",

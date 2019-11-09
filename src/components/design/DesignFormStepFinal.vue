@@ -120,48 +120,75 @@
             </button>
           </div>
 
-          <div
-            class="form-row"
-            v-for="(row, index) in frequencies"
-            v-bind:class="{ 'mt-4': index === 0 }"
-          >
-            <div
-              class="form-group col-md-3"
-              v-for="(frequency, internalIndex) in row"
-            >
-              <div class="form-row">
-                <div class="form-group col-md-3 text-right">
-                  <span class="aminoAcid">{{ frequency.name }}:</span>
-                </div>
-                <div class="form-group col-md-9">
-                  <number-input
-                    v-model="frequencies[index][internalIndex].value"
-                    @change="checkFrequencies"
-                    :min="0"
-                    :max="1"
-                    :step="0.001"
-                    inline
-                    controls
-                    center
-                    size="small"
-                  ></number-input>
+          <div class="row">
+            <div class="col-md-3 grey-border">
+
+              <h5 class="mt-3 mb-2 font-weight-bold">{{ $t("views.patenaSettings.references") }}:</h5>
+              <div class="row align-items-center">
+                <div class="col col-md-auto"><div class="uvReference"></div></div>
+                <div class="col">{{ $t("views.patenaSettings.uvAminoAcidLabel") }}</div>
+              </div>
+
+              <h5 class="mt-5 mb-2 font-weight-bold">{{ $t("views.patenaSettings.actions") }}:</h5>
+
+              <a href="#/" class="btn btn-link" v-on:click="restoreFrequencies">
+                <i class="fas fa-undo"></i>
+                {{ $t("views.patenaSettings.restoreFrequencies") }}
+              </a>
+
+
+              <div class="form-check mt-2 ml-2">
+                <input class="form-check-input" type="checkbox" value="" id="uvSilent" v-model="avoidUVSilent" @change="checkUVSilent($event)">
+                <label class="form-check-label" for="uvSilent">
+                  {{ $t("views.patenaSettings.avoidAminoAcid") }}
+                </label>
+              </div>
+
+            </div>
+            <div class="col-md-9">
+
+              <div
+                      class="form-row"
+                      v-for="(row, index) in frequencies"
+                      v-bind:class="{ 'mt-4': index === 0 }"
+              >
+                <div
+                        class="form-group col-md-3"
+                        v-for="(frequency, internalIndex) in row"
+                >
+                  <div class="form-row">
+                    <div class="form-group col-md-3 text-right">
+                  <span class="aminoAcid"  v-bind:class="uvLabelClass(frequency)">
+                    {{ frequency.name }}:</span>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <number-input
+                              v-model="frequencies[index][internalIndex].value"
+                              v-bind:class="uvInputClass(frequency)"
+                              :disabled="frequency.uvSilent && avoidUVSilent"
+                              @change="checkFrequencies"
+                              :min="0"
+                              :max="1"
+                              :step="0.001"
+                              inline
+                              controls
+                              center
+                              size="small"
+                      ></number-input>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="form-row align-items-center ml-1">
-            <div class="col col-md-auto">
-              <span class="badge" v-bind:class="totalFrequencyClass"
+
+          <div class="form-row">
+            <div class="col">
+              <span class="badge float-right" v-bind:class="totalFrequencyClass"
                 >{{ $t("views.patenaSettings.totalFrequency") }}:
                 {{ totalFrequency }}</span
               >
-            </div>
-            <div class="col">
-              <a href="#/" class="btn btn-link" v-on:click="restoreFrequencies">
-                <i class="fas fa-undo"></i>
-                {{ $t("views.patenaSettings.restoreFrequencies") }}
-              </a>
             </div>
           </div>
         </div>
@@ -230,6 +257,7 @@ export default {
       submitInProgress: false,
       useDefaultSettings: null,
       totalFrequency: 0,
+      avoidUVSilent:false,
       frequencies: [],
       defaultFrequencies: [
         [
@@ -252,15 +280,15 @@ export default {
         ],
         [
           { name: "M", value: 0.242 },
-          { name: "F", value: 0.386 },
+          { name: "F", value: 0.386,  uvSilent: true},
           { name: "P", value: 0.47 },
           { name: "S", value: 0.656 }
         ],
 
         [
           { name: "T", value: 0.534 },
-          { name: "W", value: 0.108 },
-          { name: "Y", value: 0.292 },
+          { name: "W", value: 0.108, uvSilent: true },
+          { name: "Y", value: 0.292, uvSilent: true},
           { name: "V", value: 0.734 } //TODO validate with patena 0.687 value
         ]
       ]
@@ -270,11 +298,49 @@ export default {
     this.restoreFrequencies();
   },
   methods: {
+    uvInputClass: function(frequency) {
+      if (frequency.uvSilent && !this.avoidUVSilent) {
+        return 'uvInput';
+      }
+
+      if (frequency.uvSilent && this.avoidUVSilent) {
+        return 'uvInput uvInputDisabled';
+      }
+
+      return '';
+    },
+    uvLabelClass: function(frequency) {
+      if (frequency.uvSilent && !this.avoidUVSilent) {
+        return 'uvLabel';
+      }
+
+      if (frequency.uvSilent && this.avoidUVSilent) {
+        return 'uvLabel uvLabelDisabled';
+      }
+
+      return '';
+    },
     getStepBack() {
       this.goToStep(this.formData.stepFrom);
     },
     restoreFrequencies() {
+      this.avoidUVSilent = false;
       this.frequencies = JSON.parse(JSON.stringify(this.defaultFrequencies));
+    },
+    disableAllUVFrequencies() {
+      this.frequencies = this.frequencies.map((row) => {
+        return row.map((frequency) => {
+          if (frequency.uvSilent) {
+            frequency.value = 0;
+          }
+          return frequency;
+        });
+      });
+    },
+    checkUVSilent() {
+      if(this.avoidUVSilent) {
+        this.disableAllUVFrequencies();
+      }
     },
     getFrequenciesValues() {
       let flatArray = [];
@@ -413,4 +479,30 @@ export default {
   font-variant: small-caps;
   font-size: 1.3em;
 }
+.uvLabel {
+  color: violet;
+  font-weight: bold;
+}
+.uvLabelDisabled {
+  color: #eebdee !important;
+}
+.uvInputDisabled {
+  border: 2px solid #eebdee !important;
+}
+.uvInput {
+  border: 2px solid violet;
+  border-radius: 6px;
+}
+  .grey-border {
+    border-right: 1px solid #dee2e6;
+  }
+  .uvReference {
+    margin-left: 10px;
+    margin-right: -20px;
+    width: 18px;
+    height: 18px;
+    background-color: violet;
+    border-radius: 3px;
+  }
+
 </style>

@@ -108,7 +108,11 @@
       "important": "Attention please: ",
       "aminoAcidWarning": "Take into account that all frequencies must sum 10.000 together",
       "totalFrequency": "Total frequency",
-      "restoreFrequencies": "Restore default frequencies"
+      "restoreFrequencies": "Restore default frequencies",
+      "references": "References",
+      "uvAminoAcidLabel": "Amino acids that absorb UV",
+      "actions": "Actions",
+      "avoidAminoAcid": "Avoid UV amino acids"
     },
     "designSuccess": {
       "title": "Design a linker",
