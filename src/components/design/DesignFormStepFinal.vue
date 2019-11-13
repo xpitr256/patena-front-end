@@ -238,6 +238,7 @@
 
 <script>
 import ConfirmationModal from "../ConfirmationModal";
+import FastaService from "../../services/FastaService";
 
 export default {
   name: "DesignFormStepFinal",
@@ -294,8 +295,13 @@ export default {
       ]
     };
   },
-  created() {
+  async created() {
     this.restoreFrequencies();
+    if (this.formData.initialSequence instanceof File) {
+      console.log("It's a File !!!!");
+      const sequence = await FastaService.getSequenceLengthFrom(this.formData.initialSequence);
+      console.log(sequence);
+    }
   },
   methods: {
     uvInputClass: function(frequency) {

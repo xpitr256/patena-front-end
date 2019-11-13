@@ -4,6 +4,7 @@ function timeout() {
 
 import Vue from "vue";
 
+// TODO read value from env file
 const baseDomain = "https://patena-api.herokuapp.com";
 
 export default {
