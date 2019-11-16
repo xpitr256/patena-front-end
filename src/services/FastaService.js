@@ -27,6 +27,9 @@ const aminoAcids = [
  * Returns true | false according to fasta validations
  */
 export function isValidFasta(fastaContent) {
+  if (!fastaContent) {
+    return false;
+  }
   const lines = fastaContent.split("\n");
   const linesWithoutComments = lines.filter(line => !line.startsWith(">"));
   const allContent = linesWithoutComments.join("").trim();
@@ -46,6 +49,10 @@ export function isValidFasta(fastaContent) {
  * Returns the first (or only) amino acid sequence without comments
  */
 export function getFirstSequence(fastaContent) {
+  if (!fastaContent) {
+    return "";
+  }
+
   const lines = fastaContent.split("\n");
 
   if (lines.length === 0) {
@@ -81,7 +88,18 @@ export async function getFastaFileContent(fastaFile) {
   });
 }
 
-export async function getSequenceLengthFrom(fastaContent) {}
+/**
+ * PRE: receive a clean sequence: no comment line.
+ * @param fastaContent
+ * @returns {number}
+ */
+export function getSequenceLengthFrom(sequence) {
+  if (!sequence) {
+    return 0;
+  }
+
+  return sequence.trim().length;
+}
 
 export default {
   isValidFasta,

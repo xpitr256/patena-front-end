@@ -1,9 +1,11 @@
+import { getSequenceLengthFrom } from "../../src/services/FastaService";
+
 let assert = require("assert");
 import fastaService from "../../src/services/FastaService.js";
 
 const fs = require("fs");
 
-const basePath = "./test/services/";
+const basePath = "./test/services/fasta/";
 
 describe("FastaService Test ", function() {
   describe("Validate fasta file ", function() {
@@ -69,6 +71,14 @@ describe("FastaService Test ", function() {
         throw err;
       }
     });
+
+    it("should return false for undefined data", function() {
+      assert.strictEqual(fastaService.isValidFasta(), false);
+    });
+
+    it("should return false for null data", function() {
+      assert.strictEqual(fastaService.isValidFasta(null), false);
+    });
   });
 
   describe("get fasta sequence ", function() {
@@ -84,7 +94,7 @@ describe("FastaService Test ", function() {
       }
     });
 
-    it("should return only the onley sequencewith no comments", function() {
+    it("should return only the sequence with no comments", function() {
       try {
         const data = fs.readFileSync(
           basePath + "validWithNoComment.fasta",
@@ -97,6 +107,98 @@ describe("FastaService Test ", function() {
       } catch (err) {
         throw err;
       }
+    });
+
+    it("should return the sequence in a fasta with 2 comments before the sequence", function() {
+      try {
+        const data = fs.readFileSync(
+          basePath + "twoLinesComment.fasta",
+          "utf8"
+        );
+        assert.strictEqual(fastaService.getFirstSequence(data), "ABC");
+      } catch (err) {
+        throw err;
+      }
+    });
+
+    it("should return the sequence in a fasta with no comment at the begin then comment and finally a second sequence", function() {
+      try {
+        const data = fs.readFileSync(
+          basePath + "sequenceCommentOtherSequence.fasta",
+          "utf8"
+        );
+        assert.strictEqual(fastaService.getFirstSequence(data), "DDDDDEEEE");
+      } catch (err) {
+        throw err;
+      }
+    });
+
+    it("should return the sequence in a fasta with 1 line comment and 1 line sequence after it", function() {
+      try {
+        const data = fs.readFileSync(
+          basePath + "commentSequence.fasta",
+          "utf8"
+        );
+        assert.strictEqual(fastaService.getFirstSequence(data), "ZGHWABC");
+      } catch (err) {
+        throw err;
+      }
+    });
+
+    it("should return the sequence in a fasta with only 1 line sequence", function() {
+      try {
+        const data = fs.readFileSync(
+          basePath + "oneLineSequence.fasta",
+          "utf8"
+        );
+        assert.strictEqual(fastaService.getFirstSequence(data), "AAABBBCCC");
+      } catch (err) {
+        throw err;
+      }
+    });
+
+    it("should return empty string for an empty fasta", function() {
+      try {
+        const data = fs.readFileSync(basePath + "emptyFile.fasta", "utf8");
+        assert.strictEqual(fastaService.getFirstSequence(data), "");
+      } catch (err) {
+        throw err;
+      }
+    });
+
+    it("should return empty string for undefined data", function() {
+      assert.strictEqual(fastaService.getFirstSequence(), "");
+    });
+
+    it("should return empty string for null data", function() {
+      assert.strictEqual(fastaService.getFirstSequence(null), "");
+    });
+  });
+
+  describe("get sequence length", function() {
+    it("should be 0  for undefined data", function() {
+      assert.strictEqual(fastaService.getSequenceLengthFrom(), 0);
+    });
+
+    it("should be 0  for null data", function() {
+      assert.strictEqual(fastaService.getSequenceLengthFrom(null), 0);
+    });
+
+    it("should be 0 for an empty fasta", function() {
+      try {
+        const data = fs.readFileSync(basePath + "emptyFile.fasta", "utf8");
+        assert.strictEqual(fastaService.getSequenceLengthFrom(data), 0);
+      } catch (err) {
+        throw err;
+      }
+    });
+
+    it("should be 3 for 'ABC' sequence", function() {
+      assert.strictEqual(fastaService.getSequenceLengthFrom("ABC"), 3);
+    });
+
+    it("should still be 3 for '    ABC     ' sequence", function() {
+      assert.strictEqual(fastaService.getSequenceLengthFrom("    ABC     "), 3);
     });
   });
 });
