@@ -14,13 +14,19 @@
       <div class="form-row">
         <div class="form-group col">
           <fasta-uploader
-            name="fasta"
+            name="fastaFile"
             v-validate="'required'"
             v-model="fastaFile"
             @input="updateFastaFileName"
-            :error="errors.first('fasta')"
+            :error="errors.first('fastaFile')"
           >
           </fasta-uploader>
+          <fasta-validator
+            :fasta-file="fastaFile"
+            id="fastaFile"
+            :characters-in-line="70"
+            @newFastaValidation="updateFormValidation"
+          ></fasta-validator>
         </div>
       </div>
 
@@ -63,6 +69,7 @@
 <script>
 import FastaUploader from "../components/FastaUploader";
 import BackendService from "../services/BackendService";
+import FastaValidator from "../components/FastaValidator";
 import { ValidationProvider } from "vee-validate";
 import ConfirmationModal from "../components/ConfirmationModal";
 
@@ -71,7 +78,8 @@ export default {
   components: {
     FastaUploader,
     ValidationProvider,
-    ConfirmationModal
+    ConfirmationModal,
+    FastaValidator
   },
   created: function() {
     setTimeout(() => {
@@ -81,6 +89,15 @@ export default {
   methods: {
     updateFastaFileName: function() {
       this.fastaFileName = this.fastaFile.name;
+    },
+    updateFormValidation: function(id, isValid) {
+      if (!isValid) {
+        this.errors.add({
+          field: id,
+          msg:
+            "Please provide a fasta file according to the following suggestions"
+        });
+      }
     },
     clearNotifications: function() {
       this.$notify({

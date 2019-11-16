@@ -33,6 +33,12 @@
             :error="errors.first('initialSequence')"
           >
           </fasta-uploader>
+          <fasta-validator
+            :fasta-file="initialSequence"
+            id="initialSequence"
+            :characters-in-line="70"
+            @newFastaValidation="updateFormValidation"
+          ></fasta-validator>
         </div>
       </div>
 
@@ -79,11 +85,13 @@
 </template>
 
 <script>
+import FastaValidator from "../FastaValidator";
 import FastaUploader from "../../components/FastaUploader";
 
 export default {
   name: "DesignFormStep5",
   components: {
+    FastaValidator,
     FastaUploader
   },
   methods: {
@@ -101,6 +109,15 @@ export default {
     onEnterKeypress: function(event) {
       if (event.key === "Enter") {
         this.next();
+      }
+    },
+    updateFormValidation: function(id, isValid) {
+      if (!isValid) {
+        this.errors.add({
+          field: id,
+          msg:
+            "Please provide a fasta file according to the following suggestions"
+        });
       }
     },
     next: async function() {

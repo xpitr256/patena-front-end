@@ -34,6 +34,12 @@
             :error="errors.first('flankingSequence1')"
           >
           </fasta-uploader>
+          <fasta-validator
+            :fasta-file="flankingSequence1"
+            id="flankingSequence1"
+            :characters-in-line="45"
+            @newFastaValidation="updateFormValidation"
+          ></fasta-validator>
         </div>
         <div class="form-group col-6">
           <label>{{ $t("views.design.rdStepLabelFS2") }}</label>
@@ -44,6 +50,12 @@
             :error="errors.first('flankingSequence2')"
           >
           </fasta-uploader>
+          <fasta-validator
+            :fasta-file="flankingSequence2"
+            id="flankingSequence2"
+            :characters-in-line="45"
+            @newFastaValidation="updateFormValidation"
+          ></fasta-validator>
         </div>
       </div>
 
@@ -113,10 +125,12 @@
 </template>
 <script>
 import FastaUploader from "../../components/FastaUploader";
+import FastaValidator from "../FastaValidator";
 
 export default {
   name: "DesignFormStep6",
   components: {
+    FastaValidator,
     FastaUploader
   },
   methods: {
@@ -127,6 +141,15 @@ export default {
       this.$emit("goToNextStep", {
         nextStep: step
       });
+    },
+    updateFormValidation: function(id, isValid) {
+      if (!isValid) {
+        this.errors.add({
+          field: id,
+          msg:
+            "Please provide a fasta file according to the following suggestions"
+        });
+      }
     },
     next: async function() {
       let formIsValid = await this.$validator.validate();

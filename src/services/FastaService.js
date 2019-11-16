@@ -23,6 +23,10 @@ const aminoAcids = [
   "V"
 ];
 
+export function getAminoAcids() {
+  return aminoAcids;
+}
+
 /**
  * Returns true | false according to fasta validations
  */
@@ -77,6 +81,10 @@ export function getFirstSequence(fastaContent) {
  */
 export async function getFastaFileContent(fastaFile) {
   return new Promise((resolve, reject) => {
+    if (!fastaFile) {
+      resolve("");
+    }
+
     const reader = new FileReader();
     reader.readAsText(fastaFile, "UTF-8");
     reader.onload = function(evt) {
@@ -101,9 +109,23 @@ export function getSequenceLengthFrom(sequence) {
   return sequence.trim().length;
 }
 
+export function splitSequenceInLinesOf(sequence, amountOfCharacters) {
+  return sequence
+    .split("")
+    .reduce(
+      (accumulator, element, index) =>
+        accumulator +
+        element +
+        ((index + 1) % amountOfCharacters === 0 ? "<br>" : ""),
+      ""
+    );
+}
+
 export default {
   isValidFasta,
   getFastaFileContent,
   getFirstSequence,
-  getSequenceLengthFrom
+  getSequenceLengthFrom,
+  splitSequenceInLinesOf,
+  getAminoAcids
 };
