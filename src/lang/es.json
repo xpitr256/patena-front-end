@@ -112,7 +112,11 @@
       "references": "Referencias",
       "uvAminoAcidLabel": "Aminoácidos UV",
       "actions": "Acciones",
-      "avoidAminoAcid": "Evitar aminoácidos UV"
+      "avoidAminoAcid": "Evitar aminoácidos UV",
+      "netChargeWarning": "La carga neta debe tener un valor entero positivo y no puede ser mayor a la longitud de la secuencia inicial.",
+      "netCharge": "Carga neta (valor opcional)",
+      "netChargePlaceholder": "Ingrese la carga neta",
+      "algorithmWarning": "Por lo menos un algoritmos debe estar activo. Tenga en cuenta que algunos algortimos pueden demorar mucho tiempo."
     },
     "designSuccess": {
       "title": "Diseñar un linker",

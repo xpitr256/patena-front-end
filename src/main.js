@@ -14,6 +14,8 @@ import spanishValidationMessages from "vee-validate/dist/locale/es";
 import englishValidationMessages from "vee-validate/dist/locale/en";
 import VueNumberInput from "@chenfengyuan/vue-number-input";
 Vue.use(VueNumberInput);
+import ToggleButton from "vue-js-toggle-button";
+Vue.use(ToggleButton);
 
 import vueResource from "vue-resource";
 import { library } from "@fortawesome/fontawesome-svg-core";

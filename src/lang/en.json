@@ -112,7 +112,11 @@
       "references": "References",
       "uvAminoAcidLabel": "Amino acids that absorb UV",
       "actions": "Actions",
-      "avoidAminoAcid": "Avoid UV amino acids"
+      "avoidAminoAcid": "Avoid UV amino acids",
+      "netChargeWarning": "Net charge must be a postive integer and it could not be higher than the sequence length.",
+      "netCharge": "Net charge (optional)",
+      "netChargePlaceholder": "Enter net charge",
+      "algorithmWarning": "At least one algorithm should remain active. Take into account that some algorithms would require some time to work."
     },
     "designSuccess": {
       "title": "Design a linker",

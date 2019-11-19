@@ -126,6 +126,7 @@
 <script>
 import FastaUploader from "../../components/FastaUploader";
 import FastaValidator from "../FastaValidator";
+import FastaService from "../../services/FastaService";
 
 export default {
   name: "DesignFormStep6",
@@ -154,16 +155,29 @@ export default {
     next: async function() {
       let formIsValid = await this.$validator.validate();
       if (formIsValid) {
+        const flankingSequence1Content = await FastaService.getFastaFileContent(
+          this.flankingSequence1
+        );
+        const flankingSequence2Content = await FastaService.getFastaFileContent(
+          this.flankingSequence2
+        );
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {
             stepFrom: 6,
             email: this.email,
+            distance: this.distance,
             initialSequence: {
               name: this.$t("views.design.noInitialSequence")
             },
-            flankingSequence1: this.flankingSequence1,
-            flankingSequence2: this.flankingSequence1
+            flankingSequence1: {
+              name: this.flankingSequence1.name,
+              value: FastaService.getFirstSequence(flankingSequence1Content)
+            },
+            flankingSequence2: {
+              name: this.flankingSequence2.name,
+              value: FastaService.getFirstSequence(flankingSequence2Content)
+            }
           }
         });
       }

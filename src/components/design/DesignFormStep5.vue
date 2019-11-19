@@ -87,6 +87,7 @@
 <script>
 import FastaValidator from "../FastaValidator";
 import FastaUploader from "../../components/FastaUploader";
+import FastaService from "../../services/FastaService";
 
 export default {
   name: "DesignFormStep5",
@@ -123,12 +124,18 @@ export default {
     next: async function() {
       let formIsValid = await this.$validator.validate();
       if (formIsValid) {
+        const initialSequenceContent = await FastaService.getFastaFileContent(
+          this.initialSequence
+        );
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {
             stepFrom: 5,
             email: this.email,
-            initialSequence: this.initialSequence
+            initialSequence: {
+              name: this.initialSequence.name,
+              value: FastaService.getFirstSequence(initialSequenceContent)
+            }
           }
         });
       }

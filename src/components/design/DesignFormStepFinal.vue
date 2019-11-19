@@ -122,58 +122,77 @@
 
           <div class="row">
             <div class="col-md-3 grey-border">
-
-              <h5 class="mt-3 mb-2 font-weight-bold">{{ $t("views.patenaSettings.references") }}:</h5>
+              <h5 class="mt-3 mb-2 font-weight-bold">
+                {{ $t("views.patenaSettings.references") }}:
+              </h5>
               <div class="row align-items-center">
-                <div class="col col-md-auto"><div class="uvReference"></div></div>
-                <div class="col">{{ $t("views.patenaSettings.uvAminoAcidLabel") }}</div>
+                <div class="col col-md-auto">
+                  <div class="uvReference"></div>
+                </div>
+                <div class="col">
+                  {{ $t("views.patenaSettings.uvAminoAcidLabel") }}
+                </div>
               </div>
 
-              <h5 class="mt-5 mb-2 font-weight-bold">{{ $t("views.patenaSettings.actions") }}:</h5>
+              <h5 class="mt-5 mb-2 font-weight-bold">
+                {{ $t("views.patenaSettings.actions") }}:
+              </h5>
 
-              <a href="#/" class="btn btn-link" v-on:click="restoreFrequencies">
+              <a
+                href="#/"
+                class="btn btn-link mb-2"
+                v-on:click="restoreFrequencies"
+              >
                 <i class="fas fa-undo"></i>
                 {{ $t("views.patenaSettings.restoreFrequencies") }}
               </a>
-
-
-              <div class="form-check mt-2 ml-2">
-                <input class="form-check-input" type="checkbox" value="" id="uvSilent" v-model="avoidUVSilent" @change="checkUVSilent($event)">
-                <label class="form-check-label" for="uvSilent">
-                  {{ $t("views.patenaSettings.avoidAminoAcid") }}
-                </label>
-              </div>
-
+              <toggle-button
+                :value="avoidUVSilent"
+                id="uvSilent"
+                class="mt-1"
+                v-model="avoidUVSilent"
+                @change="checkUVSilent($event)"
+                :color="toogleColor"
+                :switch-color="switchColor"
+                :sync="true"
+                :labels="true"
+              />
+              <label class="form-check-label ml-2" for="uvSilent">
+                {{ $t("views.patenaSettings.avoidAminoAcid") }}
+              </label>
             </div>
             <div class="col-md-9">
-
               <div
-                      class="form-row"
-                      v-for="(row, index) in frequencies"
-                      v-bind:class="{ 'mt-4': index === 0 }"
+                class="form-row"
+                v-for="(row, index) in frequencies"
+                v-bind:class="{ 'mt-4': index === 0 }"
               >
                 <div
-                        class="form-group col-md-3"
-                        v-for="(frequency, internalIndex) in row"
+                  class="form-group col-md-3"
+                  v-for="(frequency, internalIndex) in row"
                 >
                   <div class="form-row">
                     <div class="form-group col-md-3 text-right">
-                  <span class="aminoAcid"  v-bind:class="uvLabelClass(frequency)">
-                    {{ frequency.name }}:</span>
+                      <span
+                        class="aminoAcid"
+                        v-bind:class="uvLabelClass(frequency)"
+                      >
+                        {{ frequency.name }}:</span
+                      >
                     </div>
                     <div class="form-group col-md-9">
                       <number-input
-                              v-model="frequencies[index][internalIndex].value"
-                              v-bind:class="uvInputClass(frequency)"
-                              :disabled="frequency.uvSilent && avoidUVSilent"
-                              @change="checkFrequencies"
-                              :min="0"
-                              :max="1"
-                              :step="0.001"
-                              inline
-                              controls
-                              center
-                              size="small"
+                        v-model="frequencies[index][internalIndex].value"
+                        v-bind:class="uvInputClass(frequency)"
+                        :disabled="frequency.uvSilent && avoidUVSilent"
+                        @change="checkFrequencies"
+                        :min="0"
+                        :max="1"
+                        :step="0.001"
+                        inline
+                        controls
+                        center
+                        size="small"
                       ></number-input>
                     </div>
                   </div>
@@ -181,7 +200,6 @@
               </div>
             </div>
           </div>
-
 
           <div class="form-row">
             <div class="col">
@@ -198,7 +216,36 @@
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-          ...
+          <div class="alert alert-warning alert-dismissible fade show mt-4">
+            <strong>{{ $t("views.patenaSettings.important") }}</strong>
+            {{ $t("views.patenaSettings.netChargeWarning") }}
+            <button type="button" class="close" data-dismiss="alert">
+              &times;
+            </button>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>{{ $t("views.patenaSettings.netCharge") }}</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="netCharge"
+                ref="netCharge"
+                v-bind:class="{ 'is-invalid': errors.has('netCharge') }"
+                v-validate="
+                  `numeric|min:1|min_value:1|max_value:${maxNetChargeValue}`
+                "
+                name="netCharge"
+                v-on:keypress="onEnterKeypress"
+                v-model="netCharge"
+                :placeholder="$t('views.patenaSettings.netChargePlaceholder')"
+              />
+              <div class="invalid-feedback">
+                {{ errors.first("netCharge") }}
+              </div>
+            </div>
+          </div>
         </div>
         <div
           class="tab-pane fade"
@@ -206,7 +253,54 @@
           role="tabpanel"
           aria-labelledby="nav-contact-tab"
         >
-          ...
+          <div class="alert alert-warning alert-dismissible fade show mt-4">
+            <strong>{{ $t("views.patenaSettings.important") }}</strong>
+            {{ $t("views.patenaSettings.algorithmWarning") }}
+            <button type="button" class="close" data-dismiss="alert">
+              &times;
+            </button>
+          </div>
+
+          <div
+            class="form-row"
+            v-for="(row, index) in algorithms"
+            v-bind:class="{ 'mt-4': index === 0 }"
+          >
+            <div
+              class="form-group col-md-4"
+              v-for="(algorithm, internalIndex) in row"
+            >
+                <div class="card">
+                  <h5 class="card-header font-weight-bold ">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        {{ algorithm.name }}
+                      </div>
+                      <div>
+                        <toggle-button
+                                :value="algorithm.active"
+                                :color="toogleColor"
+                                :switch-color="switchColor"
+                                :width="56"
+                                :height="25"
+                                :font-size="14"
+                                :sync="false"
+                                :labels="true"
+                        />
+                      </div>
+                    </div>
+                  </h5>
+
+                  <div class="card-body">
+                    <p class="card-text">
+                      This is a description for this algorithm Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
+                    </p>
+                  </div>
+                </div>
+
+
+            </div>
+          </div>
         </div>
       </div>
 
@@ -239,6 +333,7 @@
 <script>
 import ConfirmationModal from "../ConfirmationModal";
 import FastaService from "../../services/FastaService";
+import BackendService from "../../services/BackendService";
 
 export default {
   name: "DesignFormStepFinal",
@@ -255,10 +350,38 @@ export default {
   },
   data: function() {
     return {
+      maxNetChargeValue: null,
       submitInProgress: false,
       useDefaultSettings: null,
       totalFrequency: 0,
-      avoidUVSilent:false,
+      avoidUVSilent: false,
+      toogleColor: {
+        checked: "#2ecc71",
+        unchecked: "#bfbfbf",
+        disabled: "#CCCCCC"
+      },
+      switchColor: { checked: "#28a745", unchecked: "#e2e2e2" },
+      algorithms: [
+        [
+          { name: "BLAST", active: true },
+          { name: "TANGO", active: true },
+          { name: "ELM", active: true }
+        ],
+        [
+          { name: "IUPred", active: true },
+          { name: "ANCHOR", active: true },
+          { name: "Prosite", active: true }
+        ],
+        [
+          { name: "Limbo", active: true },
+          { name: "TMHMM", active: true },
+          { name: "PASTA", active: true }
+        ],
+        [
+          { name: "Waltz", active: true },
+          { name: "Amyloid pattern", active: true }
+        ]
+      ],
       frequencies: [],
       defaultFrequencies: [
         [
@@ -281,7 +404,7 @@ export default {
         ],
         [
           { name: "M", value: 0.242 },
-          { name: "F", value: 0.386,  uvSilent: true},
+          { name: "F", value: 0.386, uvSilent: true },
           { name: "P", value: 0.47 },
           { name: "S", value: 0.656 }
         ],
@@ -289,42 +412,52 @@ export default {
         [
           { name: "T", value: 0.534 },
           { name: "W", value: 0.108, uvSilent: true },
-          { name: "Y", value: 0.292, uvSilent: true},
+          { name: "Y", value: 0.292, uvSilent: true },
           { name: "V", value: 0.734 } //TODO validate with patena 0.687 value
         ]
-      ]
+      ],
+      netCharge: null
     };
   },
   async created() {
     this.restoreFrequencies();
-    if (this.formData.initialSequence instanceof File) {
-      console.log("It's a File !!!!");
-      const sequence = await FastaService.getSequenceLengthFrom(this.formData.initialSequence);
-      console.log(sequence);
+    if (this.formData.initialSequence.value) {
+      this.maxNetChargeValue = FastaService.getSequenceLengthFrom(
+        this.formData.initialSequence.value
+      );
+    } else {
+      try {
+        const response = await BackendService.calculateLength(
+          this.formData.distance
+        );
+        this.maxNetChargeValue = Math.round(response.length);
+      } catch (e) {
+        console.error("Cannot get sequence length from distance");
+      }
     }
   },
   methods: {
     uvInputClass: function(frequency) {
       if (frequency.uvSilent && !this.avoidUVSilent) {
-        return 'uvInput';
+        return "uvInput";
       }
 
       if (frequency.uvSilent && this.avoidUVSilent) {
-        return 'uvInput uvInputDisabled';
+        return "uvInput uvInputDisabled";
       }
 
-      return '';
+      return "";
     },
     uvLabelClass: function(frequency) {
       if (frequency.uvSilent && !this.avoidUVSilent) {
-        return 'uvLabel';
+        return "uvLabel";
       }
 
       if (frequency.uvSilent && this.avoidUVSilent) {
-        return 'uvLabel uvLabelDisabled';
+        return "uvLabel uvLabelDisabled";
       }
 
-      return '';
+      return "";
     },
     getStepBack() {
       this.goToStep(this.formData.stepFrom);
@@ -334,8 +467,8 @@ export default {
       this.frequencies = JSON.parse(JSON.stringify(this.defaultFrequencies));
     },
     disableAllUVFrequencies() {
-      this.frequencies = this.frequencies.map((row) => {
-        return row.map((frequency) => {
+      this.frequencies = this.frequencies.map(row => {
+        return row.map(frequency => {
           if (frequency.uvSilent) {
             frequency.value = 0;
           }
@@ -344,7 +477,7 @@ export default {
       });
     },
     checkUVSilent() {
-      if(this.avoidUVSilent) {
+      if (this.avoidUVSilent) {
         this.disableAllUVFrequencies();
       }
     },
@@ -499,16 +632,15 @@ export default {
   border: 2px solid violet;
   border-radius: 6px;
 }
-  .grey-border {
-    border-right: 1px solid #dee2e6;
-  }
-  .uvReference {
-    margin-left: 10px;
-    margin-right: -20px;
-    width: 18px;
-    height: 18px;
-    background-color: violet;
-    border-radius: 3px;
-  }
-
+.grey-border {
+  border-right: 1px solid #dee2e6;
+}
+.uvReference {
+  margin-left: 10px;
+  margin-right: -20px;
+  width: 18px;
+  height: 18px;
+  background-color: violet;
+  border-radius: 3px;
+}
 </style>
