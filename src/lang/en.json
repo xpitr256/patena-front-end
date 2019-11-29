@@ -99,7 +99,7 @@
       }
     },
     "patenaSettings": {
-      "title": "Patena's settings",
+      "title": "Which Patena's settings do you prefer?",
       "useDefaultSettings": "Use default settings",
       "useCustomSettings": "Use custom settings",
       "aminoAcidFrequencies": "Amino acid's frequency",

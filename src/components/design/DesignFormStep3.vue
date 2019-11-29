@@ -18,53 +18,62 @@
       {{ $t("views.design.ndStepSequence") }}
     </h2>
 
-    <div class="button-wrap mt-4 ml-5 mb-4">
-      <input
-        class="hidden radio-label"
-        v-model="nextStep"
-        v-bind:value="4"
-        type="radio"
-        id="nothing-button"
-      />
-      <label class="button-label" for="nothing-button">
-        <span>{{ $t("views.design.ndStepSequenceNothing") }}</span>
-      </label>
-      <br />
-      <input
-        class="hidden radio-label"
-        v-model="nextStep"
-        v-bind:value="5"
-        type="radio"
-        id="sequence-button"
-      />
-      <label class="button-label" for="sequence-button">
-        <span>{{ $t("views.design.ndStepSequenceIS") }}</span>
-      </label>
+    <div class="container">
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div class="button-wrap mt-4 ml-5 mb-4">
+            <input
+                    class="hidden radio-label"
+                    v-model="nextStep"
+                    v-bind:value="4"
+                    type="radio"
+                    id="nothing-button"
+            />
+            <label class="button-label" for="nothing-button">
+              <span>{{ $t("views.design.ndStepSequenceNothing") }}</span>
+            </label>
+            <br />
+            <input
+                    class="hidden radio-label"
+                    v-model="nextStep"
+                    v-bind:value="5"
+                    type="radio"
+                    id="sequence-button"
+            />
+            <label class="button-label" for="sequence-button">
+              <span>{{ $t("views.design.ndStepSequenceIS") }}</span>
+            </label>
 
-      <br />
-      <input
-        class="hidden radio-label"
-        v-model="nextStep"
-        v-bind:value="6"
-        type="radio"
-        id="flanking-button"
-      />
-      <label class="button-label" for="flanking-button">
-        <span>{{ $t("views.design.ndStepSequenceFS") }}</span>
-      </label>
+            <br />
+            <input
+                    class="hidden radio-label"
+                    v-model="nextStep"
+                    v-bind:value="6"
+                    type="radio"
+                    id="flanking-button"
+            />
+            <label class="button-label" for="flanking-button">
+              <span>{{ $t("views.design.ndStepSequenceFS") }}</span>
+            </label>
 
-      <br />
-      <input
-        class="hidden radio-label"
-        v-model="nextStep"
-        v-bind:value="7"
-        type="radio"
-        id="sequence-flanking-button"
-      />
-      <label class="button-label" for="sequence-flanking-button">
-        <span>{{ $t("views.design.ndStepSequenceISFS") }}</span>
-      </label>
+            <br />
+            <input
+                    class="hidden radio-label"
+                    v-model="nextStep"
+                    v-bind:value="7"
+                    type="radio"
+                    id="sequence-flanking-button"
+            />
+            <label class="button-label" for="sequence-flanking-button">
+              <span>{{ $t("views.design.ndStepSequenceISFS") }}</span>
+            </label>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
     </div>
+
 
     <div class="d-flex">
       <div>
@@ -121,15 +130,6 @@ export default {
 
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Lato:300, 400, 900);
-.button-wrap {
-  position: relative;
-  top: 50%;
-}
-@media (max-width: 40em) {
-  .button-wrap {
-    margin-top: -1.5em;
-  }
-}
 
 .button-label {
   min-width: 100%;

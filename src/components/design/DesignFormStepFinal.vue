@@ -49,6 +49,7 @@
           class="hidden radio-label"
           v-model="useDefaultSettings"
           v-bind:value="true"
+          v-on:click="setDefaultSettings"
           type="radio"
           id="length-button"
         />
@@ -67,7 +68,7 @@
         </label>
       </div>
 
-      <nav v-show="useDefaultSettings === false">
+      <nav v-show="useDefaultSettings !== null">
         <div class="nav nav-tabs mt-5" id="nav-tab" role="tablist">
           <a
             class="nav-item nav-link active"
@@ -104,7 +105,7 @@
       <div
         class="tab-content"
         id="nav-tabContent"
-        v-show="useDefaultSettings === false"
+        v-show="useDefaultSettings !== null"
       >
         <div
           class="tab-pane fade show active"
@@ -112,7 +113,7 @@
           role="tabpanel"
           aria-labelledby="nav-home-tab"
         >
-          <div class="alert alert-warning alert-dismissible fade show mt-4">
+          <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
             <strong>{{ $t("views.patenaSettings.important") }}</strong>
             {{ $t("views.patenaSettings.aminoAcidWarning") }}
             <button type="button" class="close" data-dismiss="alert">
@@ -122,19 +123,20 @@
 
           <div class="row">
             <div class="col-md-3 grey-border">
-              <h5 class="mt-3 mb-2 font-weight-bold">
+              <h5 class="mt-3 mb-2 font-weight-bold" :class="{labelDisabled: useDefaultSettings}">
                 {{ $t("views.patenaSettings.references") }}:
               </h5>
               <div class="row align-items-center">
                 <div class="col col-md-auto">
-                  <div class="uvReference"></div>
+                  <div class="uvReference" :class="{uvReferenceDisabled: useDefaultSettings}"></div>
                 </div>
-                <div class="col">
+                <div class="col" :class="{labelDisabled: useDefaultSettings}">
                   {{ $t("views.patenaSettings.uvAminoAcidLabel") }}
                 </div>
               </div>
 
-              <h5 class="mt-5 mb-2 font-weight-bold">
+              <h5 class="mt-5 mb-2 font-weight-bold"  :class="{labelDisabled: useDefaultSettings}"
+              >
                 {{ $t("views.patenaSettings.actions") }}:
               </h5>
 
@@ -142,24 +144,31 @@
                 href="#/"
                 class="btn btn-link mb-2"
                 v-on:click="restoreFrequencies"
+                :class="{disabled: useDefaultSettings}"
               >
                 <i class="fas fa-undo"></i>
                 {{ $t("views.patenaSettings.restoreFrequencies") }}
               </a>
+              <br />
               <toggle-button
                 :value="avoidUVSilent"
                 id="uvSilent"
                 class="mt-1"
                 v-model="avoidUVSilent"
                 @change="checkUVSilent($event)"
+                :class="{disabled: useDefaultSettings}"
                 :color="toogleColor"
                 :switch-color="switchColor"
                 :sync="true"
                 :labels="true"
               />
-              <label class="form-check-label ml-2" for="uvSilent">
+              <a  href="#/"
+                  class="btn btn-link mb-2"
+                  v-on:click="changeUVSilent"
+                  :class="{disabled: useDefaultSettings}"
+              >
                 {{ $t("views.patenaSettings.avoidAminoAcid") }}
-              </label>
+              </a>
             </div>
             <div class="col-md-9">
               <div
@@ -184,7 +193,7 @@
                       <number-input
                         v-model="frequencies[index][internalIndex].value"
                         v-bind:class="uvInputClass(frequency)"
-                        :disabled="frequency.uvSilent && avoidUVSilent"
+                        :disabled="(frequency.uvSilent && avoidUVSilent) || useDefaultSettings"
                         @change="checkFrequencies"
                         :min="0"
                         :max="1"
@@ -216,7 +225,7 @@
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-          <div class="alert alert-warning alert-dismissible fade show mt-4">
+          <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
             <strong>{{ $t("views.patenaSettings.important") }}</strong>
             {{ $t("views.patenaSettings.netChargeWarning") }}
             <button type="button" class="close" data-dismiss="alert">
@@ -224,7 +233,7 @@
             </button>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 mt-4">
             <label>{{ $t("views.patenaSettings.netCharge") }}</label>
             <div class="input-group mb-3">
               <input
@@ -237,6 +246,7 @@
                   `numeric|min:1|min_value:1|max_value:${maxNetChargeValue}`
                 "
                 name="netCharge"
+                :disabled=useDefaultSettings
                 v-on:keypress="onEnterKeypress"
                 v-model="netCharge"
                 :placeholder="$t('views.patenaSettings.netChargePlaceholder')"
@@ -253,7 +263,7 @@
           role="tabpanel"
           aria-labelledby="nav-contact-tab"
         >
-          <div class="alert alert-warning alert-dismissible fade show mt-4">
+          <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
             <strong>{{ $t("views.patenaSettings.important") }}</strong>
             {{ $t("views.patenaSettings.algorithmWarning") }}
             <button type="button" class="close" data-dismiss="alert">
@@ -273,18 +283,20 @@
                 <div class="card">
                   <h5 class="card-header font-weight-bold ">
                     <div class="d-flex justify-content-between">
-                      <div>
+                      <div :class="{labelDisabled: useDefaultSettings}">
                         {{ algorithm.name }}
                       </div>
                       <div>
                         <toggle-button
                                 :value="algorithm.active"
+                                v-model="algorithms[index][internalIndex].active"
                                 :color="toogleColor"
+                                :class="{disabled: useDefaultSettings}"
                                 :switch-color="switchColor"
                                 :width="56"
                                 :height="25"
                                 :font-size="14"
-                                :sync="false"
+                                :sync="true"
                                 :labels="true"
                         />
                       </div>
@@ -292,7 +304,7 @@
                   </h5>
 
                   <div class="card-body">
-                    <p class="card-text">
+                    <p class="card-text" :class="{labelDisabled: useDefaultSettings}">
                       This is a description for this algorithm Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
                     </p>
                   </div>
@@ -314,11 +326,7 @@
           <button
             type="button"
             v-on:click="launchConfirmationModal"
-            :disabled="
-              submitInProgress ||
-                errors.items.length > 0 ||
-                useDefaultSettings === null
-            "
+            :disabled=isSendDisabled
             class="btn btn-primary"
           >
             <i class="fas fa-paper-plane mr-1"></i>
@@ -342,8 +350,16 @@ export default {
   },
   props: ["formData"],
   computed: {
+    isSendDisabled: function() {
+      return this.submitInProgress ||
+      this.errors.items.length > 0 ||
+      this.useDefaultSettings === null || !this.isValidTotalFrequency() || !this.isAtLeastOneActiveAlgorithm()
+    },
     totalFrequencyClass: function() {
-      return Number(this.totalFrequency) === Number(10.0)
+      if (this.useDefaultSettings) {
+        return 'badge-success badge-success-disabled'
+      }
+      return this.isValidTotalFrequency()
         ? "badge-success"
         : "badge-danger";
     }
@@ -361,7 +377,8 @@ export default {
         disabled: "#CCCCCC"
       },
       switchColor: { checked: "#28a745", unchecked: "#e2e2e2" },
-      algorithms: [
+      algorithms: [],
+      defaultAlgorithms: [
         [
           { name: "BLAST", active: true },
           { name: "TANGO", active: true },
@@ -420,7 +437,7 @@ export default {
     };
   },
   async created() {
-    this.restoreFrequencies();
+    this.setDefaultSettings();
     if (this.formData.initialSequence.value) {
       this.maxNetChargeValue = FastaService.getSequenceLengthFrom(
         this.formData.initialSequence.value
@@ -437,30 +454,58 @@ export default {
     }
   },
   methods: {
+    isValidTotalFrequency: function() {
+      return Number(this.totalFrequency) === Number(10.0);
+    },
+    isAtLeastOneActiveAlgorithm: function() {
+      let algorithmsActiveData = [];
+      this.algorithms.forEach(group => {
+        group.forEach(algorithm => {
+          algorithmsActiveData.push(algorithm.active);
+        });
+      });
+      const active = (element) => element;
+      return algorithmsActiveData.some(active);
+    },
     uvInputClass: function(frequency) {
-      if (frequency.uvSilent && !this.avoidUVSilent) {
+      if (frequency.uvSilent && !this.avoidUVSilent && !this.useDefaultSettings) {
         return "uvInput";
       }
 
-      if (frequency.uvSilent && this.avoidUVSilent) {
+      if ((frequency.uvSilent && this.avoidUVSilent) || (this.useDefaultSettings && frequency.uvSilent)) {
         return "uvInput uvInputDisabled";
       }
 
       return "";
     },
     uvLabelClass: function(frequency) {
-      if (frequency.uvSilent && !this.avoidUVSilent) {
+      if (frequency.uvSilent && !this.avoidUVSilent && !this.useDefaultSettings) {
         return "uvLabel";
       }
 
-      if (frequency.uvSilent && this.avoidUVSilent) {
+      if ((frequency.uvSilent && this.avoidUVSilent) || (this.useDefaultSettings && frequency.uvSilent)) {
         return "uvLabel uvLabelDisabled";
+      }
+
+      if(this.useDefaultSettings) {
+        return "labelDisabled";
       }
 
       return "";
     },
     getStepBack() {
       this.goToStep(this.formData.stepFrom);
+    },
+    setDefaultSettings() {
+      this.restoreFrequencies();
+      this.restoreNetCharge();
+      this.restoreAlgorithms();
+    },
+    restoreAlgorithms() {
+      this.algorithms = JSON.parse(JSON.stringify(this.defaultAlgorithms));
+    },
+    restoreNetCharge() {
+      this.netCharge = null;
     },
     restoreFrequencies() {
       this.avoidUVSilent = false;
@@ -475,6 +520,10 @@ export default {
           return frequency;
         });
       });
+    },
+    changeUVSilent() {
+      this.avoidUVSilent = !this.avoidUVSilent;
+      this.checkUVSilent();
     },
     checkUVSilent() {
       if (this.avoidUVSilent) {
@@ -632,6 +681,9 @@ export default {
   border: 2px solid violet;
   border-radius: 6px;
 }
+.labelDisabled {
+  color: #6c757d;
+}
 .grey-border {
   border-right: 1px solid #dee2e6;
 }
@@ -643,4 +695,13 @@ export default {
   background-color: violet;
   border-radius: 3px;
 }
+
+.uvReferenceDisabled {
+  background-color: #eebdee !important;
+}
+
+.badge-success-disabled {
+  background-color: #9ed3a4;
+}
+
 </style>

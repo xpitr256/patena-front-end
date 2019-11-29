@@ -99,7 +99,7 @@
       }
     },
     "patenaSettings": {
-      "title": "Configuraciones del Patena",
+      "title": "¿Qué configuración del Patena prefiere?",
       "useDefaultSettings": "Usar configuraciones por default",
       "useCustomSettings": "Usar configuraciones propias",
       "aminoAcidFrequencies": "Frecuencias de aminoácidos",
