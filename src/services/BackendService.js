@@ -11,8 +11,13 @@ const baseDomain = "https://patena-api.herokuapp.com";
 export default {
   async sendContactInformation(email, name, message) {
     const postData = { email: email, name: name, message: message };
-    let response = await Vue.http.post(baseDomain + "/contact", postData);
-    console.log(response.body);
+    try {
+      let response = await Vue.http.post(baseDomain + "/contact", postData);
+      return response.ok;
+    } catch (error) {
+      console.error("BackendService -> sendContactInformation -> " + error);
+      return false;
+    }
   },
 
   async analyzeLinker() {

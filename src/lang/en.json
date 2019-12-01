@@ -1,6 +1,8 @@
 {
   "views": {
     "getBack": "Back",
+    "sendSuccess": "Sent succesfully!",
+    "sendError": "Send has failed.",
     "components": {
       "navBar": {
         "menu": {

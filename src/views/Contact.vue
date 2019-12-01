@@ -120,14 +120,21 @@ export default {
         this.$Progress.start();
         this.submitInProgress = true;
         this.clearNotifications();
-        await BackendService.sendContactInformation(this.email, this.fullName, this.message);
+        const sendOk = await BackendService.sendContactInformation(this.email, this.fullName, this.message);
         this.$Progress.finish();
-        this.$notify({
-          group: "notifications",
-          type: "success",
-          title: "Success",
-          text: "Data is correct!"
-        });
+        if (sendOk) {
+          this.$notify({
+            group: "notifications",
+            type: "success",
+            title: this.$t("views.sendSuccess"),
+          });
+        } else {
+          this.$notify({
+            group: "notifications",
+            type: "error",
+            title: this.$t("views.sendError"),
+          });
+        }
         this.submitInProgress = false;
       }
     }
