@@ -6,13 +6,13 @@ import Vue from "vue";
 
 // TODO read value from env file
 const baseDomain = "https://patena-api.herokuapp.com";
+//const baseDomain = "http://localhost:3000";
 
 export default {
-  async sendContactInformation() {
-    await timeout();
-    return {
-      status: "ok"
-    };
+  async sendContactInformation(email, name, message) {
+    const postData = { email: email, name: name, message: message };
+    let response = await Vue.http.post(baseDomain + "/contact", postData);
+    console.log(response.body);
   },
 
   async analyzeLinker() {

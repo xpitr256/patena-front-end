@@ -50,6 +50,7 @@
             v-bind:class="{ 'is-invalid': errors.has('message') }"
             v-validate="'required|min:50'"
             name="message"
+            v-model="message"
             ref="message"
           ></textarea>
           <div class="invalid-feedback">
@@ -119,7 +120,7 @@ export default {
         this.$Progress.start();
         this.submitInProgress = true;
         this.clearNotifications();
-        await BackendService.sendContactInformation();
+        await BackendService.sendContactInformation(this.email, this.fullName, this.message);
         this.$Progress.finish();
         this.$notify({
           group: "notifications",
@@ -129,20 +130,6 @@ export default {
         });
         this.submitInProgress = false;
       }
-    },
-    sendFailedForm: async function() {
-      this.$Progress.start();
-      this.submitInProgress = true;
-      this.clearNotifications();
-      let response = await BackendService.failedSendContactInformation();
-      this.$Progress.fail();
-      this.$notify({
-        group: "notifications",
-        type: "error",
-        title: "Error",
-        text: response.errors[0].message
-      });
-      this.submitInProgress = false;
     }
   }
 };
