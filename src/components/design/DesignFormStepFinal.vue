@@ -394,6 +394,7 @@ export default {
   },
   data: function() {
     return {
+      designTypeMap: new Map(),
       maxNetChargeValue: null,
       submitInProgress: false,
       useDefaultSettings: null,
@@ -466,6 +467,7 @@ export default {
   },
   async created() {
     this.setDefaultSettings();
+    this.buildDesignTypeMap();
     if (this.formData.initialSequence.value) {
       this.maxNetChargeValue = FastaService.getSequenceLengthFrom(
         this.formData.initialSequence.value
@@ -484,6 +486,15 @@ export default {
   methods: {
     isValidTotalFrequency: function() {
       return Number(this.totalFrequency) === Number(10.0);
+    },
+    getAlgorithmsDataForBackend() {
+      let flatArray = [];
+      this.algorithms.forEach(group => {
+        group.forEach(algorithm => {
+          flatArray.push(algorithm);
+        });
+      });
+      return flatArray;
     },
     isAtLeastOneActiveAlgorithm: function() {
       let algorithmsActiveData = [];
@@ -538,6 +549,13 @@ export default {
     getStepBack() {
       this.goToStep(this.formData.stepFrom);
     },
+    buildDesignTypeMap() {
+      // key = stepFrom, value = serverDesignType
+      this.designTypeMap.set(7,4);
+      this.designTypeMap.set(6,3);
+      this.designTypeMap.set(5,2);
+      this.designTypeMap.set(4,1);
+    },
     setDefaultSettings() {
       this.restoreFrequencies();
       this.restoreNetCharge();
@@ -571,6 +589,16 @@ export default {
       if (this.avoidUVSilent) {
         this.disableAllUVFrequencies();
       }
+    },
+    getFrequenciesDataForBackend() {
+      let flatArray = [];
+      this.frequencies.forEach(group => {
+        group.forEach(frequency => {
+          delete frequency.uvSilent;
+          flatArray.push(frequency);
+        });
+      });
+      return flatArray;
     },
     getFrequenciesValues() {
       let flatArray = [];
@@ -615,16 +643,51 @@ export default {
         this.$refs.modal.show();
       }
     },
+    getDesignData: function() {
+      let data =  JSON.parse(JSON.stringify(this.formData));
+      delete data.stepFrom;
+      data.designType = this.designTypeMap.get(this.formData.stepFrom);
+
+      // remove non initial sequences cases
+      if (!data.initialSequence.value) {
+        delete data.initialSequence;
+      }
+
+      if (!this.useDefaultSettings) {
+        data.config = {
+          frequencies: this.getFrequenciesDataForBackend(),
+          netCharge: this.netCharge,
+          algorithms: this.getAlgorithmsDataForBackend()
+        }
+      }
+
+      return  data;
+    },
     sendForm: async function() {
       this.$Progress.start();
       this.submitInProgress = true;
       this.clearNotifications();
+
+      const designData = this.getDesignData();
+      const response = await BackendService.designLinker(designData);
+
       this.$Progress.finish();
-      this.$notify({
-        group: "notifications",
-        type: "success",
-        title: "Success"
-      });
+      if (!response.error) {
+        this.$notify({
+          group: "notifications",
+          type: "success",
+          title: this.$t("views.sendSuccess"),
+        });
+        this.$router.push("/design/success");
+        this.$route.params.orderNumber = response.orderNumber;
+        this.$route.params.email = this.email;
+      } else {
+        this.$notify({
+          group: "notifications",
+          type: "error",
+          title: response.error,
+        });
+      }
       this.submitInProgress = false;
     }
   }

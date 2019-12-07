@@ -22,6 +22,25 @@ export default {
     }
   },
 
+  async designLinker(data) {
+    try {
+      const response = await Vue.http.post(baseDomain + "/design", data);
+      if (response.ok) {
+        return {
+          orderNumber: response.body.orderNumber
+        };
+      }
+      return {
+        error: response.body.message
+      };
+    } catch (error) {
+      console.error("BackendService -> designLinker -> " + error);
+      return {
+        error: genericErrorMessage
+      };
+    }
+  },
+
   async analyzeLinker(email, sequence) {
     const postData = { email: email, sequence: sequence };
     try {
@@ -57,27 +76,6 @@ export default {
       status: "ok"
     };
   },
-  async sendOrderNumberUnknown() {
-    await timeout();
-    return {
-      status: "failed",
-      errors: [
-        {
-          message: "Order number not found"
-        }
-      ]
-    };
-  },
 
-  async failedSendContactInformation() {
-    await timeout();
-    return {
-      status: "failed",
-      errors: [
-        {
-          message: "There was an error. Please try again later"
-        }
-      ]
-    };
-  }
+
 };
