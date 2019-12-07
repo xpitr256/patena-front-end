@@ -120,11 +120,20 @@
       "netChargePlaceholder": "Ingrese la carga neta",
       "algorithmWarning": "Por lo menos un algoritmos debe estar activo. Tenga en cuenta que algunos algortimos pueden demorar mucho tiempo."
     },
-    "designSuccess": {
-      "title": "Diseñar un linker",
+    "designLengthSuccess": {
+      "title": "Diseñar la longitud de un linker",
       "length": "La longitud necesaria es: ",
       "suggestion": "Gracias por utilizar PATENA.",
       "lengthUnit": " aminoácidos"
+    },
+    "designSuccess": {
+      "title": "Diseñar un linker",
+      "alertTitle": "¡Bien hecho!",
+      "dataReceived": "Hemos recibido correctamente su información",
+      "emailSent": "Le comentamos también que hemos enviado un mail a ",
+      "orderNumber": "con el siguiente número de orden ",
+      "notify": "Cuando su solicitud esté lista recibirá otro mail de notificación para poder ver los resultados.",
+      "suggestion": "Le recomendamos guardar el número de orden y agradecemos que haya confiado en PATENA."
     },
     "confirmationModal": {
       "title": "Confirma tu información",

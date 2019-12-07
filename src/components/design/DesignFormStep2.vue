@@ -102,7 +102,7 @@ export default {
             type: "success",
             title: "Success"
           });
-          this.$router.push("/design/success");
+          this.$router.push("/design/length/success");
           this.$route.params.length = response.length;
         } catch (error) {
           this.$Progress.fail();

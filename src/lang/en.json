@@ -120,11 +120,20 @@
       "netChargePlaceholder": "Enter net charge",
       "algorithmWarning": "At least one algorithm should remain active. Take into account that some algorithms would require some time to work."
     },
-    "designSuccess": {
-      "title": "Design a linker",
+    "designLengthSuccess": {
+      "title": "Design a linker length",
       "length": "The required length is:",
       "suggestion": "Thank you for using PATENA",
       "lengthUnit": " amino acid"
+    },
+    "designSuccess": {
+      "title": "Design a linker",
+      "alertTitle": "Well done!",
+      "dataReceived": "We have successfully received your information",
+      "emailSent": "In addition we just sent an email to ",
+      "orderNumber": "with the following order number ",
+      "notify": "When your request is done you will received a notification email in order to see the results.",
+      "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
     },
     "confirmationModal": {
       "title": "Confirm your information",

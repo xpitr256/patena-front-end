@@ -2,10 +2,13 @@
   <div class="container wrapper">
     <h1 class="display-4">{{ $t("views.designSuccess.title") }}</h1>
     <div class="alert alert-success mt-4" role="alert">
+      <h4 class="alert-heading">{{ $t("views.designSuccess.alertTitle") }}</h4>
       <p>
-        {{ $t("views.designSuccess.length") }}
-        <span class="font-weight-bold">{{ length }}</span>
-        {{ $t("views.designSuccess.lengthUnit") }}
+        {{ $t("views.designSuccess.dataReceived") }}. {{ $t("views.designSuccess.emailSent") }}
+        <span class="font-italic">{{ email }}</span>
+        {{ $t("views.designSuccess.orderNumber") }}
+        <span class="font-weight-bold">{{ orderNumber }}</span>
+        {{ $t("views.designSuccess.notify") }}
       </p>
       <hr />
       <p class="mb-0">{{ $t("views.designSuccess.suggestion") }}</p>
@@ -23,11 +26,12 @@ export default {
   name: "DesignSuccess",
   data() {
     return {
-      length: 0
+      orderNumber: 0
     };
   },
   created() {
-    this.length = this.$route.params.length;
+    this.orderNumber = this.$route.params.orderNumber;
+    this.email = this.$route.params.email;
   },
   methods: {
     navigate() {
