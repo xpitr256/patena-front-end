@@ -6,6 +6,8 @@ import Vue from "vue";
 
 // TODO read value from env file
 const baseDomain = "https://patena-api.herokuapp.com";
+const genericErrorMessage = "There was an error connecting with our servers. Try again later please"; //TODO translate it
+
 //const baseDomain = "http://localhost:3000";
 
 export default {
@@ -20,11 +22,24 @@ export default {
     }
   },
 
-  async analyzeLinker() {
-    await timeout();
-    return {
-      orderNumber: "3cf3e00f-4d72-4c5d-9d5f-aff4582d6ad8"
-    };
+  async analyzeLinker(email, sequence) {
+    const postData = { email: email, sequence: sequence };
+    try {
+      const response = await Vue.http.post(baseDomain + "/analyze", postData);
+      if (response.ok) {
+        return {
+          orderNumber: response.body.orderNumber
+        };
+      }
+      return {
+        error: response.body.message
+      };
+    } catch (error) {
+      console.error("BackendService -> analyzeLinker -> " + error);
+      return {
+        error: genericErrorMessage
+      };
+    }
   },
 
   async calculateLength(distance) {

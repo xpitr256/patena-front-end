@@ -72,6 +72,7 @@ import BackendService from "../services/BackendService";
 import FastaValidator from "../components/FastaValidator";
 import { ValidationProvider } from "vee-validate";
 import ConfirmationModal from "../components/ConfirmationModal";
+import FastaService from "../services/FastaService";
 
 export default {
   name: "analyze",
@@ -121,18 +122,32 @@ export default {
       this.$Progress.start();
       this.submitInProgress = true;
       this.clearNotifications();
-      let response = await BackendService.analyzeLinker();
+
+      const fastaFileContent = await FastaService.getFastaFileContent(this.fastaFile);
+      const sequence = {
+        name: this.fastaFileName,
+        value: FastaService.getFirstSequence(fastaFileContent)
+      };
+
+      const response = await BackendService.analyzeLinker(this.email, sequence);
       this.$Progress.finish();
-      this.$notify({
-        group: "notifications",
-        type: "success",
-        title: "Success",
-        text: "Data is correct!"
-      });
-      this.$router.push("/analyze/success");
-      this.$route.params.orderNumber = response.orderNumber;
-      this.$route.params.email = this.email;
-      this.$route.params.fastaName = this.fastaFile.name;
+      if (!response.error) {
+        this.$notify({
+          group: "notifications",
+          type: "success",
+          title: this.$t("views.sendSuccess"),
+        });
+        this.$router.push("/analyze/success");
+        this.$route.params.orderNumber = response.orderNumber;
+        this.$route.params.email = this.email;
+        this.$route.params.fastaName = this.fastaFile.name;
+      } else {
+        this.$notify({
+          group: "notifications",
+          type: "error",
+          title: response.error,
+        });
+      }
       this.submitInProgress = false;
     }
   },
