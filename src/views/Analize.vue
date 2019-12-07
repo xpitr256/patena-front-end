@@ -123,7 +123,9 @@ export default {
       this.submitInProgress = true;
       this.clearNotifications();
 
-      const fastaFileContent = await FastaService.getFastaFileContent(this.fastaFile);
+      const fastaFileContent = await FastaService.getFastaFileContent(
+        this.fastaFile
+      );
       const sequence = {
         name: this.fastaFileName,
         value: FastaService.getFirstSequence(fastaFileContent)
@@ -135,7 +137,7 @@ export default {
         this.$notify({
           group: "notifications",
           type: "success",
-          title: this.$t("views.sendSuccess"),
+          title: this.$t("views.sendSuccess")
         });
         this.$router.push("/analyze/success");
         this.$route.params.orderNumber = response.orderNumber;
@@ -145,7 +147,7 @@ export default {
         this.$notify({
           group: "notifications",
           type: "error",
-          title: response.error,
+          title: response.error
         });
       }
       this.submitInProgress = false;

@@ -551,10 +551,10 @@ export default {
     },
     buildDesignTypeMap() {
       // key = stepFrom, value = serverDesignType
-      this.designTypeMap.set(7,4);
-      this.designTypeMap.set(6,3);
-      this.designTypeMap.set(5,2);
-      this.designTypeMap.set(4,1);
+      this.designTypeMap.set(7, 4);
+      this.designTypeMap.set(6, 3);
+      this.designTypeMap.set(5, 2);
+      this.designTypeMap.set(4, 1);
     },
     setDefaultSettings() {
       this.restoreFrequencies();
@@ -644,7 +644,7 @@ export default {
       }
     },
     getDesignData: function() {
-      let data =  JSON.parse(JSON.stringify(this.formData));
+      let data = JSON.parse(JSON.stringify(this.formData));
       delete data.stepFrom;
       data.designType = this.designTypeMap.get(this.formData.stepFrom);
 
@@ -658,10 +658,10 @@ export default {
           frequencies: this.getFrequenciesDataForBackend(),
           netCharge: this.netCharge,
           algorithms: this.getAlgorithmsDataForBackend()
-        }
+        };
       }
 
-      return  data;
+      return data;
     },
     sendForm: async function() {
       this.$Progress.start();
@@ -676,7 +676,7 @@ export default {
         this.$notify({
           group: "notifications",
           type: "success",
-          title: this.$t("views.sendSuccess"),
+          title: this.$t("views.sendSuccess")
         });
         this.$router.push("/design/success");
         this.$route.params.orderNumber = response.orderNumber;
@@ -685,7 +685,7 @@ export default {
         this.$notify({
           group: "notifications",
           type: "error",
-          title: response.error,
+          title: response.error
         });
       }
       this.submitInProgress = false;

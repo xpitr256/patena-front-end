@@ -82,16 +82,23 @@ export default {
         this.$Progress.start();
         this.submitInProgress = true;
         this.clearNotifications();
-        await BackendService.sendOrderNumber();
+        const response = await BackendService.getResults(this.orderNumber);
         this.$Progress.finish();
-        this.$notify({
-          group: "notifications",
-          type: "success",
-          title: "Success",
-          text: "Order Number is correct!"
-        });
-        this.$router.push("/results/download");
-        this.$route.params.orderNumber = this.orderNumber;
+        if (!response.error) {
+          this.$notify({
+            group: "notifications",
+            type: "success",
+            title: this.$t("views.sendSuccess")
+          });
+          this.$router.push("/results/download");
+          this.$route.params.orderNumber = response.orderNumber;
+        } else {
+          this.$notify({
+            group: "notifications",
+            type: "error",
+            title: response.error
+          });
+        }
         this.submitInProgress = false;
       }
     }

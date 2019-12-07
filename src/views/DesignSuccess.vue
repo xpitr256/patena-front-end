@@ -4,7 +4,8 @@
     <div class="alert alert-success mt-4" role="alert">
       <h4 class="alert-heading">{{ $t("views.designSuccess.alertTitle") }}</h4>
       <p>
-        {{ $t("views.designSuccess.dataReceived") }}. {{ $t("views.designSuccess.emailSent") }}
+        {{ $t("views.designSuccess.dataReceived") }}.
+        {{ $t("views.designSuccess.emailSent") }}
         <span class="font-italic">{{ email }}</span>
         {{ $t("views.designSuccess.orderNumber") }}
         <span class="font-weight-bold">{{ orderNumber }}</span>

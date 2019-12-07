@@ -1,12 +1,9 @@
-function timeout() {
-  return new Promise(resolve => setTimeout(resolve, 1000));
-}
-
 import Vue from "vue";
 
 // TODO read value from env file
 const baseDomain = "https://patena-api.herokuapp.com";
-const genericErrorMessage = "There was an error connecting with our servers. Try again later please"; //TODO translate it
+const genericErrorMessage =
+  "There was an error connecting with our servers. Try again later please"; //TODO translate it
 
 //const baseDomain = "http://localhost:3000";
 
@@ -70,12 +67,25 @@ export default {
     };
   },
 
-  async sendOrderNumber() {
-    await timeout();
-    return {
-      status: "ok"
-    };
-  },
-
-
+  async getResults(orderNumber) {
+    try {
+      const response = await Vue.http.get(
+        baseDomain + "/results?orderNumber=" + orderNumber
+      );
+      if (response.ok) {
+        return {
+          orderNumber: response.body.orderNumber
+        };
+      }
+      return {
+        error: response.body.message
+      };
+    } catch (error) {
+      console.error("BackendService -> getResults:");
+      console.error(error);
+      return {
+        error: error.body.message
+      };
+    }
+  }
 };
