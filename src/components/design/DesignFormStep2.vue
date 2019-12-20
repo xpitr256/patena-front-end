@@ -27,7 +27,7 @@
               id="distance"
               ref="distance"
               v-bind:class="{ 'is-invalid': errors.has('distance') }"
-              v-validate="'required|numeric|min:1|max:3|min_value:1'"
+              v-validate="'required|decimal:1|max_value:100|min_value:0.1'"
               name="distance"
               v-model="distance"
               :placeholder="$t('views.design.placeholder')"
