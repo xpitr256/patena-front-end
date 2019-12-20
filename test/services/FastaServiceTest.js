@@ -102,7 +102,7 @@ describe("FastaService Test ", function() {
         );
         assert.strictEqual(
           fastaService.getFirstSequence(data),
-          "AAAAABBBBBBCCCCCCCCCCCCCZZZZIIIIDDDDDDQQQQQQQ"
+          "AAARRRRRNNNNDDDDDDCCCCEEQQQ"
         );
       } catch (err) {
         throw err;
