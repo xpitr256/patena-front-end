@@ -1,5 +1,12 @@
 <template>
   <div class="mt-1">
+
+
+    <div class="alert alert-secondary" role="alert" v-show="isValid === null">
+      <h4 class="alert-heading">Fasta file visualization</h4>
+      Once you choose a fasta file you will see in this box the selected sequence, it's name and also it's length.
+    </div>
+
     <div class="alert alert-success" role="alert" v-show="isValid">
       <h4 class="alert-heading">Well done! This is a valid fasta file</h4>
       <p class="mb-1 mt-3">
@@ -55,6 +62,8 @@ export default {
           if (newVal) {
             this.$emit("newFastaValidation", this.id, false);
             this.isInvalid = true;
+          } else {
+            this.reset();
           }
         }
       } catch (e) {

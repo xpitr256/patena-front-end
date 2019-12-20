@@ -12,7 +12,7 @@
 
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="form-row">
-        <div class="form-group col">
+        <div class="form-group col-5">
           <fasta-uploader
             name="fastaFile"
             v-validate="'required'"
@@ -21,35 +21,32 @@
             :error="errors.first('fastaFile')"
           >
           </fasta-uploader>
-          <fasta-validator
-            :fasta-file="fastaFile"
-            id="fastaFile"
-            :characters-in-line="70"
-            @newFastaValidation="updateFormValidation"
-          ></fasta-validator>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-6">
-          <label>Email</label>
+          <label class="mt-4">Email</label>
           <input
-            class="form-control"
-            v-bind:class="{ 'is-invalid': errors.has('email') }"
-            v-validate="'required|email'"
-            placeholder="Email"
-            ref="email"
-            name="email"
-            v-model="email"
-            type="email"
+                  class="form-control"
+                  v-bind:class="{ 'is-invalid': errors.has('email') }"
+                  v-validate="'required|email'"
+                  placeholder="Email"
+                  ref="email"
+                  name="email"
+                  v-model="email"
+                  type="email"
           />
           <div class="invalid-feedback">
             {{ errors.first("email") }}
           </div>
         </div>
+        <div class="form-group col-7">
+          <fasta-validator
+                  :fasta-file="fastaFile"
+                  id="fastaFile"
+                  :characters-in-line="60"
+                  @newFastaValidation="updateFormValidation"
+          ></fasta-validator>
+        </div>
       </div>
 
-      <div class="form-row">
+      <div class="form-row text-center mt-4">
         <div class="form-group col">
           <button
             type="button"
@@ -89,7 +86,7 @@ export default {
   },
   methods: {
     updateFastaFileName: function() {
-      this.fastaFileName = this.fastaFile.name;
+      this.fastaFileName = this.fastaFile ? this.fastaFile.name : null;
     },
     updateFormValidation: function(id, isValid) {
       if (!isValid) {
