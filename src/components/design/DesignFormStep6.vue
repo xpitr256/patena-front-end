@@ -37,7 +37,7 @@
           <fasta-validator
             :fasta-file="flankingSequence1"
             id="flankingSequence1"
-            :characters-in-line="45"
+            :characters-in-line="50"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
@@ -53,7 +53,7 @@
           <fasta-validator
             :fasta-file="flankingSequence2"
             id="flankingSequence2"
-            :characters-in-line="45"
+            :characters-in-line="50"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
@@ -87,8 +87,6 @@
           <label>Email</label>
           <input
             class="form-control"
-            v-bind:class="{ 'is-invalid': errors.has('email') }"
-            v-validate="'required|email'"
             placeholder="Email"
             ref="email"
             v-on:keypress="onEnterKeypress"
@@ -96,9 +94,6 @@
             v-model="email"
             type="email"
           />
-          <div class="invalid-feedback">
-            {{ errors.first("email") }}
-          </div>
         </div>
       </div>
 

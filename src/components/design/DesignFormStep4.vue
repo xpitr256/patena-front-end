@@ -52,8 +52,6 @@
           <label>Email</label>
           <input
             class="form-control"
-            v-bind:class="{ 'is-invalid': errors.has('email') }"
-            v-validate="'required|email'"
             placeholder="Email"
             name="email"
             v-on:keypress="onEnterKeypress"
@@ -61,9 +59,6 @@
             v-model="email"
             type="email"
           />
-          <div class="invalid-feedback">
-            {{ errors.first("email") }}
-          </div>
         </div>
       </div>
 

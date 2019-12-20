@@ -24,17 +24,12 @@
           <label class="mt-4">Email</label>
           <input
                   class="form-control"
-                  v-bind:class="{ 'is-invalid': errors.has('email') }"
-                  v-validate="'required|email'"
                   placeholder="Email"
                   ref="email"
                   name="email"
                   v-model="email"
                   type="email"
           />
-          <div class="invalid-feedback">
-            {{ errors.first("email") }}
-          </div>
         </div>
         <div class="form-group col-7">
           <fasta-validator

@@ -39,7 +39,7 @@
           <fasta-validator
             :fasta-file="flankingSequence1"
             id="flankingSequence1"
-            :characters-in-line="45"
+            :characters-in-line="50"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
@@ -57,7 +57,7 @@
           <fasta-validator
             :fasta-file="flankingSequence2"
             id="flankingSequence2"
-            :characters-in-line="45"
+            :characters-in-line="50"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
@@ -68,8 +68,6 @@
           <label><strong>Email</strong></label>
           <input
             class="form-control"
-            v-bind:class="{ 'is-invalid': errors.has('email') }"
-            v-validate="'required|email'"
             placeholder="Email"
             ref="email"
             name="email"
@@ -77,14 +75,11 @@
             v-on:keypress="onEnterKeypress"
             type="email"
           />
-          <div class="invalid-feedback">
-            {{ errors.first("email") }}
-          </div>
         </div>
       </div>
 
       <div class="form-row">
-        <div class="form-group col">
+        <div class="form-group col-5">
           <label
             ><strong>{{ $t("views.design.rdStepLabelIS") }}</strong></label
           >
@@ -95,10 +90,13 @@
             :error="errors.first('initialSequence')"
           >
           </fasta-uploader>
+        </div>
+        <div class="form-group col-7">
+          <label>&nbsp;</label>
           <fasta-validator
             :fasta-file="initialSequence"
             id="initialSequence"
-            :characters-in-line="70"
+            :characters-in-line="60"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
