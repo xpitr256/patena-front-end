@@ -7,7 +7,7 @@
         <span class="ml-3"><strong> Length: </strong>{{ sequenceLength }}</span>
       </p>
       <p class="mb-0 mt-0"><strong>Sequence: </strong></p>
-      <p class="mb-0 mt-0" v-html="sequence"></p>
+      <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
     </div>
     <div class="alert alert-danger" role="alert" v-show="isInvalid">
       <h4 class="alert-heading">Oops! This is not a valid fasta file</h4>
@@ -90,4 +90,7 @@ export default {
 .alert-heading {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
+  .fasta-text {
+    font-family: monospace, monospace;
+  }
 </style>
