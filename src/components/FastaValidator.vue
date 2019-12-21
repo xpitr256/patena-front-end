@@ -9,12 +9,16 @@
 
     <div class="alert alert-success" role="alert" v-show="isValid">
       <h4 class="alert-heading">Well done! This is a valid fasta file</h4>
-      <p class="mb-1 mt-3">
-        <strong>File: </strong><em>{{ fileName }}</em>
-        <span class="ml-3"><strong> Length: </strong>{{ sequenceLength }}</span>
+      <p class="mt-3">
+        <strong>Name: </strong><em>{{ sequenceName }}</em>
       </p>
-      <p class="mb-0 mt-0"><strong>Sequence: </strong></p>
+      <hr>
+      <p class="mb-0 mt-2"><strong>Sequence: </strong></p>
       <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
+      <hr>
+      <p>
+        <span><strong> Length: </strong>{{ sequenceLength }}</span>
+      </p>
     </div>
     <div class="alert alert-danger" role="alert" v-show="isInvalid">
       <h4 class="alert-heading">Oops! This is not a valid fasta file</h4>
@@ -57,7 +61,8 @@ export default {
             this.charactersInLine
           );
           this.sequenceLength = FastaService.getSequenceLengthFrom(sequence);
-          this.$emit("newFastaValidation", this.id, true);
+          this.sequenceName = FastaService.getSequenceName(content);
+          this.$emit("newFastaValidation", this.id, true, this.sequenceName);
         } else {
           if (newVal) {
             this.$emit("newFastaValidation", this.id, false);
@@ -77,6 +82,7 @@ export default {
     reset: function() {
       this.fileName = "";
       this.sequenceLength = 0;
+      this.sequenceName = "";
       this.sequence = "";
       this.isValid = null;
       this.isInvalid = null;
@@ -88,6 +94,7 @@ export default {
       isInvalid: null,
       fileName: "",
       sequenceLength: 0,
+      sequenceName: "",
       sequence: "",
       aminoAcids: FastaService.getAminoAcids().join(" ")
     };

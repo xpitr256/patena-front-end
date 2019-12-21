@@ -178,15 +178,15 @@ export default {
             stepFrom: 7,
             email: this.email,
             initialSequence: {
-              name: this.initialSequence.name,
+              name: FastaService.getSequenceName(initialSequenceContent),
               value: FastaService.getFirstSequence(initialSequenceContent)
             },
             flankingSequence1: {
-              name: this.flankingSequence1.name,
+              name: FastaService.getSequenceName(flankingSequence1Content),
               value: FastaService.getFirstSequence(flankingSequence1Content)
             },
             flankingSequence2: {
-              name: this.flankingSequence2.name,
+              name: FastaService.getSequenceName(flankingSequence2Content),
               value: FastaService.getFirstSequence(flankingSequence2Content)
             }
           }

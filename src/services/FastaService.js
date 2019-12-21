@@ -119,10 +119,33 @@ export function splitSequenceInLinesOf(sequence, amountOfCharacters) {
     );
 }
 
+export function getSequenceName(fastaContent) {
+  if (!fastaContent) {
+    return "";
+  }
+
+  const lines = fastaContent.split("\n");
+
+  if (lines.length === 0) {
+    return "";
+  }
+
+  const firstCommentLineIndex = lines.findIndex(
+      line => line.startsWith(">")
+  );
+
+  if (firstCommentLineIndex >= 0) {
+    return lines[firstCommentLineIndex].substr(1).trim();
+  }
+
+  return "";
+}
+
 export default {
   isValidFasta,
   getFastaFileContent,
   getFirstSequence,
+  getSequenceName,
   getSequenceLengthFrom,
   splitSequenceInLinesOf,
   getAminoAcids

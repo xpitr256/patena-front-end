@@ -166,11 +166,11 @@ export default {
               name: this.$t("views.design.noInitialSequence")
             },
             flankingSequence1: {
-              name: this.flankingSequence1.name,
+              name: FastaService.getSequenceName(flankingSequence1Content),
               value: FastaService.getFirstSequence(flankingSequence1Content)
             },
             flankingSequence2: {
-              name: this.flankingSequence2.name,
+              name: FastaService.getSequenceName(flankingSequence2Content),
               value: FastaService.getFirstSequence(flankingSequence2Content)
             }
           }

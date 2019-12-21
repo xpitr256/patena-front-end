@@ -4,7 +4,7 @@
       ref="modal"
       :operation="$t('views.analyze.title')"
       :email="email"
-      :sequence="fastaFileName"
+      :sequence="sequenceName"
       @modalConfirmation="sendForm"
     ></Confirmation-modal>
 
@@ -17,7 +17,6 @@
             name="fastaFile"
             v-validate="'required'"
             v-model="fastaFile"
-            @input="updateFastaFileName"
             :error="errors.first('fastaFile')"
           >
           </fasta-uploader>
@@ -80,16 +79,17 @@ export default {
     }, 100);
   },
   methods: {
-    updateFastaFileName: function() {
-      this.fastaFileName = this.fastaFile ? this.fastaFile.name : null;
-    },
-    updateFormValidation: function(id, isValid) {
+    updateFormValidation: function(id, isValid, sequenceName) {
       if (!isValid) {
         this.errors.add({
           field: id,
           msg:
             "Please provide a fasta file according to the following suggestions"
         });
+      }
+
+      if (sequenceName) {
+        this.sequenceName = sequenceName;
       }
     },
     clearNotifications: function() {
@@ -119,7 +119,7 @@ export default {
         this.fastaFile
       );
       const sequence = {
-        name: this.fastaFileName,
+        name: this.sequenceName,
         value: FastaService.getFirstSequence(fastaFileContent)
       };
 
@@ -150,7 +150,7 @@ export default {
       fastaFile: null,
       email: null,
       submitInProgress: false,
-      fastaFileName: null
+      sequenceName: null
     };
   }
 };

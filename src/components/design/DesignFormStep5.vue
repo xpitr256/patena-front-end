@@ -127,7 +127,7 @@ export default {
             stepFrom: 5,
             email: this.email,
             initialSequence: {
-              name: this.initialSequence.name,
+              name: FastaService.getSequenceName(initialSequenceContent),
               value: FastaService.getFirstSequence(initialSequenceContent)
             }
           }
