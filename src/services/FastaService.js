@@ -130,9 +130,7 @@ export function getSequenceName(fastaContent) {
     return "";
   }
 
-  const firstCommentLineIndex = lines.findIndex(
-      line => line.startsWith(">")
-  );
+  const firstCommentLineIndex = lines.findIndex(line => line.startsWith(">"));
 
   if (firstCommentLineIndex >= 0) {
     return lines[firstCommentLineIndex].substr(1).trim();

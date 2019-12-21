@@ -202,9 +202,8 @@ describe("FastaService Test ", function() {
     });
   });
 
-
-  describe("get sequence name", function () {
-    it('should be empty for empty fasta', function () {
+  describe("get sequence name", function() {
+    it("should be empty for empty fasta", function() {
       try {
         const data = fs.readFileSync(basePath + "emptyFile.fasta", "utf8");
         assert.strictEqual(fastaService.getSequenceName(data), "");
@@ -213,32 +212,40 @@ describe("FastaService Test ", function() {
       }
     });
 
-    it('should be empty for no comment fasta', function () {
+    it("should be empty for no comment fasta", function() {
       try {
-        const data = fs.readFileSync(basePath + "validWithNoComment.fasta", "utf8");
+        const data = fs.readFileSync(
+          basePath + "validWithNoComment.fasta",
+          "utf8"
+        );
         assert.strictEqual(fastaService.getSequenceName(data), "");
       } catch (err) {
         throw err;
       }
     });
 
-    it('should not be empty for valid fasta with comment in the first line', function () {
+    it("should not be empty for valid fasta with comment in the first line", function() {
       try {
         const data = fs.readFileSync(basePath + "validFasta.fasta", "utf8");
-        assert.strictEqual(fastaService.getSequenceName(data), "Comment comment first sequence");
+        assert.strictEqual(
+          fastaService.getSequenceName(data),
+          "Comment comment first sequence"
+        );
       } catch (err) {
         throw err;
       }
     });
 
-    it('should get the first of two lines comments', function () {
+    it("should get the first of two lines comments", function() {
       try {
-        const data = fs.readFileSync(basePath + "twoLinesComment.fasta", "utf8");
+        const data = fs.readFileSync(
+          basePath + "twoLinesComment.fasta",
+          "utf8"
+        );
         assert.strictEqual(fastaService.getSequenceName(data), "comment 1");
       } catch (err) {
         throw err;
       }
     });
-
-  })
+  });
 });

@@ -22,9 +22,9 @@ export default {
   name: "readOnlyField",
   props: ["label", "value", "highlight"],
   computed: {
-    showValue: function () {
-      if (this.value.length > 70){
-        return this.value.substring(0,70) + "...";
+    showValue: function() {
+      if (this.value.length > 70) {
+        return this.value.substring(0, 70) + "...";
       }
       return this.value;
     }

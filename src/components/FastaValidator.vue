@@ -1,10 +1,9 @@
 <template>
   <div class="mt-1">
-
-
     <div class="alert alert-secondary" role="alert" v-show="isValid === null">
       <h4 class="alert-heading">Fasta file visualization</h4>
-      Once you choose a fasta file you will see in this box the selected sequence, it's name and also it's length.
+      Once you choose a fasta file you will see in this box the selected
+      sequence, it's name and also it's length.
     </div>
 
     <div class="alert alert-success" role="alert" v-show="isValid">
@@ -12,10 +11,10 @@
       <p class="mt-3">
         <strong>Name: </strong><em>{{ sequenceName }}</em>
       </p>
-      <hr>
+      <hr />
       <p class="mb-0 mt-2"><strong>Sequence: </strong></p>
       <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
-      <hr>
+      <hr />
       <p>
         <span><strong> Length: </strong>{{ sequenceLength }}</span>
       </p>
@@ -106,7 +105,7 @@ export default {
 .alert-heading {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
-  .fasta-text {
-    font-family: monospace, monospace;
-  }
+.fasta-text {
+  font-family: monospace, monospace;
+}
 </style>

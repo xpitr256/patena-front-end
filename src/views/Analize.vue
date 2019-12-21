@@ -22,20 +22,20 @@
           </fasta-uploader>
           <label class="mt-4">Email</label>
           <input
-                  class="form-control"
-                  placeholder="Email"
-                  ref="email"
-                  name="email"
-                  v-model="email"
-                  type="email"
+            class="form-control"
+            placeholder="Email"
+            ref="email"
+            name="email"
+            v-model="email"
+            type="email"
           />
         </div>
         <div class="form-group col-7">
           <fasta-validator
-                  :fasta-file="fastaFile"
-                  id="fastaFile"
-                  :characters-in-line="60"
-                  @newFastaValidation="updateFormValidation"
+            :fasta-file="fastaFile"
+            id="fastaFile"
+            :characters-in-line="60"
+            @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
       </div>
