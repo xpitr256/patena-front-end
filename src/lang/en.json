@@ -108,7 +108,7 @@
       "netCharge": "Net Charge",
       "algorithms": "Algorithms",
       "important": "Attention please: ",
-      "aminoAcidWarning": "Take into account that all frequencies must sum 10.000 together",
+      "aminoAcidWarning": "Take into account that all frequencies must sum 100% together",
       "totalFrequency": "Total frequency",
       "restoreFrequencies": "Restore default frequencies",
       "references": "References",

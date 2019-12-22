@@ -211,8 +211,8 @@
                         "
                         @change="checkFrequencies"
                         :min="0"
-                        :max="1"
-                        :step="0.001"
+                        :max="100"
+                        :step="0.1"
                         inline
                         controls
                         center
@@ -431,35 +431,35 @@ export default {
       frequencies: [],
       defaultFrequencies: [
         [
-          { name: "A", value: 0.825 },
-          { name: "R", value: 0.553 },
-          { name: "N", value: 0.406 },
-          { name: "D", value: 0.545 }
+          { name: "A", value: 8.2 },
+          { name: "R", value: 5.5 },
+          { name: "N", value: 4.0 },
+          { name: "D", value: 5.4 }
         ],
         [
-          { name: "C", value: 0.137 },
-          { name: "E", value: 0.393 },
-          { name: "Q", value: 0.675 },
-          { name: "G", value: 0.707 }
+          { name: "C", value: 1.4 },
+          { name: "Q", value: 3.9 },
+          { name: "E", value: 6.8 },
+          { name: "G", value: 7.1 }
         ],
         [
-          { name: "H", value: 0.227 },
-          { name: "I", value: 0.596 },
-          { name: "L", value: 0.966 },
-          { name: "K", value: 0.548 }
+          { name: "H", value: 2.3 },
+          { name: "I", value: 6.0 },
+          { name: "L", value: 9.7 },
+          { name: "K", value: 5.8 }
         ],
         [
-          { name: "M", value: 0.242 },
-          { name: "F", value: 0.386, uvSilent: true },
-          { name: "P", value: 0.47 },
-          { name: "S", value: 0.656 }
+          { name: "M", value: 2.4 },
+          { name: "F", value: 3.9, uvSilent: true },
+          { name: "P", value: 4.7 },
+          { name: "S", value: 6.7 }
         ],
 
         [
-          { name: "T", value: 0.534 },
-          { name: "W", value: 0.108, uvSilent: true },
-          { name: "Y", value: 0.292, uvSilent: true },
-          { name: "V", value: 0.734 } //TODO validate with patena 0.687 value
+          { name: "T", value: 5.3 },
+          { name: "W", value: 1.1, uvSilent: true },
+          { name: "Y", value: 2.9, uvSilent: true },
+          { name: "V", value: 6.9 }
         ]
       ],
       netCharge: null
@@ -485,7 +485,7 @@ export default {
   },
   methods: {
     isValidTotalFrequency: function() {
-      return Number(this.totalFrequency) === Number(10.0);
+      return Number(this.totalFrequency) === Number(100);
     },
     getAlgorithmsDataForBackend() {
       let flatArray = [];
@@ -611,11 +611,12 @@ export default {
     },
     checkFrequencies() {
       const values = this.getFrequenciesValues();
-      this.totalFrequency = values
+      const sum = values
         .reduce((sum, value) => {
           return sum + value;
         }, 0)
-        .toFixed(3);
+        .toFixed(1);
+      this.totalFrequency = sum === "100.0" ? 100 : sum;
     },
     goToStep(step) {
       this.$emit("goToNextStep", {

@@ -108,7 +108,7 @@
       "netCharge": "Carga neta",
       "algorithms": "Algoritmos",
       "important": "Atención: ",
-      "aminoAcidWarning": "Tenga en cuenta que todas las frecuencias deben sumar un total de 10.000",
+      "aminoAcidWarning": "Tenga en cuenta que todas las frecuencias deben sumar un total de 100%",
       "totalFrequency": "Frecuencia total",
       "restoreFrequencies": "Reiniciar frequencias",
       "references": "Referencias",
