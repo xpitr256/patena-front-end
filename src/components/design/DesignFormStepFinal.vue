@@ -208,7 +208,7 @@
                     <div class="form-group col-md-3 text-right">
                       <span
                         class="aminoAcid"
-                        v-bind:class="uvLabelClass(frequency)"
+                        v-bind:class="getLabelFrequencyClass(frequency)"
                       >
                         {{ frequency.name }}:</span
                       >
@@ -408,6 +408,7 @@ export default {
     return {
       designTypeMap: new Map(),
       inputClassMap: new Map(),
+      labelClassMap: new Map(),
       maxNetChargeValue: null,
       submitInProgress: false,
       useDefaultSettings: null,
@@ -445,34 +446,34 @@ export default {
       frequencies: [],
       defaultFrequencies: [
         [
-          { name: "A", value: 8.2, getInputClass: "R" },
-          { name: "R", value: 5.5,  getInputClass: "R" },
-          { name: "N", value: 4.0,  getInputClass: "R" },
-          { name: "D", value: 5.4,  getInputClass: "R" }
+          { name: "A", value: 8.2, getCSSClass: "R" },
+          { name: "R", value: 5.5,  getCSSClass: "R" },
+          { name: "N", value: 4.0,  getCSSClass: "R" },
+          { name: "D", value: 5.4,  getCSSClass: "R" }
         ],
         [
-          { name: "C", value: 1.4, getInputClass: 'C' },
-          { name: "Q", value: 3.9,  getInputClass: "R" },
-          { name: "E", value: 6.8, getInputClass: "R" },
-          { name: "G", value: 7.1, getInputClass: "R" }
+          { name: "C", value: 1.4, getCSSClass: 'C' },
+          { name: "Q", value: 3.9,  getCSSClass: "R" },
+          { name: "E", value: 6.8, getCSSClass: "R" },
+          { name: "G", value: 7.1, getCSSClass: "R" }
         ],
         [
-          { name: "H", value: 2.3, getInputClass: "R" },
-          { name: "I", value: 6.0, getInputClass: "R" },
-          { name: "L", value: 9.7, getInputClass: "R" },
-          { name: "K", value: 5.8, getInputClass: "R" }
+          { name: "H", value: 2.3, getCSSClass: "R" },
+          { name: "I", value: 6.0, getCSSClass: "R" },
+          { name: "L", value: 9.7, getCSSClass: "R" },
+          { name: "K", value: 5.8, getCSSClass: "R" }
         ],
         [
-          { name: "M", value: 2.4, getInputClass: "R" },
-          { name: "F", value: 3.9, uvSilent: true, getInputClass: "UV" },
-          { name: "P", value: 4.7, getInputClass: "R" },
-          { name: "S", value: 6.7, getInputClass: "R" }
+          { name: "M", value: 2.4, getCSSClass: "R" },
+          { name: "F", value: 3.9, uvSilent: true, getCSSClass: "UV" },
+          { name: "P", value: 4.7, getCSSClass: "R" },
+          { name: "S", value: 6.7, getCSSClass: "R" }
         ],
         [
-          { name: "T", value: 5.3, getInputClass: "R" },
-          { name: "W", value: 1.1, uvSilent: true, getInputClass: "UV" },
-          { name: "Y", value: 2.9, uvSilent: true, getInputClass: "UV" },
-          { name: "V", value: 6.9, getInputClass: "R" }
+          { name: "T", value: 5.3, getCSSClass: "R" },
+          { name: "W", value: 1.1, uvSilent: true, getCSSClass: "UV" },
+          { name: "Y", value: 2.9, uvSilent: true, getCSSClass: "UV" },
+          { name: "V", value: 6.9, getCSSClass: "R" }
         ]
       ],
       netCharge: null
@@ -481,7 +482,7 @@ export default {
   async created() {
     this.setDefaultSettings();
     this.buildDesignTypeMap();
-    this.buildInputMap();
+    this.buildCSSsMap();
     if (this.formData.initialSequence.value) {
       this.maxNetChargeValue = FastaService.getSequenceLengthFrom(
         this.formData.initialSequence.value
@@ -538,8 +539,13 @@ export default {
 
       return "";
     },
-    getRegularInputClass: function(){
+    getRegularInputClass: function() {
       return ""
+    },
+    getRegularLabelClass: function() {
+      if (this.useDefaultSettings) {
+        return "labelDisabled";
+      }
     },
     getInputCysteineClass: function (frequency) {
       const isCysteine = frequency.name === "C";
@@ -561,10 +567,33 @@ export default {
       return "";
     },
     getInputFrequencyClass: function(frequency) {
-      const fc = this.inputClassMap.get(frequency.getInputClass);
+      const fc = this.inputClassMap.get(frequency.getCSSClass);
       return fc(frequency);
     },
-    uvLabelClass: function(frequency) {
+    getLabelFrequencyClass: function(frequency) {
+      const fc = this.labelClassMap.get(frequency.getCSSClass);
+      return fc(frequency);
+    },
+    getLabelCysteineClass: function(frequency) {
+      const isCysteine = frequency.name === "C";
+      if (
+              isCysteine &&
+              !this.avoidCysteine &&
+              !this.useDefaultSettings
+      ) {
+        return "cLabel";
+      }
+
+      if (
+              (isCysteine && this.avoidCysteine) ||
+              (this.useDefaultSettings && isCysteine)
+      ) {
+        return "cLabel cLabelDisabled";
+      }
+
+      return "";
+    },
+    getLabelUvClass: function(frequency) {
       if (
         frequency.uvSilent &&
         !this.avoidUVSilent &&
@@ -580,20 +609,19 @@ export default {
         return "uvLabel uvLabelDisabled";
       }
 
-      if (this.useDefaultSettings) {
-        return "labelDisabled";
-      }
-
       return "";
     },
     getStepBack() {
       this.goToStep(this.formData.stepFrom);
     },
-    buildInputMap() {
-      // key = aminoacid type, value = input class function
+    buildCSSsMap() {
+      // key = aminoacid type, value = css class function
       this.inputClassMap.set("R", this.getRegularInputClass);
       this.inputClassMap.set("C", this.getInputCysteineClass);
       this.inputClassMap.set("UV", this.getInputUvClass);
+      this.labelClassMap.set("R", this.getRegularLabelClass);
+      this.labelClassMap.set("C", this.getLabelCysteineClass);
+      this.labelClassMap.set("UV", this.getLabelUvClass);
     },
     buildDesignTypeMap() {
       // key = stepFrom, value = serverDesignType
