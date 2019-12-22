@@ -135,12 +135,24 @@
               <div class="row align-items-center">
                 <div class="col col-md-auto">
                   <div
-                    class="uvReference"
+                    class="reference uvReference"
                     :class="{ uvReferenceDisabled: useDefaultSettings }"
                   ></div>
                 </div>
                 <div class="col" :class="{ labelDisabled: useDefaultSettings }">
                   {{ $t("views.patenaSettings.uvAminoAcidLabel") }}
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col col-md-auto">
+                  <div
+                          class="reference cReference"
+                          :class="{ cReferenceDisabled: useDefaultSettings }"
+                  ></div>
+                </div>
+                <div class="col" :class="{ labelDisabled: useDefaultSettings }">
+                  {{ $t("views.patenaSettings.CLabel") }}
                 </div>
               </div>
 
@@ -203,21 +215,21 @@
                     </div>
                     <div class="form-group col-md-9">
                       <number-input
-                        v-model="frequencies[index][internalIndex].value"
-                        v-bind:class="uvInputClass(frequency)"
-                        :disabled="
+                              v-model="frequencies[index][internalIndex].value"
+                              v-bind:class="getInputFrequencyClass(frequency)"
+                              :disabled="
                           (frequency.uvSilent && avoidUVSilent) ||
                             useDefaultSettings
                         "
-                        @change="checkFrequencies"
-                        :min="0"
-                        :max="100"
-                        :step="0.1"
-                        inline
-                        controls
-                        center
-                        size="small"
-                      ></number-input>
+                              @change="checkFrequencies"
+                              :min="0"
+                              :max="100"
+                              :step="0.1"
+                              inline
+                              controls
+                              center
+                              size="small"
+                      />
                     </div>
                   </div>
                 </div>
@@ -229,7 +241,7 @@
             <div class="col">
               <span class="badge float-right" v-bind:class="totalFrequencyClass"
                 >{{ $t("views.patenaSettings.totalFrequency") }}:
-                {{ totalFrequency }}</span
+                {{ totalFrequency }}%</span
               >
             </div>
           </div>
@@ -395,11 +407,13 @@ export default {
   data: function() {
     return {
       designTypeMap: new Map(),
+      inputClassMap: new Map(),
       maxNetChargeValue: null,
       submitInProgress: false,
       useDefaultSettings: null,
       totalFrequency: 0,
       avoidUVSilent: false,
+      avoidCysteine: false,
       toogleColor: {
         checked: "#2ecc71",
         unchecked: "#bfbfbf",
@@ -431,35 +445,34 @@ export default {
       frequencies: [],
       defaultFrequencies: [
         [
-          { name: "A", value: 8.2 },
-          { name: "R", value: 5.5 },
-          { name: "N", value: 4.0 },
-          { name: "D", value: 5.4 }
+          { name: "A", value: 8.2, getInputClass: "R" },
+          { name: "R", value: 5.5,  getInputClass: "R" },
+          { name: "N", value: 4.0,  getInputClass: "R" },
+          { name: "D", value: 5.4,  getInputClass: "R" }
         ],
         [
-          { name: "C", value: 1.4 },
-          { name: "Q", value: 3.9 },
-          { name: "E", value: 6.8 },
-          { name: "G", value: 7.1 }
+          { name: "C", value: 1.4, getInputClass: 'C' },
+          { name: "Q", value: 3.9,  getInputClass: "R" },
+          { name: "E", value: 6.8, getInputClass: "R" },
+          { name: "G", value: 7.1, getInputClass: "R" }
         ],
         [
-          { name: "H", value: 2.3 },
-          { name: "I", value: 6.0 },
-          { name: "L", value: 9.7 },
-          { name: "K", value: 5.8 }
+          { name: "H", value: 2.3, getInputClass: "R" },
+          { name: "I", value: 6.0, getInputClass: "R" },
+          { name: "L", value: 9.7, getInputClass: "R" },
+          { name: "K", value: 5.8, getInputClass: "R" }
         ],
         [
-          { name: "M", value: 2.4 },
-          { name: "F", value: 3.9, uvSilent: true },
-          { name: "P", value: 4.7 },
-          { name: "S", value: 6.7 }
+          { name: "M", value: 2.4, getInputClass: "R" },
+          { name: "F", value: 3.9, uvSilent: true, getInputClass: "UV" },
+          { name: "P", value: 4.7, getInputClass: "R" },
+          { name: "S", value: 6.7, getInputClass: "R" }
         ],
-
         [
-          { name: "T", value: 5.3 },
-          { name: "W", value: 1.1, uvSilent: true },
-          { name: "Y", value: 2.9, uvSilent: true },
-          { name: "V", value: 6.9 }
+          { name: "T", value: 5.3, getInputClass: "R" },
+          { name: "W", value: 1.1, uvSilent: true, getInputClass: "UV" },
+          { name: "Y", value: 2.9, uvSilent: true, getInputClass: "UV" },
+          { name: "V", value: 6.9, getInputClass: "R" }
         ]
       ],
       netCharge: null
@@ -468,6 +481,7 @@ export default {
   async created() {
     this.setDefaultSettings();
     this.buildDesignTypeMap();
+    this.buildInputMap();
     if (this.formData.initialSequence.value) {
       this.maxNetChargeValue = FastaService.getSequenceLengthFrom(
         this.formData.initialSequence.value
@@ -506,23 +520,49 @@ export default {
       const active = element => element;
       return algorithmsActiveData.some(active);
     },
-    uvInputClass: function(frequency) {
+    getInputUvClass: function (frequency) {
       if (
-        frequency.uvSilent &&
-        !this.avoidUVSilent &&
-        !this.useDefaultSettings
+              frequency.uvSilent &&
+              !this.avoidUVSilent &&
+              !this.useDefaultSettings
       ) {
         return "uvInput";
       }
 
       if (
-        (frequency.uvSilent && this.avoidUVSilent) ||
-        (this.useDefaultSettings && frequency.uvSilent)
+              (frequency.uvSilent && this.avoidUVSilent) ||
+              (this.useDefaultSettings && frequency.uvSilent)
       ) {
         return "uvInput uvInputDisabled";
       }
 
       return "";
+    },
+    getRegularInputClass: function(){
+      return ""
+    },
+    getInputCysteineClass: function (frequency) {
+      const isCysteine = frequency.name === "C";
+      if (
+              isCysteine &&
+              !this.avoidCysteine &&
+              !this.useDefaultSettings
+      ) {
+        return "cInput";
+      }
+
+      if (
+              (isCysteine && this.avoidCysteine) ||
+              (this.useDefaultSettings && isCysteine)
+      ) {
+        return "cInput cInputDisabled";
+      }
+
+      return "";
+    },
+    getInputFrequencyClass: function(frequency) {
+      const fc = this.inputClassMap.get(frequency.getInputClass);
+      return fc(frequency);
     },
     uvLabelClass: function(frequency) {
       if (
@@ -548,6 +588,12 @@ export default {
     },
     getStepBack() {
       this.goToStep(this.formData.stepFrom);
+    },
+    buildInputMap() {
+      // key = aminoacid type, value = input class function
+      this.inputClassMap.set("R", this.getRegularInputClass);
+      this.inputClassMap.set("C", this.getInputCysteineClass);
+      this.inputClassMap.set("UV", this.getInputUvClass);
     },
     buildDesignTypeMap() {
       // key = stepFrom, value = serverDesignType
@@ -787,6 +833,22 @@ export default {
   border: 2px solid violet;
   border-radius: 6px;
 }
+
+.cLabel {
+  color: rgb(243, 112, 33);
+  font-weight: bold;
+}
+.cLabelDisabled {
+  color: rgb(255, 196, 160) !important;
+}
+.cInputDisabled {
+  border: 2px solid rgb(255, 196, 160) !important;
+}
+.cInput {
+  border: 2px solid rgb(243, 112, 33);
+  border-radius: 6px;
+}
+
 .labelDisabled {
   color: #6c757d;
 }
@@ -794,12 +856,23 @@ export default {
   border-right: 1px solid #dee2e6;
 }
 .uvReference {
+  background-color: violet;
+}
+
+.reference {
   margin-left: 10px;
   margin-right: -20px;
   width: 18px;
   height: 18px;
-  background-color: violet;
   border-radius: 3px;
+}
+
+.cReference {
+  background-color: rgb(243, 112, 33);
+}
+
+.cReferenceDisabled {
+  background-color: rgb(255, 196, 160);
 }
 
 .uvReferenceDisabled {
