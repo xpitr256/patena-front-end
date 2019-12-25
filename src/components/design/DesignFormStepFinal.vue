@@ -193,6 +193,27 @@
               >
                 {{ $t("views.patenaSettings.avoidAminoAcid") }}
               </a>
+              <br />
+              <toggle-button
+                      :value="avoidCysteine"
+                      id="cysteine"
+                      class="mt-1"
+                      v-model="avoidCysteine"
+                      @change="checkCysteine($event)"
+                      :class="{ disabled: useDefaultSettings }"
+                      :color="toogleColor"
+                      :switch-color="switchColor"
+                      :sync="true"
+                      :labels="true"
+              />
+              <a
+                      href="#/"
+                      class="btn btn-link mb-2"
+                      v-on:click="changeCysteine"
+                      :class="{ disabled: useDefaultSettings }"
+              >
+                {{ $t("views.patenaSettings.avoidCysteine") }}
+              </a>
             </div>
             <div class="col-md-9">
               <div
@@ -643,6 +664,7 @@ export default {
     },
     restoreFrequencies() {
       this.avoidUVSilent = false;
+      this.avoidCysteine = false;
       this.frequencies = JSON.parse(JSON.stringify(this.defaultFrequencies));
     },
     disableAllUVFrequencies() {
@@ -658,10 +680,51 @@ export default {
     changeUVSilent() {
       this.avoidUVSilent = !this.avoidUVSilent;
       this.checkUVSilent();
+      this.scaleFrequencies();
     },
     checkUVSilent() {
       if (this.avoidUVSilent) {
         this.disableAllUVFrequencies();
+      }
+    },
+    changeCysteine() {
+      this.avoidCysteine = !this.avoidCysteine;
+      this.checkCysteine();
+      this.scaleFrequencies();
+    },
+    checkCysteine() {
+      if (this.avoidCysteine) {
+        this.frequencies = this.frequencies.map(row => {
+          return row.map(frequency => {
+            if (frequency.name === "C") {
+              frequency.value = 0;
+            }
+            return frequency;
+          });
+        });
+      }
+    },
+    scaleFrequencies() {
+      const frequenciesSum = this.getTotalFrequencies();
+      this.frequencies = this.frequencies.map(row => {
+        return row.map(frequency => {
+          frequency.value = Number(((frequency.value / frequenciesSum) * 100).toFixed(1));
+          return frequency;
+        });
+      });
+
+      //ROUND FIX
+      const newSum = this.getTotalFrequencies();
+      if (newSum !== 100.0) {
+        const dif = Number((newSum - 100.0).toFixed(1));
+        this.frequencies = this.frequencies.map(row => {
+          return row.map(frequency => {
+            if (frequency.name === "N"){
+              frequency.value = Number((frequency.value - dif).toFixed(1));
+            }
+            return frequency;
+          });
+        });
       }
     },
     getFrequenciesDataForBackend() {
@@ -683,14 +746,17 @@ export default {
       });
       return flatArray;
     },
-    checkFrequencies() {
+    getTotalFrequencies() {
       const values = this.getFrequenciesValues();
-      const sum = values
-        .reduce((sum, value) => {
-          return sum + value;
-        }, 0)
-        .toFixed(1);
-      this.totalFrequency = sum === "100.0" ? 100 : sum;
+      return Number(values
+              .reduce((sum, value) => {
+                return sum + value;
+              }, 0)
+              .toFixed(1));
+    },
+    checkFrequencies() {
+      const sum = this.getTotalFrequencies();
+      this.totalFrequency = sum === 100.0 ? 100 : sum;
     },
     goToStep(step) {
       this.$emit("goToNextStep", {

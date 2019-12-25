@@ -116,7 +116,7 @@
       "CLabel": "Cisteína",
       "actions": "Acciones",
       "avoidAminoAcid": "Evitar aminoácidos UV",
-      "avoidC": "Evitar la Cisteína",
+      "avoidCysteine": "Evitar la Cisteína",
       "netChargeWarning": "La carga neta debe tener un valor entero positivo y no puede ser mayor a la longitud de la secuencia inicial.",
       "netCharge": "Carga neta (valor opcional)",
       "netChargePlaceholder": "Ingrese la carga neta",
