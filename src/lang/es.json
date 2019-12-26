@@ -117,7 +117,7 @@
       "actions": "Acciones",
       "avoidAminoAcid": "Evitar aminoácidos UV",
       "avoidCysteine": "Evitar la Cisteína",
-      "netChargeWarning": "La carga neta debe tener un valor entero positivo y no puede ser mayor a la longitud de la secuencia inicial.",
+      "netChargeWarning": "La carga neta puede tener un valor entero positivo, negativo o cero y su modulo no puede ser mayor a la longitud de la secuencia inicial.",
       "netCharge": "Carga neta (valor opcional)",
       "netChargePlaceholder": "Ingrese la carga neta",
       "algorithmWarning": "Por lo menos un algoritmos debe estar activo. Tenga en cuenta que algunos algortimos pueden demorar mucho tiempo."

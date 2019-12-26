@@ -284,8 +284,8 @@
             </button>
           </div>
 
-          <div class="form-group col-md-6 mt-4">
-            <label>{{ $t("views.patenaSettings.netCharge") }}</label>
+          <div class="form-group col-md-3 mt-4">
+            <label>{{ $t("views.patenaSettings.netCharge") }}: </label>
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -294,7 +294,7 @@
                 ref="netCharge"
                 v-bind:class="{ 'is-invalid': errors.has('netCharge') }"
                 v-validate="
-                  `numeric|min:1|min_value:1|max_value:${maxNetChargeValue}`
+                  `integer|min_value:-${maxNetChargeValue}|max_value:${maxNetChargeValue}`
                 "
                 name="netCharge"
                 :disabled="useDefaultSettings"

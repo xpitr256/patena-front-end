@@ -117,7 +117,7 @@
       "actions": "Actions",
       "avoidAminoAcid": "Avoid UV amino acids",
       "avoidCysteine": "Avoid Cysteine",
-      "netChargeWarning": "Net charge must be a postive integer and it could not be higher than the sequence length.",
+      "netChargeWarning": "Net charge could be zero, a postive or negative integer and it's module could not be higher than the sequence length.",
       "netCharge": "Net charge (optional)",
       "netChargePlaceholder": "Enter net charge",
       "algorithmWarning": "At least one algorithm should remain active. Take into account that some algorithms would require some time to work."
