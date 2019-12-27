@@ -3,7 +3,8 @@
     <div class="alert alert-secondary" role="alert" v-show="isValid === null">
       <h4 class="alert-heading">Fasta file visualization</h4>
       Once you choose a fasta file you will see in this box the selected
-      sequence, it's name and also it's length.
+      sequence, it's name and also it's length. <br />
+      For <strong>flanking sequences</strong> you will see as highlighted the part that will be taken into account for the analysis.
     </div>
 
     <div class="alert alert-success" role="alert" v-show="isValid">
@@ -16,7 +17,9 @@
       <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
       <hr />
       <p>
-        <span><strong> Length: </strong>{{ sequenceLength }}</span>
+        <span v-show="!highlightedCharactersAmount"><strong> Length: </strong>{{ sequenceLength }}</span>
+        <span v-show="highlightedCharactersAmount"><strong> Taken length: </strong>{{ sequenceLength }}</span>
+
       </p>
     </div>
     <div class="alert alert-danger" role="alert" v-show="isInvalid">
@@ -44,7 +47,10 @@ export default {
   props: {
     fastaFile: File,
     id: String,
-    charactersInLine: Number
+    charactersInLine: Number,
+    highlightAtTheEnd:  Boolean,
+    highlightAtTheBeginning:  Boolean,
+    highlightedCharactersAmount: Number
   },
   watch: {
     fastaFile: async function(newVal, oldVal) {
@@ -55,11 +61,11 @@ export default {
         if (this.isValid) {
           this.fileName = newVal.name;
           const sequence = FastaService.getFirstSequence(content);
-          this.sequence = FastaService.splitSequenceInLinesOf(
-            sequence,
-            this.charactersInLine
-          );
+          this.sequence = this.getStyledSequence(sequence);
           this.sequenceLength = FastaService.getSequenceLengthFrom(sequence);
+          if (this.sequenceLength > this.highlightedCharactersAmount) {
+            this. sequenceLength = this.highlightedCharactersAmount;
+          }
           this.sequenceName = FastaService.getSequenceName(content);
           this.$emit("newFastaValidation", this.id, true, this.sequenceName);
         } else {
@@ -85,6 +91,25 @@ export default {
       this.sequence = "";
       this.isValid = null;
       this.isInvalid = null;
+    },
+    getStyledSequence: function(sequence){
+      if (this.highlightAtTheBeginning || this.highlightAtTheEnd) {
+        let highlightOptions = {
+          highlightedCharactersAmount: this.highlightedCharactersAmount
+        };
+        if (this.highlightAtTheBeginning) {
+          highlightOptions.highlightAtTheBeginning = true;
+        }
+        if (this.highlightAtTheEnd) {
+          highlightOptions.highlightAtTheEnd = true;
+        }
+        return FastaService.splitSequenceInLinesWithHighlight(sequence, this.charactersInLine, highlightOptions);
+      } else {
+        return FastaService.splitSequenceInLinesOf(
+                sequence,
+                this.charactersInLine
+        );
+      }
     }
   },
   data: function() {

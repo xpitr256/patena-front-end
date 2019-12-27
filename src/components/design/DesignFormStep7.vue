@@ -40,6 +40,8 @@
             :fasta-file="flankingSequence1"
             id="flankingSequence1"
             :characters-in-line="50"
+            :highlight-at-the-end=true
+            :highlighted-characters-amount="100"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
@@ -58,6 +60,8 @@
             :fasta-file="flankingSequence2"
             id="flankingSequence2"
             :characters-in-line="50"
+            :highlight-at-the-beginning=true
+            :highlighted-characters-amount="100"
             @newFastaValidation="updateFormValidation"
           ></fasta-validator>
         </div>
