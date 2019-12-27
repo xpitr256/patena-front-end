@@ -147,8 +147,8 @@
               <div class="row align-items-center">
                 <div class="col col-md-auto">
                   <div
-                          class="reference cReference"
-                          :class="{ cReferenceDisabled: useDefaultSettings }"
+                    class="reference cReference"
+                    :class="{ cReferenceDisabled: useDefaultSettings }"
                   ></div>
                 </div>
                 <div class="col" :class="{ labelDisabled: useDefaultSettings }">
@@ -195,22 +195,22 @@
               </a>
               <br />
               <toggle-button
-                      :value="avoidCysteine"
-                      id="cysteine"
-                      class="mt-1"
-                      v-model="avoidCysteine"
-                      @change="checkCysteine($event)"
-                      :class="{ disabled: useDefaultSettings }"
-                      :color="toogleColor"
-                      :switch-color="switchColor"
-                      :sync="true"
-                      :labels="true"
+                :value="avoidCysteine"
+                id="cysteine"
+                class="mt-1"
+                v-model="avoidCysteine"
+                @change="checkCysteine($event)"
+                :class="{ disabled: useDefaultSettings }"
+                :color="toogleColor"
+                :switch-color="switchColor"
+                :sync="true"
+                :labels="true"
               />
               <a
-                      href="#/"
-                      class="btn btn-link mb-2"
-                      v-on:click="changeCysteine"
-                      :class="{ disabled: useDefaultSettings }"
+                href="#/"
+                class="btn btn-link mb-2"
+                v-on:click="changeCysteine"
+                :class="{ disabled: useDefaultSettings }"
               >
                 {{ $t("views.patenaSettings.avoidCysteine") }}
               </a>
@@ -236,20 +236,20 @@
                     </div>
                     <div class="form-group col-md-9">
                       <number-input
-                              v-model="frequencies[index][internalIndex].value"
-                              v-bind:class="getInputFrequencyClass(frequency)"
-                              :disabled="
+                        v-model="frequencies[index][internalIndex].value"
+                        v-bind:class="getInputFrequencyClass(frequency)"
+                        :disabled="
                           (frequency.uvSilent && avoidUVSilent) ||
                             useDefaultSettings
                         "
-                              @change="checkFrequencies"
-                              :min="0"
-                              :max="100"
-                              :step="0.1"
-                              inline
-                              controls
-                              center
-                              size="small"
+                        @change="checkFrequencies"
+                        :min="0"
+                        :max="100"
+                        :step="0.1"
+                        inline
+                        controls
+                        center
+                        size="small"
                       />
                     </div>
                   </div>
@@ -468,13 +468,13 @@ export default {
       defaultFrequencies: [
         [
           { name: "A", value: 8.2, getCSSClass: "R" },
-          { name: "R", value: 5.5,  getCSSClass: "R" },
-          { name: "N", value: 4.0,  getCSSClass: "R" },
-          { name: "D", value: 5.4,  getCSSClass: "R" }
+          { name: "R", value: 5.5, getCSSClass: "R" },
+          { name: "N", value: 4.0, getCSSClass: "R" },
+          { name: "D", value: 5.4, getCSSClass: "R" }
         ],
         [
-          { name: "C", value: 1.4, getCSSClass: 'C' },
-          { name: "Q", value: 3.9,  getCSSClass: "R" },
+          { name: "C", value: 1.4, getCSSClass: "C" },
+          { name: "Q", value: 3.9, getCSSClass: "R" },
           { name: "E", value: 6.8, getCSSClass: "R" },
           { name: "G", value: 7.1, getCSSClass: "R" }
         ],
@@ -542,18 +542,18 @@ export default {
       const active = element => element;
       return algorithmsActiveData.some(active);
     },
-    getInputUvClass: function (frequency) {
+    getInputUvClass: function(frequency) {
       if (
-              frequency.uvSilent &&
-              !this.avoidUVSilent &&
-              !this.useDefaultSettings
+        frequency.uvSilent &&
+        !this.avoidUVSilent &&
+        !this.useDefaultSettings
       ) {
         return "uvInput";
       }
 
       if (
-              (frequency.uvSilent && this.avoidUVSilent) ||
-              (this.useDefaultSettings && frequency.uvSilent)
+        (frequency.uvSilent && this.avoidUVSilent) ||
+        (this.useDefaultSettings && frequency.uvSilent)
       ) {
         return "uvInput uvInputDisabled";
       }
@@ -561,26 +561,22 @@ export default {
       return "";
     },
     getRegularInputClass: function() {
-      return ""
+      return "";
     },
     getRegularLabelClass: function() {
       if (this.useDefaultSettings) {
         return "labelDisabled";
       }
     },
-    getInputCysteineClass: function (frequency) {
+    getInputCysteineClass: function(frequency) {
       const isCysteine = frequency.name === "C";
-      if (
-              isCysteine &&
-              !this.avoidCysteine &&
-              !this.useDefaultSettings
-      ) {
+      if (isCysteine && !this.avoidCysteine && !this.useDefaultSettings) {
         return "cInput";
       }
 
       if (
-              (isCysteine && this.avoidCysteine) ||
-              (this.useDefaultSettings && isCysteine)
+        (isCysteine && this.avoidCysteine) ||
+        (this.useDefaultSettings && isCysteine)
       ) {
         return "cInput cInputDisabled";
       }
@@ -597,17 +593,13 @@ export default {
     },
     getLabelCysteineClass: function(frequency) {
       const isCysteine = frequency.name === "C";
-      if (
-              isCysteine &&
-              !this.avoidCysteine &&
-              !this.useDefaultSettings
-      ) {
+      if (isCysteine && !this.avoidCysteine && !this.useDefaultSettings) {
         return "cLabel";
       }
 
       if (
-              (isCysteine && this.avoidCysteine) ||
-              (this.useDefaultSettings && isCysteine)
+        (isCysteine && this.avoidCysteine) ||
+        (this.useDefaultSettings && isCysteine)
       ) {
         return "cLabel cLabelDisabled";
       }
@@ -708,7 +700,9 @@ export default {
       const frequenciesSum = this.getTotalFrequencies();
       this.frequencies = this.frequencies.map(row => {
         return row.map(frequency => {
-          frequency.value = Number(((frequency.value / frequenciesSum) * 100).toFixed(1));
+          frequency.value = Number(
+            ((frequency.value / frequenciesSum) * 100).toFixed(1)
+          );
           return frequency;
         });
       });
@@ -719,7 +713,7 @@ export default {
         const dif = Number((newSum - 100.0).toFixed(1));
         this.frequencies = this.frequencies.map(row => {
           return row.map(frequency => {
-            if (frequency.name === "N"){
+            if (frequency.name === "N") {
               frequency.value = Number((frequency.value - dif).toFixed(1));
             }
             return frequency;
@@ -748,11 +742,13 @@ export default {
     },
     getTotalFrequencies() {
       const values = this.getFrequenciesValues();
-      return Number(values
-              .reduce((sum, value) => {
-                return sum + value;
-              }, 0)
-              .toFixed(1));
+      return Number(
+        values
+          .reduce((sum, value) => {
+            return sum + value;
+          }, 0)
+          .toFixed(1)
+      );
     },
     checkFrequencies() {
       const sum = this.getTotalFrequencies();
