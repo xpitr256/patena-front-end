@@ -24,7 +24,7 @@
     </h2>
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
           <label>{{ $t("views.design.rdStepDistanceFS") }}</label>
           <div class="input-group mb-3">
             <input
@@ -35,8 +35,9 @@
               v-bind:class="{ 'is-invalid': errors.has('distance') }"
               v-validate="'required|decimal:1|max_value:100|min_value:0.1'"
               name="distance"
-              v-on:keypress="onEnterKeypress"
+              v-on:keyup="onDistanceKeypress"
               v-model="distance"
+              @input="distanceChanged"
               :placeholder="$t('views.design.placeholder')"
             />
             <div class="input-group-append">
@@ -46,6 +47,21 @@
               {{ errors.first("distance") }}
             </div>
           </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label>{{ $t("views.design.rdStepCalculatedLength") }}</label>
+          <input
+                  class="form-control"
+                  name="length"
+                  ref="length"
+                  v-model="length"
+                  type="text"
+                  readonly
+          />
+        </div>
+
+        <div class="form-group col-md-1">
         </div>
 
         <div class="form-group col-md-6">
@@ -91,6 +107,7 @@
 
 <script>
 import { ValidationProvider } from "vee-validate";
+import BackendService from "../../services/BackendService";
 
 export default {
   name: "DesignFormStep4",
@@ -130,6 +147,29 @@ export default {
         this.next();
       }
     },
+    onDistanceKeypress: function(event) {
+      if (event.key === "Enter") {
+        this.next();
+      } else {
+        this.distanceChanged({
+          data: this.distance
+        })
+      }
+    },
+    distanceChanged: async function(event) {
+        this.length = null;
+        await this.$validator.validate();
+        if (!this.errors.has("distance") && event.data !== null) {
+          try {
+            this.$Progress.start();
+            const response = await BackendService.calculateLength(this.distance);
+            this.length = response.length;
+            this.$Progress.finish();
+          }catch (e) {
+            // canceled requests got here.
+          }
+        }
+    },
 
     setFocus: function() {
       this.$refs.distance.focus();
@@ -143,6 +183,7 @@ export default {
   data: function() {
     return {
       distance: null,
+      length: null,
       email: null
     };
   }

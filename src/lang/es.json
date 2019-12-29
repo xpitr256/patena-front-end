@@ -82,6 +82,7 @@
       "rdStepIS": "¿Cuál es su secuencia inicial?",
       "rdStepFS": "¿Cuáles son sus secuencias de flanqueo?",
       "rdStepDistanceFS": "Distancia",
+      "rdStepCalculatedLength": "Longitud calculada",
       "rdStepISFS": "¿Cuáles son sus secuencias iniciales y de flanqueo?",
       "rdStepLabelFS1": "Secuencia flanqueante 1",
       "rdStepLabelFS2": "Secuencia flanqueante 2",

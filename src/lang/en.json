@@ -82,6 +82,7 @@
       "rdStepIS": "Which is your initial sequence ?",
       "rdStepFS": "Which are your flanking sequences ?",
       "rdStepDistanceFS": "Distance",
+      "rdStepCalculatedLength": "Calculated length",
       "rdStepISFS": "Which are your flanking and initial sequences?",
       "rdStepLabelFS1": "Flanking sequence 1",
       "rdStepLabelFS2": "Flanking sequence 2",
