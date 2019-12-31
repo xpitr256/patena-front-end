@@ -52,17 +52,16 @@
         <div class="form-group col-md-2">
           <label>{{ $t("views.design.rdStepCalculatedLength") }}</label>
           <input
-                  class="form-control"
-                  name="length"
-                  ref="length"
-                  v-model="length"
-                  type="text"
-                  readonly
+            class="form-control"
+            name="length"
+            ref="length"
+            v-model="length"
+            type="text"
+            readonly
           />
         </div>
 
-        <div class="form-group col-md-1">
-        </div>
+        <div class="form-group col-md-1"></div>
 
         <div class="form-group col-md-6">
           <label>Email</label>
@@ -153,22 +152,22 @@ export default {
       } else {
         this.distanceChanged({
           data: this.distance
-        })
+        });
       }
     },
     distanceChanged: async function(event) {
-        this.length = null;
-        await this.$validator.validate();
-        if (!this.errors.has("distance") && event.data !== null) {
-          try {
-            this.$Progress.start();
-            const response = await BackendService.calculateLength(this.distance);
-            this.length = response.length;
-            this.$Progress.finish();
-          }catch (e) {
-            // canceled requests got here.
-          }
+      this.length = null;
+      await this.$validator.validate();
+      if (!this.errors.has("distance") && event.data !== null) {
+        try {
+          this.$Progress.start();
+          const response = await BackendService.calculateLength(this.distance);
+          this.length = response.length;
+          this.$Progress.finish();
+        } catch (e) {
+          // canceled requests got here.
         }
+      }
     },
 
     setFocus: function() {

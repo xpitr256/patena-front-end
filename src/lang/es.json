@@ -107,6 +107,7 @@
       "useCustomSettings": "Usar configuraciones propias",
       "aminoAcidFrequencies": "Frecuencias de aminoácidos",
       "netCharge": "Carga neta",
+      "selectNetCharge": "Seleccione dentro del rango un valor para la carga neta",
       "algorithms": "Algoritmos",
       "important": "Atención: ",
       "aminoAcidWarning": "Tenga en cuenta que todas las frecuencias deben sumar un total de 100%",

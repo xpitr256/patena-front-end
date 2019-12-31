@@ -64,7 +64,7 @@
       </div>
 
       <div class="form-row">
-        <div class="form-group col-6">
+        <div class="form-group col-3">
           <label>{{ $t("views.design.rdStepDistanceFS") }}</label>
           <div class="input-group mb-3">
             <input
@@ -75,8 +75,9 @@
               v-bind:class="{ 'is-invalid': errors.has('distance') }"
               v-validate="'required|decimal:1|max_value:100|min_value:0.1'"
               name="distance"
-              v-on:keypress="onEnterKeypress"
+              v-on:keyup="onDistanceKeypress"
               v-model="distance"
+              @input="distanceChanged"
               :placeholder="$t('views.design.placeholder')"
             />
             <div class="input-group-append">
@@ -87,6 +88,18 @@
             </div>
           </div>
         </div>
+        <div class="form-group col-2">
+          <label>{{ $t("views.design.rdStepCalculatedLength") }}</label>
+          <input
+            class="form-control"
+            name="length"
+            ref="length"
+            v-model="length"
+            type="text"
+            readonly
+          />
+        </div>
+
         <div class="form-group col-6">
           <label>Email</label>
           <input
@@ -126,6 +139,7 @@
 import FastaUploader from "../../components/FastaUploader";
 import FastaValidator from "../FastaValidator";
 import FastaService from "../../services/FastaService";
+import BackendService from "../../services/BackendService";
 
 export default {
   name: "DesignFormStep6",
@@ -184,6 +198,29 @@ export default {
     onSubmit: function() {
       this.next();
     },
+    onDistanceKeypress: function(event) {
+      if (event.key === "Enter") {
+        this.next();
+      } else {
+        this.distanceChanged({
+          data: this.distance
+        });
+      }
+    },
+    distanceChanged: async function(event) {
+      this.length = null;
+      await this.$validator.validate();
+      if (!this.errors.has("distance") && event.data !== null) {
+        try {
+          this.$Progress.start();
+          const response = await BackendService.calculateLength(this.distance);
+          this.length = response.length;
+          this.$Progress.finish();
+        } catch (e) {
+          // canceled requests got here.
+        }
+      }
+    },
     onEnterKeypress: function(event) {
       if (event.key === "Enter") {
         this.next();
@@ -195,7 +232,8 @@ export default {
       flankingSequence1: null,
       flankingSequence2: null,
       email: null,
-      distance: null
+      distance: null,
+      length: null
     };
   }
 };

@@ -107,6 +107,7 @@
       "useCustomSettings": "Use custom settings",
       "aminoAcidFrequencies": "Amino acid's frequency",
       "netCharge": "Net Charge",
+      "selectNetCharge": "Select within the range a value for net charge",
       "algorithms": "Algorithms",
       "important": "Attention please: ",
       "aminoAcidWarning": "Take into account that all frequencies must sum 100% together",
