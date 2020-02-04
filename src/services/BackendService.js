@@ -59,12 +59,27 @@ export default {
   },
 
   async calculateLength(distance) {
-    let response = await Vue.http.get(
-      baseDomain + "/linkerLength?distance=" + distance
-    );
-    return {
-      length: response.body.length
-    };
+    return new Promise((resolve, reject) => {
+      Vue.http
+        .get(baseDomain + "/linkerLength?distance=" + distance, {
+          before(request) {
+            if (Vue.previousRequest) {
+              Vue.previousRequest.abort();
+            }
+            Vue.previousRequest = request;
+          }
+        })
+        .then(
+          response => {
+            resolve({
+              length: response.body.length
+            });
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
   },
 
   async getResults(orderNumber) {

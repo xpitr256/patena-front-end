@@ -284,27 +284,24 @@
             </button>
           </div>
 
-          <div class="form-group col-md-3 mt-4">
-            <label>{{ $t("views.patenaSettings.netCharge") }}: </label>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="netCharge"
-                ref="netCharge"
-                v-bind:class="{ 'is-invalid': errors.has('netCharge') }"
-                v-validate="
-                  `integer|min_value:-${maxNetChargeValue}|max_value:${maxNetChargeValue}`
-                "
-                name="netCharge"
-                :disabled="useDefaultSettings"
-                v-on:keypress="onEnterKeypress"
+          <div class="form-row mt-4">
+            <div class="form-group">
+              <label>{{ $t("views.patenaSettings.selectNetCharge") }}: </label>
+            </div>
+          </div>
+
+          <div class="form-row mt-4">
+            <div class="col-2"></div>
+            <div class="form-group col-8">
+              <vue-slider
                 v-model="netCharge"
-                :placeholder="$t('views.patenaSettings.netChargePlaceholder')"
-              />
-              <div class="invalid-feedback">
-                {{ errors.first("netCharge") }}
-              </div>
+                :min="-maxNetChargeValue"
+                :max="maxNetChargeValue"
+                tooltip="always"
+                :marks="[-maxNetChargeValue, maxNetChargeValue]"
+                :dotSize="16"
+                :disabled="useDefaultSettings"
+              ></vue-slider>
             </div>
           </div>
         </div>
@@ -401,11 +398,14 @@
 import ConfirmationModal from "../ConfirmationModal";
 import FastaService from "../../services/FastaService";
 import BackendService from "../../services/BackendService";
+import VueSlider from "vue-slider-component";
+import "vue-slider-component/theme/default.css";
 
 export default {
   name: "DesignFormStepFinal",
   components: {
-    ConfirmationModal
+    ConfirmationModal,
+    VueSlider
   },
   props: ["formData"],
   computed: {
@@ -652,7 +652,7 @@ export default {
       this.algorithms = JSON.parse(JSON.stringify(this.defaultAlgorithms));
     },
     restoreNetCharge() {
-      this.netCharge = null;
+      this.netCharge = 0;
     },
     restoreFrequencies() {
       this.avoidUVSilent = false;
@@ -726,6 +726,7 @@ export default {
       this.frequencies.forEach(group => {
         group.forEach(frequency => {
           delete frequency.uvSilent;
+          delete frequency.getCSSClass;
           flatArray.push(frequency);
         });
       });
