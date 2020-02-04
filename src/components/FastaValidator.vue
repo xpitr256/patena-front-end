@@ -1,44 +1,41 @@
 <template>
   <div class="mt-1">
     <div class="alert alert-secondary" role="alert" v-show="isValid === null">
-      <h4 class="alert-heading">Fasta file visualization</h4>
-      Once you choose a fasta file you will see in this box the selected
-      sequence, it's name and also it's length. <br />
-      For <strong>flanking sequences</strong> you will see as highlighted the
-      part that will be taken into account for the analysis.
+      <h4 class="alert-heading">{{ $t("views.components.fastaValidator.title") }}</h4>
+      {{ $t("views.components.fastaValidator.subtitle") }}
     </div>
 
     <div class="alert alert-success" role="alert" v-show="isValid">
-      <h4 class="alert-heading">Well done! This is a valid fasta file</h4>
+      <h4 class="alert-heading">{{ $t("views.components.fastaValidator.successfulMessageTitle")}}</h4>
       <p class="mt-3">
-        <strong>Name: </strong><em>{{ sequenceName }}</em>
+        <strong>{{ $t("views.components.fastaValidator.labelName") }}</strong><em>{{ sequenceName }}</em>
       </p>
       <hr />
-      <p class="mb-0 mt-2"><strong>Sequence: </strong></p>
+      <p class="mb-0 mt-2"><strong>{{ $t("views.components.fastaValidator.labelSequence") }}</strong></p>
       <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
       <hr />
       <p>
         <span v-show="!highlightedCharactersAmount"
-          ><strong> Length: </strong>{{ sequenceLength }}</span
+          ><strong> {{ $t("views.components.fastaValidator.labelLength") }} </strong>{{ sequenceLength }}</span
         >
         <span v-show="highlightedCharactersAmount"
-          ><strong> Taken length: </strong>{{ sequenceLength }}</span
+          ><strong> {{ $t("views.components.fastaValidator.labelTakenLength") }} </strong>{{ sequenceLength }}</span
         >
       </p>
     </div>
     <div class="alert alert-danger" role="alert" v-show="isInvalid">
-      <h4 class="alert-heading">Oops! This is not a valid fasta file</h4>
+      <h4 class="alert-heading">{{ $t("views.components.fastaValidator.errorMessageTitle") }}</h4>
       <p class="mb-0 mt-0">
-        <strong>Please check out the following suggestions: </strong>
+        <strong>{{ $t("views.components.fastaValidator.labelSuggetionsTitle") }} </strong>
       </p>
       <ul>
-        <li>Only <em>.fasta</em> and <em>.txt</em> files are allowed.</li>
-        <li>The file should not be empty.</li>
-        <li>All comments should start with ">" character.</li>
+        <li>{{ $t("views.components.fastaValidator.labelSuggetion1") }} "<em>.fasta"</em>, "<em>.txt"</em></li>
+        <li>{{ $t("views.components.fastaValidator.labelSuggetion2") }}</li>
+        <li>{{ $t("views.components.fastaValidator.labelSuggetion3") }}</li>
         <li>
-          Outside a comment, the only allowed characters are: {{ aminoAcids }}
+          {{ $t("views.components.fastaValidator.labelSuggetion4") }} {{ aminoAcids }}
         </li>
-        <li>Your file contains forbidden characters.</li>
+        <li>{{ $t("views.components.fastaValidator.labelSuggetion5") }}</li>
       </ul>
     </div>
   </div>

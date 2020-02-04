@@ -16,6 +16,23 @@
       "fastaUploader": {
         "title": "Arrastre su archivo .fasta aquí!",
         "subtitle": "...o haga click para seleccionar un archivo .fasta desde su ordenador."
+      },
+      "fastaValidator": {
+        "title": "Vista Previa",
+        "subtitle": "Una vez que elija un archivo fasta, verá en esta casilla la secuencia seleccionada, su nombre y también su longitud.\nPara las secuencias de flanqueo, verá como resaltada la parte que se tendrá en cuenta para el análisis.",
+        "successfulMessageTitle": "Bien Hecho!  Archivo fasta correcto",
+        "errorMessageTitle": "Algo ha salido mal! Archivo fasta no es correcto",
+        "labelName": "Nombre:",
+        "labelSequence": "Secuencia:",
+        "labelLength": "Longitud:",
+        "labelTakenLength": "Longitud considerada:",
+        "labelSuggetionsTitle": "Por favor revisa las siguientes sugerencias:",
+        "labelSuggetion1": "Solo se permiten archivos",
+        "labelSuggetion2": "El archivo no debe estar vacío.",
+        "labelSuggetion3": "Todos los comentarios deben comenzar con el carácter \">\".",
+        "labelSuggetion4": "Fuera de un comentario, los únicos caracteres permitidos son: A R N D C E Q G H I L K M F P S T W Y V",
+        "labelSuggetion5": "Su archivo contiene caracteres prohibidos."
+
       }
     },
     "home": {

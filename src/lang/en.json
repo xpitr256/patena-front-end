@@ -16,6 +16,22 @@
       "fastaUploader": {
         "title": "Drag and drop to upload .fasta file!",
         "subtitle": "...or click to select a .fasta file from your computer"
+      },
+      "fastaValidator": {
+        "title": "Fasta file visualization",
+        "subtitle": "Once you choose a fasta file you will see in this box the selected\n      sequence, it's name and also it's length. <br />\n      For <strong>flanking sequences</strong> you will see as highlighted the\n      part that will be taken into account for the analysis.",
+        "successfulMessageTitle": "Well done! This is a valid fasta file",
+        "errorMessageTitle": "Oops! This is not a valid fasta file",
+        "labelName": "Name:",
+        "labelSequence": "Sequence:",
+        "labelLength": "Lenght:",
+        "labelTakenLength": "Taken Length:",
+        "labelSuggetionsTitle": "Please check out the following suggestions:",
+        "labelSuggetion1": "Only files are allowed: ",
+        "labelSuggetion2": "The file should not be empty.",
+        "labelSuggetion3": "All comments should start with \">\" character.",
+        "labelSuggetion4": "Outside a comment, the only allowed characters are:",
+        "labelSuggetion5": "Your file contains forbidden characters."
       }
     },
     "home": {
