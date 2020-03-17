@@ -672,17 +672,16 @@ export default {
     changeUVSilent() {
       this.avoidUVSilent = !this.avoidUVSilent;
       this.checkUVSilent();
-      this.scaleFrequencies();
     },
     checkUVSilent() {
       if (this.avoidUVSilent) {
         this.disableAllUVFrequencies();
       }
+      this.scaleFrequencies();
     },
     changeCysteine() {
       this.avoidCysteine = !this.avoidCysteine;
       this.checkCysteine();
-      this.scaleFrequencies();
     },
     checkCysteine() {
       if (this.avoidCysteine) {
@@ -695,6 +694,7 @@ export default {
           });
         });
       }
+      this.scaleFrequencies();
     },
     scaleFrequencies() {
       const frequenciesSum = this.getTotalFrequencies();
