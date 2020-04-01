@@ -45,6 +45,13 @@
       "title": "Quiénes  Somos",
       "description": "La Comunidad Patena es un grupo formado por dos instituciones: La Universidad de Buenos Aires, la Universidad de la Plata.\n\nQuienes trabajamos aquí lo hacemos guiados por los principios y valores que nos transmitió nuestro fundador, y movilizados por la única finalidad trascendente que marca el rumbo de nuestras Instituciones."
     },
+    "notFound": {
+      "title": "404 - Página no encontrada",
+      "description": "No hemos podido encontrar la dirección requerida. Quizás haya querido acceder a?",
+      "getResult": "Chequear el resultado de un análisis o diseño",
+      "design": "Diseñar un nuevo Linker",
+      "analyze": "Analizar su propio Linker"
+    },
     "contact": {
       "title": "Contacto",
       "name": "Nombre Completo",

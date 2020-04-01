@@ -10,6 +10,7 @@ import Download from "./views/Download";
 import AnalyzeSuccess from "./views/AnalyzeSuccess";
 import DesignSuccess from "./views/DesignSuccess";
 import DesignLengthSuccess from "./views/DesignLengthSuccess";
+import NotFound from "./views/NotFound";
 
 Vue.use(Router);
 
@@ -66,6 +67,11 @@ export default new Router({
       path: "/design/success",
       name: "DesignSuccess",
       component: DesignSuccess
+    },
+    {
+      path: "*",
+      name: "NotFound",
+      component: NotFound
     }
   ]
 });

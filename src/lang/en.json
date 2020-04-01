@@ -44,6 +44,13 @@
       "title": "About us",
       "description": "The Patena Community is a group formed by two institutions: The University of Buenos Aires, the University of La Plata. \n \nWho work here we do it guided by the principles and values that our founder transmitted to us, and mobilized for the only transcendent purpose that marks the direction of our Institutions. "
     },
+    "notFound": {
+      "title": "404 - Page not found",
+      "description": "The page you requested could not be found. Is there any chance you were looking for one of these?",
+      "getResult": "Check the result of an analysis or design",
+      "design": "Design a new Linker",
+      "analyze": "Analyze your own Linker"
+    },
     "contact": {
       "title": "Contact us",
       "name": "Full Name",
