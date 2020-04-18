@@ -1,5 +1,5 @@
 <template>
-    <span >{{ nameAminoacid }}</span>
+        <span >{{ nameAminoacid }}</span>
 </template>
 
 <script>

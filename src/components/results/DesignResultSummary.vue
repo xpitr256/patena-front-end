@@ -16,9 +16,11 @@
                <Aminoacid class="btn btn-orange btn-circle" name-aminoacid="X"
                 ></Aminoacid>-->
                 <!-- Put here component Sequence -->
+                <Sequence  Aminoacids="ACDKSPKWTG"></Sequence>
             </td>
             <td>&#10148;</td>
             <td>
+                <Sequence  Aminoacids="BCCABCCAKK"></Sequence>
                 <!-- Put here component Sequence -->
             </td>
             <td class="a">{{ lenght }}</td>
@@ -30,10 +32,11 @@
 
 <script>
     import Aminoacid from "./Aminoacid";
+    import Sequence from "./Sequence";
     export default {
         name: "DesignResultSummary",
         props:["lenght"],
-        components: {Aminoacid}
+        components: {Sequence, Aminoacid}
     }
 </script>
 
