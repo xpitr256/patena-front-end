@@ -9,7 +9,7 @@
     </div>
     <br>
     <div>
-      <DesignResultHistory></DesignResultHistory>
+      <DesignResultHistory v-bind:columns=columns v-bind:rows=rows></DesignResultHistory>
     </div>
 
 
@@ -29,7 +29,9 @@ export default {
   components: {DesignResultHistory, DesignResultSummary, DesignResult},
   data() {
     return {
-      orderNumber: 0
+      orderNumber: 0,
+      columns: "Pos,Before, ,After,Score",
+      rows:[{Pos:'2', Before:'ABCD', After:'AKCD', Score:'135.6'},{Pos:'4', Before:'AKCD', After:'AKCK', Score:'15.6'}]
     };
   },
   created() {
