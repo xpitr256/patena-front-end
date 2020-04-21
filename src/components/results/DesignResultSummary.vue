@@ -16,11 +16,11 @@
                <Aminoacid class="btn btn-orange btn-circle" name-aminoacid="X"
                 ></Aminoacid>-->
                 <!-- Put here component Sequence -->
-                <Sequence  Aminoacids="ACDKSPKWTG"></Sequence>
+                <Sequence v-bind:is-initial="true" v-bind:is-not-change="true" Aminoacids="ACDKSPKWTG"></Sequence>
             </td>
             <td>&#10148;</td>
             <td>
-                <Sequence Aminoacids="BCCABCCAKK"></Sequence>
+                <Sequence v-bind:is-initial="false" v-bind:is-not-change="true" Aminoacids="BCCABCCAKK"></Sequence>
                 <!-- Put here component Sequence -->
             </td>
             <td class="a">{{ lenght }}</td>
