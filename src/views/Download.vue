@@ -5,7 +5,7 @@
     </div>
     <br>
     <div>
-      <DesignResultSummary></DesignResultSummary>
+      <DesignResultSummary v-bind:lenght="8"></DesignResultSummary>
     </div>
     <br>
     <div>

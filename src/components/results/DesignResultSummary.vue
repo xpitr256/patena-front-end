@@ -5,8 +5,8 @@
             <th class="a" scope="col">Sequence initial</th>
             <th class="a" scope="col"></th>
             <th class="a" scope="col">Sequence final</th>
+            <th class="a" scope="col">Copy</th>
             <th class="a" scope="col">Length</th>
-            <th class="a" scope="col">Mode</th>
         </tr>
         </thead>
         <tbody>
@@ -23,8 +23,12 @@
                 <Sequence v-bind:is-initial="false" v-bind:is-not-change="true" Aminoacids="BCCABCCAKK"></Sequence>
                 <!-- Put here component Sequence -->
             </td>
-            <td class="a">{{ lenght }}</td>
-            <td class="a">Design</td>
+            <td>
+                <div class="h2 mb-0">
+                    <button class="btn"><i class="fa fa-copy" style="font-size:24px; color:orange;"></i></button>
+                </div>
+            </td>
+            <td class="a" style="font-size:18px;">{{lenght}}</td>
         </tr>
         </tbody>
     </table>
