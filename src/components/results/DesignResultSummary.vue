@@ -12,16 +12,11 @@
         <tbody>
         <tr>
             <td>
-                <!--
-               <Aminoacid class="btn btn-orange btn-circle" name-aminoacid="X"
-                ></Aminoacid>-->
-                <!-- Put here component Sequence -->
                 <Sequence v-bind:is-initial="true" v-bind:is-not-change="true" Aminoacids="ACDKSPKWTG"></Sequence>
             </td>
             <td>&#10148;</td>
             <td>
-                <Sequence v-bind:is-initial="false" v-bind:is-not-change="true" Aminoacids="BCCABCCAKK"></Sequence>
-                <!-- Put here component Sequence -->
+                <Sequence v-bind:is-initial="false" v-bind:is-not-change="true" Aminoacids="AKCKSPKWTG"></Sequence>
             </td>
             <td>
                 <div class="h2 mb-0">

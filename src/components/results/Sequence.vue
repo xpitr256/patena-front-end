@@ -2,7 +2,7 @@
         <tbody>
                 <th  v-for="(value,index) in Aminoacids" style="border-top:0px; padding: 2px">
                         <Aminoacid :class="{'btn-final-changed btn-circle-xl':!isBefore && (index+1).toString()===Pos && !isNotChange,
-                                            'btn-brown btn-circle-xl': isBefore & (index+1).toString()===Pos && !isNotChange,
+                                            'btn-yellow btn-circle-xl': isBefore & (index+1).toString()===Pos && !isNotChange,
                                             'btn-circle-xl': isInitial && isNotChange,
                                             'btn-final btn-circle-xl':!isInitial && isNotChange}" v-bind:name=value></Aminoacid>
                 </th>

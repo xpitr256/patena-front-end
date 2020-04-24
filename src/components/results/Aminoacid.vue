@@ -56,10 +56,16 @@
         }
 
 
-        .btn-brown{
-                background-color: #FF5733;
+        .btn-yellow{
+                background-color: #ffc107;
                 border-style: solid;
-                border-color: black;
+                border-color: #ffc107;
+        }
+
+        .btn-yellow:hover{
+                background-color: #e0a800;
+                border-style: solid;
+                border-color: #d39e00;
         }
         .btn-circle-xl {
                 width: 35px;
