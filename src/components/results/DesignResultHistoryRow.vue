@@ -1,11 +1,16 @@
 <template>
     <tbody>
         <tr v-for="row in rows">
-        <td>{{row.Pos}}</td>
-        <td><Sequence v-bind:pos=row.Pos  v-bind:is-before="true" v-bind:aminoacids= row.Before></Sequence></td>
-        <td><span  style="font-size:20pt;">&#10148;</span></td>
-        <td><Sequence v-bind:pos=row.Pos v-bind:is-before="false" v-bind:aminoacids= row.After></Sequence></td>
-        <td>{{row.Score}}</td>
+            <td>{{row.Pos}}</td>
+            <td>
+                <Sequence  v-bind:sequence=row.Before :warning-positions="[0,2,7]"></Sequence>
+            </td>
+            <td>
+                <span style="font-size:20pt;"><i class="fas fa-long-arrow-alt-right"></i></span>
+            </td>
+            <td>
+                <Sequence v-bind:sequence=row.After :success-positions="[0,2,7]"></Sequence></td>
+            <td>{{row.Score}}</td>
         </tr>
     </tbody>
 </template>

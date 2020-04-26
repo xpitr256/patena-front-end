@@ -91,7 +91,7 @@ export default {
             title: this.$t("views.sendSuccess")
           });
           this.$router.push("/results/download");
-          this.$route.params.orderNumber = response.orderNumber;
+          this.$route.params.results = response;
         } else {
           this.$notify({
             group: "notifications",

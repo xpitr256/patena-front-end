@@ -88,9 +88,7 @@ export default {
         baseDomain + "/results?orderNumber=" + orderNumber
       );
       if (response.ok) {
-        return {
-          orderNumber: response.body.orderNumber
-        };
+        return response.body;
       }
       return {
         error: response.body.message

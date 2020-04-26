@@ -1,16 +1,42 @@
 <template>
-        <span class="btn btn-initial btn-circle">{{ name }}</span>
+        <span v-bind:class="getAminoAcidClass()">
+                {{ name }}
+        </span>
 </template>
 
 <script>
     export default {
         name: "Aminoacid",
-        props:["name"],
-            data:{
-                isActive: true,
-                isSelectionBefore:false,
-                isSelectionAfter:false
-            }
+        props: {
+                name: String,
+                showBig: Boolean,
+                showAsFinal: Boolean,
+                showAsSuccess: Boolean,
+                showAsWarning: Boolean,
+        },
+        methods:{
+                getAminoAcidClass: function() {
+                        let aminoAcidClass = "btn";
+                        let circleClass = "btn-circle";
+                        let colorClass = "btn-initial";
+                        if (this.showBig) {
+                                circleClass = "btn-circle-xl";
+                        }
+                        if (this.showAsFinal) {
+                                colorClass = "btn-final";
+                        }
+                        if (this.showAsSuccess) {
+                                colorClass = "btn-success";
+                        }
+                        if (this.showAsWarning) {
+                                colorClass = "btn-warning";
+                        }
+                        return aminoAcidClass + ' ' + colorClass + ' ' + circleClass;
+                }
+        },
+        async created() {
+            this.getAminoAcidClass();
+        },
     }
 </script>
 
@@ -43,29 +69,6 @@
 
         .btn-final:hover{
                 background-color: #C0C0C0;
-        }
-
-        .btn-final-changed {
-                background-color: #2fcc70;
-                border-style: solid;
-                border-color: #bbbbbb;
-        }
-
-        .btn-final-changed:hover{
-                background-color: #29b765;
-        }
-
-
-        .btn-yellow{
-                background-color: #ffc107;
-                border-style: solid;
-                border-color: #ffc107;
-        }
-
-        .btn-yellow:hover{
-                background-color: #e0a800;
-                border-style: solid;
-                border-color: #d39e00;
         }
         .btn-circle-xl {
                 width: 35px;
