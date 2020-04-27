@@ -9,7 +9,7 @@
     </div>
     <br>
     <div>
-      <DesignResultHistory v-bind:columns=columns v-bind:rows=rows></DesignResultHistory>
+      <DesignResultHistory  v-bind:mutations-history="mutationsHistory"></DesignResultHistory>
     </div>
 
 
@@ -30,17 +30,22 @@ export default {
   components: {DesignResultHistory, DesignResultSummary, DesignResult},
   data() {
     return {
-      orderNumber: 0,
+      orderNumber: '',
       initialSequence: '',
       finalSequence: '',
-      columns: "Pos,Before, ,After,Score",
-      rows:[{Pos:'2', Before:'ABCDSPKWTG', After:'AKCDSPKWTG', Score:'135.6'},{Pos:'4', Before:'AKCDSPKWTG', After:'AKCKSPKWTG', Score:'15.6'}]
+      mutationsHistory: [],
+      initialScore:'',
+      //columns: "Pos,Before, ,After,Score"
+      //rows:[{Pos:'2', Before:'ABCDSPKWTG', After:'AKCDSPKWTG', Score:'135.6'},{Pos:'4', Before:'AKCDSPKWTG', After:'AKCKSPKWTG', Score:'15.6'}]
     };
   },
   created() {
     this.orderNumber = this.$route.params.results.orderNumber;
     this.initialSequence = this.$route.params.results.initialSequence;
     this.finalSequence = this.$route.params.results.finalSequence;
+    this.mutationsHistory = this.$route.params.results.mutationsHistory;
+    this.initialScore = this.$route.params.results.initialScore;
+    this.mutationsHistory.unshift({mutated_sequence:this.initialSequence,score_after_mutation: this.initialScore})
   },
   methods: {
     navigate() {
