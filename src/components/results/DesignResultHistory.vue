@@ -28,10 +28,10 @@
             console.log("ciclo history");
             //this.rows = this.mutationsHistory;
             for(i=0; i<this.mutationsHistory.length; i++){
-                    this.rows.push({Pos:this.mutationsHistory[i].mutated_position,
+                    this.rows.push({Pos:this.mutationsHistory[i+1].mutated_position,
                         Before:this.mutationsHistory[i].mutated_sequence,
                         After:this.mutationsHistory[i+1].mutated_sequence,
-                        Score:this.mutationsHistory[i].score_after_mutation})
+                        Score:this.mutationsHistory[i+1].score_after_mutation})
             }
 
         },
