@@ -2,9 +2,9 @@
     <table class="table table-responsive">
         <thead>
         <tr>
-            <th class="a" scope="col">Initial sequence</th>
+            <th class="a" scope="col">Initial sequence (Score: {{initialScore}})</th>
             <th class="a" scope="col"></th>
-            <th class="a" scope="col">Final sequence</th>
+            <th class="a" scope="col">Final sequence (Score: {{finalScore}})</th>
             <th class="a" scope="col">Copy</th>
             <th class="a" scope="col">Length</th>
         </tr>
@@ -21,7 +21,7 @@
                 <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true"></Sequence>
             </td>
             <td class="a">
-                <button class="btn btn-outline-primary"><i class="fas fa-copy"></i></button>
+                <button  class="btn btn-outline-primary" @click="getSequenceCopy"><i class="fas fa-copy"></i></button>
             </td>
             <td class="a" style="font-size:18px;">
                 {{length}}
@@ -36,15 +36,28 @@
     import Sequence from "./Sequence";
     import FastaService from "../../services/FastaService";
 
+
     export default {
         name: "DesignResultSummary",
         props:[
             "initialSequence",
-            "finalSequence"
+            "finalSequence",
+            "initialScore",
+            "finalScore"
         ],
         components: {
             Sequence,
             Aminoacid
+        },
+        methods: {
+            getSequenceCopy: function() {
+                let sequencesCopied = this.getSequencesCopied();
+                navigator.clipboard.writeText(sequencesCopied);
+
+            },
+            getSequencesCopied: function(){
+                return "initialSequence: "+this.initialSequence+"\n"+"finalSequence: "+this.finalSequence;
+            }
         },
         computed: {
             length: function () {

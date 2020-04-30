@@ -25,9 +25,7 @@
         },
         created() {
             let i;
-            console.log("ciclo history");
-            //this.rows = this.mutationsHistory;
-            for(i=0; i<this.mutationsHistory.length; i++){
+             for(i=0; i<this.mutationsHistory.length-1; i++){
                     this.rows.push({Pos:this.mutationsHistory[i+1].mutated_position,
                         Before:this.mutationsHistory[i].mutated_sequence,
                         After:this.mutationsHistory[i+1].mutated_sequence,

@@ -5,7 +5,12 @@
     </div>
     <br>
     <div>
-      <DesignResultSummary v-bind:initial-sequence="initialSequence" v-bind:final-sequence="finalSequence"></DesignResultSummary>
+      <DesignResultSummary
+              :initial-sequence="initialSequence"
+              :initial-score="initialScore"
+              :final-sequence="finalSequence"
+              :final-score="finalScore"
+      ></DesignResultSummary>
     </div>
     <br>
     <div>
@@ -35,8 +40,7 @@ export default {
       finalSequence: '',
       mutationsHistory: [],
       initialScore:'',
-      //columns: "Pos,Before, ,After,Score"
-      //rows:[{Pos:'2', Before:'ABCDSPKWTG', After:'AKCDSPKWTG', Score:'135.6'},{Pos:'4', Before:'AKCDSPKWTG', After:'AKCKSPKWTG', Score:'15.6'}]
+      finalScore:''
     };
   },
   created() {
@@ -45,6 +49,7 @@ export default {
     this.finalSequence = this.$route.params.results.finalSequence;
     this.mutationsHistory = this.$route.params.results.mutationsHistory;
     this.initialScore = this.$route.params.results.initialScore;
+    this.finalScore = this.$route.params.results.finalScore;
     this.mutationsHistory.unshift({mutated_sequence:this.initialSequence,score_after_mutation: this.initialScore})
   },
   methods: {
