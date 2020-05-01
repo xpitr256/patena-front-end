@@ -38,6 +38,7 @@
             "title": "Design Result"
         },
         "DesignResultHistory":{
+          "title": "Mutation history",
           "headers": {
             "Pos": "Pos",
             "Before": "Before",

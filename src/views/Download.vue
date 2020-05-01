@@ -14,7 +14,8 @@
     </div>
     <br>
     <div>
-      <DesignResultHistory  v-bind:mutations-history="mutationsHistory"></DesignResultHistory>
+      <DesignResultContentHistory></DesignResultContentHistory>
+      <DesignResultHistory v-bind:mutations-history="mutationsHistory"></DesignResultHistory>
     </div>
 
 
@@ -25,14 +26,14 @@
 </template>
 
 <script>
-import router from "../router";
-import DesignResult from "../components/results/DesignResult";
-import DesignResultSummary from "../components/results/DesignResultSummary";
-import DesignResultHistory from "../components/results/DesignResultHistory";
+  import router from "../router";
+  import DesignResult from "../components/results/DesignResult";
+  import DesignResultSummary from "../components/results/DesignResultSummary";
+  import DesignResultContentHistory from "../components/results/DesignResultContentHistory";
 
-export default {
+  export default {
   name: "Download",
-  components: {DesignResultHistory, DesignResultSummary, DesignResult},
+  components: {DesignResultContentHistory, DesignResultSummary, DesignResult},
   data() {
     return {
       orderNumber: '',
