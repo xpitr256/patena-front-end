@@ -32,6 +32,27 @@
         "labelSuggetion3": "All comments should start with \">\" character.",
         "labelSuggetion4": "Outside a comment, the only allowed characters are:",
         "labelSuggetion5": "Your file contains forbidden characters."
+      },
+      "results": {
+        "DesignResult": {
+            "title": "Design Result"
+        },
+        "DesignResultHistory":{
+          "headers": {
+            "Pos": "Pos",
+            "Before": "Before",
+            "After": "After",
+            "Score": "Score"
+          }
+        },
+        "DesignResultSummary":{
+            "headers": {
+              "Initial": "Initial sequence ",
+              "Final": "Final sequence ",
+              "Copy": "Copy",
+              "Length": "Length"
+            }
+        }
       }
     },
     "home": {

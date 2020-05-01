@@ -33,6 +33,27 @@
         "labelSuggetion4": "Fuera de un comentario, los únicos caracteres permitidos son: A R N D C E Q G H I L K M F P S T W Y V",
         "labelSuggetion5": "Su archivo contiene caracteres prohibidos."
 
+      },
+      "results": {
+        "DesignResult": {
+          "title": "Resultado del Diseño"
+        },
+        "DesignResultHistory":{
+          "headers": {
+            "Pos": "Pos",
+            "Before": "Antes",
+            "After": "Después",
+            "Score": "Score"
+          }
+        },
+        "DesignResultSummary":{
+          "headers": {
+            "Initial": "Secuencia inicial ",
+            "Final": "Secuencia final",
+            "Copy": "Copiar",
+            "Length": "Longitud"
+          }
+        }
       }
     },
     "home": {

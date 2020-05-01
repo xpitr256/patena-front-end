@@ -1,5 +1,5 @@
 <template>
-        <h1>Design Result</h1>
+        <h1>{{ $t("views.components.results.DesignResult.title") }}</h1>
 </template>
 
 <script>

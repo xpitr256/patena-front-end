@@ -2,11 +2,11 @@
     <table class="table table-responsive">
         <thead>
         <tr>
-            <th class="a" scope="col">Initial sequence (Score: {{initialScore}})</th>
-            <th class="a" scope="col"></th>
-            <th class="a" scope="col">Final sequence (Score: {{finalScore}})</th>
-            <th class="a" scope="col">Copy</th>
-            <th class="a" scope="col">Length</th>
+            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Initial")}} (Score: {{initialScore}})</th>
+            <th class="a" scope="col"> </th>
+            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Final")}} (Score: {{finalScore}})</th>
+            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Copy")}}</th>
+            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Length")}}</th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +21,10 @@
                 <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true"></Sequence>
             </td>
             <td class="a">
-                <button  class="btn btn-outline-primary" @click="getSequenceCopy"><i class="fas fa-copy"></i></button>
+                <button type="button"
+                        class="clip clip-demo"
+                        @click="getSequenceCopy"><i
+                        class="fas fa-copy"></i></button>
             </td>
             <td class="a" style="font-size:18px;">
                 {{length}}
@@ -35,7 +38,6 @@
     import Aminoacid from "./Aminoacid";
     import Sequence from "./Sequence";
     import FastaService from "../../services/FastaService";
-
 
     export default {
         name: "DesignResultSummary",
@@ -56,7 +58,7 @@
 
             },
             getSequencesCopied: function(){
-                return "initialSequence: "+this.initialSequence+"\n"+"finalSequence: "+this.finalSequence;
+                return "initial Sequence: "+this.initialSequence+"\n"+"final Sequence: "+this.finalSequence;
             }
         },
         computed: {
@@ -65,11 +67,33 @@
             }
         }
     }
+
+
+
+
+
 </script>
 
 <style scoped>
     .a {
         text-align: center;
     }
+    .clip-demo {
+        font-size: 95%;
+        padding: .5em;
+        display: flex;
+        line-height: normal;
+        width: auto;
+        margin: auto;
+        margin-bottom: 2em;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+    }
+
+    .button-demo {
+        float: right;
+        overflow: hidden;
+    }
+
 
 </style>

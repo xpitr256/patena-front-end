@@ -2,7 +2,11 @@
     <table class="table table-responsive" >
         <thead>
         <tr>
-            <th v-for="key in this.columns.split(',')" style="text-align: center;">{{key}}</th>
+            <th style="text-align: center;">{{$t("views.components.results.DesignResultHistory.headers.Pos")}}</th>
+            <th style="text-align: center;">{{$t("views.components.results.DesignResultHistory.headers.Before")}}</th>
+            <th style="text-align: center;"> </th>
+            <th style="text-align: center;">{{$t("views.components.results.DesignResultHistory.headers.After")}}</th>
+            <th style="text-align: center;">{{$t("views.components.results.DesignResultHistory.headers.Score")}}</th>
          </tr>
         </thead>
                 <design-result-history-row v-bind:rows="rows"></design-result-history-row>
@@ -19,7 +23,6 @@
         },
         data(){
             return {
-                columns: "Pos,Before, ,After,Score",
                 rows : []
             }
         },
