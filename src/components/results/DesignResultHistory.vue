@@ -1,4 +1,9 @@
 <template>
+    <div>
+    <div>
+        <h2>{{ $t("views.components.results.DesignResultHistory.title") }}</h2>
+    </div>
+    <div>
     <table class="table table-responsive" >
         <thead>
         <tr>
@@ -11,6 +16,8 @@
         </thead>
                 <design-result-history-row v-bind:rows="rows"></design-result-history-row>
     </table>
+    </div>
+    </div>
 </template>
 
 <script>

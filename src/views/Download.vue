@@ -13,12 +13,9 @@
       ></DesignResultSummary>
     </div>
     <br>
-    <div>
-      <DesignResultContentHistory></DesignResultContentHistory>
+      <div>
       <DesignResultHistory v-bind:mutations-history="mutationsHistory"></DesignResultHistory>
     </div>
-
-
     <a href="#" class="btn btn-lg btn-light mt-4" v-on:click="navigate()">
       <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
     </a>
@@ -29,11 +26,11 @@
   import router from "../router";
   import DesignResult from "../components/results/DesignResult";
   import DesignResultSummary from "../components/results/DesignResultSummary";
-  import DesignResultContentHistory from "../components/results/DesignResultContentHistory";
+  import DesignResultHistory from "../components/results/DesignResultHistory";
 
   export default {
   name: "Download",
-  components: {DesignResultContentHistory, DesignResultSummary, DesignResult},
+  components: {DesignResultSummary, DesignResult, DesignResultHistory},
   data() {
     return {
       orderNumber: '',
