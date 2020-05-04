@@ -22,9 +22,12 @@
             </td>
             <td class="a">
                 <button type="button"
-                        class="clip clip-demo"
-                        @click="getSequenceCopy"><i
-                        class="fas fa-copy"></i></button>
+                        v-on:click="getSequenceCopy">
+                        <i class="fas fa-copy"></i>
+                </button>
+                <transition name="fade" v-on:enter="enter">
+                    <p v-if="show">{{$t("views.components.results.DesignResultSummary.headers.Copied")}}</p>
+                </transition>
             </td>
             <td class="a" style="font-size:18px;">
                 {{length}}
@@ -51,15 +54,38 @@
             Sequence,
             Aminoacid
         },
+        data: function() {
+            return {
+                show: false
+            }
+        },
         methods: {
             getSequenceCopy: function() {
                 let sequencesCopied = this.getSequencesCopied();
-                navigator.clipboard.writeText(sequencesCopied);
+                navigator.clipboard.writeText(sequencesCopied)
+                    .then(() => {
+                    console.log('Text is on the clipboard.');
+                    this.show = !this.show
+
+                })
+                    .catch(e => {
+                        console.error(e);
+                        this.message = 'Sorry, unable to copy to clipboard.'
+                    });
 
             },
             getSequencesCopied: function(){
                 return "initial Sequence: "+this.initialSequence+"\n"+"final Sequence: "+this.finalSequence;
+            },
+            enter: function(el, done) {
+
+                let that = this;
+
+                setTimeout(function() {
+                    that.show = false;
+                }, 2000);
             }
+
         },
         computed: {
             length: function () {
@@ -93,6 +119,19 @@
     .button-demo {
         float: right;
         overflow: hidden;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 1s
+    }
+
+    .fade-enter,
+    .fade-leave-to
+        /* .fade-leave-active in <2.1.8 */
+
+    {
+        opacity: 0
     }
 
 
