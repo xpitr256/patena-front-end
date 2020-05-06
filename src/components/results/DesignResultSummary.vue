@@ -2,8 +2,6 @@
     <table class="table table-responsive">
         <thead>
         <tr>
-            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Initial")}} (Score: {{initialScore}})</th>
-            <th class="a" scope="col"> </th>
             <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Final")}} (Score: {{finalScore}})</th>
             <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Copy")}}</th>
             <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Length")}}</th>
@@ -11,12 +9,6 @@
         </thead>
         <tbody>
         <tr>
-            <td>
-                <Sequence :sequence=initialSequence :show-big="true"></Sequence>
-            </td>
-            <td>
-                <span style="font-size:20pt;"><i class="fas fa-long-arrow-alt-right"></i></span>
-            </td>
             <td>
                 <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true"></Sequence>
             </td>
@@ -27,6 +19,7 @@
                 </button>
                 <transition name="fade" v-on:enter="enter">
                     <p v-if="show">{{$t("views.components.results.DesignResultSummary.headers.Copied")}}</p>
+                    <p v-if="message">{{$t("views.components.results.DesignResultSummary.headers.ErrorMessage")}}</p>
                 </transition>
             </td>
             <td class="a" style="font-size:18px;">
@@ -56,7 +49,8 @@
         },
         data: function() {
             return {
-                show: false
+                show: false,
+                messageShowError : false
             }
         },
         methods: {
@@ -70,12 +64,12 @@
                 })
                     .catch(e => {
                         console.error(e);
-                        this.message = 'Sorry, unable to copy to clipboard.'
+                        this.messageShowError=!this.messageShowError
                     });
 
             },
             getSequencesCopied: function(){
-                return "initial Sequence: "+this.initialSequence+"\n"+"final Sequence: "+this.finalSequence;
+                return  "initial Sequence: "+this.initialSequence+"\n"+"final Sequence: "+this.finalSequence;
             },
             enter: function(el, done) {
 
@@ -89,7 +83,7 @@
         },
         computed: {
             length: function () {
-                return FastaService.getSequenceLengthFrom(this.initialSequence);
+                return FastaService.getSequenceLengthFrom(this.finalSequence);
             }
         }
     }

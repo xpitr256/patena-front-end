@@ -53,6 +53,7 @@
             "Final": "Secuencia final",
             "Copy": "Copiar",
             "Copied": "Copiado!",
+            "ErrorMessage": "Lo sentimos, no se puede copiar al portapapeles.",
             "Length": "Longitud"
           }
         }
