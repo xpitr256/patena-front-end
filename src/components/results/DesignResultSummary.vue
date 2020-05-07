@@ -10,7 +10,7 @@
         <tbody>
         <tr>
             <td>
-                <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true"></Sequence>
+                <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :hidden="false"></Sequence>
             </td>
             <td class="a">
                 <button type="button"
@@ -19,7 +19,7 @@
                 </button>
                 <transition name="fade" v-on:enter="enter">
                     <p v-if="show">{{$t("views.components.results.DesignResultSummary.headers.Copied")}}</p>
-                    <p v-if="message">{{$t("views.components.results.DesignResultSummary.headers.ErrorMessage")}}</p>
+                    <p v-if="messageShowError">{{$t("views.components.results.DesignResultSummary.headers.ErrorMessage")}}</p>
                 </transition>
             </td>
             <td class="a" style="font-size:18px;">

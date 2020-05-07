@@ -1,6 +1,6 @@
 <template>
         <span v-bind:class="getAminoAcidClass()">
-                {{ name }}
+                {{ getName }}
         </span>
 </template>
 
@@ -13,6 +13,7 @@
                 showAsFinal: Boolean,
                 showAsSuccess: Boolean,
                 showAsWarning: Boolean,
+                hidden: Boolean
         },
         methods:{
                 getAminoAcidClass: function() {
@@ -31,12 +32,22 @@
                         if (this.showAsWarning) {
                                 colorClass = "btn-warning";
                         }
+                        if (this.hidden) {
+                                 return "display: none;";
+                        }
                         return aminoAcidClass + ' ' + colorClass + ' ' + circleClass;
                 }
         },
         async created() {
             this.getAminoAcidClass();
         },
+            computed: {
+
+                    getName: function () {
+
+                            return this.hidden ? "" : this.name;
+                    }
+            }
     }
 </script>
 
