@@ -1,6 +1,6 @@
 <template>
         <div>
-                <span v-if="hidden && getPivot()!=0"> ...</span>
+                <span v-if="showTruncated && showExtensionInitial()"> ...</span>
                 <Aminoacid v-for="aminoAcid in aminoAcids"
                            v-bind:name=aminoAcid.value
                            :show-big=aminoAcid.showBig
@@ -9,7 +9,7 @@
                            :show-as-final=aminoAcid.showAsFinal
                            :hidden=aminoAcid.hidden
                 ></Aminoacid>
-                <span v-if="hidden && getPivot()!=this.sequence.length-1"> ...</span>
+                <span v-if="showTruncated && showExtensionFinal()"> ...</span>
         </div>
 </template>
 
@@ -27,12 +27,13 @@
                 successPositions: Array,
                 showBig: Boolean,
                 showAsFinal: Boolean,
-                hidden:Boolean
+                showTruncated:Boolean
         },
         data: function() {
             return {
                     aminoAcids: [],
-                    hiddenPositions : []
+                    hiddenPositions : [],
+                    windowRadius : 4
             }
         },
             methods: {
@@ -45,19 +46,20 @@
                 showAsSuccess: function(position) {
                     return this.successPositions && this.successPositions.includes(position);
                 },
-                    showAsTruncate: function (position) {
-                            const windowRadius = 4;
+                getLength: function () {
+                    return this.sequence.length;
+                }, showAsTruncate: function (position) {
                             const pivot = this.getPivot();
-                            const length = this.sequence.length;
-                            const min = pivot - windowRadius;
-                            const max = pivot + windowRadius;
+                            const length = this.getLength();
+                            const min = pivot - this.windowRadius;
+                            const max = pivot + this.windowRadius;
                             //TODO: add case length less than size window
-                            if (pivot > length-windowRadius-1 ) {
-                                    this.hiddenPositions=this.loadFirstAsHidden(windowRadius, length);
+                            if (pivot > length-this.windowRadius-1 ) {
+                                    this.hiddenPositions=this.loadFirstAsHidden(this.windowRadius, length);
                                     return this.hiddenPositions && this.hiddenPositions.includes(position);
                             } else {
-                                    if (pivot <= windowRadius) {
-                                            this.hiddenPositions=this.loadLastAsHidden(windowRadius, length);
+                                    if (pivot <= this.windowRadius) {
+                                            this.hiddenPositions=this.loadLastAsHidden(this.windowRadius, length);
                                             return this.hiddenPositions && this.hiddenPositions.includes(position);
                                     }
                             }
@@ -85,6 +87,14 @@
                                     lastHiddenPositions.push(i)
                             }
                             return lastHiddenPositions;
+                    },
+                    showExtensionInitial(){
+                    const pivot = this.getPivot();
+                        return pivot >= this.windowRadius
+                    },
+                    showExtensionFinal(){
+                        const pivot = this.getPivot();
+                        return  pivot < this.getLength()-this.windowRadius-1;
                     }
 
             },
@@ -96,7 +106,7 @@
                                     showBig: this.isBigAminoAcid(index),
                                     showAsWarning: this.showAsWarning(index),
                                     showAsSuccess: this.showAsSuccess(index),
-                                    hidden: this.hidden ? this.showAsTruncate(index) : false,
+                                    hidden: this.showTruncated ? this.showAsTruncate(index) : false,
                                     showAsFinal: this.showAsFinal
                             }
                     });

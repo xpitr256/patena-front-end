@@ -3,13 +3,13 @@
         <tr v-for="row in rows">
             <td>{{row.Pos}}</td>
             <td>
-                <Sequence  v-bind:sequence=row.Before :warning-positions="[row.Pos]" :hidden="true" ></Sequence>
+                <Sequence  v-bind:sequence=row.Before :warning-positions="[row.Pos]" :show-truncated="true" ></Sequence>
             </td>
             <td>
                 <span style="font-size:20pt;"><i class="fas fa-long-arrow-alt-right"></i></span>
             </td>
             <td>
-                <Sequence v-bind:sequence=row.After :success-positions="[row.Pos]" :hidden="true"></Sequence></td>
+                <Sequence v-bind:sequence=row.After :success-positions="[row.Pos]" :show-truncated="true"></Sequence></td>
             <td>{{row.Score}}</td>
         </tr>
     </tbody>

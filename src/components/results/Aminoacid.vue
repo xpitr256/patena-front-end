@@ -13,7 +13,7 @@
                 showAsFinal: Boolean,
                 showAsSuccess: Boolean,
                 showAsWarning: Boolean,
-                hidden: Boolean
+                hideAmino: Boolean
         },
         methods:{
                 getAminoAcidClass: function() {
@@ -32,7 +32,7 @@
                         if (this.showAsWarning) {
                                 colorClass = "btn-warning";
                         }
-                        if (this.hidden) {
+                        if (this.hideAmino) {
                                  return "display: none;";
                         }
                         return aminoAcidClass + ' ' + colorClass + ' ' + circleClass;
@@ -45,7 +45,7 @@
 
                     getName: function () {
 
-                            return this.hidden ? "" : this.name;
+                            return this.hideAmino ? "" : this.name;
                     }
             }
     }

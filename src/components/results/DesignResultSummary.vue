@@ -10,7 +10,7 @@
         <tbody>
         <tr>
             <td>
-                <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :hidden="false"></Sequence>
+                <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :show-truncated="false"></Sequence>
             </td>
             <td class="a">
                 <button type="button"
