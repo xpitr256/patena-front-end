@@ -1,6 +1,6 @@
 <template>
         <div>
-                <span v-if="showTruncated && showExtensionInitial()"> ...</span>
+                <span v-if="showTruncated && showExtensionInitial()">... &nbsp;</span>
                 <Aminoacid v-for="aminoAcid in aminoAcids"
                            v-bind:name=aminoAcid.value
                            :show-big=aminoAcid.showBig
@@ -9,7 +9,7 @@
                            :show-as-final=aminoAcid.showAsFinal
                            :hidden=aminoAcid.hidden
                 ></Aminoacid>
-                <span v-if="showTruncated && showExtensionFinal()"> ...</span>
+                <span v-if="showTruncated && showExtensionFinal()">&nbsp; ...</span>
         </div>
 </template>
 
@@ -33,7 +33,7 @@
             return {
                     aminoAcids: [],
                     hiddenPositions : [],
-                    windowRadius : 4
+                    windowRadius : 6
             }
         },
             methods: {

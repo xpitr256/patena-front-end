@@ -1,19 +1,32 @@
 <template>
-    <table class="table table-responsive">
-        <thead>
+    <table class="table table-responsive " >
+        <thead class="background-th">
         <tr>
-            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Final")}} (Score: {{finalScore}})</th>
-            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Copy")}}</th>
-            <th class="a" scope="col">{{$t("views.components.results.DesignResultSummary.headers.Length")}}</th>
+            <th class="a" scope="col" v-if="this.showDualSummary">
+                {{$t("views.components.results.DesignResultSummary.headers.Initial")}} (Score: {{initialScore}})</th>
+            <th class="a" scope="col">
+                {{$t("views.components.results.DesignResultSummary.headers.Final")}} (Score: {{finalScore}})</th>
+            <th class="a" scope="col">
+                {{$t("views.components.results.DesignResultSummary.headers.Copy")}}</th>
+            <th class="a" scope="col">
+                {{$t("views.components.results.DesignResultSummary.headers.Length")}}</th>
         </tr>
         </thead>
         <tbody>
         <tr>
+            <td v-if="this.showDualSummary">
+
+                    <Sequence :sequence=initialSequence :show-big="true" :show-as-initial="true"
+                              :show-truncated="false"></Sequence>
+
+            </td>
             <td>
+
                 <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :show-truncated="false"></Sequence>
+
             </td>
             <td class="a">
-                <button type="button"
+                <button type="button" class="btn btn-primary btn-lg"
                         v-on:click="getSequenceCopy">
                         <i class="fas fa-copy"></i>
                 </button>
@@ -50,7 +63,8 @@
         data: function() {
             return {
                 show: false,
-                messageShowError : false
+                messageShowError : false,
+                sizeDualSummary : 11
             }
         },
         methods: {
@@ -69,7 +83,7 @@
 
             },
             getSequencesCopied: function(){
-                return  "initial Sequence: "+this.initialSequence+"\n"+"final Sequence: "+this.finalSequence;
+                return  this.finalSequence;
             },
             enter: function(el, done) {
 
@@ -80,10 +94,14 @@
                 }, 2000);
             }
 
+
         },
         computed: {
             length: function () {
                 return FastaService.getSequenceLengthFrom(this.finalSequence);
+            },
+            showDualSummary: function(){
+                return this.length<=this.sizeDualSummary;
             }
         }
     }
@@ -127,6 +145,10 @@
     {
         opacity: 0
     }
+    .background-th {
+        background-color: #e2e2e2;
+    }
+
 
 
 </style>
