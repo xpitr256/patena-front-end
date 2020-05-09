@@ -14,18 +14,18 @@
         </thead>
         <tbody>
         <tr>
-            <td v-if="this.showDualSummary">
+            <td class="align-vertical" v-if="this.showDualSummary">
 
                     <Sequence :sequence=initialSequence :show-big="true" :show-as-initial="true"
                               :show-truncated="false"></Sequence>
 
             </td>
-            <td>
+            <td class="align-vertical">
 
                 <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :show-truncated="false"></Sequence>
 
             </td>
-            <td class="a">
+            <td class="a align-vertical" >
                 <button type="button" class="btn btn-primary btn-lg"
                         v-on:click="getSequenceCopy">
                         <i class="fas fa-copy"></i>
@@ -35,7 +35,7 @@
                     <p v-if="messageShowError">{{$t("views.components.results.DesignResultSummary.headers.ErrorMessage")}}</p>
                 </transition>
             </td>
-            <td class="a" style="font-size:18px;">
+            <td class="a align-vertical" style="font-size:18px;">
                 {{length}}
             </td>
         </tr>
@@ -147,6 +147,10 @@
     }
     .background-th {
         background-color: #e2e2e2;
+        vertical-align: baseline;
+    }
+    .align-vertical{
+        vertical-align: baseline;
     }
 
 

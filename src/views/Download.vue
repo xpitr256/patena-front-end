@@ -6,16 +6,6 @@
     <br>
     <div align="center">
       <DesignResultSummary
-              :initial-sequence="'ABCDEFGHIJK'"
-              :initial-score="145"
-              :final-sequence="'ABCDEFGHIJK'"
-              :final-score="2"
-      ></DesignResultSummary>
-    </div>
-    <br>
-    <br>
-    <div align="center">
-      <DesignResultSummary
               :initial-sequence="initialSequence"
               :initial-score="initialScore"
               :final-sequence="finalSequence"
