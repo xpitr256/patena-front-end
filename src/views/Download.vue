@@ -42,12 +42,12 @@
     };
   },
   created() {
-    this.orderNumber = this.$route.params.results.orderNumber;
-    this.initialSequence = this.$route.params.results.initialSequence;
-    this.finalSequence = this.$route.params.results.finalSequence;
-    this.mutationsHistory = this.$route.params.results.mutationsHistory;
-    this.initialScore = this.$route.params.results.initialScore;
-    this.finalScore = this.$route.params.results.finalScore;
+    this.orderNumber = this.$route.params.results.results.orderNumber;
+    this.initialSequence = this.$route.params.results.results.initialSequence;
+    this.finalSequence = this.$route.params.results.results.finalSequence;
+    this.mutationsHistory = this.$route.params.results.results.mutationsHistory;
+    this.initialScore = this.$route.params.results.results.initialScore;
+    this.finalScore = this.$route.params.results.results.finalScore;
     this.mutationsHistory.unshift({mutated_sequence:this.initialSequence,score_after_mutation: this.initialScore})
   },
   methods: {
