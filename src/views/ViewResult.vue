@@ -39,9 +39,21 @@
       </div>
     </form>
 
-    <div class="alert alert-danger" role="alert" v-if="showErrorMessage">
+    <div class="alert alert-warning" role="alert" v-if="showErrorMessage">
       <i class="fas fa-exclamation-circle"></i>
       {{ $t("views.result.unknownOrderNumber") }}
+    </div>
+    <div class="alert alert-secondary" role="alert" v-if="showErrorMessage">
+      <i class="fa fa-cogs"></i>
+       Su orden se esta ejecutando en estos momento, le notificaremos cuando termine
+    </div>
+    <div class="alert alert-warning" role="alert" v-if="showErrorMessage">
+      <i class="fa fa-hourglass"></i>
+      Su orden se esta pendiente de ser ejecutada aún.
+    </div>
+    <div class="alert alert-danger" role="alert" v-if="showErrorMessage">
+      <i class="fa fa-ban"></i>
+      Su orden  fue cancelada.
     </div>
   </div>
 </template>
@@ -72,6 +84,7 @@ export default {
         clean: true
       });
       this.showErrorMessage = false;
+      this.show = false;
     },
     onSubmit: function() {
       this.sendForm();
@@ -84,7 +97,7 @@ export default {
         this.clearNotifications();
         const response = await BackendService.getResults(this.orderNumber);
         this.$Progress.finish();
-        if (!response.error) {
+        if (!response.error && response.stateId==3) {
           this.$notify({
             group: "notifications",
             type: "success",
@@ -92,7 +105,11 @@ export default {
           });
           this.$router.push("/results/download");
           this.$route.params.results = response;
-        } else {
+        } else if (response.stateId!=3){
+          this.show = true;
+          this.showErrorMessage= response.status;
+        }
+         else{
           this.$notify({
             group: "notifications",
             type: "error",
