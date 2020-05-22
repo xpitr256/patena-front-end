@@ -3,19 +3,34 @@
     <h1 class="display-4 h-page-header">{{ $t("views.result.title") }}</h1>
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
           <label for="orderNumber">{{ $t("views.result.label") }}</label>
-          <input
-            type="text"
-            class="form-control"
-            id="orderNumber"
-            ref="orderNumber"
-            v-bind:class="{ 'is-invalid': errors.has('orderNumber') }"
-            v-validate="'required|min:36'"
-            name="orderNumber"
-            v-model="orderNumber"
-            :placeholder="$t('views.result.placeholder')"
-          />
+          <div class="row">
+            <div class="col-4">
+              <input
+                      type="text"
+                      class="form-control"
+                      id="orderNumber"
+                      ref="orderNumber"
+                      v-bind:class="{ 'is-invalid': errors.has('orderNumber') }"
+                      v-validate="'required|min:36'"
+                      name="orderNumber"
+                      v-model="orderNumber"
+                      :placeholder="$t('views.result.placeholder')"
+              />
+            </div>
+            <div class="col-6">
+              <button
+                      type="button"
+                      v-on:click="sendForm"
+                      :disabled="submitInProgress || errors.items.length > 0"
+                      class="btn btn-md btn-primary">
+                <i class="fas fa-search"></i>
+                {{ $t("views.result.btnSearch") }}
+              </button>
+            </div>
+
+          </div>
           <div class="invalid-feedback">
             {{ errors.first("orderNumber") }}
           </div>
@@ -24,38 +39,26 @@
           }}</small>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <button
-            type="button"
-            v-on:click="sendForm"
-            :disabled="submitInProgress || errors.items.length > 0"
-            class="btn btn-lg btn-primary"
-          >
-            <i class="fas fa-search"></i>
-            {{ $t("views.result.btnSearch") }}
-          </button>
-        </div>
-      </div>
     </form>
 
-    <div class="alert alert-warning" role="alert" v-if="showUnknownMessage">
-      <i class="fas fa-exclamation-circle"></i>
-      {{ $t("views.result.unknownOrderNumber") }}
-    </div>
-    <div class="alert alert-secondary" role="alert" v-if="showInActionMessage">
-      <i class="fa fa-cogs"></i>
-      {{ $t("views.result.inActionOrderNumber") }}
-    </div>
-    <div class="alert alert-warning" role="alert" v-if="showPendingMessage">
-      <i class="fa fa-hourglass"></i>
-      {{ $t("views.result.pendingOrderNumber") }}
-    </div>
-    <div class="alert alert-danger" role="alert" v-if="showCancelledMessage">
-      <i class="fa fa-ban"></i>
-      {{ $t("views.result.cancelledOrderNumber") }}
-    </div>
-  </div>
+        <div class="a alert alert-warning" role="alert" v-if="showUnknownMessage">
+          <i class="fas fa-exclamation-circle"></i>
+          {{ $t("views.result.unknownOrderNumber") }}
+        </div>
+        <div class="a alert alert-secondary" role="alert" v-if="showInActionMessage">
+          <i class="fa fa-cogs"></i>
+          {{ $t("views.result.inActionOrderNumber") }}
+        </div>
+        <div class="a alert alert-warning" role="alert" v-if="showPendingMessage">
+          <i class="fa fa-hourglass"></i>
+          {{ $t("views.result.pendingOrderNumber") }}
+        </div>
+        <div class="a alert alert-danger" role="alert" v-if="showCancelledMessage">
+          <i class="fa fa-ban"></i>
+          {{ $t("views.result.cancelledOrderNumber") }}
+        </div>
+      </div>
+
 </template>
 
 <script>
@@ -130,4 +133,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .a {
+    text-align: center;
+  }
+</style>
