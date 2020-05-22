@@ -92,7 +92,10 @@
       "btnSearch": "Buscar",
       "btnFailed": "Buscar (fallando)",
       "btnUnknown": "Buscar (número de orden inválido)",
-      "unknownOrderNumber": "El número de orden solicitado no fue encontrado. Intente con otro por favor."
+      "unknownOrderNumber": "El número de orden solicitado no fue encontrado. Intente con otro por favor.",
+      "cancelledOrderNumber": "El número de orden solicitado fue cancelado .",
+      "inActionOrderNumber": "El pedido se está procesando en este momento. Los resultados estarán listos muy pronto.",
+      "pendingOrderNumber": "El pedido está esperando ser procesado."
     },
     "download": {
       "title": "Descargar Resultado",

@@ -39,21 +39,21 @@
       </div>
     </form>
 
-    <div class="alert alert-warning" role="alert" v-if="showErrorMessage">
+    <div class="alert alert-warning" role="alert" v-if="showUnknownMessage">
       <i class="fas fa-exclamation-circle"></i>
       {{ $t("views.result.unknownOrderNumber") }}
     </div>
-    <div class="alert alert-secondary" role="alert" v-if="showErrorMessage">
+    <div class="alert alert-secondary" role="alert" v-if="showInActionMessage">
       <i class="fa fa-cogs"></i>
-       Su orden se esta ejecutando en estos momento, le notificaremos cuando termine
+      {{ $t("views.result.inActionOrderNumber") }}
     </div>
-    <div class="alert alert-warning" role="alert" v-if="showErrorMessage">
+    <div class="alert alert-warning" role="alert" v-if="showPendingMessage">
       <i class="fa fa-hourglass"></i>
-      Su orden se esta pendiente de ser ejecutada aún.
+      {{ $t("views.result.pendingOrderNumber") }}
     </div>
-    <div class="alert alert-danger" role="alert" v-if="showErrorMessage">
+    <div class="alert alert-danger" role="alert" v-if="showCancelledMessage">
       <i class="fa fa-ban"></i>
-      Su orden  fue cancelada.
+      {{ $t("views.result.cancelledOrderNumber") }}
     </div>
   </div>
 </template>
@@ -65,7 +65,10 @@ export default {
   data() {
     return {
       submitInProgress: false,
-      showErrorMessage: false,
+      showCancelledMessage: false,
+      showPendingMessage: false,
+      showInActionMessage: false,
+      showUnknownMessage: false,
       orderNumber: null
     };
   },
@@ -83,8 +86,10 @@ export default {
         group: "notifications",
         clean: true
       });
-      this.showErrorMessage = false;
-      this.show = false;
+      this.showCancelledMessage = false;
+      this.showPendingMessage = false;
+      this.showInActionMessage = false;
+      this.showUnknownMessage = false;
     },
     onSubmit: function() {
       this.sendForm();
@@ -106,8 +111,10 @@ export default {
           this.$router.push("/results/download");
           this.$route.params.results = response;
         } else if (response.stateId!=3){
-          this.show = true;
-          this.showErrorMessage= response.status;
+          this.showUnknownMessage= response.stateId==0;
+          this.showPendingMessage= response.stateId==1;
+          this.showInActionMessage= response.stateId==2;
+          this.showCancelledMessage= response.stateId==4;
         }
          else{
           this.$notify({

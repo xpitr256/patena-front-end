@@ -91,7 +91,10 @@
       "btnSearch": "Search",
       "btnFailed": "Search (failed)",
       "btnUnknown": "Search (invalid order number)",
-      "unknownOrderNumber": "The requested order number was not found. Please try another one."
+      "unknownOrderNumber": "The requested order number was not found. Please try another one.",
+      "cancelledOrderNumber": "The order has been cancelled.",
+      "inActionOrderNumber": "The order is being processed right now. Results will be ready very soon.",
+      "pendingOrderNumber": "The order is waiting to be processed."
     },
     "download": {
       "title": "Download Result",
