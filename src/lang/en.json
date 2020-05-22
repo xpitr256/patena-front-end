@@ -94,7 +94,11 @@
       "unknownOrderNumber": "The requested order number was not found. Please try another one.",
       "cancelledOrderNumber": "The order has been cancelled.",
       "inActionOrderNumber": "The order is being processed right now. Results will be ready very soon.",
-      "pendingOrderNumber": "The order is waiting to be processed."
+      "pendingOrderNumber": "The order is waiting to be processed.",
+      "unknownOrderNumberHeader": "Are you sure it is correct?",
+      "cancelledOrderNumberHeader": "The order has been cancelled.",
+      "inActionOrderNumberHeader": "Little time left to finish!",
+      "pendingOrderNumberHeader": "Your order has not yet been processed"
     },
     "download": {
       "title": "Download Result",

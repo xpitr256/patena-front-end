@@ -41,20 +41,28 @@
       </div>
     </form>
 
-        <div class="a alert alert-warning" role="alert" v-if="showUnknownMessage">
-          <i class="fas fa-exclamation-circle"></i>
+        <div class="a alert alert-warning border border-dark" role="alert" v-if="showUnknownMessage">
+            <h4 class="alert-heading">{{ $t("views.result.unknownOrderNumberHeader") }}
+                <i class="fas fa-search"></i>
+            </h4>
           {{ $t("views.result.unknownOrderNumber") }}
         </div>
-        <div class="a alert alert-secondary" role="alert" v-if="showInActionMessage">
-          <i class="fa fa-cogs"></i>
+        <div class="a alert alert-secondary border border-dark" role="alert" v-if="showInActionMessage">
+            <h4 class="alert-heading">{{ $t("views.result.inActionOrderNumberHeader") }}
+                <i class="fa fa-cogs"></i>
+            </h4>
           {{ $t("views.result.inActionOrderNumber") }}
         </div>
-        <div class="a alert alert-warning" role="alert" v-if="showPendingMessage">
-          <i class="fa fa-hourglass"></i>
+        <div class="a alert alert-warning border border-dark" role="alert" v-if="showPendingMessage">
+            <h4 class="alert-heading">{{ $t("views.result.pendingOrderNumberHeader") }}
+                <i class="fas fa-hourglass-start"></i>
+            </h4>
           {{ $t("views.result.pendingOrderNumber") }}
         </div>
-        <div class="a alert alert-danger" role="alert" v-if="showCancelledMessage">
-          <i class="fa fa-ban"></i>
+        <div class="a alert alert-danger border border-dark" role="alert" v-if="showCancelledMessage">
+            <h4 class="alert-heading">{{ $t("views.result.cancelledOrderNumberHeader") }}
+                <i class="fa fa-ban"></i>
+            </h4>
           {{ $t("views.result.cancelledOrderNumber") }}
         </div>
       </div>
