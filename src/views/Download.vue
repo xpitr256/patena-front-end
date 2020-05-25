@@ -42,17 +42,33 @@
     };
   },
   created() {
-    this.orderNumber = this.$route.params.results.results.orderNumber;
-    this.initialSequence = this.$route.params.results.results.initialSequence;
-    this.finalSequence = this.$route.params.results.results.finalSequence;
-    this.mutationsHistory = this.$route.params.results.results.mutationsHistory;
-    this.initialScore = this.$route.params.results.results.initialScore;
-    this.finalScore = this.$route.params.results.results.finalScore;
-    this.mutationsHistory.unshift({mutated_sequence:this.initialSequence,score_after_mutation: this.initialScore})
+
+    if (this.$route.params.results){
+      console.log ("resquest / con order number", this.$route.fullPath);
+      this.orderNumber = this.$route.params.results.results.orderNumber;
+      this.initialSequence = this.$route.params.results.results.initialSequence;
+      this.finalSequence = this.$route.params.results.results.finalSequence;
+      this.mutationsHistory = this.$route.params.results.results.mutationsHistory;
+      this.initialScore = this.$route.params.results.results.initialScore;
+      this.finalScore = this.$route.params.results.results.finalScore;
+      this.mutationsHistory.unshift({mutated_sequence:this.initialSequence,score_after_mutation: this.initialScore})
+    }else{
+      this.checkDirectLink();
+    }
   },
   methods: {
     navigate() {
       router.go(-1);
+    },
+    checkDirectLink(){
+      console.log ("Redirecting search Results...");
+      const parseRes= this.$route.fullPath.split("/");
+      let orderNumber = parseRes[2];
+      if (orderNumber!= null){
+        this.$router.push("/results?orderNumber="+ orderNumber );
+
+      }
+
     }
   }
 };
