@@ -87,6 +87,7 @@ export default {
     setTimeout(() => {
       this.$nextTick(() => this.setFocus());
     }, 100);
+    this.checkDirectLink();
   },
   methods: {
     setFocus: function() {
@@ -136,6 +137,14 @@ export default {
         }
         this.submitInProgress = false;
       }
+    },
+    checkDirectLink(){
+        const parseRes= this.$route.fullPath.split("=");
+        this.orderNumber = parseRes[1];
+        console.log ("resquest con order number", this.orderNumber);
+        if (this.orderNumber!= null){
+            this.onSubmit();
+        }
     }
   }
 };
