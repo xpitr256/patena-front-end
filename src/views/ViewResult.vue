@@ -120,7 +120,7 @@ export default {
             type: "success",
             title: this.$t("views.sendSuccess")
           });
-          this.$router.push("/results/download");
+          this.$router.push("/results/"+ this.orderNumber );
           this.$route.params.results = response;
         } else if (response.stateId!=3){
           this.showUnknownMessage= response.stateId==0;
@@ -141,10 +141,8 @@ export default {
     checkDirectLink(){
         const parseRes= this.$route.fullPath.split("=");
         this.orderNumber = parseRes[1];
-        console.log ("resquest con order number", this.orderNumber);
-        if (this.orderNumber!= null){
+        if (this.orderNumber!= null)
             this.onSubmit();
-        }
     }
   }
 };

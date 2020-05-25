@@ -39,7 +39,7 @@ export default new Router({
       component: ViewResult
     },
     {
-      path: "/results/download",
+      path: "/results/:orderNumber",
       name: "download",
       component: Download
     },
