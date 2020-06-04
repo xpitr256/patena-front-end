@@ -176,7 +176,8 @@
       "netChargeWarning": "Net charge could be zero, a postive or negative integer and it's module could not be higher than the sequence length.",
       "netCharge": "Net charge (optional)",
       "netChargePlaceholder": "Enter net charge",
-      "algorithmWarning": "At least one algorithm should remain active. Take into account that some algorithms would require some time to work."
+      "algorithmWarning": "At least one algorithm should remain active. Take into account that some algorithms would require some time to work.",
+      "labelCheckNetCharge": "Enabled"
     },
     "designLengthSuccess": {
       "title": "Design a linker length",

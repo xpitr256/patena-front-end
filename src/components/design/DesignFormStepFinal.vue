@@ -277,6 +277,7 @@
             class="alert alert-warning alert-dismissible fade show mt-4"
             v-show="!useDefaultSettings"
           >
+
             <strong>{{ $t("views.patenaSettings.important") }}</strong>
             {{ $t("views.patenaSettings.netChargeWarning") }}
             <button type="button" class="close" data-dismiss="alert">
@@ -289,10 +290,17 @@
               <label>{{ $t("views.patenaSettings.selectNetCharge") }}: </label>
             </div>
           </div>
-
+          <div class="form-check"  v-if="!useDefaultSettings">
+            <input type="checkbox" class="form-check-input"
+                   id="checkEnabledNetCharge"
+                   v-on:click="changeEnabledNetCharge">
+            <label class="form-check-label" for="checkEnabledNetCharge">
+              {{ $t("views.patenaSettings.labelCheckNetCharge") }}
+            </label>
+          </div>
           <div class="form-row mt-4">
             <div class="col-2"></div>
-            <div class="form-group col-8">
+            <div class="form-group col-8" >
               <vue-slider
                 v-model="netCharge"
                 :min="-maxNetChargeValue"
@@ -300,7 +308,7 @@
                 tooltip="always"
                 :marks="[-maxNetChargeValue, maxNetChargeValue]"
                 :dotSize="16"
-                :disabled="useDefaultSettings"
+                :disabled="useDefaultSettings || checkDisabledNetCharge == true"
               ></vue-slider>
             </div>
           </div>
@@ -436,6 +444,7 @@ export default {
       totalFrequency: 0,
       avoidUVSilent: false,
       avoidCysteine: false,
+      checkDisabledNetCharge: true,
       toogleColor: {
         checked: "#2ecc71",
         unchecked: "#bfbfbf",
@@ -653,6 +662,7 @@ export default {
     },
     restoreNetCharge() {
       this.netCharge = 0;
+      this.checkDisabledNetCharge=true;
     },
     restoreFrequencies() {
       this.avoidUVSilent = false;
@@ -827,6 +837,10 @@ export default {
         });
       }
       this.submitInProgress = false;
+    },
+    changeEnabledNetCharge: function(){
+      console.log(this.checkDisabledNetCharge);
+      this.checkDisabledNetCharge =!this.checkDisabledNetCharge;
     }
   }
 };
