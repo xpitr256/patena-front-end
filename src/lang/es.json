@@ -178,7 +178,7 @@
       "netCharge": "Carga neta (valor opcional)",
       "netChargePlaceholder": "Ingrese la carga neta",
       "algorithmWarning": "Por lo menos un algoritmos debe estar activo. Tenga en cuenta que algunos algortimos pueden demorar mucho tiempo.",
-      "labelCheckNetCharge": "Habilitado"
+      "labelCheckNetCharge": "Quiero seleccionar una carga neta específica"
     },
     "designLengthSuccess": {
       "title": "Diseñar la longitud de un linker",

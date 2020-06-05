@@ -177,7 +177,7 @@
       "netCharge": "Net charge (optional)",
       "netChargePlaceholder": "Enter net charge",
       "algorithmWarning": "At least one algorithm should remain active. Take into account that some algorithms would require some time to work.",
-      "labelCheckNetCharge": "Enabled"
+      "labelCheckNetCharge": "I want to select a specific net charge"
     },
     "designLengthSuccess": {
       "title": "Design a linker length",

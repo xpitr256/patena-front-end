@@ -163,6 +163,7 @@
                 {{ $t("views.patenaSettings.actions") }}:
               </h5>
 
+
               <a
                 href="#/"
                 class="btn btn-link mb-2"
@@ -273,6 +274,21 @@
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
+
+            <div class="form-check"  v-if="!useDefaultSettings">
+
+                <div class="label-check" >
+                    <input type="checkbox" class="form-check-input"
+                           style="text-align:center;"
+                           id="checkEnabledNetCharge"
+                           v-on:click="changeEnabledNetCharge">
+                    <span class="label label-primary" for="checkEnabledNetCharge" >
+                        {{ $t("views.patenaSettings.labelCheckNetCharge") }}
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group" v-if="useDefaultSettings || checkDisabledNetCharge ==false">
           <div
             class="alert alert-warning alert-dismissible fade show mt-4"
             v-show="!useDefaultSettings"
@@ -290,14 +306,7 @@
               <label>{{ $t("views.patenaSettings.selectNetCharge") }}: </label>
             </div>
           </div>
-          <div class="form-check"  v-if="!useDefaultSettings">
-            <input type="checkbox" class="form-check-input"
-                   id="checkEnabledNetCharge"
-                   v-on:click="changeEnabledNetCharge">
-            <label class="form-check-label" for="checkEnabledNetCharge">
-              {{ $t("views.patenaSettings.labelCheckNetCharge") }}
-            </label>
-          </div>
+
           <div class="form-row mt-4">
             <div class="col-2"></div>
             <div class="form-group col-8" >
@@ -312,6 +321,7 @@
               ></vue-slider>
             </div>
           </div>
+            </div>
         </div>
         <div
           class="tab-pane fade"
@@ -840,6 +850,7 @@ export default {
     },
     changeEnabledNetCharge: function(){
       console.log(this.checkDisabledNetCharge);
+      this.netCharge = 0;
       this.checkDisabledNetCharge =!this.checkDisabledNetCharge;
     }
   }
@@ -986,5 +997,13 @@ export default {
 
 .badge-success-disabled {
   background-color: #9ed3a4;
+}
+
+.label-check {
+    position: relative;
+    border-radius: 10px;
+    padding: 30px 30px 30px 30px;
+    font: 20px Arial ;
+    text-align:center;
 }
 </style>
