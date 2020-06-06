@@ -278,10 +278,11 @@
             <div class="form-check"  v-if="!useDefaultSettings">
 
                 <div class="label-check" >
-                    <input type="checkbox" class="form-check-input"
+                    <input type="checkbox" class="checkbox-bootstrap checkbox-lg big-checkbox "
                            style="text-align:center;"
                            id="checkEnabledNetCharge"
                            v-on:click="changeEnabledNetCharge">
+                    <span>  </span>
                     <span class="label label-primary" for="checkEnabledNetCharge" >
                         {{ $t("views.patenaSettings.labelCheckNetCharge") }}
                     </span>
@@ -1003,7 +1004,58 @@ export default {
     position: relative;
     border-radius: 10px;
     padding: 30px 30px 30px 30px;
-    font: 20px Arial ;
+    font: 24px Arial ;
     text-align:center;
 }
+.big-checkbox {
+    width: 18px;
+    height: 18px;
+    padding: 30px;
+    border: 2px solid;
+    border-radius: 5px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+}
+:root {
+
+}
+:root label.checkbox-bootstrap input[type=checkbox] {
+
+    opacity: 0;
+    position: absolute;
+
+}
+:root label.checkbox-bootstrap input[type=checkbox] + span.checkbox-placeholder {
+    width: 14px;
+    height: 14px;
+    border: 1px solid;
+    border-radius: 3px;
+
+    border-color: #737373;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 7px 0 -20px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+:root label.checkbox-bootstrap input[type=checkbox]:focus:not(:hover) + span.checkbox-placeholder {
+    outline: 1px dotted black;
+}
+:root label.checkbox-bootstrap.checkbox-lg input[type=checkbox] + span.checkbox-placeholder {
+    width: 26px;
+    height: 26px;
+    border: 2px solid;
+    border-radius: 5px;
+
+    border-color: #737373;
+}
+:root label.checkbox-bootstrap.checkbox-lg input[type=checkbox]:checked + span.checkbox-placeholder:before {
+    width: 9px;
+    height: 15px;
+
+    border: solid white;
+    border-width: 0 3px 3px 0;
+}
+
 </style>
