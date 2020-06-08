@@ -809,12 +809,19 @@ export default {
         delete data.initialSequence;
       }
 
-      if (!this.useDefaultSettings) {
-        data.config = {
-          frequencies: this.getFrequenciesDataForBackend(),
-          netCharge: this.netCharge,
-          algorithms: this.getAlgorithmsDataForBackend()
-        };
+      if (!this.useDefaultSettings ) {
+        if (this.isEnabledNetCharge()){
+          data.config = {
+            frequencies: this.getFrequenciesDataForBackend(),
+            netCharge: this.netCharge,
+            algorithms: this.getAlgorithmsDataForBackend()
+          };
+        }else{
+          data.config = {
+            frequencies: this.getFrequenciesDataForBackend(),
+            algorithms: this.getAlgorithmsDataForBackend()
+          };
+        }
       }
 
       return data;
@@ -850,6 +857,9 @@ export default {
       console.log(this.checkDisabledNetCharge);
       this.netCharge = 0;
       this.checkDisabledNetCharge =!this.checkDisabledNetCharge;
+    },
+    isEnabledNetCharge: function(){
+      return this.checkDisabledNetCharge;
     }
   }
 };
