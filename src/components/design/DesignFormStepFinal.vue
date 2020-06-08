@@ -817,7 +817,7 @@ export default {
         };
 
         if (this.isEnabledNetCharge()) {
-          data.config.netCharge= this.netCharge;
+          data.config.netCharge = this.netCharge;
         }
       }
 
@@ -856,7 +856,7 @@ export default {
       this.checkDisabledNetCharge =!this.checkDisabledNetCharge;
     },
     isEnabledNetCharge: function(){
-      return this.checkDisabledNetCharge;
+      return !this.checkDisabledNetCharge;
     }
   }
 };
