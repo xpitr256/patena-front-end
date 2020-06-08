@@ -810,17 +810,14 @@ export default {
       }
 
       if (!this.useDefaultSettings ) {
-        if (this.isEnabledNetCharge()){
-          data.config = {
-            frequencies: this.getFrequenciesDataForBackend(),
-            netCharge: this.netCharge,
-            algorithms: this.getAlgorithmsDataForBackend()
-          };
-        }else{
-          data.config = {
-            frequencies: this.getFrequenciesDataForBackend(),
-            algorithms: this.getAlgorithmsDataForBackend()
-          };
+
+        data.config = {
+          frequencies: this.getFrequenciesDataForBackend(),
+          algorithms: this.getAlgorithmsDataForBackend()
+        };
+
+        if (this.isEnabledNetCharge()) {
+          data.config.netCharge= this.netCharge;
         }
       }
 
