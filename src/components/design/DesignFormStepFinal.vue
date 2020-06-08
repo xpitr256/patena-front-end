@@ -278,14 +278,11 @@
             <div class="form-check"  v-if="!useDefaultSettings">
 
                 <div class="label-check" >
-                    <input type="checkbox" class="checkbox-bootstrap checkbox-lg big-checkbox "
-                           style="text-align:center;"
-                           id="checkEnabledNetCharge"
+                  <div class="custom-control custom-checkbox checkbox-lg">
+                    <input type="checkbox" class="custom-control-input" id="checkbox-2"
                            v-on:click="changeEnabledNetCharge">
-                    <span>  </span>
-                    <span class="label label-primary" for="checkEnabledNetCharge" >
-                        {{ $t("views.patenaSettings.labelCheckNetCharge") }}
-                    </span>
+                    <label class="custom-control-label" for="checkbox-2"> {{ $t("views.patenaSettings.labelCheckNetCharge") }}</label>
+                  </div>
                 </div>
 
             </div>
@@ -1016,46 +1013,28 @@ export default {
     border: solid white;
     border-width: 0 3px 3px 0;
 }
-:root {
-
-}
-:root label.checkbox-bootstrap input[type=checkbox] {
-
-    opacity: 0;
-    position: absolute;
-
-}
-:root label.checkbox-bootstrap input[type=checkbox] + span.checkbox-placeholder {
-    width: 14px;
-    height: 14px;
-    border: 1px solid;
-    border-radius: 3px;
-
-    border-color: #737373;
-    display: inline-block;
-    cursor: pointer;
-    margin: 0 7px 0 -20px;
-    vertical-align: middle;
-    text-align: center;
+.checkbox-lg .custom-control-label::before,
+.checkbox-lg .custom-control-label::after {
+  top: .8rem;
+  width: 1.55rem;
+  height: 1.55rem;
 }
 
-:root label.checkbox-bootstrap input[type=checkbox]:focus:not(:hover) + span.checkbox-placeholder {
-    outline: 1px dotted black;
+.checkbox-lg .custom-control-label {
+  padding-top: 13px;
+  padding-left: 6px;
 }
-:root label.checkbox-bootstrap.checkbox-lg input[type=checkbox] + span.checkbox-placeholder {
-    width: 26px;
-    height: 26px;
-    border: 2px solid;
-    border-radius: 5px;
 
-    border-color: #737373;
+.checkbox-xl .custom-control-label::before,
+.checkbox-xl .custom-control-label::after {
+  top: 1.2rem;
+  width: 1.85rem;
+  height: 1.85rem;
 }
-:root label.checkbox-bootstrap.checkbox-lg input[type=checkbox]:checked + span.checkbox-placeholder:before {
-    width: 9px;
-    height: 15px;
 
-    border: solid white;
-    border-width: 0 3px 3px 0;
+.checkbox-xl .custom-control-label {
+  padding-top: 23px;
+  padding-left: 10px;
 }
 
 </style>
