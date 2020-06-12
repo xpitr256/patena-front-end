@@ -4,7 +4,7 @@
         <h2>{{ $t("views.components.results.DesignResultHistory.title") }}</h2>
     </div>
     <div>
-    <table class="table table-responsive" >
+    <table class="table " >
         <thead>
         <tr>
             <th style="text-align: center;">{{$t("views.components.results.DesignResultHistory.headers.Pos")}}</th>

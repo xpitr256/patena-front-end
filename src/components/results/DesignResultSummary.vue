@@ -1,5 +1,5 @@
 <template>
-    <table class="table table-responsive " >
+    <table class="table " >
         <thead class="background-th">
         <tr>
             <th class="a" scope="col" v-if="this.showDualSummary">
@@ -14,18 +14,18 @@
         </thead>
         <tbody>
         <tr>
-            <td class="align-vertical" v-if="this.showDualSummary">
+            <td class="a" v-if="this.showDualSummary">
 
                     <Sequence :sequence=initialSequence :show-big="true" :show-as-initial="true"
                               :show-truncated="false"></Sequence>
 
             </td>
-            <td class="align-vertical">
+            <td class="a">
 
                 <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :show-truncated="false"></Sequence>
 
             </td>
-            <td class="a align-vertical" >
+            <td class="a" >
                 <button type="button" class="btn btn-primary btn-lg"
                         v-on:click="getSequenceCopy">
                         <i class="fas fa-copy"></i>
@@ -64,7 +64,7 @@
             return {
                 show: false,
                 messageShowError : false,
-                sizeDualSummary : 11
+                sizeDualSummary : 12
             }
         },
         methods: {
@@ -115,6 +115,7 @@
 <style scoped>
     .a {
         text-align: center;
+
     }
     .clip-demo {
         font-size: 95%;

@@ -17,19 +17,24 @@
         },
         methods:{
                 getAminoAcidClass: function() {
-                        let aminoAcidClass = "btn";
-                        let circleClass = "btn-circle";
-                        let colorClass = "btn-initial";
+                        let aminoAcidClass = "";
+                        let circleClass = "";
+                        let colorClass = "";
                         if (this.showBig) {
+                                aminoAcidClass = "btn";
                                 circleClass = "btn-circle-xl";
                         }
                         if (this.showAsFinal) {
-                                colorClass = "btn-final";
+                                colorClass = "";
                         }
                         if (this.showAsSuccess) {
+                                aminoAcidClass = "btn";
+                                circleClass = "";
                                 colorClass = "btn-success";
                         }
                         if (this.showAsWarning) {
+                                aminoAcidClass = "btn";
+                                circleClass = "";
                                 colorClass = "btn-warning";
                         }
                         if (this.hideAmino) {

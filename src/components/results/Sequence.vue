@@ -33,7 +33,7 @@
             return {
                     aminoAcids: [],
                     hiddenPositions : [],
-                    windowRadius : 6
+                    windowRadius : 13
             }
         },
             methods: {
