@@ -29,12 +29,12 @@
                         }
                         if (this.showAsSuccess) {
                                 aminoAcidClass = "btn";
-                                circleClass = "";
+                                circleClass = "btn-sm";
                                 colorClass = "btn-success";
                         }
                         if (this.showAsWarning) {
                                 aminoAcidClass = "btn";
-                                circleClass = "";
+                                circleClass = "btn-sm";
                                 colorClass = "btn-warning";
                         }
                         if (this.hideAmino) {
@@ -87,14 +87,15 @@
                 background-color: #C0C0C0;
         }
         .btn-circle-xl {
-                width: 35px;
-                height: 35px;
-                padding: 6px 0px;
-                border-radius: 35px;
+                width: 20px;
+                height: 30px;
+                padding: 3px 0px;
+                border-radius: 1px;
                 text-align: center;
-                font-size: 16px;
+                font-size: 24px;
                 line-height: 1.33;
                 cursor: default;
+                font-weight: bold;
         }
         .a {
                 text-align: center;
