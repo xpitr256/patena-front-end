@@ -821,6 +821,8 @@ export default {
         }
       }
 
+      data.language=this["$i18n"].locale
+
       return data;
     },
     sendForm: async function() {
