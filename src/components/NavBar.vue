@@ -41,12 +41,44 @@
             </a>
           </li>
           <li class="last">
-            <a href="#" v-on:click="showInEnglish" title="English">
+            <a href="#"  v-on:click="showInEnglish" title="English">
               <span class="flag-icon flag-icon-gb"></span>
             </a>
           </li>
+
         </ul>
       </div>
+      <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+          <i class="fa fa-bars" ></i>
+        </label>
+        <li>
+          <a href="#" class="checkbtn" v-on:click="showInSpanish" title="Español">
+            <span class="flag-icon flag-icon-es"></span>
+          </a>
+        </li>
+        <li class="last">
+          <a href="#" class="checkbtn" v-on:click="showInEnglish" title="English">
+            <span class="flag-icon flag-icon-gb"></span>
+          </a>
+        </li>
+        <ul>
+          <li ><router-link to="/about" v-bind:class="getClass('/about')">{{
+            $t("views.components.navBar.menu.about")
+            }}</router-link></li>
+          <li><router-link to="/analyze" v-bind:class="getClass('/analyze')">{{
+            $t("views.components.navBar.menu.analyze")
+            }}</router-link></li>
+          <li><router-link to="/design" v-bind:class="getClass('/design')">{{
+            $t("views.components.navBar.menu.design")
+            }}</router-link></li>
+          <li><router-link to="/results" v-bind:class="getClass('/results')">{{
+            $t("views.components.navBar.menu.results")
+            }}</router-link></li>
+        </ul>
+      </nav>
+      <section></section>
     </div>
   </div>
 </template>
@@ -56,12 +88,21 @@ import "flag-icon-css/css/flag-icon.css";
 
 export default {
   name: "NavBar",
+  props:{
+    showSection:Boolean
+  },
   methods: {
     getClass(property) {
       return property === this.$route.path ? "active" : "";
     },
     showInEnglish: function() {
       this["$i18n"].locale = "en";
+    },
+    hiddenSection: function(){
+      this.showSection=!this.showSection;
+    },
+    statedSection: function(){
+      return this.showSection;
     },
     showInSpanish: function() {
       import("@/lang/es.json").then(msgs => {
@@ -70,10 +111,107 @@ export default {
       });
     }
   }
+  ,async created() {
+    this.showSection=true;
+  }
 };
 </script>
 <style scoped>
-#header {
+  @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+  }
+  nav{
+
+    height: 80px;
+    width: 100%;
+  }
+
+  nav ul{
+    float: right;
+    margin-right: 60px;
+  }
+  nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 2px;
+  }
+  nav ul li a{
+    color: #f2f2f2;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    /* text-transform: uppercase; */
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+  }
+  #check{
+    display: none;
+  }
+  @media (max-width: 952px){
+    label.logo{
+      font-size: 27px;
+      padding-left: 25px;
+    }
+    nav ul li a{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 858px){
+    .checkbtn{
+      display: block;
+      margin-right: 40px;
+      color: black;
+    }
+    ul{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #D3D3D3;
+      top: 67px;
+      left: -100%;
+      text-align: center;
+      transition: all .5s;
+    }
+    nav ul li{
+      display: block;
+      margin: 50px 0;
+      line-height: 30px;
+    }
+    nav ul li a{
+      font-size: 20px;
+     }
+    a:hover,a.active{
+      background: none;
+      color: #000000;
+    }
+    #check:checked ~ ul{
+      left: 0;
+    }
+  }
+  section{
+    display:none;
+    background-size: cover;
+    height: calc(120vh - 80px);
+  }
+
+
+
+  #header {
   position: relative;
   background: #ffffff;
   -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.18);
