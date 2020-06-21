@@ -76,7 +76,7 @@
           <li><router-link to="/results" >{{
             $t("views.components.navBar.menu.results")
             }}</router-link></li>
-          <li><router-link to="/results" >{{
+          <li><router-link to="/contact" >{{
             $t("views.components.navBar.menu.contact")
             }}</router-link></li>
         </ul>
