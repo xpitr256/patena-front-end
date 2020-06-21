@@ -49,31 +49,39 @@
         </ul>
       </div>
       <nav role="navigation">
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn" v-on:click="setShow">
-          <i class="fa fa-bars" ></i>
-        </label>
-        <li>
-          <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
-            <span class="flag-icon flag-icon-es"></span>
-          </a>
-        </li>
-        <li class="last">
-          <a href="#"   class="checkbtn" v-on:click="showInEnglish" title="English">
-            <span class="flag-icon flag-icon-gb"></span>
-          </a>
-        </li>
-            <ul v-show="show">
-                  <li v-on:click="hide">
-                      <router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link>
-                  </li>
-                  <li v-on:click="hide">
-                      <router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link>
-                  </li>
-                  <li v-on:click="hide">
-                      <router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link>
-                  </li>
-              </ul>
+
+              <input type="checkbox" id="check">
+              <label for="check" class="checkbtn" v-on:click="setShow">
+                  <i class="fa fa-bars " ></i>
+              </label>
+              <li>
+                  <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
+                      <span class="flag-icon flag-icon-es "></span>
+                  </a>
+              </li>
+              <li class="last">
+                  <a href="#"   class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
+                      <span class="flag-icon flag-icon-gb "></span>
+                  </a>
+              </li>
+
+          <ul v-show="show">
+              <li v-on:click="hide">
+                  <router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link>
+              </li>
+              <li v-on:click="hide">
+                  <router-link to="/analize">{{$t("views.components.navBar.menu.analyze")}}</router-link>
+              </li>
+              <li v-on:click="hide">
+                  <router-link to="/design">{{$t("views.components.navBar.menu.design")}}</router-link>
+              </li>
+              <li v-on:click="hide">
+                  <router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link>
+              </li>
+              <li v-on:click="hide">
+                  <router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link>
+              </li>
+          </ul>
          </nav>
       <section></section>
     </div>
@@ -157,18 +165,26 @@ export default {
   }
 
   .checkbtn{
-    font-size: 30px;
+    font-size: 25px;
     color: white;
     float: right;
     line-height: 80px;
-    margin-right: 40px;
+    margin-right: 20px;
     cursor: pointer;
     display: none;
   }
   #check{
     display:none;
   }
+
   @media (max-width: 1024px){
+      #header .logo img {
+          height: 50px;
+          transition: all;
+          transition-duration: 0.4s;
+          transition: all 0.4s !important;
+      }
+
       #header .site-nav > ul > li > a {
           font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
           letter-spacing: 1px !important;
@@ -186,9 +202,16 @@ export default {
       }
   }
   @media (max-width: 1200px){
+      #header .logo img {
+      height: 50px;
+      transition: all;
+      transition-duration: 0.4s;
+      transition: all 0.4s !important;
+  }
+
     .checkbtn{
       display: block;
-      margin-right: 40px;
+      margin-right: 20px;
       color: black;
     }
     ul{
@@ -232,8 +255,6 @@ export default {
     background-size: cover;
     height: calc(120vh - 80px);
   }
-
-
 
   #header {
   position: relative;
