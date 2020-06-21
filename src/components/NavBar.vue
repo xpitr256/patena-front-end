@@ -48,39 +48,33 @@
 
         </ul>
       </div>
-      <nav>
+      <nav role="navigation">
         <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
+        <label for="check" class="checkbtn" v-on:click="setShow">
           <i class="fa fa-bars" ></i>
         </label>
         <li>
-          <a href="#" class="checkbtn" v-on:click="showInSpanish" title="Español">
+          <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
             <span class="flag-icon flag-icon-es"></span>
           </a>
         </li>
         <li class="last">
-          <a href="#" class="checkbtn" v-on:click="showInEnglish" title="English">
+          <a href="#"   class="checkbtn" v-on:click="showInEnglish" title="English">
             <span class="flag-icon flag-icon-gb"></span>
           </a>
         </li>
-        <ul>
-          <li ><router-link to="/about" >{{
-            $t("views.components.navBar.menu.about")
-            }}</router-link></li>
-          <li><router-link to="/analyze" >{{
-            $t("views.components.navBar.menu.analyze")
-            }}</router-link></li>
-          <li><router-link to="/design" >{{
-            $t("views.components.navBar.menu.design")
-            }}</router-link></li>
-          <li><router-link to="/results" >{{
-            $t("views.components.navBar.menu.results")
-            }}</router-link></li>
-          <li><router-link to="/contact" >{{
-            $t("views.components.navBar.menu.contact")
-            }}</router-link></li>
-        </ul>
-      </nav>
+            <ul v-show="show">
+                  <li v-on:click="hide">
+                      <router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link>
+                  </li>
+                  <li v-on:click="hide">
+                      <router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link>
+                  </li>
+                  <li v-on:click="hide">
+                      <router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link>
+                  </li>
+              </ul>
+         </nav>
       <section></section>
     </div>
   </div>
@@ -91,19 +85,38 @@ import "flag-icon-css/css/flag-icon.css";
 
 export default {
   name: "NavBar",
-  methods: {
-    getClass(property) {
-      return property === this.$route.path ? "active" : "";
-    },
-    showInEnglish: function() {
-      this["$i18n"].locale = "en";
-    },
-    showInSpanish: function() {
-      import("@/lang/es.json").then(msgs => {
-        this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
-        this.$i18n.locale = "es";
-      });
-    }
+  data: function() {
+        return {
+            show: true,
+        }
+  },
+    methods: {
+        getClass(property) {
+            return property === this.$route.path ? "active" : "";
+        },
+        enter: function (el, done) {
+
+            let that = this;
+
+            setTimeout(function () {
+                that.show = false;
+            }, 2000);
+        },
+        hide: function () {
+            this.show=!this.show;
+        },
+        setShow: function () {
+            this.show=true;
+        },
+        showInEnglish: function () {
+            this["$i18n"].locale = "en";
+        },
+        showInSpanish: function () {
+            import("@/lang/es.json").then(msgs => {
+                this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
+                this.$i18n.locale = "es";
+            });
+        }
   }
   ,async created() {
     this.showSection=true;
@@ -153,7 +166,24 @@ export default {
     display: none;
   }
   #check{
-    display: none;
+    display:none;
+  }
+  @media (max-width: 1024px){
+      #header .site-nav > ul > li > a {
+          font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+          letter-spacing: 1px !important;
+          text-decoration: none;
+          display: block;
+          padding: 21px 20px 13px 20px;
+          font-size: 17px;
+          color: #333333;
+          transition: all;
+          transition-duration: 0.4s;
+          font-weight: 300;
+          text-transform: uppercase;
+          border-bottom: 3px solid #fff;
+          letter-spacing: 0px;
+      }
   }
   @media (max-width: 1200px){
     .checkbtn{
@@ -177,11 +207,21 @@ export default {
       line-height: 30px;
     }
     nav ul li a{
-      font-size: 20px;
+      font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+        text-decoration: none;
+        display: block;
+        font-size: 21px;
+        color: #333333;
+        transition: all;
+        transition-duration: 0.4s;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 0px;
      }
     a:hover,a.active{
       background: none;
       color: #000000;
+
     }
     #check:checked ~ ul{
       left: 0;
