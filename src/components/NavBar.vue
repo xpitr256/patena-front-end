@@ -64,17 +64,20 @@
           </a>
         </li>
         <ul>
-          <li ><router-link to="/about" v-bind:class="getClass('/about')">{{
+          <li ><router-link to="/about" >{{
             $t("views.components.navBar.menu.about")
             }}</router-link></li>
-          <li><router-link to="/analyze" v-bind:class="getClass('/analyze')">{{
+          <li><router-link to="/analyze" >{{
             $t("views.components.navBar.menu.analyze")
             }}</router-link></li>
-          <li><router-link to="/design" v-bind:class="getClass('/design')">{{
+          <li><router-link to="/design" >{{
             $t("views.components.navBar.menu.design")
             }}</router-link></li>
-          <li><router-link to="/results" v-bind:class="getClass('/results')">{{
+          <li><router-link to="/results" >{{
             $t("views.components.navBar.menu.results")
+            }}</router-link></li>
+          <li><router-link to="/results" >{{
+            $t("views.components.navBar.menu.contact")
             }}</router-link></li>
         </ul>
       </nav>
@@ -88,21 +91,12 @@ import "flag-icon-css/css/flag-icon.css";
 
 export default {
   name: "NavBar",
-  props:{
-    showSection:Boolean
-  },
   methods: {
     getClass(property) {
       return property === this.$route.path ? "active" : "";
     },
     showInEnglish: function() {
       this["$i18n"].locale = "en";
-    },
-    hiddenSection: function(){
-      this.showSection=!this.showSection;
-    },
-    statedSection: function(){
-      return this.showSection;
     },
     showInSpanish: function() {
       import("@/lang/es.json").then(msgs => {
@@ -126,7 +120,6 @@ export default {
     text-decoration: none;
   }
   nav{
-
     height: 80px;
     width: 100%;
   }
@@ -136,7 +129,7 @@ export default {
     margin-right: 60px;
   }
   nav ul li{
-    display: inline-block;
+    display: none;
     line-height: 80px;
     margin: 0 2px;
   }
@@ -162,16 +155,7 @@ export default {
   #check{
     display: none;
   }
-  @media (max-width: 952px){
-    label.logo{
-      font-size: 27px;
-      padding-left: 25px;
-    }
-    nav ul li a{
-      font-size: 16px;
-    }
-  }
-  @media (max-width: 858px){
+  @media (max-width: 1200px){
     .checkbtn{
       display: block;
       margin-right: 40px;
