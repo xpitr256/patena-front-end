@@ -50,35 +50,36 @@
       </div>
       <nav role="navigation">
 
-              <input type="checkbox" id="check">
-              <label for="check" class="checkbtn" v-on:click="setShow">
-                  <i class="fa fa-bars " ></i>
-              </label>
-              <li>
-                  <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
-                      <span class="flag-icon flag-icon-es "></span>
-                  </a>
-              </li>
-              <li class="last">
-                  <a href="#"   class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
-                      <span class="flag-icon flag-icon-gb "></span>
-                  </a>
-              </li>
+          <input type="checkbox" id="check">
 
-          <ul v-show="show">
-              <li v-on:click="hide">
+          <label for="check" class="checkbtn" v-on:click="triggerVerticalMenu">
+              <i class="fa fa-bars " ></i>
+          </label>
+          <li>
+              <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
+                  <span class="flag-icon flag-icon-es "></span>
+              </a>
+          </li>
+          <li class="last">
+              <a href="#"   class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
+                  <span class="flag-icon flag-icon-gb "></span>
+              </a>
+          </li>
+
+          <ul v-show="showVerticalMenu">
+              <li v-on:click="hideVerticalMenu">
                   <router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link>
               </li>
-              <li v-on:click="hide">
-                  <router-link to="/analize">{{$t("views.components.navBar.menu.analyze")}}</router-link>
+              <li v-on:click="hideVerticalMenu">
+                  <router-link to="/analyze">{{$t("views.components.navBar.menu.analyze")}}</router-link>
               </li>
-              <li v-on:click="hide">
+              <li v-on:click="hideVerticalMenu">
                   <router-link to="/design">{{$t("views.components.navBar.menu.design")}}</router-link>
               </li>
-              <li v-on:click="hide">
+              <li v-on:click="hideVerticalMenu">
                   <router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link>
               </li>
-              <li v-on:click="hide">
+              <li v-on:click="hideVerticalMenu">
                   <router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link>
               </li>
           </ul>
@@ -95,26 +96,24 @@ export default {
   name: "NavBar",
   data: function() {
         return {
-            show: true,
+            showVerticalMenu: false,
         }
   },
     methods: {
         getClass(property) {
             return property === this.$route.path ? "active" : "";
         },
-        enter: function (el, done) {
-
-            let that = this;
-
-            setTimeout(function () {
-                that.show = false;
-            }, 2000);
+        hideVerticalMenu: async function () {
+            console.log("--------BEFORE hide: " + this.showVerticalMenu);
+            this.showVerticalMenu = false;
+            //await this.$nextTick();
+            console.log("--------AFTER hide: " + this.showVerticalMenu);
         },
-        hide: function () {
-            this.show=!this.show;
-        },
-        setShow: function () {
-            this.show=true;
+        triggerVerticalMenu: async function () {
+            console.log("**** BEFORE setShow: " + this.showVerticalMenu);
+            this.showVerticalMenu = !this.showVerticalMenu;
+            //await this.$nextTick();
+            console.log("**** AFTER setShow: " + this.showVerticalMenu);
         },
         showInEnglish: function () {
             this["$i18n"].locale = "en";
@@ -125,9 +124,6 @@ export default {
                 this.$i18n.locale = "es";
             });
         }
-  }
-  ,async created() {
-    this.showSection=true;
   }
 };
 </script>
@@ -218,17 +214,21 @@ export default {
       position: fixed;
       width: 100%;
       height: 100vh;
-      background: #D3D3D3;
+      background: #f7f7f7;
       top: 67px;
       left: -100%;
       text-align: center;
       transition: all .5s;
     }
-    nav ul li{
+    nav ul li {
       display: block;
       margin: 50px 0;
       line-height: 30px;
     }
+      nav ul li:hover {
+          background-color: #f2f2f2;
+          color: #000000;
+      }
     nav ul li a{
       font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
         text-decoration: none;
