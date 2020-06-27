@@ -1,13 +1,23 @@
 <template>
     <div id="header" class="header-fixed">
-        <div class="container">
+        <div class="container" style="margin-right: 65px;">
             <label class="logo">
                 <a href="/"><img src="./../assets/logo.png" alt="Patena"></a>
             </label>
             <nav>
                 <input type="checkbox" id="check">
                 <label for="check" class="checkbtn">
-                    <i class="fa fa-bars" style="color:black"></i>
+                    <i class="fa fa-bars fa-lg" style="color:black"></i>
+                </label>
+                <label>
+                    <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
+                        <span class="flag-icon flag-icon-es "></span>
+                    </a>
+                </label>
+                <label class="last">
+                    <a href="#"   class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
+                        <span class="flag-icon flag-icon-gb "></span>
+                    </a>
                 </label>
                 <ul>
                     <li><a class="active" href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
@@ -120,7 +130,7 @@
     nav ul li{
         display: inline-block;
         line-height: 30px;
-        margin: 0 2px;
+        border-left: 1px solid #eee;
     }
     nav ul li a{
         font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
@@ -154,19 +164,16 @@
     #check{
         display: none;
     }
-    @media (max-width: 952px){
-        label.logo{
-            font-size: 27px;
-            padding-left: 25px;
+    @media (max-width: 1200px){
+        #header .logo img {
+            height: 60px;
+            transition: all;
+            transition-duration: 0.4s;
+            transition: all 0.4s !important;
         }
-        nav ul li a{
-            font-size: 16px;
-        }
-    }
-    @media (max-width: 858px){
         .checkbtn{
             display: block;
-            margin-right: 40px;
+            margin-right: 30px;
         }
         ul{
             position: fixed;
@@ -182,6 +189,8 @@
             display: block;
             margin: 50px 0;
             line-height: 30px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
         }
         nav ul li a{
             font-size: 20px;
@@ -199,8 +208,19 @@
         #check:checked ~ ul{
             left: 0;
         }
+
+    }
+    @media (max-width: 400px) {
+        .checkbtn {
+            display: block;
+            margin-right: 15px;
+        }
+        #check:checked ~ ul{
+            left: 0;
+        }
     }
     section{
+        display:none;
         background-size: cover;
         height: calc(100vh - 80px);
     }
