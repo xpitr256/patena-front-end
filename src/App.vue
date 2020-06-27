@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
+    <nav-bar2></nav-bar2>
     <notifications group="notifications" position="bottom right" />
     <router-view />
     <vue-progress-bar></vue-progress-bar>
@@ -9,8 +9,9 @@
 
 <script>
 import NavBar from "./components/NavBar";
+import NavBar2 from "./components/NavBar2.vue";
 export default {
-  components: { NavBar }
+  components: { NavBar2 }
 };
 </script>
 
