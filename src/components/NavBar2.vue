@@ -2,7 +2,11 @@
     <div id="header" class="header-fixed">
         <div class="container" style="margin-right: 65px;">
             <label class="logo">
-                <a href="/"><img src="./../assets/logo.png" alt="Patena"></a>
+                <a>
+                    <router-link to="/">
+                        <img src="./../assets/logo.png" alt="Patena"/>
+                    </router-link>
+                </a>
             </label>
             <nav role="navigation">
                 <input type="checkbox" id="check">
@@ -18,11 +22,11 @@
                 </label>
 
                 <ul>
-                    <li><a class="active" href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
-                    <li><a href="/analyze">{{$t("views.components.navBar.menu.analyze")}}</a></li>
-                    <li><a href="/design">{{$t("views.components.navBar.menu.design")}}</a></li>
-                    <li><a href="/results">{{$t("views.components.navBar.menu.results")}}</a></li>
-                    <li><a href="/contact">{{$t("views.components.navBar.menu.contact")}}</a></li>
+                    <li><router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link></li>
+                    <li><router-link to="/analyze">{{$t("views.components.navBar.menu.analyze")}}</router-link></li>
+                    <li><router-link to="/design">{{$t("views.components.navBar.menu.design")}}</router-link></li>
+                    <li><router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link></li>
+                    <li><router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link></li>
                     <li>
                         <a href="#" v-on:click="showInSpanish" title="Español">
                             <span class="flag-icon flag-icon-es"></span>
