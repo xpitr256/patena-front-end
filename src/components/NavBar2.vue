@@ -4,21 +4,19 @@
             <label class="logo">
                 <a href="/"><img src="./../assets/logo.png" alt="Patena"></a>
             </label>
-            <nav>
+            <nav role="navigation">
                 <input type="checkbox" id="check">
                 <label for="check" class="checkbtn">
                     <i class="fa fa-bars fa-lg" style="color:black"></i>
                 </label>
-                <label>
-                    <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
-                        <span class="flag-icon flag-icon-es "></span>
-                    </a>
+                <label href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
+                    <span class="flag-icon flag-icon-es "></span>
                 </label>
-                <label class="last">
-                    <a href="#"   class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
+
+                <label href="#"   class="checkbtn last margin:1px;" v-on:click="showInEnglish" title="English">
                         <span class="flag-icon flag-icon-gb "></span>
-                    </a>
                 </label>
+
                 <ul>
                     <li><a class="active" href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
                     <li><a href="/analyze">{{$t("views.components.navBar.menu.analyze")}}</a></li>
@@ -101,9 +99,10 @@
     #header .logo.scroll img {
         transform: scale(0.85);
     }
-    #header .site-nav .last {
+    #header nav .last {
         border-right: 1px solid #eee;
     }
+
     @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
     *{
         margin: 0;
@@ -144,13 +143,12 @@
         transition-duration: 0.4s;
         font-weight: 300;
         text-transform: uppercase;
-        border-bottom: 3px solid #fff;
         letter-spacing: 0px;
     }
     a.active,a:hover{
         background-color: #f2f2f2;
         color: #000000;
-        border-bottom: 3px solid rgb(243, 112, 33);
+        border-bottom: 3px solid rgb(243, 112, 33) !important;
     }
     .checkbtn{
         font-size: 30px;
@@ -189,24 +187,41 @@
             display: block;
             margin: 50px 0;
             line-height: 30px;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+         /*   border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;*/
         }
         nav ul li a{
-            font-size: 20px;
+            font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+            text-decoration: none;
+            display: block;
+            font-size: 21px;
+            color: #333333;
+            transition: all;
+            transition-duration: 0.4s;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0px;
         }
         nav ul li:hover {
             background-color: #f2f2f2;
             color: #000000;
         }
-        a.active,a:hover{
-            background: none !important;
+        a.active{
+            background-color: #ffffff;
+            border-bottom:none !important;
+        }
+        a:hover{
+            /*background: none !important;*/
             background-color: #f2f2f2;
             color: #000000;
-            border-bottom: none !important;
+            border-bottom:none !important;
         }
+
         #check:checked ~ ul{
             left: 0;
+        }
+        #header nav .last {
+            border-right: none;
         }
 
     }
