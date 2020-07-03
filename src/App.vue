@@ -11,7 +11,12 @@
 import NavBar from "./components/NavBar";
 import NavBar2 from "./components/NavBar2.vue";
 export default {
-  components: { NavBar2 }
+  components: { NavBar2 },
+  mounted() {
+    if (localStorage.lang) {
+      this["$i18n"].locale  = localStorage.lang;
+    }
+  }
 };
 </script>
 

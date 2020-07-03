@@ -2,11 +2,9 @@
     <div id="header" class="header-fixed">
         <div class="container" style="margin-right: 65px;">
             <label class="logo">
-                <a>
-                    <router-link to="/">
+                    <a href="/">
                         <img src="./../assets/logo.png" alt="Patena"/>
-                    </router-link>
-                </a>
+                    </a>
             </label>
             <nav role="navigation">
                 <input type="checkbox" id="check">
@@ -22,11 +20,11 @@
                 </label>
 
                 <ul>
-                    <li><router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link></li>
-                    <li><router-link to="/analyze">{{$t("views.components.navBar.menu.analyze")}}</router-link></li>
-                    <li><router-link to="/design">{{$t("views.components.navBar.menu.design")}}</router-link></li>
-                    <li><router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link></li>
-                    <li><router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link></li>
+                    <li><a href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
+                    <li><a href="/analyze">{{$t("views.components.navBar.menu.analyze")}}</a></li>
+                    <li><a href="/design">{{$t("views.components.navBar.menu.design")}}</a></li>
+                    <li><a href="/results">{{$t("views.components.navBar.menu.results")}}</a></li>
+                    <li><a href="/contact">{{$t("views.components.navBar.menu.contact")}}</a></li>
                     <li>
                         <a href="#" v-on:click="showInSpanish" title="Español">
                             <span class="flag-icon flag-icon-es"></span>
@@ -60,12 +58,14 @@
             },
             showInEnglish: function () {
                 this["$i18n"].locale = "en";
+                localStorage.lang ="en";
             },
             showInSpanish: function () {
                 import("@/lang/es.json").then(msgs => {
                     this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
                     this.$i18n.locale = "es";
                 });
+                localStorage.lang ="es";
             }
         }
     };
