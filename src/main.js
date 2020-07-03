@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import VueI18n from "vue-i18n";
 import en from "@/lang/en.json";
+import es from "@/lang/es.json";
 import "./assets/app.scss";
 import "bootstrap";
 import "jquery";
@@ -40,9 +41,12 @@ Vue.use(VueProgressBar, {
 });
 
 const i18n = new VueI18n({
-  locale: "en",
-  messages: { en }
+    locale: "en",
+    fallbackLocale: "es",
+    formatFallbackMessages: true,
+    messages: { "en": en, "es" : es  }
 });
+
 
 Vue.use(VeeValidate, {
   i18nRootKey: "validations",
