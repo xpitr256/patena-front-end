@@ -13,11 +13,11 @@
                 </label>
 
                 <ul>
-                    <li><a href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
-                    <li><a href="/analyze">{{$t("views.components.navBar.menu.analyze")}}</a></li>
-                    <li><a href="/design">{{$t("views.components.navBar.menu.design")}}</a></li>
-                    <li><a href="/results">{{$t("views.components.navBar.menu.results")}}</a></li>
-                    <li><a href="/contact">{{$t("views.components.navBar.menu.contact")}}</a></li>
+                    <li><a v-bind:class="getClass('/about')" href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
+                    <li><a v-bind:class="getClass('/analyze')" href="/analyze">{{$t("views.components.navBar.menu.analyze")}}</a></li>
+                    <li><a v-bind:class="getClass('/design')" href="/design">{{$t("views.components.navBar.menu.design")}}</a></li>
+                    <li><a v-bind:class="getClass('/results')" href="/results">{{$t("views.components.navBar.menu.results")}}</a></li>
+                    <li><a v-bind:class="getClass('/contact')" href="/contact">{{$t("views.components.navBar.menu.contact")}}</a></li>
                     <li>
                         <a href="#" v-on:click="showInSpanish" title="Español">
                             <span class="flag-icon flag-icon-es"></span>
@@ -142,7 +142,12 @@
         text-transform: uppercase;
         letter-spacing: 0px;
     }
-    a.active,a:hover{
+    .active {
+        background-color: #f7f7f7;
+        color: #333333 !important;
+        border-bottom: 3px solid #f7f7f7 !important;
+    }
+    a:hover{
         background-color: #f2f2f2;
         color: #000000;
         border-bottom: 3px solid rgb(243, 112, 33) !important;
