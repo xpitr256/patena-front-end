@@ -244,6 +244,20 @@
             line-height: 30px;
 
         }
+        nav ul li a{
+            font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+            letter-spacing: 1px !important;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px 10px 20px;
+            font-size: 21px;
+            color: #333333;
+            transition: all;
+            transition-duration: 0.4s;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0px;
+        }
 
         .checkbtn {
             font-size: 25px;
