@@ -231,13 +231,13 @@
     }
     @media (max-width: 400px) {
         #header .logo img {
-            height: 40px;
+            height: 50px;
             transition: all;
             transition-duration: 0.4s;
             transition: all 0.4s !important;
         }
         .checkbtn {
-            font-size: 20px;
+            font-size: 25px;
             display: block;
             margin-right: 10px;
         }
