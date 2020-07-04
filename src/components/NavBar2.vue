@@ -237,7 +237,7 @@
         }
         nav ul li{
             display: block;
-            margin: 35px 0;
+            margin: 30px 0;
             line-height: 30px;
 
         }
