@@ -240,7 +240,7 @@
         }
         nav ul li{
             display: block;
-            margin: 20px 0;
+            margin: 10px 0;
             line-height: 30px;
 
         }
