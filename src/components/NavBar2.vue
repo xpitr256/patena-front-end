@@ -189,10 +189,9 @@
         }
         nav ul li{
             display: block;
-            margin: 50px 0;
+            margin: 40px 0;
             line-height: 30px;
-         /*   border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;*/
+
         }
         nav ul li a{
             font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
@@ -236,6 +235,13 @@
             transition-duration: 0.4s;
             transition: all 0.4s !important;
         }
+        nav ul li{
+            display: block;
+            margin: 35px 0;
+            line-height: 30px;
+
+        }
+
         .checkbtn {
             font-size: 25px;
             display: block;
