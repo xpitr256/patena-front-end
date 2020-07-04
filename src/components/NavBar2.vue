@@ -230,9 +230,16 @@
 
     }
     @media (max-width: 400px) {
+        #header .logo img {
+            height: 40px;
+            transition: all;
+            transition-duration: 0.4s;
+            transition: all 0.4s !important;
+        }
         .checkbtn {
+            font-size: 20px;
             display: block;
-            margin-right: 15px;
+            margin-right: 10px;
         }
         #check:checked ~ ul{
             left: 0;
