@@ -11,13 +11,6 @@
                 <label for="check" class="checkbtn">
                     <i class="fa fa-bars fa-lg" style="color:black"></i>
                 </label>
-                <label href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
-                    <span class="flag-icon flag-icon-es "></span>
-                </label>
-
-                <label href="#"   class="checkbtn last margin:1px;" v-on:click="showInEnglish" title="English">
-                        <span class="flag-icon flag-icon-gb "></span>
-                </label>
 
                 <ul>
                     <li><a href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
@@ -163,12 +156,16 @@
         cursor: pointer;
         display: none;
     }
+    nav ul li:active {
+        background-color: #f2f2f2;
+        color: #000000;
+    }
     #check{
         display: none;
     }
     @media (max-width: 1200px){
         #header .logo img {
-            height: 50px;
+            height: 67px;
             transition: all;
             transition-duration: 0.4s;
             transition: all 0.4s !important;
@@ -189,7 +186,7 @@
         }
         nav ul li{
             display: block;
-            margin: 40px 0;
+            margin: 20px 0;
             line-height: 30px;
 
         }
@@ -205,13 +202,10 @@
             text-transform: uppercase;
             letter-spacing: 0px;
         }
+
         nav ul li:hover {
             background-color: #f2f2f2;
             color: #000000;
-        }
-        a.active{
-            background-color: #ffffff;
-            border-bottom:none !important;
         }
         a:hover{
             /*background: none !important;*/
@@ -230,14 +224,18 @@
     }
     @media (max-width: 400px) {
         #header .logo img {
-            height: 50px;
+            height: 67px;
             transition: all;
             transition-duration: 0.4s;
             transition: all 0.4s !important;
         }
+        nav ul li:hover {
+            background-color: #f2f2f2;
+            color: #000000;
+        }
         nav ul li{
             display: block;
-            margin: 30px 0;
+            margin: 20px 0;
             line-height: 30px;
 
         }
