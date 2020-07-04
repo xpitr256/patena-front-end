@@ -168,14 +168,14 @@
     }
     @media (max-width: 1200px){
         #header .logo img {
-            height: 60px;
+            height: 50px;
             transition: all;
             transition-duration: 0.4s;
             transition: all 0.4s !important;
         }
         .checkbtn{
             display: block;
-            margin-right: 30px;
+            margin-right: 15px;
         }
         ul{
             position: fixed;
