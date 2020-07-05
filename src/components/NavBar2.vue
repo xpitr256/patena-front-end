@@ -125,7 +125,7 @@
     }
     nav ul li{
         display: inline-block;
-        line-height: 33px;
+        line-height: 30px;
         border-left: 1px solid #eee;
     }
     nav ul li a{
@@ -140,6 +140,7 @@
         transition-duration: 0.4s;
         font-weight: 300;
         text-transform: uppercase;
+        border-bottom: 3px solid #fff;
         letter-spacing: 0px;
     }
     .active {
@@ -202,6 +203,7 @@
             transition-duration: 0.4s;
             font-weight: 300;
             text-transform: uppercase;
+            border-bottom: none !important;
             letter-spacing: 0px;
         }
 
