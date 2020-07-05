@@ -125,7 +125,7 @@
     }
     nav ul li{
         display: inline-block;
-        line-height: 30px;
+        line-height: 33px;
         border-left: 1px solid #eee;
     }
     nav ul li a{
@@ -144,12 +144,12 @@
     }
     .active {
         background-color: #f7f7f7;
-        color: #333333 !important;
+        color: #333333 ;
         border-bottom: 3px solid #f7f7f7 !important;
     }
-    a:hover{
-        background-color: #f2f2f2;
-        color: #000000;
+    a:hover,a.active{
+        background-color: #f7f7f7;
+        color: #333333;
         border-bottom: 3px solid rgb(243, 112, 33) !important;
     }
     .checkbtn{
@@ -161,10 +161,7 @@
         cursor: pointer;
         display: none;
     }
-    nav ul li:active {
-        background-color: #f2f2f2;
-        color: #000000;
-    }
+
     #check{
         display: none;
     }
@@ -183,7 +180,7 @@
             position: fixed;
             width: 100%;
             height: 100vh;
-            background: #ffffff;
+            background: #f7f7f7;
             top: 67px;
             left: -100%;
             text-align: center;
@@ -212,8 +209,7 @@
             background-color: #f2f2f2;
             color: #000000;
         }
-        a:hover{
-            /*background: none !important;*/
+        a:hover,a.active{
             background-color: #f2f2f2;
             color: #000000;
             border-bottom:none !important;
