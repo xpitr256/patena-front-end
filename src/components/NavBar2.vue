@@ -111,7 +111,6 @@
     nav{
         position: relative;
         float: right;
-        margin-right: -60px;
     }
     label.logo{
         height: 67px;
