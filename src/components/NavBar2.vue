@@ -1,6 +1,6 @@
 <template>
     <div id="header" class="header-fixed">
-        <div class="container" style="margin-right: 65px;">
+        <div class="container">
             <label class="logo">
                     <a href="/">
                         <img src="./../assets/logo.png" alt="Patena"/>
@@ -111,7 +111,7 @@
     nav{
         position: relative;
         float: right;
-        margin-right: 0px;
+        margin-right: -60px;
     }
     label.logo{
         height: 67px;
