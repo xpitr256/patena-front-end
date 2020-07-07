@@ -2,31 +2,31 @@
     <div id="header" class="header-fixed">
         <div class="container">
             <label class="logo">
-                    <a href="/">
+                    <router-link to="/">
                         <img src="./../assets/logo.png" alt="Patena"/>
-                    </a>
+                    </router-link>
             </label>
             <nav role="navigation">
-                <input type="checkbox" id="check">
-                <label for="check" class="checkbtn">
+                <input type="checkbox" id="check" >
+                <label for="check" class="checkbtn" v-on:click="actionMenu">
                     <i class="fa fa-bars fa-lg" style="color:black"></i>
                 </label>
 
                 <ul>
-                    <li><a v-bind:class="getClass('/about')" href="/about">{{$t("views.components.navBar.menu.about")}}</a></li>
-                    <li><a v-bind:class="getClass('/analyze')" href="/analyze">{{$t("views.components.navBar.menu.analyze")}}</a></li>
-                    <li><a v-bind:class="getClass('/design')" href="/design">{{$t("views.components.navBar.menu.design")}}</a></li>
-                    <li><a v-bind:class="getClass('/results')" href="/results">{{$t("views.components.navBar.menu.results")}}</a></li>
-                    <li><a v-bind:class="getClass('/contact')" href="/contact">{{$t("views.components.navBar.menu.contact")}}</a></li>
-                    <li>
-                        <a href="#" v-on:click="showInSpanish" title="Español">
-                            <span class="flag-icon flag-icon-es"></span>
-                        </a>
+                    <li v-on:click="refreshMenu"><router-link to="/about" v-bind:class="getClass('/about')" >{{$t("views.components.navBar.menu.about")}}</router-link></li>
+                    <li v-on:click="refreshMenu"><router-link to="/analyze" v-bind:class="getClass('/analyze')">{{$t("views.components.navBar.menu.analyze")}}</router-link></li>
+                    <li v-on:click="refreshMenu"><router-link to="/design" v-bind:class="getClass('/design')">{{$t("views.components.navBar.menu.design")}}</router-link></li>
+                    <li v-on:click="refreshMenu"><router-link to="/results" v-bind:class="getClass('/results')">{{$t("views.components.navBar.menu.results")}}</router-link></li>
+                    <li v-on:click="refreshMenu"><router-link to="/contact" v-bind:class="getClass('/contact')">{{$t("views.components.navBar.menu.contact")}}</router-link></li>
+                    <li v-on:click="showInSpanish"  >
+                           <router-link to="/"  v-on:click="showInSpanish" title="Español">
+                               <i class="flag-icon flag-icon-es"></i>
+                            </router-link>
                     </li>
-                    <li class="last">
-                        <a href="#"  v-on:click="showInEnglish" title="English">
-                            <span class="flag-icon flag-icon-gb"></span>
-                        </a>
+                    <li v-on:click="showInEnglish" class="last">
+                            <router-link to="/"  v-on:click="showInEnglish" title="English">
+                                <i class="flag-icon flag-icon-gb"></i>
+                            </router-link>
                     </li>
                 </ul>
             </nav>
@@ -42,7 +42,7 @@
         name: "NavBar2",
         data: function() {
             return {
-                showVerticalMenu: false,
+                isShowMenu: false,
             }
         },
         methods: {
@@ -59,6 +59,14 @@
                     this.$i18n.locale = "es";
                 });
                 localStorage.lang ="es";
+            },
+            refreshMenu : function (){
+                if (this.isShowMenu){
+                    location.reload()
+                }
+            },
+            actionMenu : function (){
+                this.isShowMenu = true;
             }
         }
     };
@@ -150,7 +158,7 @@
     a:hover,a.active{
         background-color: #f7f7f7;
         color: #333333;
-        border-bottom: 3px solid rgb(243, 112, 33) !important;
+        border-bottom: 3px solid rgb(243, 112, 33) ;
     }
     .checkbtn{
         font-size: 30px;
@@ -268,7 +276,7 @@
     section{
         display:none;
         background-size: cover;
-        height: calc(100vh - 80px);
+        height: calc(120vh - 80px);
     }
 
 </style>
