@@ -6,6 +6,7 @@
                         <img src="./../assets/logo.png" alt="Patena"/>
                     </router-link>
             </label>
+
             <nav role="navigation">
                 <input type="checkbox" id="check" >
                 <label for="check" class="checkbtn" v-on:click="actionMenu">
@@ -18,18 +19,21 @@
                     <li v-on:click="refreshMenu"><router-link to="/design" v-bind:class="getClass('/design')">{{$t("views.components.navBar.menu.design")}}</router-link></li>
                     <li v-on:click="refreshMenu"><router-link to="/results" v-bind:class="getClass('/results')">{{$t("views.components.navBar.menu.results")}}</router-link></li>
                     <li v-on:click="refreshMenu"><router-link to="/contact" v-bind:class="getClass('/contact')">{{$t("views.components.navBar.menu.contact")}}</router-link></li>
-                    <li v-on:click="showInSpanish"  >
-                           <router-link to="/"  v-on:click="showInSpanish" title="Español">
-                               <i class="flag-icon flag-icon-es"></i>
-                            </router-link>
+                    <li class="last">
+                        <router-link to="#" v-on:click="showInSpanish" title="Español">
+                            <span class="flag-icon flag-icon-es"></span>
+                        </router-link>
                     </li>
-                    <li v-on:click="showInEnglish" class="last">
-                            <router-link to="/"  v-on:click="showInEnglish" title="English">
-                                <i class="flag-icon flag-icon-gb"></i>
-                            </router-link>
+                    <li class="last">
+                        <router-link to="#"  v-on:click="showInEnglish" title="English">
+                            <span class="flag-icon flag-icon-gb"></span>
+                        </router-link>
                     </li>
+
                 </ul>
             </nav>
+
+
             <section></section>
         </div>
     </div>
@@ -117,6 +121,7 @@
         text-decoration: none;
     }
     nav{
+        display: flex;
         position: relative;
         float: right;
     }
@@ -139,17 +144,18 @@
         font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
         letter-spacing: 1px !important;
         text-decoration: none;
-        display: block;
+        display: grid;
         padding: 21px 20px 13px 20px;
         font-size: 21px;
         color: #333333;
         transition: all;
         transition-duration: 0.4s;
-        font-weight: 300;
+        font-weight: 400;
         text-transform: uppercase;
         border-bottom: 3px solid #fff;
         letter-spacing: 0px;
     }
+
     .active {
         background-color: #f7f7f7;
         color: #333333 ;
