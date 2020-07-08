@@ -1,41 +1,67 @@
 <template>
     <div id="header" class="header-fixed">
         <div class="container">
-            <label class="logo">
-                    <router-link to="/">
-                        <img src="./../assets/logo.png" alt="Patena"/>
-                    </router-link>
-            </label>
+            <div class="logo">
+                <router-link to="/"
+                ><img src="./../assets/logo.png" alt="Patena"
+                /></router-link>
+            </div>
 
             <nav role="navigation">
-                <input type="checkbox" id="check" >
+                <input type="checkbox" id="check">
                 <label for="check" class="checkbtn" v-on:click="actionMenu">
                     <i class="fa fa-bars fa-lg" style="color:black"></i>
                 </label>
-
                 <ul>
-                    <li v-on:click="refreshMenu"><router-link to="/about" v-bind:class="getClass('/about')" >{{$t("views.components.navBar.menu.about")}}</router-link></li>
-                    <li v-on:click="refreshMenu"><router-link to="/analyze" v-bind:class="getClass('/analyze')">{{$t("views.components.navBar.menu.analyze")}}</router-link></li>
-                    <li v-on:click="refreshMenu"><router-link to="/design" v-bind:class="getClass('/design')">{{$t("views.components.navBar.menu.design")}}</router-link></li>
-                    <li v-on:click="refreshMenu"><router-link to="/results" v-bind:class="getClass('/results')">{{$t("views.components.navBar.menu.results")}}</router-link></li>
-                    <li v-on:click="refreshMenu"><router-link to="/contact" v-bind:class="getClass('/contact')">{{$t("views.components.navBar.menu.contact")}}</router-link></li>
-                    <li class="last">
-                        <router-link to="#" v-on:click="showInSpanish" title="Español">
-                            <span class="flag-icon flag-icon-es"></span>
+                    <li v-on:click="refreshMenu">
+                        <router-link to="/about" v-bind:class="getClass('/about')">
+                            {{$t("views.components.navBar.menu.about")}}
                         </router-link>
                     </li>
-                    <li class="last">
-                        <router-link to="#"  v-on:click="showInEnglish" title="English">
-                            <span class="flag-icon flag-icon-gb"></span>
+                    <li v-on:click="refreshMenu">
+                        <router-link to="/analyze" v-bind:class="getClass('/analyze')">
+                            {{$t("views.components.navBar.menu.analyze")}}
                         </router-link>
                     </li>
-
+                    <li v-on:click="refreshMenu">
+                        <router-link to="/design" v-bind:class="getClass('/design')">
+                            {{$t("views.components.navBar.menu.design")}}
+                        </router-link>
+                    </li>
+                    <li v-on:click="refreshMenu">
+                        <router-link to="/results" v-bind:class="getClass('/results')">
+                            {{$t("views.components.navBar.menu.results")}}
+                        </router-link>
+                    </li>
+                    <li v-on:click="refreshMenu">
+                        <router-link to="/contact" v-bind:class="getClass('/contact')">
+                            {{$t("views.components.navBar.menu.contact")}}
+                        </router-link>
+                    </li>
                 </ul>
+
+                <div class="search">
+                    <i v-on:click="showInSpanish" title="Español" class="flag-icon flag-icon-es "
+                       style="  position: relative;
+                          right: 20px;
+                          top: 15px;
+                          font-size: 1.6rem;
+                          color: #aaa;
+                          margin:10px;
+                          cursor: pointer;"></i>
+                    <i v-on:click="showInEnglish" title="English" class="flag-icon flag-icon-gb "
+                       style="  position: relative;
+                          right: 20px;
+                          top: 15px;
+                          font-size: 1.6rem;
+                          color: #aaa;
+                          margin:10px;
+                          cursor: pointer;"></i>
+                </div>
+
             </nav>
-
-
-            <section></section>
         </div>
+        <section></section>
     </div>
 </template>
 
@@ -156,6 +182,7 @@
         letter-spacing: 0px;
     }
 
+
     .active {
         background-color: #f7f7f7;
         color: #333333 ;
@@ -179,6 +206,21 @@
     #check{
         display: none;
     }
+    .search {
+        position: relative;
+        max-width: 200px;
+        right: -20px;
+    }
+    .search i {
+        position: relative;
+        right: 20px;
+        top: 15px;
+        font-size: 1.6rem;
+        color: #aaa;
+        margin:10px;
+        cursor: pointer;
+    }
+
     @media (max-width: 1200px){
         #header .logo img {
             height: 67px;
