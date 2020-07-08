@@ -41,7 +41,7 @@
                 </ul>
 
                 <div class="search">
-                    <i v-on:click="showInSpanish" title="Español" class="flag-icon flag-icon-es "
+                    <i v-if="isEnglish()" v-on:click="showInSpanish" title="Español" class="flag-icon flag-icon-es "
                        style="  position: relative;
                           right: 20px;
                           top: 15px;
@@ -49,7 +49,7 @@
                           color: #aaa;
                           margin:10px;
                           cursor: pointer;"></i>
-                    <i v-on:click="showInEnglish" title="English" class="flag-icon flag-icon-gb "
+                    <i v-if="!isEnglish()" v-on:click="showInEnglish" title="English" class="flag-icon flag-icon-gb "
                        style="  position: relative;
                           right: 20px;
                           top: 15px;
@@ -97,6 +97,9 @@
             },
             actionMenu : function (){
                 this.isShowMenu = true;
+            },
+            isEnglish : function (){
+                return localStorage.lang =="en"
             }
         }
     };
