@@ -41,15 +41,15 @@
                 </ul>
 
                 <div class="search">
-                    <i v-if="isEnglish()" v-on:click="showInSpanish" title="Español" class="flag-icon flag-icon-es "
+                    <i v-if="isEnglish()" v-on:click="showInSpanish" title="Mostrar en Español" class="flag-icon flag-icon-es "
                        style="  position: relative;
                           right: 20px;
                           top: 15px;
                           font-size: 1.6rem;
                           color: #aaa;
                           margin:10px;
-                          cursor: pointer;"></i>
-                    <i v-if="!isEnglish()" v-on:click="showInEnglish" title="English" class="flag-icon flag-icon-gb "
+                          cursor: pointer;" ></i>
+                    <i v-if="!isEnglish()" v-on:click="showInEnglish" title="Show in English" class="flag-icon flag-icon-gb "
                        style="  position: relative;
                           right: 20px;
                           top: 15px;
@@ -99,7 +99,7 @@
                 this.isShowMenu = true;
             },
             isEnglish : function (){
-                return localStorage.lang =="en"
+                return this["$i18n"].locale =="en"
             }
         }
     };
