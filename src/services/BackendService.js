@@ -38,8 +38,7 @@ export default {
     }
   },
 
-  async analyzeLinker(email, sequence) {
-    const postData = { email: email, sequence: sequence };
+  async analyzeLinker(postData) {
     try {
       const response = await Vue.http.post(baseDomain + "/analyze", postData);
       if (response.ok) {

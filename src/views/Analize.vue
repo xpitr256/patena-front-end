@@ -122,8 +122,12 @@ export default {
         name: this.sequenceName,
         value: FastaService.getFirstSequence(fastaFileContent)
       };
-
-      const response = await BackendService.analyzeLinker(this.email, sequence);
+      const postData = {
+        email: this.email,
+        sequence: sequence,
+        language:this["$i18n"].locale
+      };
+      const response = await BackendService.analyzeLinker(postData);
       this.$Progress.finish();
       if (!response.error) {
         this.$notify({
@@ -152,6 +156,32 @@ export default {
       submitInProgress: false,
       sequenceName: null
     };
+  },
+  getDesignData: function() {
+    let data = JSON.parse(JSON.stringify(this.formData));
+    delete data.stepFrom;
+    data.designType = this.designTypeMap.get(this.formData.stepFrom);
+
+    // remove non initial sequences cases
+    if (!data.initialSequence.value) {
+      delete data.initialSequence;
+    }
+
+    if (!this.useDefaultSettings ) {
+
+      data.config = {
+        frequencies: this.getFrequenciesDataForBackend(),
+        algorithms: this.getAlgorithmsDataForBackend()
+      };
+
+      if (this.isEnabledNetCharge()) {
+        data.config.netCharge = this.netCharge;
+      }
+    }
+
+    data.language=this["$i18n"].locale
+
+    return data;
   }
 };
 </script>
