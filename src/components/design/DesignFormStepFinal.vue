@@ -842,7 +842,7 @@ export default {
         });
         this.$router.push("/design/success");
         this.$route.params.orderNumber = response.orderNumber;
-        this.$route.params.email = this.email;
+        this.$route.params.email = response.email;
       } else {
         this.$notify({
           group: "notifications",

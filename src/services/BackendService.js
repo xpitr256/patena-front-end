@@ -24,7 +24,8 @@ export default {
       const response = await Vue.http.post(baseDomain + "/design", data);
       if (response.ok) {
         return {
-          orderNumber: response.body.orderNumber
+          orderNumber: response.body.orderNumber,
+          email: data.email
         };
       }
       return {

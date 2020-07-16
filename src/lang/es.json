@@ -119,6 +119,7 @@
       "alertTitle": "¡Bien hecho!",
       "fileReceived": "Hemos recibido correctamente su archivo ",
       "emailSent": "Le comentamos también que hemos enviado un mail a ",
+      "emailNotSent": " El número de orden asignado fue ",
       "orderNumber": "con el siguiente número de orden ",
       "notify": "Cuando su solicitud esté lista recibirá otro mail de notificación para poder ver los resultados.",
       "suggestion": "Le recomendamos guardar el número de orden y agradecemos que haya confiado en PATENA."
@@ -191,6 +192,7 @@
       "alertTitle": "¡Bien hecho!",
       "dataReceived": "Hemos recibido correctamente su información",
       "emailSent": "Le comentamos también que hemos enviado un mail a ",
+      "emailNotSent": " El número de orden asignado fue ",
       "orderNumber": "con el siguiente número de orden ",
       "notify": "Cuando su solicitud esté lista recibirá otro mail de notificación para poder ver los resultados.",
       "suggestion": "Le recomendamos guardar el número de orden y agradecemos que haya confiado en PATENA."

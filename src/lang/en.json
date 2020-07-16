@@ -118,6 +118,7 @@
       "alertTitle": "Well done!",
       "fileReceived": "We have successfully received your file ",
       "emailSent": "In addition we just sent an email to ",
+      "emailNotSent": " The assigned order number was ",
       "orderNumber": "with the following order number ",
       "notify": "When your request is done you will received a notification email in order to see the results.",
       "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
@@ -190,6 +191,7 @@
       "alertTitle": "Well done!",
       "dataReceived": "We have successfully received your information",
       "emailSent": "In addition we just sent an email to ",
+      "emailNotSent": " The assigned order number was",
       "orderNumber": "with the following order number ",
       "notify": "When your request is done you will received a notification email in order to see the results.",
       "suggestion": "We strongly recommend to keep this order number and we thank you for using PATENA"
