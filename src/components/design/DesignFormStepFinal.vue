@@ -601,12 +601,10 @@ export default {
       return "";
     },
     getInputFrequencyClass: function(frequency) {
-      const fc = this.inputClassMap.get(frequency.getCSSClass);
-      return fc(frequency);
+      return this.inputClassMap.get(frequency.getCSSClass);
     },
     getLabelFrequencyClass: function(frequency) {
-      const fc = this.labelClassMap.get(frequency.getCSSClass);
-      return fc(frequency);
+      return this.labelClassMap.get(frequency.getCSSClass);
     },
     getLabelCysteineClass: function(frequency) {
       const isCysteine = frequency.name === "C";
