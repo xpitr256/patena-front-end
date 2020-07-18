@@ -11,13 +11,22 @@
 
 
     import NavBarMaster from "./components/NavBar2.vue";
+    import BackendService from "./services/BackendService";
     export default {
-      components: { NavBarMaster },
+      components: { NavBarMaster, BackendService },
       mounted() {
-        if (localStorage.lang) {
+       if (localStorage.lang) {
           this["$i18n"].locale  = localStorage.lang;
         }
-      }
+      },data() {
+            return {
+                data: '',
+                error: undefined,
+            }
+        },
+        async created() {
+              await BackendService.wakeUpBackend();
+        }
     };
     </script>
 

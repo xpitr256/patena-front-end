@@ -16,17 +16,17 @@
         <tr>
             <td class="a" v-if="this.showDualSummary">
 
-                    <Sequence :sequence=initialSequence :show-big="true" :show-as-initial="true"
+                    <Sequence :sequence=initialSequence :show-big="false" :show-as-initial="true"
                               :show-truncated="false"></Sequence>
 
             </td>
             <td class="a">
 
-                <Sequence :sequence=finalSequence :show-big="true" :show-as-final="true" :show-truncated="false"></Sequence>
+                <Sequence :sequence=finalSequence :show-big="false" :show-as-final="true" :show-truncated="false"></Sequence>
 
             </td>
             <td class="a" >
-                <button type="button" class="btn btn-primary btn-lg"
+                <button type="button" class="btn btn-primary btn-sm"
                         v-on:click="getSequenceCopy">
                         <i class="fas fa-copy"></i>
                 </button>
