@@ -100,5 +100,8 @@ export default {
         error: error.body.message
       };
     }
+  },
+  async wakeUpBackend() {
+     await Vue.http.get(baseDomain);
   }
 };
