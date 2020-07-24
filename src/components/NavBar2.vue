@@ -10,7 +10,11 @@
             <nav role="navigation">
                 <input type="checkbox" id="check">
                 <label for="check" class="checkbtn" v-on:click="actionMenu">
-                    <i class="fa fa-bars fa-lg" style="color:black"></i>
+                    <i class="fa fa-bars "
+                       style="color:black;
+                          right: 20px;
+                          font-size: 2.1rem;
+                          top: 10px;"></i>
                 </label>
                 <ul>
                     <li v-on:click="refreshMenu">
@@ -40,11 +44,11 @@
                     </li>
                 </ul>
 
-                <div class="search">
+                <div class="navBarClass">
                     <i v-if="isEnglish()" v-on:click="showInSpanish" title="Mostrar en Español" class="flag-icon flag-icon-es "
                        style="  position: relative;
                           right: 20px;
-                          top: 15px;
+                          top: 10px;
                           font-size: 1.6rem;
                           color: #aaa;
                           margin:10px;
@@ -52,7 +56,7 @@
                     <i v-if="!isEnglish()" v-on:click="showInEnglish" title="Show in English" class="flag-icon flag-icon-gb "
                        style="  position: relative;
                           right: 20px;
-                          top: 15px;
+                          top: 10px;
                           font-size: 1.6rem;
                           color: #aaa;
                           margin:10px;
@@ -209,12 +213,12 @@
     #check{
         display: none;
     }
-    .search {
+    .navBarClass {
         position: relative;
         max-width: 200px;
         right: -20px;
     }
-    .search i {
+    .navBarClass i {
         position: relative;
         right: 20px;
         top: 15px;
