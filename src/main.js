@@ -34,6 +34,10 @@ Vue.use(Notifications);
 Vue.use(VueI18n);
 Vue.use(vueResource);
 
+Vue.http.interceptors.push((request) => {
+    request.headers.set('Authorization', 'Bearer ' + process.env.BACK_END_TOKEN);
+});
+
 Vue.use(VueProgressBar, {
   color: "rgb(243, 112, 33)",
   failedColor: "red",
