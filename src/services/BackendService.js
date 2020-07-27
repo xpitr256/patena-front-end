@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-const baseDomain = process.env.BACK_END_BASE_URL || "http://localhost:3000";
+const baseDomain = process.env.VUE_APP_BACK_END_BASE_URL;
 const genericErrorMessage =
   "There was an error connecting with our servers. Try again later please"; //TODO translate it
 
