@@ -99,6 +99,6 @@ export default {
     }
   },
   async wakeUpBackend() {
-     await Vue.http.get(baseDomain);
+    await Vue.http.get(baseDomain);
   }
 };

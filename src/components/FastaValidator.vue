@@ -1,39 +1,64 @@
 <template>
   <div class="mt-1">
     <div class="alert alert-secondary" role="alert" v-show="isValid === null">
-      <h4 class="alert-heading">{{ $t("views.components.fastaValidator.title") }}</h4>
+      <h4 class="alert-heading">
+        {{ $t("views.components.fastaValidator.title") }}
+      </h4>
       {{ $t("views.components.fastaValidator.subtitle") }}
     </div>
 
     <div class="alert alert-success" role="alert" v-show="isValid">
-      <h4 class="alert-heading">{{ $t("views.components.fastaValidator.successfulMessageTitle")}}</h4>
+      <h4 class="alert-heading">
+        {{ $t("views.components.fastaValidator.successfulMessageTitle") }}
+      </h4>
       <p class="mt-3">
-        <strong>{{ $t("views.components.fastaValidator.labelName") }}</strong><em>{{ sequenceName }}</em>
+        <strong>{{ $t("views.components.fastaValidator.labelName") }}</strong
+        ><em>{{ sequenceName }}</em>
       </p>
       <hr />
-      <p class="mb-0 mt-2"><strong>{{ $t("views.components.fastaValidator.labelSequence") }}</strong></p>
+      <p class="mb-0 mt-2">
+        <strong>{{
+          $t("views.components.fastaValidator.labelSequence")
+        }}</strong>
+      </p>
       <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
       <hr />
       <p>
         <span v-show="!highlightedCharactersAmount"
-          ><strong> {{ $t("views.components.fastaValidator.labelLength") }} </strong>{{ sequenceLength }}</span
+          ><strong>
+            {{ $t("views.components.fastaValidator.labelLength") }} </strong
+          >{{ sequenceLength }}</span
         >
         <span v-show="highlightedCharactersAmount"
-          ><strong> {{ $t("views.components.fastaValidator.labelTakenLength") }} </strong>{{ sequenceLength }}</span
+          ><strong>
+            {{
+              $t("views.components.fastaValidator.labelTakenLength")
+            }} </strong
+          >{{ sequenceLength }}</span
         >
       </p>
     </div>
     <div class="alert alert-danger" role="alert" v-show="isInvalid">
-      <h4 class="alert-heading">{{ $t("views.components.fastaValidator.errorMessageTitle") }}</h4>
+      <h4 class="alert-heading">
+        {{ $t("views.components.fastaValidator.errorMessageTitle") }}
+      </h4>
       <p class="mb-0 mt-0">
-        <strong>{{ $t("views.components.fastaValidator.labelSuggetionsTitle") }} </strong>
+        <strong
+          >{{ $t("views.components.fastaValidator.labelSuggetionsTitle") }}
+        </strong>
       </p>
       <ul>
-        <li>{{ $t("views.components.fastaValidator.labelSuggetion1") }} "<em>.fasta"</em>, "<em>.txt"</em></li>
+        <li>
+          {{
+            $t("views.components.fastaValidator.labelSuggetion1")
+          }}
+          "<em>.fasta"</em>, "<em>.txt"</em>
+        </li>
         <li>{{ $t("views.components.fastaValidator.labelSuggetion2") }}</li>
         <li>{{ $t("views.components.fastaValidator.labelSuggetion3") }}</li>
         <li>
-          {{ $t("views.components.fastaValidator.labelSuggetion4") }} {{ aminoAcids }}
+          {{ $t("views.components.fastaValidator.labelSuggetion4") }}
+          {{ aminoAcids }}
         </li>
         <li>{{ $t("views.components.fastaValidator.labelSuggetion5") }}</li>
       </ul>

@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       orderNumber: 0,
-      email:"",
-      HasEmail : false
+      email: "",
+      HasEmail: false
     };
   },
   created() {

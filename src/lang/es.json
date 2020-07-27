@@ -32,13 +32,12 @@
         "labelSuggetion3": "Todos los comentarios deben comenzar con el carácter \">\".",
         "labelSuggetion4": "Fuera de un comentario, los únicos caracteres permitidos son: A R N D C E Q G H I L K M F P S T W Y V",
         "labelSuggetion5": "Su archivo contiene caracteres prohibidos."
-
       },
       "results": {
         "DesignResult": {
           "title": "Resultado del Diseño"
         },
-        "DesignResultHistory":{
+        "DesignResultHistory": {
           "title": "Historial de mutaciones",
           "headers": {
             "Pos": "Pos",
@@ -47,7 +46,7 @@
             "Score": "Score"
           }
         },
-        "DesignResultSummary":{
+        "DesignResultSummary": {
           "headers": {
             "Initial": "Secuencia inicial ",
             "Final": "Secuencia final",

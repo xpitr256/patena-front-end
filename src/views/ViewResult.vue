@@ -8,28 +8,28 @@
           <div class="row">
             <div class="col-4">
               <input
-                      type="text"
-                      class="form-control"
-                      id="orderNumber"
-                      ref="orderNumber"
-                      v-bind:class="{ 'is-invalid': errors.has('orderNumber') }"
-                      v-validate="'required|min:36'"
-                      name="orderNumber"
-                      v-model="orderNumber"
-                      :placeholder="$t('views.result.placeholder')"
+                type="text"
+                class="form-control"
+                id="orderNumber"
+                ref="orderNumber"
+                v-bind:class="{ 'is-invalid': errors.has('orderNumber') }"
+                v-validate="'required|min:36'"
+                name="orderNumber"
+                v-model="orderNumber"
+                :placeholder="$t('views.result.placeholder')"
               />
             </div>
             <div class="col-6">
               <button
-                      type="button"
-                      v-on:click="sendForm"
-                      :disabled="submitInProgress || errors.items.length > 0"
-                      class="btn btn-md btn-primary">
+                type="button"
+                v-on:click="sendForm"
+                :disabled="submitInProgress || errors.items.length > 0"
+                class="btn btn-md btn-primary"
+              >
                 <i class="fas fa-search"></i>
                 {{ $t("views.result.btnSearch") }}
               </button>
             </div>
-
           </div>
           <div class="invalid-feedback">
             {{ errors.first("orderNumber") }}
@@ -41,32 +41,51 @@
       </div>
     </form>
 
-        <div class="a alert alert-warning border border-dark" role="alert" v-if="showUnknownMessage">
-            <h4 class="alert-heading">{{ $t("views.result.unknownOrderNumberHeader") }}
-                <i class="fas fa-search"></i>
-            </h4>
-          {{ $t("views.result.unknownOrderNumber") }}
-        </div>
-        <div class="a alert alert-secondary border border-dark" role="alert" v-if="showInActionMessage">
-            <h4 class="alert-heading">{{ $t("views.result.inActionOrderNumberHeader") }}
-                <i class="fa fa-cogs"></i>
-            </h4>
-          {{ $t("views.result.inActionOrderNumber") }}
-        </div>
-        <div class="a alert alert-warning border border-dark" role="alert" v-if="showPendingMessage">
-            <h4 class="alert-heading">{{ $t("views.result.pendingOrderNumberHeader") }}
-                <i class="fas fa-hourglass-start"></i>
-            </h4>
-          {{ $t("views.result.pendingOrderNumber") }}
-        </div>
-        <div class="a alert alert-danger border border-dark" role="alert" v-if="showCancelledMessage">
-            <h4 class="alert-heading">{{ $t("views.result.cancelledOrderNumberHeader") }}
-                <i class="fa fa-ban"></i>
-            </h4>
-          {{ $t("views.result.cancelledOrderNumber") }}
-        </div>
-      </div>
-
+    <div
+      class="a alert alert-warning border border-dark"
+      role="alert"
+      v-if="showUnknownMessage"
+    >
+      <h4 class="alert-heading">
+        {{ $t("views.result.unknownOrderNumberHeader") }}
+        <i class="fas fa-search"></i>
+      </h4>
+      {{ $t("views.result.unknownOrderNumber") }}
+    </div>
+    <div
+      class="a alert alert-secondary border border-dark"
+      role="alert"
+      v-if="showInActionMessage"
+    >
+      <h4 class="alert-heading">
+        {{ $t("views.result.inActionOrderNumberHeader") }}
+        <i class="fa fa-cogs"></i>
+      </h4>
+      {{ $t("views.result.inActionOrderNumber") }}
+    </div>
+    <div
+      class="a alert alert-warning border border-dark"
+      role="alert"
+      v-if="showPendingMessage"
+    >
+      <h4 class="alert-heading">
+        {{ $t("views.result.pendingOrderNumberHeader") }}
+        <i class="fas fa-hourglass-start"></i>
+      </h4>
+      {{ $t("views.result.pendingOrderNumber") }}
+    </div>
+    <div
+      class="a alert alert-danger border border-dark"
+      role="alert"
+      v-if="showCancelledMessage"
+    >
+      <h4 class="alert-heading">
+        {{ $t("views.result.cancelledOrderNumberHeader") }}
+        <i class="fa fa-ban"></i>
+      </h4>
+      {{ $t("views.result.cancelledOrderNumber") }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -114,21 +133,20 @@ export default {
         this.clearNotifications();
         const response = await BackendService.getResults(this.orderNumber);
         this.$Progress.finish();
-        if (!response.error && response.stateId==3) {
+        if (!response.error && response.stateId == 3) {
           this.$notify({
             group: "notifications",
             type: "success",
             title: this.$t("views.sendSuccess")
           });
-          this.$router.push("/results/"+ this.orderNumber );
+          this.$router.push("/results/" + this.orderNumber);
           this.$route.params.results = response;
-        } else if (response.stateId!=3){
-          this.showUnknownMessage= response.stateId==0;
-          this.showPendingMessage= response.stateId==1;
-          this.showInActionMessage= response.stateId==2;
-          this.showCancelledMessage= response.stateId==4;
-        }
-         else{
+        } else if (response.stateId != 3) {
+          this.showUnknownMessage = response.stateId == 0;
+          this.showPendingMessage = response.stateId == 1;
+          this.showInActionMessage = response.stateId == 2;
+          this.showCancelledMessage = response.stateId == 4;
+        } else {
           this.$notify({
             group: "notifications",
             type: "error",
@@ -138,18 +156,17 @@ export default {
         this.submitInProgress = false;
       }
     },
-    checkDirectLink(){
-        const parseRes= this.$route.fullPath.split("=");
-        this.orderNumber = parseRes[1];
-        if (this.orderNumber!= null)
-            this.onSubmit();
+    checkDirectLink() {
+      const parseRes = this.$route.fullPath.split("=");
+      this.orderNumber = parseRes[1];
+      if (this.orderNumber != null) this.onSubmit();
     }
   }
 };
 </script>
 
 <style scoped>
-  .a {
-    text-align: center;
-  }
+.a {
+  text-align: center;
+}
 </style>

@@ -41,49 +41,67 @@
             </a>
           </li>
           <li class="last">
-            <a href="#"  v-on:click="showInEnglish" title="English">
+            <a href="#" v-on:click="showInEnglish" title="English">
               <span class="flag-icon flag-icon-gb"></span>
             </a>
           </li>
-
         </ul>
       </div>
       <nav role="navigation">
+        <input type="checkbox" id="check" />
 
-          <input type="checkbox" id="check">
+        <label for="check" class="checkbtn" v-on:click="triggerVerticalMenu">
+          <i class="fa fa-bars "></i>
+        </label>
+        <li>
+          <a
+            href="#"
+            class="checkbtn"
+            v-on:click="showInSpanish"
+            title="Español"
+          >
+            <span class="flag-icon flag-icon-es "></span>
+          </a>
+        </li>
+        <li class="last">
+          <a
+            href="#"
+            class="checkbtn margin:1px;"
+            v-on:click="showInEnglish"
+            title="English"
+          >
+            <span class="flag-icon flag-icon-gb "></span>
+          </a>
+        </li>
 
-          <label for="check" class="checkbtn" v-on:click="triggerVerticalMenu">
-              <i class="fa fa-bars " ></i>
-          </label>
-          <li>
-              <a href="#"  class="checkbtn" v-on:click="showInSpanish" title="Español">
-                  <span class="flag-icon flag-icon-es "></span>
-              </a>
+        <ul v-show="showVerticalMenu">
+          <li v-on:click="hideVerticalMenu">
+            <router-link to="/about">{{
+              $t("views.components.navBar.menu.about")
+            }}</router-link>
           </li>
-          <li class="last">
-              <a href="#"   class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
-                  <span class="flag-icon flag-icon-gb "></span>
-              </a>
+          <li v-on:click="hideVerticalMenu">
+            <router-link to="/analyze">{{
+              $t("views.components.navBar.menu.analyze")
+            }}</router-link>
           </li>
-
-          <ul v-show="showVerticalMenu">
-              <li v-on:click="hideVerticalMenu">
-                  <router-link to="/about">{{$t("views.components.navBar.menu.about")}}</router-link>
-              </li>
-              <li v-on:click="hideVerticalMenu">
-                  <router-link to="/analyze">{{$t("views.components.navBar.menu.analyze")}}</router-link>
-              </li>
-              <li v-on:click="hideVerticalMenu">
-                  <router-link to="/design">{{$t("views.components.navBar.menu.design")}}</router-link>
-              </li>
-              <li v-on:click="hideVerticalMenu">
-                  <router-link to="/results">{{$t("views.components.navBar.menu.results")}}</router-link>
-              </li>
-              <li v-on:click="hideVerticalMenu">
-                  <router-link to="/contact">{{$t("views.components.navBar.menu.contact")}}</router-link>
-              </li>
-          </ul>
-         </nav>
+          <li v-on:click="hideVerticalMenu">
+            <router-link to="/design">{{
+              $t("views.components.navBar.menu.design")
+            }}</router-link>
+          </li>
+          <li v-on:click="hideVerticalMenu">
+            <router-link to="/results">{{
+              $t("views.components.navBar.menu.results")
+            }}</router-link>
+          </li>
+          <li v-on:click="hideVerticalMenu">
+            <router-link to="/contact">{{
+              $t("views.components.navBar.menu.contact")
+            }}</router-link>
+          </li>
+        </ul>
+      </nav>
       <section></section>
     </div>
   </div>
@@ -95,168 +113,168 @@ import "flag-icon-css/css/flag-icon.css";
 export default {
   name: "NavBar",
   data: function() {
-        return {
-            showVerticalMenu: false,
-        }
+    return {
+      showVerticalMenu: false
+    };
   },
-    methods: {
-        getClass(property) {
-            return property === this.$route.path ? "active" : "";
-        },
-        hideVerticalMenu: async function () {
-            console.log("--------BEFORE hide: " + this.showVerticalMenu);
-            this.showVerticalMenu = false;
-            //await this.$nextTick();
-            console.log("--------AFTER hide: " + this.showVerticalMenu);
-        },
-        triggerVerticalMenu: async function () {
-            console.log("**** BEFORE setShow: " + this.showVerticalMenu);
-            this.showVerticalMenu = !this.showVerticalMenu;
-            //await this.$nextTick();
-            console.log("**** AFTER setShow: " + this.showVerticalMenu);
-        },
-        showInEnglish: function () {
-            this["$i18n"].locale = "en";
-        },
-        showInSpanish: function () {
-            import("@/lang/es.json").then(msgs => {
-                this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
-                this.$i18n.locale = "es";
-            });
-        }
+  methods: {
+    getClass(property) {
+      return property === this.$route.path ? "active" : "";
+    },
+    hideVerticalMenu: async function() {
+      console.log("--------BEFORE hide: " + this.showVerticalMenu);
+      this.showVerticalMenu = false;
+      //await this.$nextTick();
+      console.log("--------AFTER hide: " + this.showVerticalMenu);
+    },
+    triggerVerticalMenu: async function() {
+      console.log("**** BEFORE setShow: " + this.showVerticalMenu);
+      this.showVerticalMenu = !this.showVerticalMenu;
+      //await this.$nextTick();
+      console.log("**** AFTER setShow: " + this.showVerticalMenu);
+    },
+    showInEnglish: function() {
+      this["$i18n"].locale = "en";
+    },
+    showInSpanish: function() {
+      import("@/lang/es.json").then(msgs => {
+        this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
+        this.$i18n.locale = "es";
+      });
+    }
   }
 };
 </script>
 <style scoped>
-  @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-  *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+nav {
+  height: 80px;
+  width: 100%;
+}
+
+nav ul {
+  float: right;
+  margin-right: 60px;
+}
+nav ul li {
+  display: none;
+  line-height: 80px;
+  margin: 0 2px;
+}
+nav ul li a {
+  color: #f2f2f2;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  /* text-transform: uppercase; */
+  font-family: "Poppins", sans-serif;
+}
+
+.checkbtn {
+  font-size: 25px;
+  color: white;
+  float: right;
+  line-height: 80px;
+  margin-right: 20px;
+  cursor: pointer;
+  display: none;
+}
+#check {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  #header .logo img {
+    height: 50px;
+    transition: all;
+    transition-duration: 0.4s;
+    transition: all 0.4s !important;
+  }
+
+  #header .site-nav > ul > li > a {
+    font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+    letter-spacing: 1px !important;
     text-decoration: none;
+    display: block;
+    padding: 21px 20px 13px 20px;
+    font-size: 17px;
+    color: #333333;
+    transition: all;
+    transition-duration: 0.4s;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-bottom: 3px solid #fff;
+    letter-spacing: 0px;
   }
-  nav{
-    height: 80px;
-    width: 100%;
-  }
-
-  nav ul{
-    float: right;
-    margin-right: 60px;
-  }
-  nav ul li{
-    display: none;
-    line-height: 80px;
-    margin: 0 2px;
-  }
-  nav ul li a{
-    color: #f2f2f2;
-    font-weight: 500;
-    font-size: 20px;
-    padding: 7px 13px;
-    border-radius: 3px;
-    /* text-transform: uppercase; */
-    font-family: 'Poppins', sans-serif;
+}
+@media (max-width: 1200px) {
+  #header .logo img {
+    height: 50px;
+    transition: all;
+    transition-duration: 0.4s;
+    transition: all 0.4s !important;
   }
 
-  .checkbtn{
-    font-size: 25px;
-    color: white;
-    float: right;
-    line-height: 80px;
+  .checkbtn {
+    display: block;
     margin-right: 20px;
-    cursor: pointer;
-    display: none;
+    color: black;
   }
-  #check{
-    display:none;
+  ul {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #f7f7f7;
+    top: 67px;
+    left: -100%;
+    text-align: center;
+    transition: all 0.5s;
   }
+  nav ul li {
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;
+  }
+  nav ul li:hover {
+    background-color: #f2f2f2;
+    color: #000000;
+  }
+  nav ul li a {
+    font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+    text-decoration: none;
+    display: block;
+    font-size: 21px;
+    color: #333333;
+    transition: all;
+    transition-duration: 0.4s;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+  }
+  a:hover,
+  a.active {
+    background: none;
+    color: #000000;
+  }
+  #check:checked ~ ul {
+    left: 0;
+  }
+}
+section {
+  display: none;
+  background-size: cover;
+  height: calc(120vh - 80px);
+}
 
-  @media (max-width: 1024px){
-      #header .logo img {
-          height: 50px;
-          transition: all;
-          transition-duration: 0.4s;
-          transition: all 0.4s !important;
-      }
-
-      #header .site-nav > ul > li > a {
-          font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
-          letter-spacing: 1px !important;
-          text-decoration: none;
-          display: block;
-          padding: 21px 20px 13px 20px;
-          font-size: 17px;
-          color: #333333;
-          transition: all;
-          transition-duration: 0.4s;
-          font-weight: 300;
-          text-transform: uppercase;
-          border-bottom: 3px solid #fff;
-          letter-spacing: 0px;
-      }
-  }
-  @media (max-width: 1200px){
-      #header .logo img {
-      height: 50px;
-      transition: all;
-      transition-duration: 0.4s;
-      transition: all 0.4s !important;
-  }
-
-    .checkbtn{
-      display: block;
-      margin-right: 20px;
-      color: black;
-    }
-    ul{
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: #f7f7f7;
-      top: 67px;
-      left: -100%;
-      text-align: center;
-      transition: all .5s;
-    }
-    nav ul li {
-      display: block;
-      margin: 50px 0;
-      line-height: 30px;
-    }
-      nav ul li:hover {
-          background-color: #f2f2f2;
-          color: #000000;
-      }
-    nav ul li a{
-      font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
-        text-decoration: none;
-        display: block;
-        font-size: 21px;
-        color: #333333;
-        transition: all;
-        transition-duration: 0.4s;
-        font-weight: 300;
-        text-transform: uppercase;
-        letter-spacing: 0px;
-     }
-    a:hover,a.active{
-      background: none;
-      color: #000000;
-
-    }
-    #check:checked ~ ul{
-      left: 0;
-    }
-  }
-  section{
-    display:none;
-    background-size: cover;
-    height: calc(120vh - 80px);
-  }
-
-  #header {
+#header {
   position: relative;
   background: #ffffff;
   -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.18);

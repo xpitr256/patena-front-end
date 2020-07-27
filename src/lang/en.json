@@ -35,9 +35,9 @@
       },
       "results": {
         "DesignResult": {
-            "title": "Design Result"
+          "title": "Design Result"
         },
-        "DesignResultHistory":{
+        "DesignResultHistory": {
           "title": "Mutation history",
           "headers": {
             "Pos": "Pos",
@@ -46,15 +46,15 @@
             "Score": "Score"
           }
         },
-        "DesignResultSummary":{
-            "headers": {
-              "Initial": "Initial sequence ",
-              "Final": "Final sequence ",
-              "Copy": "Copy",
-              "Copied": "Copied!",
-              "ErrorMessage": "Sorry, unable to copy to clipboard.",
-              "Length": "Length"
-            }
+        "DesignResultSummary": {
+          "headers": {
+            "Initial": "Initial sequence ",
+            "Final": "Final sequence ",
+            "Copy": "Copy",
+            "Copied": "Copied!",
+            "ErrorMessage": "Sorry, unable to copy to clipboard.",
+            "Length": "Length"
+          }
         }
       }
     },

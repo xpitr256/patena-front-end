@@ -163,7 +163,6 @@
                 {{ $t("views.patenaSettings.actions") }}:
               </h5>
 
-
               <a
                 href="#/"
                 class="btn btn-link mb-2"
@@ -274,52 +273,61 @@
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-
-            <div class="form-check"  v-if="!useDefaultSettings">
-
-                <div class="label-check" >
-                  <div class="custom-control custom-checkbox checkbox-lg">
-                    <input type="checkbox" class="custom-control-input" id="checkbox-2"
-                           v-on:click="changeEnabledNetCharge">
-                    <label class="custom-control-label" for="checkbox-2"> {{ $t("views.patenaSettings.labelCheckNetCharge") }}</label>
-                  </div>
-                </div>
-
+          <div class="form-check" v-if="!useDefaultSettings">
+            <div class="label-check">
+              <div class="custom-control custom-checkbox checkbox-lg">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="checkbox-2"
+                  v-on:click="changeEnabledNetCharge"
+                />
+                <label class="custom-control-label" for="checkbox-2">
+                  {{ $t("views.patenaSettings.labelCheckNetCharge") }}</label
+                >
+              </div>
             </div>
-            <div class="form-group" v-if="useDefaultSettings || checkDisabledNetCharge ==false">
+          </div>
           <div
-            class="alert alert-warning alert-dismissible fade show mt-4"
-            v-show="!useDefaultSettings"
+            class="form-group"
+            v-if="useDefaultSettings || checkDisabledNetCharge == false"
           >
+            <div
+              class="alert alert-warning alert-dismissible fade show mt-4"
+              v-show="!useDefaultSettings"
+            >
+              <strong>{{ $t("views.patenaSettings.important") }}</strong>
+              {{ $t("views.patenaSettings.netChargeWarning") }}
+              <button type="button" class="close" data-dismiss="alert">
+                &times;
+              </button>
+            </div>
 
-            <strong>{{ $t("views.patenaSettings.important") }}</strong>
-            {{ $t("views.patenaSettings.netChargeWarning") }}
-            <button type="button" class="close" data-dismiss="alert">
-              &times;
-            </button>
-          </div>
+            <div class="form-row mt-4">
+              <div class="form-group">
+                <label
+                  >{{ $t("views.patenaSettings.selectNetCharge") }}:
+                </label>
+              </div>
+            </div>
 
-          <div class="form-row mt-4">
-            <div class="form-group">
-              <label>{{ $t("views.patenaSettings.selectNetCharge") }}: </label>
+            <div class="form-row mt-4">
+              <div class="col-2"></div>
+              <div class="form-group col-8">
+                <vue-slider
+                  v-model="netCharge"
+                  :min="-maxNetChargeValue"
+                  :max="maxNetChargeValue"
+                  tooltip="always"
+                  :marks="[-maxNetChargeValue, maxNetChargeValue]"
+                  :dotSize="16"
+                  :disabled="
+                    useDefaultSettings || checkDisabledNetCharge == true
+                  "
+                ></vue-slider>
+              </div>
             </div>
           </div>
-
-          <div class="form-row mt-4">
-            <div class="col-2"></div>
-            <div class="form-group col-8" >
-              <vue-slider
-                v-model="netCharge"
-                :min="-maxNetChargeValue"
-                :max="maxNetChargeValue"
-                tooltip="always"
-                :marks="[-maxNetChargeValue, maxNetChargeValue]"
-                :dotSize="16"
-                :disabled="useDefaultSettings || checkDisabledNetCharge == true"
-              ></vue-slider>
-            </div>
-          </div>
-            </div>
         </div>
         <div
           class="tab-pane fade"
@@ -668,7 +676,7 @@ export default {
     },
     restoreNetCharge() {
       this.netCharge = 0;
-      this.checkDisabledNetCharge=true;
+      this.checkDisabledNetCharge = true;
     },
     restoreFrequencies() {
       this.avoidUVSilent = false;
@@ -807,8 +815,7 @@ export default {
         delete data.initialSequence;
       }
 
-      if (!this.useDefaultSettings ) {
-
+      if (!this.useDefaultSettings) {
         data.config = {
           frequencies: this.getFrequenciesDataForBackend(),
           algorithms: this.getAlgorithmsDataForBackend()
@@ -819,7 +826,7 @@ export default {
         }
       }
 
-      data.language=this["$i18n"].locale
+      data.language = this["$i18n"].locale;
 
       return data;
     },
@@ -850,12 +857,12 @@ export default {
       }
       this.submitInProgress = false;
     },
-    changeEnabledNetCharge: function(){
+    changeEnabledNetCharge: function() {
       console.log(this.checkDisabledNetCharge);
       this.netCharge = 0;
-      this.checkDisabledNetCharge =!this.checkDisabledNetCharge;
+      this.checkDisabledNetCharge = !this.checkDisabledNetCharge;
     },
-    isEnabledNetCharge: function(){
+    isEnabledNetCharge: function() {
       return !this.checkDisabledNetCharge;
     }
   }
@@ -1005,24 +1012,24 @@ export default {
 }
 
 .label-check {
-    position: relative;
-    border-radius: 10px;
-    padding: 30px 30px 30px 30px;
-    font: 24px Arial ;
-    text-align:center;
+  position: relative;
+  border-radius: 10px;
+  padding: 30px 30px 30px 30px;
+  font: 24px Arial;
+  text-align: center;
 }
 .big-checkbox {
-    width: 18px;
-    height: 18px;
-    padding: 30px;
-    border: 2px solid;
-    border-radius: 5px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
+  width: 18px;
+  height: 18px;
+  padding: 30px;
+  border: 2px solid;
+  border-radius: 5px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
 }
 .checkbox-lg .custom-control-label::before,
 .checkbox-lg .custom-control-label::after {
-  top: .8rem;
+  top: 0.8rem;
   width: 1.55rem;
   height: 1.55rem;
 }
@@ -1043,5 +1050,4 @@ export default {
   padding-top: 23px;
   padding-left: 10px;
 }
-
 </style>

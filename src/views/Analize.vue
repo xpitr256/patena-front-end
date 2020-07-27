@@ -125,7 +125,7 @@ export default {
       const postData = {
         email: this.email,
         sequence: sequence,
-        language:this["$i18n"].locale
+        language: this["$i18n"].locale
       };
       const response = await BackendService.analyzeLinker(postData);
       this.$Progress.finish();
@@ -167,8 +167,7 @@ export default {
       delete data.initialSequence;
     }
 
-    if (!this.useDefaultSettings ) {
-
+    if (!this.useDefaultSettings) {
       data.config = {
         frequencies: this.getFrequenciesDataForBackend(),
         algorithms: this.getAlgorithmsDataForBackend()
@@ -179,7 +178,7 @@ export default {
       }
     }
 
-    data.language=this["$i18n"].locale
+    data.language = this["$i18n"].locale;
 
     return data;
   }

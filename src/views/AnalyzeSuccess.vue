@@ -6,7 +6,7 @@
       <p v-if="HasEmail">
         {{ $t("views.analyzeSuccess.fileReceived") }}
         <span class="font-weight-bold">{{ fastaName }}</span
-        >.  {{ $t("views.analyzeSuccess.emailSent") }}
+        >. {{ $t("views.analyzeSuccess.emailSent") }}
         <span class="font-italic">{{ email }}</span>
         {{ $t("views.analyzeSuccess.orderNumber") }}
         <span class="font-weight-bold">{{ orderNumber }}.</span>
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       orderNumber: 0,
-      HasEmail : false
+      HasEmail: false
     };
   },
   created() {
