@@ -1,11 +1,8 @@
 import Vue from "vue";
 
-// TODO read value from env file
-const baseDomain = "https://patena-api.herokuapp.com";
+const baseDomain = process.env.BACK_END_BASE_URL || "http://localhost:3000";
 const genericErrorMessage =
   "There was an error connecting with our servers. Try again later please"; //TODO translate it
-
-//const baseDomain = "http://localhost:3000";
 
 export default {
   async sendContactInformation(email, name, message) {
