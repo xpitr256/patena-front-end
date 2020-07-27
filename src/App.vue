@@ -15,6 +15,7 @@
     export default {
       components: { NavBarMaster, BackendService },
       mounted() {
+          console.log("%%%%%%%%%%% : " + process.env.VUE_APP_TEST_NAME);
        if (localStorage.lang) {
           this["$i18n"].locale  = localStorage.lang;
         }
@@ -25,7 +26,8 @@
             }
         },
         async created() {
-              await BackendService.wakeUpBackend();
+            console.log("#############" + process.env.VUE_APP_TEST_NAME);
+            await BackendService.wakeUpBackend();
         }
     };
     </script>
