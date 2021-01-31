@@ -2,9 +2,7 @@
   <div id="header" class="header-fixed">
     <div class="container">
       <div class="logo">
-        <router-link to="/"
-          ><img src="./../assets/logo.png" alt="Patena"
-        /></router-link>
+        <router-link to="/"><img src="./../assets/logo.png" alt="Patena"/></router-link>
       </div>
 
       <nav role="navigation">

@@ -8,33 +8,21 @@
         <thead>
           <tr>
             <th style="text-align: center;">
-              {{
-                $t("views.components.results.DesignResultHistory.headers.Pos")
-              }}
+              {{ $t("views.components.results.DesignResultHistory.headers.Pos") }}
             </th>
             <th style="text-align: center;">
-              {{
-                $t(
-                  "views.components.results.DesignResultHistory.headers.Before"
-                )
-              }}
+              {{ $t("views.components.results.DesignResultHistory.headers.Before") }}
             </th>
             <th style="text-align: center;"></th>
             <th style="text-align: center;">
-              {{
-                $t("views.components.results.DesignResultHistory.headers.After")
-              }}
+              {{ $t("views.components.results.DesignResultHistory.headers.After") }}
             </th>
             <th style="text-align: center;">
-              {{
-                $t("views.components.results.DesignResultHistory.headers.Score")
-              }}
+              {{ $t("views.components.results.DesignResultHistory.headers.Score") }}
             </th>
           </tr>
         </thead>
-        <design-result-history-row
-          v-bind:rows="rows"
-        ></design-result-history-row>
+        <design-result-history-row v-bind:rows="rows"></design-result-history-row>
       </table>
     </div>
   </div>

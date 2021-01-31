@@ -3,37 +3,25 @@
     <div class="container">
       <div class="logo">
         <a>
-          <router-link to="/"
-            ><img src="./../assets/logo.png" alt="Patena"
-          /></router-link>
+          <router-link to="/"><img src="./../assets/logo.png" alt="Patena"/></router-link>
         </a>
       </div>
       <div class="site-nav">
         <ul>
           <li>
-            <router-link to="/about" v-bind:class="getClass('/about')">{{
-              $t("views.components.navBar.menu.about")
-            }}</router-link>
+            <router-link to="/about" v-bind:class="getClass('/about')">{{ $t("views.components.navBar.menu.about") }}</router-link>
           </li>
           <li>
-            <router-link to="/analyze" v-bind:class="getClass('/analyze')">{{
-              $t("views.components.navBar.menu.analyze")
-            }}</router-link>
+            <router-link to="/analyze" v-bind:class="getClass('/analyze')">{{ $t("views.components.navBar.menu.analyze") }}</router-link>
           </li>
           <li>
-            <router-link to="/design" v-bind:class="getClass('/design')">{{
-              $t("views.components.navBar.menu.design")
-            }}</router-link>
+            <router-link to="/design" v-bind:class="getClass('/design')">{{ $t("views.components.navBar.menu.design") }}</router-link>
           </li>
           <li>
-            <router-link to="/results" v-bind:class="getClass('/results')">{{
-              $t("views.components.navBar.menu.results")
-            }}</router-link>
+            <router-link to="/results" v-bind:class="getClass('/results')">{{ $t("views.components.navBar.menu.results") }}</router-link>
           </li>
           <li>
-            <router-link to="/contact" v-bind:class="getClass('/contact')">{{
-              $t("views.components.navBar.menu.contact")
-            }}</router-link>
+            <router-link to="/contact" v-bind:class="getClass('/contact')">{{ $t("views.components.navBar.menu.contact") }}</router-link>
           </li>
           <li>
             <a href="#" v-on:click="showInSpanish" title="Español">
@@ -54,51 +42,31 @@
           <i class="fa fa-bars "></i>
         </label>
         <li>
-          <a
-            href="#"
-            class="checkbtn"
-            v-on:click="showInSpanish"
-            title="Español"
-          >
+          <a href="#" class="checkbtn" v-on:click="showInSpanish" title="Español">
             <span class="flag-icon flag-icon-es "></span>
           </a>
         </li>
         <li class="last">
-          <a
-            href="#"
-            class="checkbtn margin:1px;"
-            v-on:click="showInEnglish"
-            title="English"
-          >
+          <a href="#" class="checkbtn margin:1px;" v-on:click="showInEnglish" title="English">
             <span class="flag-icon flag-icon-gb "></span>
           </a>
         </li>
 
         <ul v-show="showVerticalMenu">
           <li v-on:click="hideVerticalMenu">
-            <router-link to="/about">{{
-              $t("views.components.navBar.menu.about")
-            }}</router-link>
+            <router-link to="/about">{{ $t("views.components.navBar.menu.about") }}</router-link>
           </li>
           <li v-on:click="hideVerticalMenu">
-            <router-link to="/analyze">{{
-              $t("views.components.navBar.menu.analyze")
-            }}</router-link>
+            <router-link to="/analyze">{{ $t("views.components.navBar.menu.analyze") }}</router-link>
           </li>
           <li v-on:click="hideVerticalMenu">
-            <router-link to="/design">{{
-              $t("views.components.navBar.menu.design")
-            }}</router-link>
+            <router-link to="/design">{{ $t("views.components.navBar.menu.design") }}</router-link>
           </li>
           <li v-on:click="hideVerticalMenu">
-            <router-link to="/results">{{
-              $t("views.components.navBar.menu.results")
-            }}</router-link>
+            <router-link to="/results">{{ $t("views.components.navBar.menu.results") }}</router-link>
           </li>
           <li v-on:click="hideVerticalMenu">
-            <router-link to="/contact">{{
-              $t("views.components.navBar.menu.contact")
-            }}</router-link>
+            <router-link to="/contact">{{ $t("views.components.navBar.menu.contact") }}</router-link>
           </li>
         </ul>
       </nav>

@@ -1,25 +1,4 @@
-const aminoAcids = [
-  "A",
-  "R",
-  "N",
-  "D",
-  "C",
-  "E",
-  "Q",
-  "G",
-  "H",
-  "I",
-  "L",
-  "K",
-  "M",
-  "F",
-  "P",
-  "S",
-  "T",
-  "W",
-  "Y",
-  "V"
-];
+const aminoAcids = ["A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V"];
 
 const flankingOpenMark = "<span class='flanking'>";
 const flankingCloseMark = "</span>";
@@ -64,9 +43,7 @@ export function getFirstSequence(fastaContent) {
     return "";
   }
 
-  const firstNoCommentLineIndex = lines.findIndex(
-    line => !line.startsWith(">")
-  );
+  const firstNoCommentLineIndex = lines.findIndex(line => !line.startsWith(">"));
   let otherLines = lines.slice(firstNoCommentLineIndex, lines.length);
   const otherCommentIndex = otherLines.findIndex(line => line.startsWith(">"));
 
@@ -112,45 +89,27 @@ export function getSequenceLengthFrom(sequence) {
 
 export function splitSequenceInLinesOf(sequence, amountOfCharacters) {
   return sequence.split("").reduce((accumulator, element, index) => {
-    return (
-      accumulator +
-      element +
-      ((index + 1) % amountOfCharacters === 0 ? "<br>" : "")
-    );
+    return accumulator + element + ((index + 1) % amountOfCharacters === 0 ? "<br>" : "");
   }, "");
 }
 
-export function splitSequenceInLinesWithHighlight(
-  sequence,
-  charactersPerLine,
-  highlightOptions
-) {
+export function splitSequenceInLinesWithHighlight(sequence, charactersPerLine, highlightOptions) {
   let sequenceArray = [];
 
-  const isSequenceShorterThanHighlightAmount =
-    sequence.length <= highlightOptions.highlightedCharactersAmount;
+  const isSequenceShorterThanHighlightAmount = sequence.length <= highlightOptions.highlightedCharactersAmount;
 
-  if (
-    highlightOptions.highlightAtTheBeginning ||
-    isSequenceShorterThanHighlightAmount
-  ) {
+  if (highlightOptions.highlightAtTheBeginning || isSequenceShorterThanHighlightAmount) {
     sequenceArray.push(flankingOpenMark);
   }
 
   [...sequence].forEach((c, index) => {
     sequenceArray.push(c);
 
-    if (
-      highlightOptions.highlightAtTheBeginning &&
-      index === highlightOptions.highlightedCharactersAmount
-    ) {
+    if (highlightOptions.highlightAtTheBeginning && index === highlightOptions.highlightedCharactersAmount) {
       sequenceArray.push(flankingCloseMark);
     }
 
-    if (
-      highlightOptions.highlightAtTheEnd &&
-      index === sequence.length - highlightOptions.highlightedCharactersAmount
-    ) {
+    if (highlightOptions.highlightAtTheEnd && index === sequence.length - highlightOptions.highlightedCharactersAmount) {
       sequenceArray.push(flankingOpenMark);
     }
 
@@ -159,10 +118,7 @@ export function splitSequenceInLinesWithHighlight(
     }
   });
 
-  if (
-    highlightOptions.highlightAtTheEnd ||
-    isSequenceShorterThanHighlightAmount
-  ) {
+  if (highlightOptions.highlightAtTheEnd || isSequenceShorterThanHighlightAmount) {
     sequenceArray.push(flankingCloseMark);
   }
 

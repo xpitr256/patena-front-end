@@ -38,11 +38,7 @@ export default {
   },
   methods: {
     isBigAminoAcid: function(position) {
-      return (
-        this.showBig ||
-        this.showAsWarning(position) ||
-        this.showAsSuccess(position)
-      );
+      return this.showBig || this.showAsWarning(position) || this.showAsSuccess(position);
     },
     showAsWarning: function(position) {
       return this.warningPositions && this.warningPositions.includes(position);
@@ -60,20 +56,12 @@ export default {
       const max = pivot + this.windowRadius;
       //TODO: add case length less than size window
       if (pivot > length - this.windowRadius - 1) {
-        this.hiddenPositions = this.loadFirstAsHidden(
-          this.windowRadius,
-          length
-        );
+        this.hiddenPositions = this.loadFirstAsHidden(this.windowRadius, length);
         return this.hiddenPositions && this.hiddenPositions.includes(position);
       } else {
         if (pivot <= this.windowRadius) {
-          this.hiddenPositions = this.loadLastAsHidden(
-            this.windowRadius,
-            length
-          );
-          return (
-            this.hiddenPositions && this.hiddenPositions.includes(position)
-          );
+          this.hiddenPositions = this.loadLastAsHidden(this.windowRadius, length);
+          return this.hiddenPositions && this.hiddenPositions.includes(position);
         }
       }
 
@@ -84,9 +72,7 @@ export default {
       return false;
     },
     getPivot() {
-      return this.successPositions && this.successPositions.length > 0
-        ? this.successPositions[0]
-        : this.warningPositions[0];
+      return this.successPositions && this.successPositions.length > 0 ? this.successPositions[0] : this.warningPositions[0];
     },
     loadFirstAsHidden(radius, length) {
       let firstHiddenPositions = [];

@@ -20,12 +20,7 @@
               />
             </div>
             <div class="col-6">
-              <button
-                type="button"
-                v-on:click="sendForm"
-                :disabled="submitInProgress || errors.items.length > 0"
-                class="btn btn-md btn-primary"
-              >
+              <button type="button" v-on:click="sendForm" :disabled="submitInProgress || errors.items.length > 0" class="btn btn-md btn-primary">
                 <i class="fas fa-search"></i>
                 {{ $t("views.result.btnSearch") }}
               </button>
@@ -34,51 +29,33 @@
           <div class="invalid-feedback">
             {{ errors.first("orderNumber") }}
           </div>
-          <small id="orderNumberHelp" class="form-text text-muted">{{
-            $t("views.result.help")
-          }}</small>
+          <small id="orderNumberHelp" class="form-text text-muted">{{ $t("views.result.help") }}</small>
         </div>
       </div>
     </form>
 
-    <div
-      class="a alert alert-warning border border-dark"
-      role="alert"
-      v-if="showUnknownMessage"
-    >
+    <div class="a alert alert-warning border border-dark" role="alert" v-if="showUnknownMessage">
       <h4 class="alert-heading">
         {{ $t("views.result.unknownOrderNumberHeader") }}
         <i class="fas fa-search"></i>
       </h4>
       {{ $t("views.result.unknownOrderNumber") }}
     </div>
-    <div
-      class="a alert alert-secondary border border-dark"
-      role="alert"
-      v-if="showInActionMessage"
-    >
+    <div class="a alert alert-secondary border border-dark" role="alert" v-if="showInActionMessage">
       <h4 class="alert-heading">
         {{ $t("views.result.inActionOrderNumberHeader") }}
         <i class="fa fa-cogs"></i>
       </h4>
       {{ $t("views.result.inActionOrderNumber") }}
     </div>
-    <div
-      class="a alert alert-warning border border-dark"
-      role="alert"
-      v-if="showPendingMessage"
-    >
+    <div class="a alert alert-warning border border-dark" role="alert" v-if="showPendingMessage">
       <h4 class="alert-heading">
         {{ $t("views.result.pendingOrderNumberHeader") }}
         <i class="fas fa-hourglass-start"></i>
       </h4>
       {{ $t("views.result.pendingOrderNumber") }}
     </div>
-    <div
-      class="a alert alert-danger border border-dark"
-      role="alert"
-      v-if="showCancelledMessage"
-    >
+    <div class="a alert alert-danger border border-dark" role="alert" v-if="showCancelledMessage">
       <h4 class="alert-heading">
         {{ $t("views.result.cancelledOrderNumberHeader") }}
         <i class="fa fa-ban"></i>

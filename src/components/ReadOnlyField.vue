@@ -1,18 +1,8 @@
 <template>
-  <div
-    class="form-group row"
-    v-if="value"
-    v-bind:class="{ highlight: highlight }"
-  >
+  <div class="form-group row" v-if="value" v-bind:class="{ highlight: highlight }">
     <label for="operation" class="col-sm-3 col-form-label">{{ label }}</label>
     <div class="col-sm-9">
-      <input
-        type="text"
-        readonly
-        class="form-control-plaintext bold"
-        id="operation"
-        v-model="showValue"
-      />
+      <input type="text" readonly class="form-control-plaintext bold" id="operation" v-model="showValue" />
     </div>
   </div>
 </template>

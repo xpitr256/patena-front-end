@@ -20,10 +20,7 @@ describe("FastaService Test ", function() {
 
     it("should return true for valid file with no comments", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "validWithNoComment.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "validWithNoComment.fasta", "utf8");
         assert(fastaService.isValidFasta(data));
       } catch (err) {
         throw err;
@@ -32,10 +29,7 @@ describe("FastaService Test ", function() {
 
     it("should return false for wrong amino acid", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "invalidAminoAcidCharacter.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "invalidAminoAcidCharacter.fasta", "utf8");
         assert.strictEqual(fastaService.isValidFasta(data), false);
       } catch (err) {
         throw err;
@@ -62,10 +56,7 @@ describe("FastaService Test ", function() {
 
     it("should return false for files with spaces between amino acids", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "spacesBetweenAminoAcid.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "spacesBetweenAminoAcid.fasta", "utf8");
         assert.strictEqual(fastaService.isValidFasta(data), false);
       } catch (err) {
         throw err;
@@ -96,14 +87,8 @@ describe("FastaService Test ", function() {
 
     it("should return only the sequence with no comments", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "validWithNoComment.fasta",
-          "utf8"
-        );
-        assert.strictEqual(
-          fastaService.getFirstSequence(data),
-          "AAARRRRRNNNNDDDDDDCCCCEEQQQ"
-        );
+        const data = fs.readFileSync(basePath + "validWithNoComment.fasta", "utf8");
+        assert.strictEqual(fastaService.getFirstSequence(data), "AAARRRRRNNNNDDDDDDCCCCEEQQQ");
       } catch (err) {
         throw err;
       }
@@ -111,10 +96,7 @@ describe("FastaService Test ", function() {
 
     it("should return the sequence in a fasta with 2 comments before the sequence", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "twoLinesComment.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "twoLinesComment.fasta", "utf8");
         assert.strictEqual(fastaService.getFirstSequence(data), "ABC");
       } catch (err) {
         throw err;
@@ -123,10 +105,7 @@ describe("FastaService Test ", function() {
 
     it("should return the sequence in a fasta with no comment at the begin then comment and finally a second sequence", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "sequenceCommentOtherSequence.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "sequenceCommentOtherSequence.fasta", "utf8");
         assert.strictEqual(fastaService.getFirstSequence(data), "DDDDDEEEE");
       } catch (err) {
         throw err;
@@ -135,10 +114,7 @@ describe("FastaService Test ", function() {
 
     it("should return the sequence in a fasta with 1 line comment and 1 line sequence after it", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "commentSequence.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "commentSequence.fasta", "utf8");
         assert.strictEqual(fastaService.getFirstSequence(data), "ZGHWABC");
       } catch (err) {
         throw err;
@@ -147,10 +123,7 @@ describe("FastaService Test ", function() {
 
     it("should return the sequence in a fasta with only 1 line sequence", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "oneLineSequence.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "oneLineSequence.fasta", "utf8");
         assert.strictEqual(fastaService.getFirstSequence(data), "AAABBBCCC");
       } catch (err) {
         throw err;
@@ -214,10 +187,7 @@ describe("FastaService Test ", function() {
 
     it("should be empty for no comment fasta", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "validWithNoComment.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "validWithNoComment.fasta", "utf8");
         assert.strictEqual(fastaService.getSequenceName(data), "");
       } catch (err) {
         throw err;
@@ -227,10 +197,7 @@ describe("FastaService Test ", function() {
     it("should not be empty for valid fasta with comment in the first line", function() {
       try {
         const data = fs.readFileSync(basePath + "validFasta.fasta", "utf8");
-        assert.strictEqual(
-          fastaService.getSequenceName(data),
-          "Comment comment first sequence"
-        );
+        assert.strictEqual(fastaService.getSequenceName(data), "Comment comment first sequence");
       } catch (err) {
         throw err;
       }
@@ -238,10 +205,7 @@ describe("FastaService Test ", function() {
 
     it("should get the first of two lines comments", function() {
       try {
-        const data = fs.readFileSync(
-          basePath + "twoLinesComment.fasta",
-          "utf8"
-        );
+        const data = fs.readFileSync(basePath + "twoLinesComment.fasta", "utf8");
         assert.strictEqual(fastaService.getSequenceName(data), "comment 1");
       } catch (err) {
         throw err;
