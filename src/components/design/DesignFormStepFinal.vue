@@ -240,7 +240,7 @@
                         v-bind:class="getInputFrequencyClass(frequency)"
                         :disabled="
                           (frequency.uvSilent && avoidUVSilent) ||
-                            useDefaultSettings
+                            useDefaultSettings || (frequency.cysteine && avoidCysteine)
                         "
                         @change="checkFrequencies"
                         :min="0"
@@ -322,7 +322,7 @@
                   :marks="[-maxNetChargeValue, maxNetChargeValue]"
                   :dotSize="16"
                   :disabled="
-                    useDefaultSettings || checkDisabledNetCharge == true
+                    useDefaultSettings || checkDisabledNetCharge === true
                   "
                 ></vue-slider>
               </div>
@@ -498,7 +498,7 @@ export default {
           { name: "D", value: 5.4, getCSSClass: "R" }
         ],
         [
-          { name: "C", value: 1.4, getCSSClass: "C" },
+          { name: "C", value: 1.4, getCSSClass: "C", cysteine: true},
           { name: "Q", value: 3.9, getCSSClass: "R" },
           { name: "E", value: 6.8, getCSSClass: "R" },
           { name: "G", value: 7.1, getCSSClass: "R" }
@@ -594,7 +594,7 @@ export default {
       }
     },
     getInputCysteineClass: function(frequency) {
-      const isCysteine = frequency.name === "C";
+      const isCysteine = frequency.cysteine;
       if (isCysteine && !this.avoidCysteine && !this.useDefaultSettings) {
         return "cInput";
       }
