@@ -6,21 +6,31 @@
       :distance="formData.distance"
       :email="formData.email"
       :initialSequence="formData.initialSequence.name"
-      :flankingSequence1="formData.flankingSequence1 ? formData.flankingSequence1.name : null"
-      :flankingSequence2="formData.flankingSequence2 ? formData.flankingSequence2.name : null"
+      :flankingSequence1="
+        formData.flankingSequence1 ? formData.flankingSequence1.name : null
+      "
+      :flankingSequence2="
+        formData.flankingSequence2 ? formData.flankingSequence2.name : null
+      "
       @modalConfirmation="sendForm"
     ></confirmation-modal>
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="goToStep(1)">{{ $t("views.design.breadcrumb.step1") }}</a>
+          <a class="black-text" href="#" v-on:click="goToStep(1)">{{
+            $t("views.design.breadcrumb.step1")
+          }}</a>
         </li>
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="goToStep(3)">{{ $t("views.design.breadcrumb.step2InitialData") }}</a>
+          <a class="black-text" href="#" v-on:click="goToStep(3)">{{
+            $t("views.design.breadcrumb.step2InitialData")
+          }}</a>
         </li>
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="getStepBack">{{ $t("views.design.breadcrumb.step3") }}</a>
+          <a class="black-text" href="#" v-on:click="getStepBack">{{
+            $t("views.design.breadcrumb.step3")
+          }}</a>
         </li>
         <li class="breadcrumb-item active">
           {{ $t("views.design.breadcrumb.step4") }}
@@ -35,11 +45,24 @@
 
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="button-wrap mt-4">
-        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="true" v-on:click="setDefaultSettings" type="radio" id="length-button" />
+        <input
+          class="hidden radio-label"
+          v-model="useDefaultSettings"
+          v-bind:value="true"
+          v-on:click="setDefaultSettings"
+          type="radio"
+          id="length-button"
+        />
         <label class="button-label" for="length-button">
           <span>{{ $t("views.patenaSettings.useDefaultSettings") }}</span>
         </label>
-        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="false" type="radio" id="sequence-button" />
+        <input
+          class="hidden radio-label"
+          v-model="useDefaultSettings"
+          v-bind:value="false"
+          type="radio"
+          id="sequence-button"
+        />
         <label class="button-label" for="sequence-button">
           <span>{{ $t("views.patenaSettings.useCustomSettings") }}</span>
         </label>
@@ -47,20 +70,53 @@
 
       <nav v-show="useDefaultSettings !== null">
         <div class="nav nav-tabs mt-5" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"
+          <a
+            class="nav-item nav-link active"
+            id="nav-home-tab"
+            data-toggle="tab"
+            href="#nav-home"
+            role="tab"
+            aria-controls="nav-home"
+            aria-selected="true"
             >1. {{ $t("views.patenaSettings.aminoAcidFrequencies") }}</a
           >
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"
+          <a
+            class="nav-item nav-link"
+            id="nav-profile-tab"
+            data-toggle="tab"
+            href="#nav-profile"
+            role="tab"
+            aria-controls="nav-profile"
+            aria-selected="false"
             >2. {{ $t("views.patenaSettings.netCharge") }}</a
           >
-          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"
+          <a
+            class="nav-item nav-link"
+            id="nav-contact-tab"
+            data-toggle="tab"
+            href="#nav-contact"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
             >3. {{ $t("views.patenaSettings.algorithms") }}</a
           >
         </div>
       </nav>
-      <div class="tab-content" id="nav-tabContent" v-show="useDefaultSettings !== null">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
+      <div
+        class="tab-content"
+        id="nav-tabContent"
+        v-show="useDefaultSettings !== null"
+      >
+        <div
+          class="tab-pane fade show active"
+          id="nav-home"
+          role="tabpanel"
+          aria-labelledby="nav-home-tab"
+        >
+          <div
+            class="alert alert-warning alert-dismissible fade show mt-4"
+            v-show="!useDefaultSettings"
+          >
             <strong>{{ $t("views.patenaSettings.important") }}</strong>
             {{ $t("views.patenaSettings.aminoAcidWarning") }}
             <button type="button" class="close" data-dismiss="alert">
@@ -70,10 +126,18 @@
 
           <div class="row">
             <div class="col-md-3 grey-border">
-              <h5 class="mt-3 mb-2 font-weight-bold" :class="{ labelDisabled: useDefaultSettings }">{{ $t("views.patenaSettings.references") }}:</h5>
+              <h5
+                class="mt-3 mb-2 font-weight-bold"
+                :class="{ labelDisabled: useDefaultSettings }"
+              >
+                {{ $t("views.patenaSettings.references") }}:
+              </h5>
               <div class="row align-items-center">
                 <div class="col col-md-auto">
-                  <div class="reference uvReference" :class="{ uvReferenceDisabled: useDefaultSettings }"></div>
+                  <div
+                    class="reference uvReference"
+                    :class="{ uvReferenceDisabled: useDefaultSettings }"
+                  ></div>
                 </div>
                 <div class="col" :class="{ labelDisabled: useDefaultSettings }">
                   {{ $t("views.patenaSettings.uvAminoAcidLabel") }}
@@ -82,16 +146,29 @@
 
               <div class="row align-items-center">
                 <div class="col col-md-auto">
-                  <div class="reference cReference" :class="{ cReferenceDisabled: useDefaultSettings }"></div>
+                  <div
+                    class="reference cReference"
+                    :class="{ cReferenceDisabled: useDefaultSettings }"
+                  ></div>
                 </div>
                 <div class="col" :class="{ labelDisabled: useDefaultSettings }">
                   {{ $t("views.patenaSettings.CLabel") }}
                 </div>
               </div>
 
-              <h5 class="mt-5 mb-2 font-weight-bold" :class="{ labelDisabled: useDefaultSettings }">{{ $t("views.patenaSettings.actions") }}:</h5>
+              <h5
+                class="mt-5 mb-2 font-weight-bold"
+                :class="{ labelDisabled: useDefaultSettings }"
+              >
+                {{ $t("views.patenaSettings.actions") }}:
+              </h5>
 
-              <a href="#/" class="btn btn-link mb-2" v-on:click="restoreFrequencies" :class="{ disabled: useDefaultSettings }">
+              <a
+                href="#/"
+                class="btn btn-link mb-2"
+                v-on:click="restoreFrequencies"
+                :class="{ disabled: useDefaultSettings }"
+              >
                 <i class="fas fa-undo"></i>
                 {{ $t("views.patenaSettings.restoreFrequencies") }}
               </a>
@@ -108,7 +185,12 @@
                 :sync="true"
                 :labels="true"
               />
-              <a href="#/" class="btn btn-link mb-2" v-on:click="changeUVSilent" :class="{ disabled: useDefaultSettings }">
+              <a
+                href="#/"
+                class="btn btn-link mb-2"
+                v-on:click="changeUVSilent"
+                :class="{ disabled: useDefaultSettings }"
+              >
                 {{ $t("views.patenaSettings.avoidAminoAcid") }}
               </a>
               <br />
@@ -124,22 +206,45 @@
                 :sync="true"
                 :labels="true"
               />
-              <a href="#/" class="btn btn-link mb-2" v-on:click="changeCysteine" :class="{ disabled: useDefaultSettings }">
+              <a
+                href="#/"
+                class="btn btn-link mb-2"
+                v-on:click="changeCysteine"
+                :class="{ disabled: useDefaultSettings }"
+              >
                 {{ $t("views.patenaSettings.avoidCysteine") }}
               </a>
             </div>
             <div class="col-md-9">
-              <div class="form-row" v-for="(row, index) in frequencies" v-bind:class="{ 'mt-4': index === 0 }">
-                <div class="form-group col-md-3" v-for="(frequency, internalIndex) in row">
+              <div
+                class="form-row"
+                v-for="(row, index) in frequencies"
+                v-bind:class="{ 'mt-4': index === 0 }"
+                :key="row"
+              >
+                <div
+                  class="form-group col-md-3"
+                  v-for="(frequency, internalIndex) in row"
+                  :key="frequency.name"
+                >
                   <div class="form-row">
                     <div class="form-group col-md-3 text-right">
-                      <span class="aminoAcid" v-bind:class="getLabelFrequencyClass(frequency)"> {{ frequency.name }}:</span>
+                      <span
+                        class="aminoAcid"
+                        v-bind:class="getLabelFrequencyClass(frequency)"
+                      >
+                        {{ frequency.name }}:</span
+                      >
                     </div>
                     <div class="form-group col-md-9">
                       <number-input
                         v-model="frequencies[index][internalIndex].value"
                         v-bind:class="getInputFrequencyClass(frequency)"
-                        :disabled="(frequency.uvSilent && avoidUVSilent) || useDefaultSettings || (frequency.cysteine && avoidCysteine)"
+                        :disabled="
+                          (frequency.uvSilent && avoidUVSilent) ||
+                            useDefaultSettings ||
+                            (frequency.cysteine && avoidCysteine)
+                        "
                         @change="checkFrequencies"
                         :min="0"
                         :max="100"
@@ -158,21 +263,42 @@
 
           <div class="form-row">
             <div class="col">
-              <span class="badge float-right" v-bind:class="totalFrequencyClass">{{ $t("views.patenaSettings.totalFrequency") }}: {{ totalFrequency }}%</span>
+              <span class="badge float-right" v-bind:class="totalFrequencyClass"
+                >{{ $t("views.patenaSettings.totalFrequency") }}:
+                {{ totalFrequency }}%</span
+              >
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div
+          class="tab-pane fade"
+          id="nav-profile"
+          role="tabpanel"
+          aria-labelledby="nav-profile-tab"
+        >
           <div class="form-check" v-if="!useDefaultSettings">
             <div class="label-check">
               <div class="custom-control custom-checkbox checkbox-lg">
-                <input type="checkbox" class="custom-control-input" id="checkbox-2" v-on:click="changeEnabledNetCharge" />
-                <label class="custom-control-label" for="checkbox-2"> {{ $t("views.patenaSettings.labelCheckNetCharge") }}</label>
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="checkbox-2"
+                  v-on:click="changeEnabledNetCharge"
+                />
+                <label class="custom-control-label" for="checkbox-2">
+                  {{ $t("views.patenaSettings.labelCheckNetCharge") }}</label
+                >
               </div>
             </div>
           </div>
-          <div class="form-group" v-if="useDefaultSettings || checkDisabledNetCharge == false">
-            <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
+          <div
+            class="form-group"
+            v-if="useDefaultSettings || checkDisabledNetCharge == false"
+          >
+            <div
+              class="alert alert-warning alert-dismissible fade show mt-4"
+              v-show="!useDefaultSettings"
+            >
               <strong>{{ $t("views.patenaSettings.important") }}</strong>
               {{ $t("views.patenaSettings.netChargeWarning") }}
               <button type="button" class="close" data-dismiss="alert">
@@ -182,7 +308,9 @@
 
             <div class="form-row mt-4">
               <div class="form-group">
-                <label>{{ $t("views.patenaSettings.selectNetCharge") }}: </label>
+                <label
+                  >{{ $t("views.patenaSettings.selectNetCharge") }}:
+                </label>
               </div>
             </div>
 
@@ -196,14 +324,24 @@
                   tooltip="always"
                   :marks="[-maxNetChargeValue, maxNetChargeValue]"
                   :dotSize="16"
-                  :disabled="useDefaultSettings || checkDisabledNetCharge === true"
+                  :disabled="
+                    useDefaultSettings || checkDisabledNetCharge === true
+                  "
                 ></vue-slider>
               </div>
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-          <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
+        <div
+          class="tab-pane fade"
+          id="nav-contact"
+          role="tabpanel"
+          aria-labelledby="nav-contact-tab"
+        >
+          <div
+            class="alert alert-warning alert-dismissible fade show mt-4"
+            v-show="!useDefaultSettings"
+          >
             <strong>{{ $t("views.patenaSettings.important") }}</strong>
             {{ $t("views.patenaSettings.algorithmWarning") }}
             <button type="button" class="close" data-dismiss="alert">
@@ -211,8 +349,17 @@
             </button>
           </div>
 
-          <div class="form-row" v-for="(row, index) in algorithms" v-bind:class="{ 'mt-4': index === 0 }">
-            <div class="form-group col-md-4" v-for="(algorithm, internalIndex) in row">
+          <div
+            class="form-row"
+            v-bind:key="index"
+            v-for="(row, index) in algorithms"
+            v-bind:class="{ 'mt-4': index === 0 }"
+          >
+            <div
+              class="form-group col-md-4"
+              v-for="(algorithm, internalIndex) in row"
+              :key="algorithm.name"
+            >
               <div class="card">
                 <h5 class="card-header font-weight-bold ">
                   <div class="d-flex justify-content-between">
@@ -237,9 +384,15 @@
                 </h5>
 
                 <div class="card-body">
-                  <p class="card-text" :class="{ labelDisabled: useDefaultSettings }">
-                    This is a description for this algorithm Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
+                  <p
+                    class="card-text"
+                    :class="{ labelDisabled: useDefaultSettings }"
+                  >
+                    This is a description for this algorithm Lorem ipsum dolor
+                    sit amet, consectetur adipiscing elit, sed eiusmod tempor
+                    incidunt ut labore et dolore magna aliqua. Ut enim ad minim
+                    veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquid ex ea commodi consequat.
                   </p>
                 </div>
               </div>
@@ -250,10 +403,17 @@
 
       <div class="d-flex mt-4">
         <div>
-          <a href="#" class="btn btn-light" v-on:click="getStepBack"> <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
+          <a href="#" class="btn btn-light" v-on:click="getStepBack">
+            <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
+          </a>
         </div>
         <div class="ml-auto">
-          <button type="button" v-on:click="launchConfirmationModal" :disabled="isSendDisabled" class="btn btn-primary">
+          <button
+            type="button"
+            v-on:click="launchConfirmationModal"
+            :disabled="isSendDisabled"
+            class="btn btn-primary"
+          >
             <i class="fas fa-paper-plane mr-1"></i>
             {{ $t("views.contact.send") }}
           </button>
@@ -314,10 +474,25 @@ export default {
       switchColor: { checked: "#28a745", unchecked: "#e2e2e2" },
       algorithms: [],
       defaultAlgorithms: [
-        [{ name: "BLAST", active: true }, { name: "TANGO", active: true }, { name: "ELM", active: true }],
-        [{ name: "IUPred", active: true }, { name: "ANCHOR", active: true }, { name: "Prosite", active: true }],
-        [{ name: "Limbo", active: true }, { name: "TMHMM", active: true }, { name: "PASTA", active: true }],
-        [{ name: "Waltz", active: true }, { name: "Amyloid pattern", active: true }]
+        [
+          { name: "BLAST", active: true },
+          { name: "TANGO", active: true },
+          { name: "ELM", active: true }
+        ],
+        [
+          { name: "IUPred", active: true },
+          { name: "ANCHOR", active: true },
+          { name: "Prosite", active: true }
+        ],
+        [
+          { name: "Limbo", active: true },
+          { name: "TMHMM", active: true },
+          { name: "PASTA", active: true }
+        ],
+        [
+          { name: "Waltz", active: true },
+          { name: "Amyloid pattern", active: true }
+        ]
       ],
       frequencies: [],
       defaultFrequencies: [
@@ -360,10 +535,14 @@ export default {
     this.buildDesignTypeMap();
     this.buildCSSsMap();
     if (this.formData.initialSequence.value) {
-      this.maxNetChargeValue = FastaService.getSequenceLengthFrom(this.formData.initialSequence.value);
+      this.maxNetChargeValue = FastaService.getSequenceLengthFrom(
+        this.formData.initialSequence.value
+      );
     } else {
       try {
-        const response = await BackendService.calculateLength(this.formData.distance);
+        const response = await BackendService.calculateLength(
+          this.formData.distance
+        );
         this.maxNetChargeValue = Math.round(response.length);
       } catch (e) {
         console.error("Cannot get sequence length from distance");
@@ -394,11 +573,18 @@ export default {
       return algorithmsActiveData.some(active);
     },
     getInputUvClass: function(frequency) {
-      if (frequency.uvSilent && !this.avoidUVSilent && !this.useDefaultSettings) {
+      if (
+        frequency.uvSilent &&
+        !this.avoidUVSilent &&
+        !this.useDefaultSettings
+      ) {
         return "uvInput";
       }
 
-      if ((frequency.uvSilent && this.avoidUVSilent) || (this.useDefaultSettings && frequency.uvSilent)) {
+      if (
+        (frequency.uvSilent && this.avoidUVSilent) ||
+        (this.useDefaultSettings && frequency.uvSilent)
+      ) {
         return "uvInput uvInputDisabled";
       }
 
@@ -418,7 +604,10 @@ export default {
         return "cInput";
       }
 
-      if ((isCysteine && this.avoidCysteine) || (this.useDefaultSettings && isCysteine)) {
+      if (
+        (isCysteine && this.avoidCysteine) ||
+        (this.useDefaultSettings && isCysteine)
+      ) {
         return "cInput cInputDisabled";
       }
 
@@ -436,18 +625,28 @@ export default {
         return "cLabel";
       }
 
-      if ((isCysteine && this.avoidCysteine) || (this.useDefaultSettings && isCysteine)) {
+      if (
+        (isCysteine && this.avoidCysteine) ||
+        (this.useDefaultSettings && isCysteine)
+      ) {
         return "cLabel cLabelDisabled";
       }
 
       return "";
     },
     getLabelUvClass: function(frequency) {
-      if (frequency.uvSilent && !this.avoidUVSilent && !this.useDefaultSettings) {
+      if (
+        frequency.uvSilent &&
+        !this.avoidUVSilent &&
+        !this.useDefaultSettings
+      ) {
         return "uvLabel";
       }
 
-      if ((frequency.uvSilent && this.avoidUVSilent) || (this.useDefaultSettings && frequency.uvSilent)) {
+      if (
+        (frequency.uvSilent && this.avoidUVSilent) ||
+        (this.useDefaultSettings && frequency.uvSilent)
+      ) {
         return "uvLabel uvLabelDisabled";
       }
 
@@ -530,7 +729,9 @@ export default {
       const frequenciesSum = this.getTotalFrequencies();
       this.frequencies = this.frequencies.map(row => {
         return row.map(frequency => {
-          frequency.value = Number(((frequency.value / frequenciesSum) * 100).toFixed(1));
+          frequency.value = Number(
+            ((frequency.value / frequenciesSum) * 100).toFixed(1)
+          );
           return frequency;
         });
       });
@@ -722,7 +923,8 @@ export default {
 .button-label:active {
   -webkit-transform: translateY(2px);
   transform: translateY(2px);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2),
+    inset 0px -1px 0 rgba(0, 0, 0, 0.22);
 }
 
 @media (max-width: 40em) {

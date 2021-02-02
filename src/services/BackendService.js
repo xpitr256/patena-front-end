@@ -1,7 +1,8 @@
 import Vue from "vue";
 
 const baseDomain = process.env.VUE_APP_BACK_END_BASE_URL;
-const genericErrorMessage = "There was an error connecting with our servers. Try again later please"; //TODO translate it
+const genericErrorMessage =
+  "There was an error connecting with our servers. Try again later please"; //TODO translate it
 
 export default {
   async sendContactInformation(email, name, message) {
@@ -80,7 +81,9 @@ export default {
 
   async getResults(orderNumber) {
     try {
-      const response = await Vue.http.get(baseDomain + "/results?orderNumber=" + orderNumber);
+      const response = await Vue.http.get(
+        baseDomain + "/results?orderNumber=" + orderNumber
+      );
       if (response.ok) {
         return response.body;
       }
@@ -94,8 +97,5 @@ export default {
         error: error.body.message
       };
     }
-  },
-  async wakeUpBackend() {
-    await Vue.http.get(baseDomain);
   }
 };

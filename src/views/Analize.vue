@@ -13,18 +13,41 @@
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="form-row">
         <div class="form-group col-5">
-          <fasta-uploader name="fastaFile" v-validate="'required'" v-model="fastaFile" :error="errors.first('fastaFile')"> </fasta-uploader>
+          <fasta-uploader
+            name="fastaFile"
+            v-validate="'required'"
+            v-model="fastaFile"
+            :error="errors.first('fastaFile')"
+          >
+          </fasta-uploader>
           <label class="mt-4">Email</label>
-          <input class="form-control" placeholder="Email" ref="email" name="email" v-model="email" type="email" />
+          <input
+            class="form-control"
+            placeholder="Email"
+            ref="email"
+            name="email"
+            v-model="email"
+            type="email"
+          />
         </div>
         <div class="form-group col-7">
-          <fasta-validator :fasta-file="fastaFile" id="fastaFile" :characters-in-line="60" @newFastaValidation="updateFormValidation"></fasta-validator>
+          <fasta-validator
+            :fasta-file="fastaFile"
+            id="fastaFile"
+            :characters-in-line="60"
+            @newFastaValidation="updateFormValidation"
+          ></fasta-validator>
         </div>
       </div>
 
       <div class="form-row text-center mt-4">
         <div class="form-group col">
-          <button type="button" v-on:click="launchConfirmationModal" :disabled="submitInProgress || errors.items.length > 0" class="btn btn-lg btn-primary">
+          <button
+            type="button"
+            v-on:click="launchConfirmationModal"
+            :disabled="submitInProgress || errors.items.length > 0"
+            class="btn btn-lg btn-primary"
+          >
             <i class="fas fa-paper-plane mr-1"></i>
             {{ $t("views.contact.send") }}
           </button>
@@ -38,7 +61,6 @@
 import FastaUploader from "../components/FastaUploader";
 import BackendService from "../services/BackendService";
 import FastaValidator from "../components/FastaValidator";
-import { ValidationProvider } from "vee-validate";
 import ConfirmationModal from "../components/ConfirmationModal";
 import FastaService from "../services/FastaService";
 
@@ -46,7 +68,6 @@ export default {
   name: "analyze",
   components: {
     FastaUploader,
-    ValidationProvider,
     ConfirmationModal,
     FastaValidator
   },
@@ -60,7 +81,8 @@ export default {
       if (!isValid) {
         this.errors.add({
           field: id,
-          msg: "Please provide a fasta file according to the following suggestions"
+          msg:
+            "Please provide a fasta file according to the following suggestions"
         });
       }
 
@@ -91,7 +113,9 @@ export default {
       this.submitInProgress = true;
       this.clearNotifications();
 
-      const fastaFileContent = await FastaService.getFastaFileContent(this.fastaFile);
+      const fastaFileContent = await FastaService.getFastaFileContent(
+        this.fastaFile
+      );
       const sequence = {
         name: this.sequenceName,
         value: FastaService.getFirstSequence(fastaFileContent)

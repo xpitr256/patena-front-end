@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    removedFile(file, error, xhr) {
+    removedFile() {
       this.isFile = false;
       this.$emit("input", null);
     },

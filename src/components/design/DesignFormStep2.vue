@@ -3,7 +3,9 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="getStepBack">{{ $t("views.design.breadcrumb.step1") }}</a>
+          <a class="black-text" href="#" v-on:click="getStepBack">{{
+            $t("views.design.breadcrumb.step1")
+          }}</a>
         </li>
         <li class="breadcrumb-item active">
           {{ $t("views.design.breadcrumb.step2LinkerLength") }}
@@ -42,10 +44,17 @@
 
       <div class="d-flex">
         <div>
-          <a href="#" class="btn btn-light" v-on:click="getStepBack()"> <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
+          <a href="#" class="btn btn-light" v-on:click="getStepBack()">
+            <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
+          </a>
         </div>
         <div class="ml-auto">
-          <button type="button" v-on:click="sendForm" :disabled="submitInProgress || errors.items.length > 0" class="btn btn-primary">
+          <button
+            type="button"
+            v-on:click="sendForm"
+            :disabled="submitInProgress || errors.items.length > 0"
+            class="btn btn-primary"
+          >
             {{ $t("views.design.next") }}
             <i class="fas fa-chevron-right"></i>
           </button>
@@ -57,13 +66,9 @@
 
 <script>
 import BackendService from "../../services/BackendService";
-import { ValidationProvider } from "vee-validate";
 
 export default {
   name: "DesignFormStep2",
-  components: {
-    ValidationProvider
-  },
   methods: {
     getStepBack() {
       this.$emit("goToNextStep", {
@@ -111,7 +116,7 @@ export default {
     }
   },
   created: function() {
-    setTimeout(x => {
+    setTimeout(() => {
       this.$nextTick(() => this.setFocus());
     }, 100);
   },

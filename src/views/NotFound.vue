@@ -5,13 +5,22 @@
       <p class="lead">{{ $t("views.notFound.description") }}</p>
       <ul class="options">
         <li>
-          <router-link to="/results"><i class="fas fa-download"></i> {{ $t("views.notFound.getResult") }}</router-link>
+          <router-link to="/results"
+            ><i class="fas fa-download"></i>
+            {{ $t("views.notFound.getResult") }}</router-link
+          >
         </li>
         <li>
-          <router-link to="/design"><i class="fas fa-project-diagram"></i> {{ $t("views.notFound.design") }}</router-link>
+          <router-link to="/design"
+            ><i class="fas fa-project-diagram"></i>
+            {{ $t("views.notFound.design") }}</router-link
+          >
         </li>
         <li>
-          <router-link to="/analyze"><i class="fas fa-search"></i> {{ $t("views.notFound.analyze") }}</router-link>
+          <router-link to="/analyze"
+            ><i class="fas fa-search"></i>
+            {{ $t("views.notFound.analyze") }}</router-link
+          >
         </li>
       </ul>
     </div>

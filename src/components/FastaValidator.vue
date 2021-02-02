@@ -17,16 +17,24 @@
       </p>
       <hr />
       <p class="mb-0 mt-2">
-        <strong>{{ $t("views.components.fastaValidator.labelSequence") }}</strong>
+        <strong>{{
+          $t("views.components.fastaValidator.labelSequence")
+        }}</strong>
       </p>
       <p class="mb-0 mt-0 fasta-text" v-html="sequence"></p>
       <hr />
       <p>
         <span v-show="!highlightedCharactersAmount"
-          ><strong> {{ $t("views.components.fastaValidator.labelLength") }} </strong>{{ sequenceLength }}</span
+          ><strong>
+            {{ $t("views.components.fastaValidator.labelLength") }} </strong
+          >{{ sequenceLength }}</span
         >
         <span v-show="highlightedCharactersAmount"
-          ><strong> {{ $t("views.components.fastaValidator.labelTakenLength") }} </strong>{{ sequenceLength }}</span
+          ><strong>
+            {{
+              $t("views.components.fastaValidator.labelTakenLength")
+            }} </strong
+          >{{ sequenceLength }}</span
         >
       </p>
     </div>
@@ -35,7 +43,9 @@
         {{ $t("views.components.fastaValidator.errorMessageTitle") }}
       </h4>
       <p class="mb-0 mt-0">
-        <strong>{{ $t("views.components.fastaValidator.labelSuggetionsTitle") }} </strong>
+        <strong
+          >{{ $t("views.components.fastaValidator.labelSuggetionsTitle") }}
+        </strong>
       </p>
       <ul>
         <li>
@@ -67,7 +77,7 @@ export default {
     highlightedCharactersAmount: Number
   },
   watch: {
-    fastaFile: async function(newVal, oldVal) {
+    fastaFile: async function(newVal) {
       this.reset();
       try {
         const content = await FastaService.getFastaFileContent(newVal);
@@ -117,9 +127,16 @@ export default {
         if (this.highlightAtTheEnd) {
           highlightOptions.highlightAtTheEnd = true;
         }
-        return FastaService.splitSequenceInLinesWithHighlight(sequence, this.charactersInLine, highlightOptions);
+        return FastaService.splitSequenceInLinesWithHighlight(
+          sequence,
+          this.charactersInLine,
+          highlightOptions
+        );
       } else {
-        return FastaService.splitSequenceInLinesOf(sequence, this.charactersInLine);
+        return FastaService.splitSequenceInLinesOf(
+          sequence,
+          this.charactersInLine
+        );
       }
     }
   },

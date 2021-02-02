@@ -1,6 +1,10 @@
 <template>
   <div>
-    <component :is="stepComponent" @goToNextStep="manageStep" :formData="formData" />
+    <component
+      :is="stepComponent"
+      @goToNextStep="manageStep"
+      :formData="formData"
+    />
     <hr />
   </div>
 </template>
