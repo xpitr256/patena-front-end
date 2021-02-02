@@ -1,9 +1,10 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    es6: true
   },
-  extends: ["plugin:vue/essential", "@vue/prettier"],
+  extends: ["plugin:vue/essential", "@vue/prettier", "eslint:recommended"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
@@ -14,8 +15,7 @@ module.exports = {
     sourceType: "module"
   },
   parserOptions: {
-    parser: "babel-eslint"
-  },
-
-  extends: "eslint:recommended"
+    parser: "babel-eslint",
+    ecmaVersion: 2017
+  }
 };

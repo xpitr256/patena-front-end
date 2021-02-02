@@ -34,20 +34,21 @@
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.3",
     "vue-slider-component": "^3.1.0",
-    "vue2-dropzone": "^3.6.0"
+    "vue2-dropzone": "^3.6.0",
+    "vue-plain-pagination": "^0.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
-    "@vue/cli-service": "^3.9.3",
+    "@vue/cli-service": "^4.5.11",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "mocha": "^6.2.2",
-    "prettier": "^1.18.2",
-    "vue-template-compiler": "^2.6.10",
     "esm": "^3.2.25",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "mocha": "^8.2.1",
+    "prettier": "^1.18.2",
+    "vue-template-compiler": "^2.6.10"
   }
 }

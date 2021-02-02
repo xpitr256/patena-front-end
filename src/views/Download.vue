@@ -14,9 +14,13 @@
     </div>
     <br />
     <div>
-      <DesignResultHistory v-bind:mutations-history="mutationsHistory"></DesignResultHistory>
+      <DesignResultHistory
+        :mutations-history="mutationsPerPage"
+        v-bind:total-page-count="totalPageCount"
+        @pageChanged="updateMutationsForPage"
+      ></DesignResultHistory>
     </div>
-    <a href="#" class="btn btn-lg btn-light mt-4" v-on:click="navigate()"> <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
+    <a href="#" class="btn btn-lg btn-light mt-4" v-on:click="navigate()"><i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
   </div>
 </template>
 
@@ -35,8 +39,11 @@ export default {
       initialSequence: "",
       finalSequence: "",
       mutationsHistory: [],
+      mutationsPerPage: [],
       initialScore: "",
-      finalScore: ""
+      finalScore: "",
+      maxItemsPerPage: 10,
+      totalPageCount: 0
     };
   },
   created() {
@@ -46,6 +53,8 @@ export default {
       this.initialSequence = this.$route.params.results.results.initialSequence;
       this.finalSequence = this.$route.params.results.results.finalSequence;
       this.mutationsHistory = this.$route.params.results.results.mutationsHistory;
+      this.updateMutationsForPage(1);
+      this.totalPageCount = this.calculateTotalPageCount();
       this.initialScore = this.$route.params.results.results.initialScore;
       this.finalScore = this.$route.params.results.results.finalScore;
       this.mutationsHistory.unshift({
@@ -59,6 +68,14 @@ export default {
   methods: {
     navigate() {
       router.go(-1);
+    },
+    updateMutationsForPage(page) {
+      const startIndex = (page - 1) * this.maxItemsPerPage;
+      const endIndex = startIndex + this.maxItemsPerPage;
+      this.mutationsPerPage = this.mutationsHistory.slice(startIndex, endIndex);
+    },
+    calculateTotalPageCount() {
+      return Math.ceil(this.mutationsHistory.length / this.maxItemsPerPage);
     },
     checkDirectLink() {
       console.log("Redirecting search Results...");
