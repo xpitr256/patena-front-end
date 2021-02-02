@@ -73,13 +73,9 @@
 
 <script>
 import BackendService from "../services/BackendService";
-import { ValidationProvider } from "vee-validate";
 
 export default {
   name: "Contact",
-  components: {
-    ValidationProvider
-  },
   data() {
     return {
       fullName: null,
