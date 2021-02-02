@@ -133,7 +133,7 @@ export default {
         this.clearNotifications();
         const response = await BackendService.getResults(this.orderNumber);
         this.$Progress.finish();
-        if (!response.error && response.stateId == 3) {
+        if (!response.error && response.stateId === 3) {
           this.$notify({
             group: "notifications",
             type: "success",
@@ -141,11 +141,11 @@ export default {
           });
           this.$router.push("/results/" + this.orderNumber);
           this.$route.params.results = response;
-        } else if (response.stateId != 3) {
-          this.showUnknownMessage = response.stateId == 0;
-          this.showPendingMessage = response.stateId == 1;
-          this.showInActionMessage = response.stateId == 2;
-          this.showCancelledMessage = response.stateId == 4;
+        } else if (response.stateId !== 3) {
+          this.showUnknownMessage = response.stateId === 0;
+          this.showPendingMessage = response.stateId === 1;
+          this.showInActionMessage = response.stateId === 2;
+          this.showCancelledMessage = response.stateId === 4;
         } else {
           this.$notify({
             group: "notifications",

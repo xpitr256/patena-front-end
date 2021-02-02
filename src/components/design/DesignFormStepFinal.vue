@@ -220,7 +220,7 @@
                 class="form-row"
                 v-for="(row, index) in frequencies"
                 v-bind:class="{ 'mt-4': index === 0 }"
-                :key="row"
+                :key="index"
               >
                 <div
                   class="form-group col-md-3"

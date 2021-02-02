@@ -1,6 +1,6 @@
 <template>
   <tbody>
-    <tr v-for="row in rows" :key="row">
+    <tr v-for="(row, index) in rows" :key="index">
       <td style="text-align: center;">{{ row.Pos }}</td>
       <td style="text-align: center;">
         <Sequence

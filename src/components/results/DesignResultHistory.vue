@@ -75,6 +75,7 @@ export default {
   watch: {
     currentPage: async function(newVal) {
       if (newVal) {
+        this.$Progress.start();
         this.$emit("pageChanged", newVal);
       }
     },
@@ -94,9 +95,11 @@ export default {
           Score: this.mutationsHistory[i + 1].score_after_mutation
         });
       }
+      this.$Progress.finish();
     }
   },
   created() {
+    this.$Progress.start();
     this.fillMutationRows();
   }
 };

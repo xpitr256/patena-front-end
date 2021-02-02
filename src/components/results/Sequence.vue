@@ -2,8 +2,8 @@
   <div>
     <span v-if="showTruncated && showExtensionInitial()">... &nbsp;</span>
     <Aminoacid
-      v-bind:key="aminoAcid.name"
-      v-for="aminoAcid in aminoAcids"
+      v-for="(aminoAcid, index) in aminoAcids"
+      :key="index"
       v-bind:name="aminoAcid.value"
       :show-big="aminoAcid.showBig"
       :show-as-warning="aminoAcid.showAsWarning"
