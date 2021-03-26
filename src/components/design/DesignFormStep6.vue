@@ -3,14 +3,10 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="goToStep(1)">{{
-            $t("views.design.breadcrumb.step1")
-          }}</a>
+          <a class="black-text" href="#" v-on:click="goToStep(1)">{{ $t("views.design.breadcrumb.step1") }}</a>
         </li>
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="getStepBack">{{
-            $t("views.design.breadcrumb.step2InitialData")
-          }}</a>
+          <a class="black-text" href="#" v-on:click="getStepBack">{{ $t("views.design.breadcrumb.step2InitialData") }}</a>
         </li>
         <li class="breadcrumb-item active">
           {{ $t("views.design.breadcrumb.step3") }}
@@ -27,12 +23,7 @@
       <div class="form-row">
         <div class="form-group col-6">
           <label>{{ $t("views.design.rdStepLabelFS1") }}</label>
-          <fasta-uploader
-            name="flankingSequence1"
-            v-validate="'required'"
-            v-model="flankingSequence1"
-            :error="errors.first('flankingSequence1')"
-          >
+          <fasta-uploader name="flankingSequence1" v-validate="'required'" v-model="flankingSequence1" :error="errors.first('flankingSequence1')">
           </fasta-uploader>
           <fasta-validator
             :fasta-file="flankingSequence1"
@@ -45,12 +36,7 @@
         </div>
         <div class="form-group col-6">
           <label>{{ $t("views.design.rdStepLabelFS2") }}</label>
-          <fasta-uploader
-            name="flankingSequence2"
-            v-validate="'required'"
-            v-model="flankingSequence2"
-            :error="errors.first('flankingSequence2')"
-          >
+          <fasta-uploader name="flankingSequence2" v-validate="'required'" v-model="flankingSequence2" :error="errors.first('flankingSequence2')">
           </fasta-uploader>
           <fasta-validator
             :fasta-file="flankingSequence2"
@@ -90,43 +76,21 @@
         </div>
         <div class="form-group col-2">
           <label>{{ $t("views.design.rdStepCalculatedLength") }}</label>
-          <input
-            class="form-control"
-            name="length"
-            ref="length"
-            v-model="length"
-            type="text"
-            readonly
-          />
+          <input class="form-control" name="length" ref="length" v-model="length" type="text" readonly />
         </div>
 
         <div class="form-group col-6">
           <label>Email</label>
-          <input
-            class="form-control"
-            placeholder="Email"
-            ref="email"
-            v-on:keypress="onEnterKeypress"
-            name="email"
-            v-model="email"
-            type="email"
-          />
+          <input class="form-control" placeholder="Email" ref="email" v-on:keypress="onEnterKeypress" name="email" v-model="email" type="email" />
         </div>
       </div>
 
       <div class="d-flex">
         <div>
-          <a href="#" class="btn btn-light" v-on:click="getStepBack">
-            <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
-          </a>
+          <a href="#" class="btn btn-light" v-on:click="getStepBack"> <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
         </div>
         <div class="ml-auto">
-          <button
-            type="button"
-            v-on:click="next"
-            :disabled="errors.items.length > 0"
-            class="btn btn-primary"
-          >
+          <button type="button" v-on:click="next" :disabled="errors.items.length > 0" class="btn btn-primary">
             {{ $t("views.design.next") }}
             <i class="fas fa-chevron-right"></i>
           </button>
@@ -160,20 +124,15 @@ export default {
       if (!isValid) {
         this.errors.add({
           field: id,
-          msg:
-            "Please provide a fasta file according to the following suggestions"
+          msg: "Please provide a fasta file according to the following suggestions"
         });
       }
     },
     next: async function() {
       let formIsValid = await this.$validator.validate();
       if (formIsValid) {
-        const flankingSequence1Content = await FastaService.getFastaFileContent(
-          this.flankingSequence1
-        );
-        const flankingSequence2Content = await FastaService.getFastaFileContent(
-          this.flankingSequence2
-        );
+        const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
+        const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {

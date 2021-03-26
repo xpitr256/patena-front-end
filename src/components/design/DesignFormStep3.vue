@@ -3,9 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="getStepBack">{{
-            $t("views.design.breadcrumb.step1")
-          }}</a>
+          <a class="black-text" href="#" v-on:click="getStepBack">{{ $t("views.design.breadcrumb.step1") }}</a>
         </li>
         <li class="breadcrumb-item active">
           {{ $t("views.design.breadcrumb.step2InitialData") }}
@@ -23,48 +21,24 @@
         <div class="col-3"></div>
         <div class="col-6">
           <div class="button-wrap mt-4 ml-5 mb-4">
-            <input
-              class="hidden radio-label"
-              v-model="nextStep"
-              v-bind:value="4"
-              type="radio"
-              id="nothing-button"
-            />
+            <input class="hidden radio-label" v-model="nextStep" v-bind:value="4" type="radio" id="nothing-button" />
             <label class="button-label" for="nothing-button">
               <span>{{ $t("views.design.ndStepSequenceNothing") }}</span>
             </label>
             <br />
-            <input
-              class="hidden radio-label"
-              v-model="nextStep"
-              v-bind:value="5"
-              type="radio"
-              id="sequence-button"
-            />
+            <input class="hidden radio-label" v-model="nextStep" v-bind:value="5" type="radio" id="sequence-button" />
             <label class="button-label" for="sequence-button">
               <span>{{ $t("views.design.ndStepSequenceIS") }}</span>
             </label>
 
             <br />
-            <input
-              class="hidden radio-label"
-              v-model="nextStep"
-              v-bind:value="6"
-              type="radio"
-              id="flanking-button"
-            />
+            <input class="hidden radio-label" v-model="nextStep" v-bind:value="6" type="radio" id="flanking-button" />
             <label class="button-label" for="flanking-button">
               <span>{{ $t("views.design.ndStepSequenceFS") }}</span>
             </label>
 
             <br />
-            <input
-              class="hidden radio-label"
-              v-model="nextStep"
-              v-bind:value="7"
-              type="radio"
-              id="sequence-flanking-button"
-            />
+            <input class="hidden radio-label" v-model="nextStep" v-bind:value="7" type="radio" id="sequence-flanking-button" />
             <label class="button-label" for="sequence-flanking-button">
               <span>{{ $t("views.design.ndStepSequenceISFS") }}</span>
             </label>
@@ -76,18 +50,10 @@
 
     <div class="d-flex">
       <div>
-        <a href="#" class="btn btn-light" v-on:click="getStepBack">
-          <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
-        </a>
+        <a href="#" class="btn btn-light" v-on:click="getStepBack"> <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
       </div>
       <div class="ml-auto">
-        <button
-          class="btn btn-primary"
-          @click="next"
-          :disabled="nextStep === null"
-        >
-          {{ $t("views.design.next") }} <i class="fas fa-chevron-right"></i>
-        </button>
+        <button class="btn btn-primary" @click="next" :disabled="nextStep === null">{{ $t("views.design.next") }} <i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </div>
@@ -158,8 +124,7 @@ export default {
 .button-label:active {
   -webkit-transform: translateY(2px);
   transform: translateY(2px);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2),
-    inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
 }
 @media (max-width: 40em) {
   .button-label {

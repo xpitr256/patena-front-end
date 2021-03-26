@@ -3,9 +3,7 @@
     <thead class="background-th">
       <tr>
         <th class="a" scope="col" v-if="this.showDualSummary">
-          {{
-            $t("views.components.results.DesignResultSummary.headers.Initial")
-          }}
+          {{ $t("views.components.results.DesignResultSummary.headers.Initial") }}
           (Score: {{ initialScore }})
         </th>
         <th class="a" scope="col">
@@ -16,52 +14,28 @@
           {{ $t("views.components.results.DesignResultSummary.headers.Copy") }}
         </th>
         <th class="a" scope="col">
-          {{
-            $t("views.components.results.DesignResultSummary.headers.Length")
-          }}
+          {{ $t("views.components.results.DesignResultSummary.headers.Length") }}
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td class="a" v-if="this.showDualSummary">
-          <Sequence
-            :sequence="initialSequence"
-            :show-big="false"
-            :show-as-initial="true"
-            :show-truncated="false"
-          ></Sequence>
+          <Sequence :sequence="initialSequence" :show-big="false" :show-as-initial="true" :show-truncated="false"></Sequence>
         </td>
         <td class="a">
-          <Sequence
-            :sequence="finalSequence"
-            :show-big="false"
-            :show-as-final="true"
-            :show-truncated="false"
-          ></Sequence>
+          <Sequence :sequence="finalSequence" :show-big="false" :show-as-final="true" :show-truncated="false"></Sequence>
         </td>
         <td class="a">
-          <button
-            type="button"
-            class="btn btn-primary btn-sm"
-            v-on:click="getSequenceCopy"
-          >
+          <button type="button" class="btn btn-primary btn-sm" v-on:click="getSequenceCopy">
             <i class="fas fa-copy"></i>
           </button>
           <transition name="fade" v-on:enter="enter">
             <p v-if="show">
-              {{
-                $t(
-                  "views.components.results.DesignResultSummary.headers.Copied"
-                )
-              }}
+              {{ $t("views.components.results.DesignResultSummary.headers.Copied") }}
             </p>
             <p v-if="messageShowError">
-              {{
-                $t(
-                  "views.components.results.DesignResultSummary.headers.ErrorMessage"
-                )
-              }}
+              {{ $t("views.components.results.DesignResultSummary.headers.ErrorMessage") }}
             </p>
           </transition>
         </td>

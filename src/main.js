@@ -35,10 +35,7 @@ Vue.use(VueI18n);
 Vue.use(vueResource);
 
 Vue.http.interceptors.push(request => {
-  request.headers.set(
-    "Authorization",
-    "Bearer " + process.env.VUE_APP_BACK_END_TOKEN
-  );
+  request.headers.set("Authorization", "Bearer " + process.env.VUE_APP_BACK_END_TOKEN);
 });
 
 Vue.use(VueProgressBar, {

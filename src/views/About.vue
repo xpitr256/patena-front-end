@@ -7,16 +7,11 @@
     <div class="row">
       <div class="col-4">
         <div class="card">
-          <img
-            src="../assets/img/person.jpg"
-            class="card-img-top"
-            alt="Lucio Aliperti"
-          />
+          <img src="../assets/img/person.jpg" class="card-img-top" alt="Lucio Aliperti" />
           <div class="card-body">
             <h5 class="card-title">Lucio Aliperti</h5>
             <p class="card-text">
-              Some quick background about Lucio, his studies, current work,
-              hobbies, etc.
+              Some quick background about Lucio, his studies, current work, hobbies, etc.
             </p>
             <a href="#" class="btn btn-primary">Contact me</a>
           </div>
@@ -24,16 +19,11 @@
       </div>
       <div class="col-4">
         <div class="card">
-          <img
-            src="../assets/img/person.jpg"
-            class="card-img-top"
-            alt="Lucio Aliperti"
-          />
+          <img src="../assets/img/person.jpg" class="card-img-top" alt="Lucio Aliperti" />
           <div class="card-body">
             <h5 class="card-title">Lucio Aliperti</h5>
             <p class="card-text">
-              Some quick background about Lucio, his studies, current work,
-              hobbies, etc.
+              Some quick background about Lucio, his studies, current work, hobbies, etc.
             </p>
             <a href="#" class="btn btn-primary">Contact me</a>
           </div>
@@ -41,16 +31,11 @@
       </div>
       <div class="col-4">
         <div class="card">
-          <img
-            src="../assets/img/person.jpg"
-            class="card-img-top"
-            alt="Lucio Aliperti"
-          />
+          <img src="../assets/img/person.jpg" class="card-img-top" alt="Lucio Aliperti" />
           <div class="card-body">
             <h5 class="card-title">Lucio Aliperti</h5>
             <p class="card-text">
-              Some quick background about Lucio, his studies, current work,
-              hobbies, etc.
+              Some quick background about Lucio, his studies, current work, hobbies, etc.
             </p>
             <a href="#" class="btn btn-primary">Contact me</a>
           </div>

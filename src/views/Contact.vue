@@ -61,12 +61,7 @@
 
       <div class="form-row">
         <div class="form-group col">
-          <button
-            type="button"
-            v-on:click="sendForm"
-            :disabled="submitInProgress || errors.items.length > 0"
-            class="btn btn-lg btn-primary"
-          >
+          <button type="button" v-on:click="sendForm" :disabled="submitInProgress || errors.items.length > 0" class="btn btn-lg btn-primary">
             <i class="fas fa-paper-plane mr-1"></i>
             {{ $t("views.contact.send") }}
           </button>
@@ -116,11 +111,7 @@ export default {
         this.$Progress.start();
         this.submitInProgress = true;
         this.clearNotifications();
-        const sendOk = await BackendService.sendContactInformation(
-          this.email,
-          this.fullName,
-          this.message
-        );
+        const sendOk = await BackendService.sendContactInformation(this.email, this.fullName, this.message);
         this.$Progress.finish();
         if (sendOk) {
           this.$notify({

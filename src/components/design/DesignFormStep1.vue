@@ -14,36 +14,18 @@
     </h2>
 
     <div class="button-wrap mt-4">
-      <input
-        class="hidden radio-label"
-        v-model="nextStep"
-        v-bind:value="2"
-        type="radio"
-        id="length-button"
-      />
+      <input class="hidden radio-label" v-model="nextStep" v-bind:value="2" type="radio" id="length-button" />
       <label class="button-label" for="length-button">
         <span>{{ $t("views.design.btnLinkerLength") }}</span>
       </label>
-      <input
-        class="hidden radio-label"
-        v-model="nextStep"
-        v-bind:value="3"
-        type="radio"
-        id="sequence-button"
-      />
+      <input class="hidden radio-label" v-model="nextStep" v-bind:value="3" type="radio" id="sequence-button" />
       <label class="button-label" for="sequence-button">
         <span>{{ $t("views.design.btnLinkerSequence") }}</span>
       </label>
     </div>
 
     <div class="d-flex flex-row-reverse">
-      <button
-        class="btn btn-primary"
-        @click="next"
-        :disabled="nextStep === null"
-      >
-        Next <i class="fas fa-chevron-right"></i>
-      </button>
+      <button class="btn btn-primary" @click="next" :disabled="nextStep === null">Next <i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
 </template>
@@ -114,8 +96,7 @@ export default {
 .button-label:active {
   -webkit-transform: translateY(2px);
   transform: translateY(2px);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2),
-    inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
 }
 @media (max-width: 40em) {
   .button-label {

@@ -3,11 +3,9 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Contact from "./views/Contact";
 import ViewResult from "./views/ViewResult";
-import Analyze from "./views/Analize";
 import Design from "./views/Design";
 import About from "./views/About";
 import Download from "./views/Download";
-import AnalyzeSuccess from "./views/AnalyzeSuccess";
 import DesignSuccess from "./views/DesignSuccess";
 import DesignLengthSuccess from "./views/DesignLengthSuccess";
 import NotFound from "./views/NotFound";
@@ -42,16 +40,6 @@ export default new Router({
       path: "/results/:orderNumber",
       name: "download",
       component: Download
-    },
-    {
-      path: "/analyze",
-      name: "Analyze",
-      component: Analyze
-    },
-    {
-      path: "/analyze/success",
-      name: "AnalyzeSuccess",
-      component: AnalyzeSuccess
     },
     {
       path: "/design",

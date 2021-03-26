@@ -3,14 +3,10 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="goToStep(1)">{{
-            $t("views.design.breadcrumb.step1")
-          }}</a>
+          <a class="black-text" href="#" v-on:click="goToStep(1)">{{ $t("views.design.breadcrumb.step1") }}</a>
         </li>
         <li class="breadcrumb-item">
-          <a class="black-text" href="#" v-on:click="getStepBack">{{
-            $t("views.design.breadcrumb.step2InitialData")
-          }}</a>
+          <a class="black-text" href="#" v-on:click="getStepBack">{{ $t("views.design.breadcrumb.step2InitialData") }}</a>
         </li>
         <li class="breadcrumb-item active">
           {{ $t("views.design.breadcrumb.step3") }}
@@ -51,29 +47,14 @@
 
         <div class="form-group col-md-2">
           <label>{{ $t("views.design.rdStepCalculatedLength") }}</label>
-          <input
-            class="form-control"
-            name="length"
-            ref="length"
-            v-model="length"
-            type="text"
-            readonly
-          />
+          <input class="form-control" name="length" ref="length" v-model="length" type="text" readonly />
         </div>
 
         <div class="form-group col-md-1"></div>
 
         <div class="form-group col-md-6">
           <label>Email</label>
-          <input
-            class="form-control"
-            placeholder="Email"
-            name="email"
-            v-on:keypress="onEnterKeypress"
-            ref="email"
-            v-model="email"
-            type="email"
-          />
+          <input class="form-control" placeholder="Email" name="email" v-on:keypress="onEnterKeypress" ref="email" v-model="email" type="email" />
         </div>
       </div>
 
@@ -84,17 +65,10 @@
 
       <div class="d-flex">
         <div>
-          <a href="#" class="btn btn-light" v-on:click="getStepBack">
-            <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
-          </a>
+          <a href="#" class="btn btn-light" v-on:click="getStepBack"> <i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
         </div>
         <div class="ml-auto">
-          <button
-            type="button"
-            v-on:click="next"
-            :disabled="errors.items.length > 0"
-            class="btn btn-primary"
-          >
+          <button type="button" v-on:click="next" :disabled="errors.items.length > 0" class="btn btn-primary">
             {{ $t("views.design.next") }}
             <i class="fas fa-chevron-right"></i>
           </button>

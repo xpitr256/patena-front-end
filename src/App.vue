@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar-master></nav-bar-master>
+    <nav-bar></nav-bar>
     <notifications group="notifications" position="bottom right" />
     <router-view />
     <vue-progress-bar></vue-progress-bar>
@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import NavBarMaster from "./components/NavBar2.vue";
+import NavBar from "./components/NavBar.vue";
 export default {
-  components: { NavBarMaster },
+  components: { NavBar },
   mounted() {
     if (localStorage.lang) {
       this["$i18n"].locale = localStorage.lang;

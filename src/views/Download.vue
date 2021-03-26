@@ -20,9 +20,7 @@
         @pageChanged="updateMutationsForPage"
       ></DesignResultHistory>
     </div>
-    <a href="#" class="btn btn-lg btn-light mt-4" v-on:click="navigate()"
-      ><i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }}
-    </a>
+    <a href="#" class="btn btn-lg btn-light mt-4" v-on:click="navigate()"><i class="fas fa-chevron-left"></i> {{ $t("views.getBack") }} </a>
   </div>
 </template>
 

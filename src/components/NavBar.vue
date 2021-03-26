@@ -2,108 +2,74 @@
   <div id="header" class="header-fixed">
     <div class="container">
       <div class="logo">
-        <a>
-          <router-link to="/"
-            ><img src="./../assets/logo.png" alt="Patena"
-          /></router-link>
-        </a>
+        <router-link to="/"><img src="./../assets/logo.png" alt="Patena"/></router-link>
       </div>
-      <div class="site-nav">
-        <ul>
-          <li>
-            <router-link to="/about" v-bind:class="getClass('/about')">{{
-              $t("views.components.navBar.menu.about")
-            }}</router-link>
-          </li>
-          <li>
-            <router-link to="/analyze" v-bind:class="getClass('/analyze')">{{
-              $t("views.components.navBar.menu.analyze")
-            }}</router-link>
-          </li>
-          <li>
-            <router-link to="/design" v-bind:class="getClass('/design')">{{
-              $t("views.components.navBar.menu.design")
-            }}</router-link>
-          </li>
-          <li>
-            <router-link to="/results" v-bind:class="getClass('/results')">{{
-              $t("views.components.navBar.menu.results")
-            }}</router-link>
-          </li>
-          <li>
-            <router-link to="/contact" v-bind:class="getClass('/contact')">{{
-              $t("views.components.navBar.menu.contact")
-            }}</router-link>
-          </li>
-          <li>
-            <a href="#" v-on:click="showInSpanish" title="Español">
-              <span class="flag-icon flag-icon-es"></span>
-            </a>
-          </li>
-          <li class="last">
-            <a href="#" v-on:click="showInEnglish" title="English">
-              <span class="flag-icon flag-icon-gb"></span>
-            </a>
-          </li>
-        </ul>
-      </div>
+
       <nav role="navigation">
         <input type="checkbox" id="check" />
-
-        <label for="check" class="checkbtn" v-on:click="triggerVerticalMenu">
-          <i class="fa fa-bars "></i>
+        <label for="check" class="checkbtn" v-on:click="actionMenu">
+          <i
+            class="fa fa-bars "
+            style="color:black;
+                          right: 20px;
+                          font-size: 2.1rem;
+                          top: 10px;"
+          ></i>
         </label>
-        <li>
-          <a
-            href="#"
-            class="checkbtn"
-            v-on:click="showInSpanish"
-            title="Español"
-          >
-            <span class="flag-icon flag-icon-es "></span>
-          </a>
-        </li>
-        <li class="last">
-          <a
-            href="#"
-            class="checkbtn margin:1px;"
-            v-on:click="showInEnglish"
-            title="English"
-          >
-            <span class="flag-icon flag-icon-gb "></span>
-          </a>
-        </li>
-
-        <ul v-show="showVerticalMenu">
-          <li v-on:click="hideVerticalMenu">
-            <router-link to="/about">{{
-              $t("views.components.navBar.menu.about")
-            }}</router-link>
+        <ul>
+          <li v-on:click="refreshMenu">
+            <router-link to="/about" v-bind:class="getClass('/about')">
+              {{ $t("views.components.navBar.menu.about") }}
+            </router-link>
           </li>
-          <li v-on:click="hideVerticalMenu">
-            <router-link to="/analyze">{{
-              $t("views.components.navBar.menu.analyze")
-            }}</router-link>
+          <li v-on:click="refreshMenu">
+            <router-link to="/design" v-bind:class="getClass('/design')">
+              {{ $t("views.components.navBar.menu.design") }}
+            </router-link>
           </li>
-          <li v-on:click="hideVerticalMenu">
-            <router-link to="/design">{{
-              $t("views.components.navBar.menu.design")
-            }}</router-link>
+          <li v-on:click="refreshMenu">
+            <router-link to="/results" v-bind:class="getClass('/results')">
+              {{ $t("views.components.navBar.menu.results") }}
+            </router-link>
           </li>
-          <li v-on:click="hideVerticalMenu">
-            <router-link to="/results">{{
-              $t("views.components.navBar.menu.results")
-            }}</router-link>
-          </li>
-          <li v-on:click="hideVerticalMenu">
-            <router-link to="/contact">{{
-              $t("views.components.navBar.menu.contact")
-            }}</router-link>
+          <li v-on:click="refreshMenu">
+            <router-link to="/contact" v-bind:class="getClass('/contact')">
+              {{ $t("views.components.navBar.menu.contact") }}
+            </router-link>
           </li>
         </ul>
+
+        <div class="navBarClass">
+          <i
+            v-if="isEnglish()"
+            v-on:click="showInSpanish"
+            title="Mostrar en Español"
+            class="flag-icon flag-icon-es "
+            style="  position: relative;
+                          right: 20px;
+                          top: 10px;
+                          font-size: 1.6rem;
+                          color: #aaa;
+                          margin:10px;
+                          cursor: pointer;"
+          ></i>
+          <i
+            v-if="!isEnglish()"
+            v-on:click="showInEnglish"
+            title="Show in English"
+            class="flag-icon flag-icon-gb "
+            style="  position: relative;
+                          right: 20px;
+                          top: 10px;
+                          font-size: 1.6rem;
+                          color: #aaa;
+                          margin:10px;
+                          cursor: pointer;"
+          ></i>
+        </div>
       </nav>
-      <section></section>
     </div>
+    <section></section>
   </div>
 </template>
 
@@ -114,166 +80,39 @@ export default {
   name: "NavBar",
   data: function() {
     return {
-      showVerticalMenu: false
+      isShowMenu: false
     };
   },
   methods: {
     getClass(property) {
       return property === this.$route.path ? "active" : "";
     },
-    hideVerticalMenu: async function() {
-      console.log("--------BEFORE hide: " + this.showVerticalMenu);
-      this.showVerticalMenu = false;
-      //await this.$nextTick();
-      console.log("--------AFTER hide: " + this.showVerticalMenu);
-    },
-    triggerVerticalMenu: async function() {
-      console.log("**** BEFORE setShow: " + this.showVerticalMenu);
-      this.showVerticalMenu = !this.showVerticalMenu;
-      //await this.$nextTick();
-      console.log("**** AFTER setShow: " + this.showVerticalMenu);
-    },
     showInEnglish: function() {
       this["$i18n"].locale = "en";
+      localStorage.lang = "en";
     },
     showInSpanish: function() {
       import("@/lang/es.json").then(msgs => {
         this.$i18n.setLocaleMessage("es", msgs.defaults || msgs);
         this.$i18n.locale = "es";
       });
+      localStorage.lang = "es";
+    },
+    refreshMenu: function() {
+      if (this.isShowMenu) {
+        location.reload();
+      }
+    },
+    actionMenu: function() {
+      this.isShowMenu = true;
+    },
+    isEnglish: function() {
+      return this["$i18n"].locale == "en";
     }
   }
 };
 </script>
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
-}
-nav {
-  height: 80px;
-  width: 100%;
-}
-
-nav ul {
-  float: right;
-  margin-right: 60px;
-}
-nav ul li {
-  display: none;
-  line-height: 80px;
-  margin: 0 2px;
-}
-nav ul li a {
-  color: #f2f2f2;
-  font-weight: 500;
-  font-size: 20px;
-  padding: 7px 13px;
-  border-radius: 3px;
-  /* text-transform: uppercase; */
-  font-family: "Poppins", sans-serif;
-}
-
-.checkbtn {
-  font-size: 25px;
-  color: white;
-  float: right;
-  line-height: 80px;
-  margin-right: 20px;
-  cursor: pointer;
-  display: none;
-}
-#check {
-  display: none;
-}
-
-@media (max-width: 1024px) {
-  #header .logo img {
-    height: 50px;
-    transition: all;
-    transition-duration: 0.4s;
-    transition: all 0.4s !important;
-  }
-
-  #header .site-nav > ul > li > a {
-    font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
-    letter-spacing: 1px !important;
-    text-decoration: none;
-    display: block;
-    padding: 21px 20px 13px 20px;
-    font-size: 17px;
-    color: #333333;
-    transition: all;
-    transition-duration: 0.4s;
-    font-weight: 300;
-    text-transform: uppercase;
-    border-bottom: 3px solid #fff;
-    letter-spacing: 0px;
-  }
-}
-@media (max-width: 1200px) {
-  #header .logo img {
-    height: 50px;
-    transition: all;
-    transition-duration: 0.4s;
-    transition: all 0.4s !important;
-  }
-
-  .checkbtn {
-    display: block;
-    margin-right: 20px;
-    color: black;
-  }
-  ul {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: #f7f7f7;
-    top: 67px;
-    left: -100%;
-    text-align: center;
-    transition: all 0.5s;
-  }
-  nav ul li {
-    display: block;
-    margin: 50px 0;
-    line-height: 30px;
-  }
-  nav ul li:hover {
-    background-color: #f2f2f2;
-    color: #000000;
-  }
-  nav ul li a {
-    font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
-    text-decoration: none;
-    display: block;
-    font-size: 21px;
-    color: #333333;
-    transition: all;
-    transition-duration: 0.4s;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 0px;
-  }
-  a:hover,
-  a.active {
-    background: none;
-    color: #000000;
-  }
-  #check:checked ~ ul {
-    left: 0;
-  }
-}
-section {
-  display: none;
-  background-size: cover;
-  height: calc(120vh - 80px);
-}
-
 #header {
   position: relative;
   background: #ffffff;
@@ -306,49 +145,194 @@ section {
 #header .logo.scroll img {
   transform: scale(0.85);
 }
-#header .site-nav {
-  position: relative;
-  float: right;
-  margin-right: 0px;
+#header nav .last {
+  border-right: 1px solid #eee;
 }
-#header .site-nav > ul {
-  list-style: none;
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  position: relative;
+  float: right;
+}
+label.logo {
   height: 67px;
-  overflow: hidden;
+  transition: all;
+  transition-duration: 0.4s;
+  transition: all 0.4s !important;
 }
-#header .site-nav > ul > li {
-  float: left;
+nav ul {
+  float: right;
+  margin-right: 60px;
+}
+nav ul li {
+  display: inline-block;
+  line-height: 30px;
   border-left: 1px solid #eee;
-  overflow: hidden;
 }
-#header .site-nav > ul > li > a {
+nav ul li a {
   font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
   letter-spacing: 1px !important;
   text-decoration: none;
-  display: block;
+  display: grid;
   padding: 21px 20px 13px 20px;
   font-size: 21px;
   color: #333333;
   transition: all;
   transition-duration: 0.4s;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: uppercase;
   border-bottom: 3px solid #fff;
   letter-spacing: 0px;
 }
-#header .site-nav .last {
-  border-right: 1px solid #eee;
-}
-.site-nav .active {
+
+.active {
   background-color: #f7f7f7;
-  color: #333333 !important;
+  color: #333333;
   border-bottom: 3px solid #f7f7f7 !important;
 }
-#header .site-nav > ul > li > a:hover {
-  background-color: #f2f2f2;
-  color: #000000;
-  border-bottom: 3px solid rgb(243, 112, 33) !important;
+a:hover,
+a.active {
+  background-color: #f7f7f7;
+  color: #333333;
+  border-bottom: 3px solid rgb(243, 112, 33);
+}
+.checkbtn {
+  font-size: 30px;
+  color: white;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+
+#check {
+  display: none;
+}
+.navBarClass {
+  position: relative;
+  max-width: 200px;
+  right: -20px;
+}
+.navBarClass i {
+  position: relative;
+  right: 20px;
+  top: 15px;
+  font-size: 1.6rem;
+  color: #aaa;
+  margin: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  #header .logo img {
+    height: 67px;
+    transition: all;
+    transition-duration: 0.4s;
+    transition: all 0.4s !important;
+  }
+  .checkbtn {
+    display: block;
+    margin-right: 15px;
+  }
+  ul {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #f7f7f7;
+    top: 67px;
+    left: -100%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  nav ul li {
+    display: block;
+    margin: 20px 0;
+    line-height: 30px;
+  }
+  nav ul li a {
+    font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+    text-decoration: none;
+    display: block;
+    font-size: 21px;
+    color: #333333;
+    transition: all;
+    transition-duration: 0.4s;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-bottom: none !important;
+    letter-spacing: 0px;
+  }
+
+  nav ul li:hover {
+    background-color: #f2f2f2;
+    color: #000000;
+  }
+  a:hover,
+  a.active {
+    background-color: #f2f2f2;
+    color: #000000;
+    border-bottom: none !important;
+  }
+
+  #check:checked ~ ul {
+    left: 0;
+  }
+  #header nav .last {
+    border-right: none;
+  }
+}
+@media (max-width: 400px) {
+  #header .logo img {
+    height: 60px;
+    transition: all;
+    transition-duration: 0.4s;
+    transition: all 0.4s !important;
+  }
+  nav ul li:hover {
+    background-color: #f2f2f2;
+    color: #000000;
+  }
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+    line-height: 30px;
+  }
+  nav ul li a {
+    font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+    letter-spacing: 1px !important;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px 10px 20px;
+    font-size: 21px;
+    color: #333333;
+    transition: all;
+    transition-duration: 0.4s;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+  }
+
+  .checkbtn {
+    font-size: 24px;
+    display: block;
+    margin-right: 10px;
+  }
+  #check:checked ~ ul {
+    left: 0;
+  }
+}
+section {
+  display: none;
+  background-size: cover;
+  height: calc(120vh - 80px);
 }
 </style>

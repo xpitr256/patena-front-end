@@ -68,7 +68,7 @@ export default {
         thumbnailWidth: 150,
         thumbnailHeight: 150,
         maxFilesize: 2, // MB
-        acceptedFiles: ".fasta,.txt",
+        acceptedFiles: ".fasta,.txt,.fa",
         addRemoveLinks: true,
         accept: function(file, done) {
           this.files.forEach(aFile => {
