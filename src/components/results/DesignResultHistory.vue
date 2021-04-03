@@ -69,15 +69,21 @@ export default {
   },
   methods: {
     fillMutationRows() {
+      //this.mutationsHistory = this.rows;
+      console.log(this.rows);
       this.rows = [];
       let i;
       for (i = 0; i < this.mutationsHistory.length - 1; i++) {
-        this.rows.push({
-          Pos: this.mutationsHistory[i + 1].mutated_position,
-          Before: this.mutationsHistory[i].mutated_sequence,
-          After: this.mutationsHistory[i + 1].mutated_sequence,
-          Score: this.mutationsHistory[i + 1].score_after_mutation
-        });
+        if (this.mutationsHistory[i].previous_residue != undefined){
+          let index = this.mutationsHistory[i].mutated_position;
+          let beforeSequence = this.mutationsHistory[i].mutated_sequence.substring(0, index) + this.mutationsHistory[i].previous_residue + this.mutationsHistory[i].mutated_sequence.substring(index + 1);
+          this.rows.push({
+            Pos: this.mutationsHistory[i].mutated_position,
+            Before: beforeSequence,//obtengo el anterior por medio de saber el reemplazo
+            After: this.mutationsHistory[i].mutated_sequence,
+            Score: this.mutationsHistory[i].score_after_mutation
+          });
+        }
       }
       this.$Progress.finish();
     }
@@ -85,7 +91,7 @@ export default {
   created() {
     this.$Progress.start();
     this.fillMutationRows();
-  }
+  },
 };
 </script>
 

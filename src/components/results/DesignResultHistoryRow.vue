@@ -1,6 +1,6 @@
 <template>
   <tbody>
-    <tr v-for="(row, index) in rows" :key="index">
+    <tr v-for="row in rows" :key="row.Before">
       <td style="text-align: center;">{{ row.Pos }}</td>
       <td style="text-align: center;">
         <Sequence v-bind:sequence="row.Before" :warning-positions="[row.Pos]" :show-truncated="true"></Sequence>
