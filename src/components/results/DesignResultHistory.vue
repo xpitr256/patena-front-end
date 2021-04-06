@@ -69,8 +69,6 @@ export default {
   },
   methods: {
     fillMutationRows() {
-      //this.mutationsHistory = this.rows;
-      console.log(this.rows);
       this.rows = [];
       let i;
       for (i = 0; i < this.mutationsHistory.length - 1; i++) {
@@ -79,7 +77,7 @@ export default {
           let beforeSequence = this.mutationsHistory[i].mutated_sequence.substring(0, index) + this.mutationsHistory[i].previous_residue + this.mutationsHistory[i].mutated_sequence.substring(index + 1);
           this.rows.push({
             Pos: this.mutationsHistory[i].mutated_position,
-            Before: beforeSequence,//obtengo el anterior por medio de saber el reemplazo
+            Before: beforeSequence,
             After: this.mutationsHistory[i].mutated_sequence,
             Score: this.mutationsHistory[i].score_after_mutation
           });
