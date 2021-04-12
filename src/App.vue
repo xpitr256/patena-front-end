@@ -3,14 +3,17 @@
     <nav-bar></nav-bar>
     <notifications group="notifications" position="bottom right" />
     <router-view />
+    <footer-geo></footer-geo>
     <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import FooterGeo from "./components/FooterGeo.vue";
+
 export default {
-  components: { NavBar },
+  components: { NavBar, FooterGeo },
   mounted() {
     if (localStorage.lang) {
       this["$i18n"].locale = localStorage.lang;
@@ -33,5 +36,12 @@ export default {
   text-align: justify;
   color: #2c3e50;
   background: linear-gradient(to bottom, #f0f0f0, white);
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: rgba(234, 112, 15, 0.50);
+  color: white;
 }
 </style>
