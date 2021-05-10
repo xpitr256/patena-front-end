@@ -83,6 +83,24 @@ import BackendService from "../../services/BackendService";
 
 export default {
   name: "DesignFormStep4",
+  mounted() {
+
+    if (localStorage.distance) {
+      this.distance = localStorage.distance;
+    }
+
+    if (localStorage.email) {
+      this.email = localStorage.email;
+    }
+
+  },watch: {
+    distance(newDistance) {
+      localStorage.distance = Number(newDistance);
+    },
+    email(newEmail){
+      localStorage.email = newEmail;
+    }
+  },
   methods: {
     getStepBack() {
       this.goToStep(3);

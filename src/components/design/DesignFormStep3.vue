@@ -64,6 +64,11 @@ export default {
   name: "DesignFormStep3",
   mounted() {
     const self = this;
+
+    if (localStorage.nextStep) {
+      this.nextStep = localStorage.nextStep;
+    }
+
     window.addEventListener("keyup", function(event) {
       if (event.key === "Enter" && self.nextStep) {
         self.next();
@@ -72,12 +77,18 @@ export default {
         self.getStepBack();
       }
     });
+  },watch: {
+    nextStep(newNextStep) {
+      localStorage.nextStep = newNextStep;
+    }
   },
   methods: {
     getStepBack() {
-      this.$emit("goToNextStep", {
+
+              this.$emit("goToNextStep", {
         nextStep: 1
       });
+      localStorage.nextStep =3;
     },
     next: function() {
       this.$emit("goToNextStep", {

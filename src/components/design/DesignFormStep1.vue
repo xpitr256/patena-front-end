@@ -35,11 +35,19 @@ export default {
   name: "DesignFormStep1",
   mounted() {
     const self = this;
+    if (localStorage.nextStep) {
+      this.nextStep = localStorage.nextStep;
+    }
+
     window.addEventListener("keyup", function(event) {
       if (event.key === "Enter" && self.nextStep) {
         self.next();
       }
     });
+  },watch: {
+    nextStep(newNextStep) {
+      localStorage.nextStep = newNextStep;
+    }
   },
   methods: {
     next: function() {

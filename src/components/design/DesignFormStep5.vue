@@ -62,7 +62,42 @@ export default {
   components: {
     FastaValidator,
     FastaUploader
+  }
+,
+    created(){
+        this.initialSequence =
+            {
+                name: localStorage.lastname,
+                value: localStorage.lastvalue
+            };
+    },computed(){
+        this.initialSequence = localStorage.initialSequence;
+    },
+mounted() {
+
+  if (localStorage.email) {
+    this.email = localStorage.email;
+  }
+
+    if (localStorage.initialSequence) {
+        this.initialSequence =
+            {
+                name: localStorage.lastname,
+                value: localStorage.lastvalue
+            };
+    }
+
+},watch: {
+  email(newEmail){
+    localStorage.email = newEmail;
   },
+        initialSequence(newInitialSequence){
+            localStorage.initialSequence = newInitialSequence;
+
+    }
+
+
+},
   methods: {
     getStepBack() {
       this.goToStep(3);
@@ -90,26 +125,34 @@ export default {
     },
     next: async function() {
       let formIsValid = await this.$validator.validate();
-      if (formIsValid) {
+
         const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
+
+      localStorage.initialSequence   = this.initialSequence;
+      localStorage.lastname = FastaService.getSequenceName(initialSequenceContent);
+      localStorage.lastvalue = FastaService.getFirstSequence(initialSequenceContent);
+      if (formIsValid){
+
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {
             stepFrom: 5,
             email: this.email,
             initialSequence: {
-              name: FastaService.getSequenceName(initialSequenceContent),
-              value: FastaService.getFirstSequence(initialSequenceContent)
+              name:  localStorage.lastname,
+              value: localStorage.lastvalue
             }
+
           }
-        });
+        }
+        );
       }
     }
   },
   data: function() {
     return {
       initialSequence: null,
-      email: null
+      email: null,
     };
   }
 };
