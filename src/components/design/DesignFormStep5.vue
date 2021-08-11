@@ -64,15 +64,15 @@ export default {
     FastaUploader
   }
 ,
-    created(){
-        this.initialSequence =
-            {
-                name: localStorage.lastname,
-                value: localStorage.lastvalue
-            };
-    },computed(){
-        this.initialSequence = localStorage.initialSequence;
-    },
+//    created(){
+//        this.initialSequence = JSON.parse(
+//            {
+//                name: localStorage.lastname,
+//                value: localStorage.lastvalue
+//            });
+//    },computed(){
+//        this.initialSequence = JSON.stringify(localStorage.initialSequence);
+//    },
 mounted() {
 
   if (localStorage.email) {
@@ -80,11 +80,7 @@ mounted() {
   }
 
     if (localStorage.initialSequence) {
-        this.initialSequence =
-            {
-                name: localStorage.lastname,
-                value: localStorage.lastvalue
-            };
+        this.initialSequence = JSON.stringify(localStorage.initialSequence);
     }
 
 },watch: {
@@ -92,7 +88,8 @@ mounted() {
     localStorage.email = newEmail;
   },
         initialSequence(newInitialSequence){
-            localStorage.initialSequence = newInitialSequence;
+            if (newInitialSequence.toString().includes("\\") == true)
+            localStorage.initialSequence = JSON.stringify(newInitialSequence.toString().replace("\\",""));
 
     }
 
@@ -122,13 +119,13 @@ mounted() {
           msg: "Please provide a fasta file according to the following suggestions"
         });
       }
-    },
+oo    },
     next: async function() {
       let formIsValid = await this.$validator.validate();
 
         const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
 
-      localStorage.initialSequence   = this.initialSequence;
+      localStorage.setItem("initialSequence", JSON.stringify(this.initialSequence));
       localStorage.lastname = FastaService.getSequenceName(initialSequenceContent);
       localStorage.lastvalue = FastaService.getFirstSequence(initialSequenceContent);
       if (formIsValid){
