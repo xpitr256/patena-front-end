@@ -3,14 +3,17 @@
     <nav-bar></nav-bar>
     <notifications group="notifications" position="bottom right" />
     <router-view />
+    <custom-footer></custom-footer>
     <vue-progress-bar></vue-progress-bar>
+
   </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import CustomFooter from "./components/CustomFooter";
 export default {
-  components: { NavBar },
+  components: {CustomFooter, NavBar },
   mounted() {
     if (localStorage.lang) {
       this["$i18n"].locale = localStorage.lang;
