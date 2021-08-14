@@ -3,22 +3,23 @@
         <div class="container__footer">
             <div class="box__footer">
                 <div class="logo">
-                    <img src="../assets/logo.png" alt="">
+                    <img src="../assets/logo_uba.png" alt="">
                 </div>
                 <div class="terms">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas impedit cum cumque velit libero officiis quam doloremque reprehenderit quae corporis! Delectus architecto officia praesentium atque laudantium, nam deleniti sapiente deserunt.</p>
+                    <p>La Universidad de Buenos Aires es una universidad pública de investigación en Buenos Aires, Argentina. Establecida en 1821, es la principal institución de educación superior del país y en 2020 fue considerada la universidad más prestigiosa de Iberoamérica. </p>
                 </div>
-            </div>
-            <div class="box__footer">
-                <h2>Soluciones</h2>
-                <a href="https://www.google.com">App Desarrollo</a>
-                <a href="#">App Marketing</a>
-                <a href="#">IOS Desarrollo</a>
-                <a href="#">Android Desarrollo</a>
             </div>
 
             <div class="box__footer">
-                <h2>Compañia</h2>
+                <h3>Redes Sociales</h3>
+                <a href="#"> <i class="fab fa-facebook-square"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+                <a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
+                <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+            </div>
+
+            <div class="box__footer">
+                <h3>Enlaces útiles</h3>
                 <a href="#">Acerca de</a>
                 <a href="#">Trabajos</a>
                 <a href="#">Procesos</a>
@@ -26,18 +27,18 @@
             </div>
 
             <div class="box__footer">
-                <h2>Redes Sociales</h2>
-                <a href="#"> <i class="fab fa-facebook-square"></i> Facebook</a>
-                <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
-                <a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
-                <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+                <h3>Contactanos</h3>
+                <a href="https://www.google.com">App Desarrollo</a>
+                <a href="#">App Marketing</a>
+                <a href="#">IOS Desarrollo</a>
+                <a href="#">Android Desarrollo</a>
             </div>
 
         </div>
 
         <div class="box__copyright">
             <hr>
-            <p>Todos los derechos reservados © 2021 <b>MagtimusPro</b></p>
+            <p>Todos los derechos reservados © 2021 <b>UBA Universidad de Buenos Aires.</b></p>
         </div>
     </footer>
 </template>
@@ -49,8 +50,8 @@
 
     footer{
         width: 100%;
-        padding: 50px 0px;
-        background-image: url(../assets/background-footer.svg);
+        padding: 80px 0px;
+        background-image: url(../assets/background-footer2.svg);
         background-size: cover;
 
         /*background-color: #d0f0f8;
@@ -67,16 +68,19 @@
         max-width: 1200px;
         margin: auto;
         margin-top: 100px;
+        font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
     }
 
     .box__footer{
         display: flex;
         flex-direction: column;
-        padding: 40px;
+        padding: 30px;
+
     }
 
     .box__footer .logo img{
-        width: 180px;
+        padding: 0px 20px;
+        width: 350px;
     }
 
     .box__footer .terms{
@@ -104,14 +108,14 @@
     }
 
     .box__footer a .fab{
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .box__copyright{
         max-width: 1200px;
         margin: auto;
         text-align: center;
-        padding: 0px 40px;
+        padding: 0px 10px;
     }
 
     .box__copyright p{
