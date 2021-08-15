@@ -207,6 +207,12 @@
       "email": "Email",
       "btnCancel": "Cancelar",
       "btnConfirm": "Confirmar"
+    },
+    "footer": {
+      "terms": "La Universidad de Buenos Aires es una universidad pública de investigación en Buenos Aires, Argentina. Establecida en 1821, es la principal institución de educación superior del país y en 2020 fue considerada la universidad más prestigiosa de Iberoamérica.",
+      "contactInfo": "Contactanos",
+      "usefulLinks": "Enlaces útiles",
+      "navigation": "Navegación"
     }
   }
 }

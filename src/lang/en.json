@@ -207,6 +207,12 @@
       "email": "Email",
       "btnCancel": "Cancel",
       "btnConfirm": "Confirm"
+    },
+    "footer": {
+      "terms": "The University of Buenos Aires is a public research university in Buenos Aires, Argentina. Established in 1821, it is the main institution of higher education in the country and in 2020 it was considered the most prestigious university in Latin America.",
+      "contactInfo": "Contact Info",
+      "usefulLinks": "Useful Links",
+      "navigation": "Navigation"
     }
   }
 }
