@@ -34,11 +34,6 @@
             </div>
 
         </div>
-
-        <div class="box__copyright">
-            <hr>
-            <p>Todos los derechos reservados © 2021 <b>UBA Universidad de Buenos Aires.</b></p>
-        </div>
     </footer>
 </template>
 
@@ -66,7 +61,7 @@
         max-width: 1200px;
         margin: auto;
         margin-top: 100px;
-        font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+        font-family: "Avenir", Helvetica, Arial, sans-serif;
     }
 
     .box__footer{
@@ -86,14 +81,15 @@
         margin-top: 20px;
         font-weight: 500;
         color: #7a7a7a;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .box__footer h5{
         margin-bottom: 20px;
         color: #343434;
         font-weight: 700;
-        font-family: "BebasBook", "Roboto", Helvetica, sans-serif !important;
+        text-align: left;
+        font-family: "Roboto";
     }
 
     .box__footer a{
@@ -114,24 +110,6 @@
         opacity: 0.8;
     }
 
-    .box__copyright{
-        max-width: 1200px;
-        margin: auto;
-        text-align: center;
-        padding: 0px 5px;
-    }
-
-    .box__copyright p{
-        margin-top: 5px;
-        color: #7a7a7a;
-        font-size: 10px;
-    }
-
-    .box__copyright hr{
-        border: none;
-        height: 1px;
-        background-color: #7a7a7a;
-    }
 
     .footer-sub-link {
         display: block;
@@ -141,7 +119,7 @@
         -webkit-transition: color .4s;
         transition: color .4s;
         color: #dadfe9;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 24px;
         font-weight: 400;
         text-decoration: none;
