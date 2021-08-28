@@ -50,3 +50,8 @@ export default {
   name: "about"
 };
 </script>
+<style>
+  .col-4 {
+    padding: 15px;
+  }
+</style>
