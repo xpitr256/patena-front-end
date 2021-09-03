@@ -1,10 +1,12 @@
 <template>
   <div class="container wrapper">
     <h1 class="display-4 h-page-header">{{ $t("views.result.title") }}</h1>
+    <br>
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="form-row">
         <div class="form-group col-md-12">
           <label for="orderNumber">{{ $t("views.result.label") }}</label>
+          <br><br>
           <div class="row">
             <div class="col-6">
               <input
@@ -18,18 +20,22 @@
                 v-model="orderNumber"
                 :placeholder="$t('views.result.placeholder')"
               />
+
             </div>
+            <br>
             <div class="col-6">
               <button type="button" v-on:click="sendForm" :disabled="submitInProgress || errors.items.length > 0" class="btn btn-md btn-primary">
                 <i class="fas fa-search"></i>
                 {{ $t("views.result.btnSearch") }}
               </button>
             </div>
+            <br>
           </div>
           <div class="invalid-feedback">
             {{ errors.first("orderNumber") }}
           </div>
           <small id="orderNumberHelp" class="form-text text-muted">{{ $t("views.result.help") }}</small>
+          <br>
         </div>
       </div>
     </form>
