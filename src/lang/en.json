@@ -218,6 +218,14 @@
       "email": "Email",
       "btnCancel": "Cancel",
       "btnConfirm": "Confirm"
+    },
+    "footer": {
+      "uba": "Is a public research university in Buenos Aires, Argentina. Established in 1821, it is the main institution of higher education in the country and in 2020 it was considered the most prestigious university in Latin America.",
+      "contactInfo": "Main Offices",
+      "usefulLinks": "Useful Links",
+      "ourLab": "Our laboratory",
+      "blast": "What is BLAST?",
+      "navigation": "Navigation"
     }
   }
 }

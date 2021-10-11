@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
-    <notifications group="notifications" position="bottom right" />
-    <router-view />
-    <vue-progress-bar></vue-progress-bar>
+    <div id="content-wrap">
+      <nav-bar></nav-bar>
+      <notifications group="notifications" position="bottom right" />
+      <router-view />
+      <vue-progress-bar></vue-progress-bar>
+    </div>
     <Footer></Footer>
   </div>
 </template>
@@ -29,6 +31,8 @@ export default {
 
 <style>
 #app {
+  position: relative;
+  min-height: 100vh;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

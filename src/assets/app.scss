@@ -10,8 +10,11 @@
 }
 
 .wrapper {
-  top: 100px;
-  position: relative;
+  padding-top: 100px;
+}
+
+#content-wrap {
+  padding-bottom: 225px; /* Footer height */
 }
 
 h1,

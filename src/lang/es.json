@@ -218,6 +218,14 @@
       "email": "Email",
       "btnCancel": "Cancelar",
       "btnConfirm": "Confirmar"
+    },
+    "footer": {
+      "uba": "Es una universidad pública de investigación en Buenos Aires, Argentina. Establecida en 1821, es la principal institución de educación superior del país y en 2020 fue considerada la universidad más prestigiosa de Iberoamérica.",
+      "contactInfo": "Nuestras oficinas",
+      "usefulLinks": "Enlaces útiles",
+      "ourLab": "Nuestro laboratorio",
+      "blast": "¿Qué es BLAST?",
+      "navigation": "Navegación"
     }
   }
 }
