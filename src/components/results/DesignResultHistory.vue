@@ -72,9 +72,12 @@ export default {
       this.rows = [];
       let i;
       for (i = 0; i < this.mutationsHistory.length - 1; i++) {
-        if (this.mutationsHistory[i].previous_residue != undefined){
+        if (this.mutationsHistory[i].previous_residue != undefined) {
           let index = this.mutationsHistory[i].mutated_position;
-          let beforeSequence = this.mutationsHistory[i].mutated_sequence.substring(0, index) + this.mutationsHistory[i].previous_residue + this.mutationsHistory[i].mutated_sequence.substring(index + 1);
+          let beforeSequence =
+            this.mutationsHistory[i].mutated_sequence.substring(0, index) +
+            this.mutationsHistory[i].previous_residue +
+            this.mutationsHistory[i].mutated_sequence.substring(index + 1);
           this.rows.push({
             Pos: this.mutationsHistory[i].mutated_position,
             Before: beforeSequence,
@@ -89,7 +92,7 @@ export default {
   created() {
     this.$Progress.start();
     this.fillMutationRows();
-  },
+  }
 };
 </script>
 

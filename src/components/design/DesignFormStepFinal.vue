@@ -238,7 +238,7 @@
 
                 <div class="card-body">
                   <p class="card-text" :class="{ labelDisabled: useDefaultSettings }">
-                    {{ $t("views.patenaSettings.description"+algorithm.description) }}
+                    {{ $t("views.patenaSettings.description" + algorithm.description) }}
                   </p>
                 </div>
               </div>
@@ -313,17 +313,22 @@ export default {
       switchColor: { checked: "#28a745", unchecked: "#e2e2e2" },
       algorithms: [],
       defaultAlgorithms: [
-        [{ name: "BLAST", active: true, description: "Blast" },
-          { name: "TANGO", active: true , description: "Tango" },
-          { name: "ELM", active: true, description: "ELM"  }],
-        [{ name: "IUPred", active: true, description: "IUPred"  },
+        [
+          { name: "BLAST", active: true, description: "Blast" },
+          { name: "TANGO", active: true, description: "Tango" },
+          { name: "ELM", active: true, description: "ELM" }
+        ],
+        [
+          { name: "IUPred", active: true, description: "IUPred" },
           { name: "ANCHOR", active: true, description: "ANCHOR" },
-          { name: "Prosite", active: true, description: "Prosite" }],
-        [{ name: "Limbo", active: true, description: "Limbo" },
+          { name: "Prosite", active: true, description: "Prosite" }
+        ],
+        [
+          { name: "Limbo", active: true, description: "Limbo" },
           { name: "TMHMM", active: true, description: "TMHMM" },
-          { name: "PASTA", active: true, description: "PASTA" }],
-        [{ name: "Waltz", active: true,  description: "Waltz" },
-          { name: "Amyloid pattern", active: true, description: "AmyloidPattern" }]
+          { name: "PASTA", active: true, description: "PASTA" }
+        ],
+        [{ name: "Waltz", active: true, description: "Waltz" }, { name: "Amyloid pattern", active: true, description: "AmyloidPattern" }]
       ],
       frequencies: [],
       defaultFrequencies: [
