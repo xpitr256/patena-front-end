@@ -1,13 +1,15 @@
 <template>
   <div class="footer">
-    <div class="container p-5">
+    <div class="p-5" style="width: 85%;">
       <div class="row">
-        <div class="col-4">
-          <img src="../assets/uba.png" alt="UBA" width="225" />
-          <p class="mt-1 mr-4">{{ $t("views.footer.uba") }}</p>
+        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4 col-xl-4 min-300">
+          <a href="https://www.uba.ar" target="_blank">
+            <img src="../assets/uba.png" alt="UBA" width="250" title="UBA" />
+          </a>
+          <p class="mt-1 mr-0">{{ $t("views.footer.uba") }}</p>
         </div>
 
-        <div class="col-2">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xl-2 min-200">
           <h5>{{ $t("views.footer.navigation") }}</h5>
           <ul>
             <li>
@@ -33,7 +35,7 @@
           </ul>
         </div>
 
-        <div class="col-2">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xl-2 min-200" style="border:0px solid #000000;">
           <h5>{{ $t("views.footer.usefulLinks") }}</h5>
           <ul>
             <li>
@@ -49,9 +51,9 @@
           </ul>
         </div>
 
-        <div class="col-4">
-          <h5 class="ml-4">{{ $t("views.footer.contactInfo") }}</h5>
-          <p class="ml-4">
+        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4 col-xl-4 min-200">
+          <h5>{{ $t("views.footer.contactInfo") }}</h5>
+          <p>
             Departamento de Química Biológica IQUIBICEN<br />
             Facultad de Ciencias Exactas y Naturales<br />
             Ciudad Universitaria, Pabellón II 4º Piso <br />
@@ -79,6 +81,11 @@ export default {
   box-shadow: 0 -5px 7px -5px rgba(0, 0, 0, 0.18);
   background: linear-gradient(to bottom, #f0f0f0, white);
   color: darkgray;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 a {
   color: #8c8c8c;
@@ -96,5 +103,12 @@ ul {
 li {
   margin: 20px 0 20px 0;
   border-bottom: 1px solid #f0f0f0;
+}
+.min-200 {
+  min-width: 200px;
+}
+
+.min-300 {
+  min-width: 300px;
 }
 </style>
