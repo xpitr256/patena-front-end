@@ -149,6 +149,27 @@ export default {
       this.$nextTick(() => this.setFocus());
     }, 100);
   },
+  mounted() {
+    this.email = sessionStorage.getItem("step4.email") ? sessionStorage.getItem("step4.email") : this.email;
+    if (sessionStorage.getItem("step4.distance")) {
+      this.distance = sessionStorage.getItem("step4.distance");
+      this.distanceChanged({
+        data: this.distance
+      });
+    }
+  },
+  watch: {
+    distance: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step4.distance", newVal);
+      }
+    },
+    email: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step4.email", newVal);
+      }
+    }
+  },
   data: function() {
     return {
       distance: null,

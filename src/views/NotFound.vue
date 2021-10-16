@@ -10,9 +10,6 @@
         <li>
           <router-link to="/design"><i class="fas fa-project-diagram"></i> {{ $t("views.notFound.design") }}</router-link>
         </li>
-        <li>
-          <router-link to="/analyze"><i class="fas fa-search"></i> {{ $t("views.notFound.analyze") }}</router-link>
-        </li>
       </ul>
     </div>
   </div>

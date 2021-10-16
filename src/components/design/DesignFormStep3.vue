@@ -72,6 +72,14 @@ export default {
         self.getStepBack();
       }
     });
+    this.nextStep = sessionStorage.getItem("step3.nextStep") ? sessionStorage.getItem("step3.nextStep") : this.nextStep;
+  },
+  watch: {
+    nextStep: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step3.nextStep", newVal);
+      }
+    }
   },
   methods: {
     getStepBack() {

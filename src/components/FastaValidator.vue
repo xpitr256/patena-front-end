@@ -6,7 +6,6 @@
       </h4>
       {{ $t("views.components.fastaValidator.subtitle") }}
     </div>
-
     <div class="alert alert-success" role="alert" v-show="isValid">
       <h4 class="alert-heading">
         {{ $t("views.components.fastaValidator.successfulMessageTitle") }}
@@ -51,6 +50,7 @@
         <li>{{ $t("views.components.fastaValidator.labelSuggetion5") }}</li>
       </ul>
     </div>
+    <p v-if="error" class="error-message ">{{ error }}</p>
   </div>
 </template>
 
@@ -64,7 +64,20 @@ export default {
     charactersInLine: Number,
     highlightAtTheEnd: Boolean,
     highlightAtTheBeginning: Boolean,
-    highlightedCharactersAmount: Number
+    highlightedCharactersAmount: Number,
+    fastaContent: Object,
+    name: String,
+    error: {
+      type: String
+    }
+  },
+  $_veeValidate: {
+    name() {
+      return this.name;
+    },
+    value() {
+      return this.sequence;
+    }
   },
   watch: {
     fastaFile: async function(newVal) {
@@ -84,10 +97,11 @@ export default {
           this.$emit("newFastaValidation", this.id, true, this.sequenceName);
         } else {
           if (newVal) {
-            this.$emit("newFastaValidation", this.id, false);
             this.isInvalid = true;
+            this.$emit("newFastaValidation", this.id, false, true);
           } else {
             this.reset();
+            this.$emit("newFastaValidation", this.id, false, false);
           }
         }
       } catch (e) {
@@ -95,6 +109,17 @@ export default {
         this.isValid = false;
         this.isInvalid = true;
       }
+    },
+    fastaContent: function(newFastaContent) {
+      this.reset();
+      this.sequence = this.getStyledSequence(newFastaContent.value);
+      this.sequenceLength = FastaService.getSequenceLengthFrom(this.sequence);
+      if (this.sequenceLength > this.highlightedCharactersAmount) {
+        this.sequenceLength = this.highlightedCharactersAmount;
+      }
+      this.sequenceName = newFastaContent.name;
+      this.isValid = true;
+      this.$emit("newFastaValidation", this.id, true, this.sequenceName);
     }
   },
   methods: {
@@ -143,5 +168,11 @@ export default {
 }
 .fasta-text {
   font-family: monospace, monospace;
+}
+.error-message {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }
 </style>

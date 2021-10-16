@@ -40,6 +40,14 @@ export default {
         self.next();
       }
     });
+    this.nextStep = sessionStorage.getItem("step1.nextStep") ? sessionStorage.getItem("step1.nextStep") : this.nextStep;
+  },
+  watch: {
+    nextStep: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step1.nextStep", newVal);
+      }
+    }
   },
   methods: {
     next: function() {

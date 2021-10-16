@@ -71,7 +71,7 @@
     "notFound": {
       "title": "404 - Page not found",
       "description": "The page you requested could not be found. Is there any chance you were looking for one of these?",
-      "getResult": "Check the result of an analysis or design",
+      "getResult": "Check the result of your design",
       "design": "Design a new Linker",
       "analyze": "Analyze your own Linker"
     },

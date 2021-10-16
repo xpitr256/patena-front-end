@@ -22,17 +22,20 @@
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="form-row">
         <div class="form-group col-5">
-          <fasta-uploader name="initialSequence" v-validate="'required'" v-model="initialSequence" :error="errors.first('initialSequence')"> </fasta-uploader>
+          <fasta-uploader v-model="initialSequence"> </fasta-uploader>
           <label class="mt-4">Email</label>
           <input class="form-control" placeholder="Email" ref="email" name="email" v-on:keypress="onEnterKeypress" v-model="email" type="email" />
         </div>
-
         <div class="form-group col-7">
           <fasta-validator
             :fasta-file="initialSequence"
+            :fasta-content="fastaContent"
             id="initialSequence"
             :characters-in-line="60"
             @newFastaValidation="updateFormValidation"
+            name="initialSequence"
+            :error="errors.first('initialSequence')"
+            v-validate="'required'"
           ></fasta-validator>
         </div>
       </div>
@@ -80,8 +83,9 @@ export default {
         this.next();
       }
     },
-    updateFormValidation: function(id, isValid) {
-      if (!isValid) {
+    updateFormValidation: function(id, isValid, hasNewValue) {
+      this.$validator.errors.clear();
+      if (!isValid && hasNewValue) {
         this.errors.add({
           field: id,
           msg: "Please provide a fasta file according to the following suggestions"
@@ -106,9 +110,33 @@ export default {
       }
     }
   },
+  watch: {
+    email: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step5.email", newVal);
+      }
+    },
+    initialSequence: async function(newVal) {
+      if (newVal) {
+        const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
+        sessionStorage.setItem("step5.initialSequence.name", FastaService.getSequenceName(initialSequenceContent));
+        sessionStorage.setItem("step5.initialSequence.value", FastaService.getFirstSequence(initialSequenceContent));
+      }
+    }
+  },
+  mounted() {
+    this.email = sessionStorage.getItem("step5.email") ? sessionStorage.getItem("step5.email") : this.email;
+    if (sessionStorage.getItem("step5.initialSequence.name") && sessionStorage.getItem("step5.initialSequence.value")) {
+      this.fastaContent = {
+        name: sessionStorage.getItem("step5.initialSequence.name"),
+        value: sessionStorage.getItem("step5.initialSequence.value")
+      };
+    }
+  },
   data: function() {
     return {
       initialSequence: null,
+      fastaContent: null,
       email: null
     };
   }

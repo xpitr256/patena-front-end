@@ -2,7 +2,6 @@
   <div>
     <vue-dropzone
       id="drop1"
-      v-bind:class="{ 'error-box': error }"
       ref="dropzone"
       :options="dropzoneOptions"
       :useCustomSlot="true"
@@ -18,7 +17,6 @@
         </div>
       </div>
     </vue-dropzone>
-    <p v-if="error" class="error-message ">{{ error }}</p>
   </div>
 </template>
 
@@ -28,22 +26,8 @@ import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
 export default {
   name: "FastaUploader",
-  $_veeValidate: {
-    name() {
-      return this.name;
-    },
-    value() {
-      return this.files[0];
-    }
-  },
   components: {
     vueDropzone: vue2Dropzone
-  },
-  props: {
-    name: String,
-    error: {
-      type: String
-    }
   },
   methods: {
     removedFile() {
@@ -86,15 +70,6 @@ export default {
 <style scoped>
 .hide {
   display: none;
-}
-.error-box {
-  border: 1px solid #dc3545;
-}
-.error-message {
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: #dc3545;
 }
 .dropzone-custom-content {
   /*position: absolute;

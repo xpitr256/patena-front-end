@@ -71,7 +71,7 @@
     "notFound": {
       "title": "404 - Página no encontrada",
       "description": "No hemos podido encontrar la dirección requerida. Quizás haya querido acceder a?",
-      "getResult": "Chequear el resultado de un análisis o diseño",
+      "getResult": "Chequear el resultado de su diseño",
       "design": "Diseñar un nuevo Linker",
       "analyze": "Analizar su propio Linker"
     },
