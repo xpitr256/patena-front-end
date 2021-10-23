@@ -150,6 +150,15 @@ export default {
     }, 100);
   },
   mounted() {
+    const self = this;
+    window.addEventListener("keyup", function(event) {
+      if (event.key === "Enter" && self.nextStep) {
+        self.next();
+      }
+      if (event.key === "Backspace") {
+        self.getStepBack();
+      }
+    });
     this.email = sessionStorage.getItem("step4.email") ? sessionStorage.getItem("step4.email") : this.email;
     if (sessionStorage.getItem("step4.distance")) {
       this.distance = sessionStorage.getItem("step4.distance");

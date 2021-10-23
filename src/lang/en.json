@@ -219,6 +219,9 @@
       "btnCancel": "Cancel",
       "btnConfirm": "Confirm"
     },
+    "settingConfirmationModal": {
+      "text": "Are you sure you want to select default settings? If you accept, all changes you made on custom settings will be lost."
+    },
     "footer": {
       "uba": "Is a public research university in Buenos Aires, Argentina. Established in 1821, it is the main institution of higher education in the country and in 2020 it was considered the most prestigious university in Latin America.",
       "contactInfo": "Main Offices",

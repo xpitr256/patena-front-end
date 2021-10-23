@@ -219,6 +219,9 @@
       "btnCancel": "Cancelar",
       "btnConfirm": "Confirmar"
     },
+    "settingConfirmationModal": {
+      "text": "¿Está seguro de cambiar a las configuraciones por default? Si acepta, los cambios hechos en las configuraciones propias se perderán."
+    },
     "footer": {
       "uba": "Es una universidad pública de investigación en Buenos Aires, Argentina. Establecida en 1821, es la principal institución de educación superior del país y en 2020 fue considerada la universidad más prestigiosa de Iberoamérica.",
       "contactInfo": "Nuestras oficinas",

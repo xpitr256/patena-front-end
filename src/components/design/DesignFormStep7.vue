@@ -142,6 +142,15 @@ export default {
     }
   },
   mounted() {
+    const self = this;
+    window.addEventListener("keyup", function(event) {
+      if (event.key === "Enter" && self.nextStep) {
+        self.next();
+      }
+      if (event.key === "Backspace") {
+        self.getStepBack();
+      }
+    });
     this.email = sessionStorage.getItem("step7.email") ? sessionStorage.getItem("step7.email") : this.email;
     if (sessionStorage.getItem("step7.initialSequence.name") && sessionStorage.getItem("step7.initialSequence.value")) {
       this.initialSequenceContent = {

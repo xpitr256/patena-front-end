@@ -11,6 +11,8 @@
       @modalConfirmation="sendForm"
     ></confirmation-modal>
 
+    <setting-confirmation-modal ref="settingModal" @settingConfirmationModal="changeToDefaultSettings"></setting-confirmation-modal>
+
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -35,11 +37,11 @@
 
     <form class="mt-4" v-on:submit.prevent="onSubmit">
       <div class="button-wrap mt-4">
-        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="true" v-on:click="setDefaultSettings" type="radio" id="length-button" />
+        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="true" @click="settingsChoiceClick" type="radio" id="length-button" />
         <label class="button-label" for="length-button">
           <span>{{ $t("views.patenaSettings.useDefaultSettings") }}</span>
         </label>
-        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="false" type="radio" id="sequence-button" />
+        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="false" type="radio" id="sequence-button" @click="settingsChoiceClick" />
         <label class="button-label" for="sequence-button">
           <span>{{ $t("views.patenaSettings.useCustomSettings") }}</span>
         </label>
@@ -268,10 +270,12 @@ import FastaService from "../../services/FastaService";
 import BackendService from "../../services/BackendService";
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
+import SettingConfirmationModal from "@/components/SettingConfirmationModal";
 
 export default {
   name: "DesignFormStepFinal",
   components: {
+    SettingConfirmationModal,
     ConfirmationModal,
     VueSlider
   },
@@ -291,6 +295,11 @@ export default {
         return "badge-success badge-success-disabled";
       }
       return this.isValidTotalFrequency() ? "badge-success" : "badge-danger";
+    }
+  },
+  watch: {
+    useDefaultSettings: function(newVal) {
+      sessionStorage.setItem("stepFinal.useDefaultSettings", newVal);
     }
   },
   data: function() {
@@ -381,7 +390,30 @@ export default {
       }
     }
   },
+  mounted() {
+    const self = this;
+    window.addEventListener("keyup", function(event) {
+      if (event.key === "Backspace") {
+        self.getStepBack();
+      }
+    });
+
+    if (sessionStorage.getItem("stepFinal.useDefaultSettings")) {
+      this.useDefaultSettings = sessionStorage.getItem("stepFinal.useDefaultSettings") === "true";
+    }
+  },
   methods: {
+    settingsChoiceClick: function(event) {
+      if (this.useDefaultSettings !== null && this.useDefaultSettings === false) {
+        //TODO check if at least one change was made before showing the confirmation modal windows.
+        event.preventDefault();
+        this.$refs.settingModal.show();
+      }
+    },
+    changeToDefaultSettings: function(event) {
+      this.useDefaultSettings = true;
+      this.setDefaultSettings();
+    },
     isValidTotalFrequency: function() {
       return Number(this.totalFrequency) === Number(100);
     },
@@ -655,6 +687,7 @@ export default {
 
       this.$Progress.finish();
       if (!response.error) {
+        sessionStorage.clear();
         this.$notify({
           group: "notifications",
           type: "success",
