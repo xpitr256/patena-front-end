@@ -23,28 +23,34 @@
       <div class="form-row">
         <div class="form-group col-6">
           <label>{{ $t("views.design.rdStepLabelFS1") }}</label>
-          <fasta-uploader name="flankingSequence1" v-validate="'required'" v-model="flankingSequence1" :error="errors.first('flankingSequence1')">
-          </fasta-uploader>
+          <fasta-uploader v-model="flankingSequence1"> </fasta-uploader>
           <fasta-validator
             :fasta-file="flankingSequence1"
+            :fasta-content="flankingSequence1Content"
             id="flankingSequence1"
+            name="flankingSequence1"
             :characters-in-line="50"
             :highlight-at-the-end="true"
             :highlighted-characters-amount="100"
             @newFastaValidation="updateFormValidation"
+            :error="errors.first('flankingSequence1')"
+            v-validate="'required'"
           ></fasta-validator>
         </div>
         <div class="form-group col-6">
           <label>{{ $t("views.design.rdStepLabelFS2") }}</label>
-          <fasta-uploader name="flankingSequence2" v-validate="'required'" v-model="flankingSequence2" :error="errors.first('flankingSequence2')">
-          </fasta-uploader>
+          <fasta-uploader v-model="flankingSequence2"> </fasta-uploader>
           <fasta-validator
             :fasta-file="flankingSequence2"
+            :fasta-content="flankingSequence2Content"
             id="flankingSequence2"
+            name="flankingSequence2"
             :characters-in-line="50"
-            :highlight-at-the-beginning="true"
+            :highlight-at-the-end="true"
             :highlighted-characters-amount="100"
             @newFastaValidation="updateFormValidation"
+            :error="errors.first('flankingSequence2')"
+            v-validate="'required'"
           ></fasta-validator>
         </div>
       </div>
@@ -111,6 +117,53 @@ export default {
     FastaValidator,
     FastaUploader
   },
+  watch: {
+    email: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step6.email", newVal);
+      }
+    },
+    distance: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step6.distance", newVal);
+      }
+    },
+    flankingSequence1: async function(newVal) {
+      if (newVal) {
+        const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
+        sessionStorage.setItem("step6.flankingSequence1.name", FastaService.getSequenceName(flankingSequence1Content));
+        sessionStorage.setItem("step6.flankingSequence1.value", FastaService.getFirstSequence(flankingSequence1Content));
+      }
+    },
+    flankingSequence2: async function(newVal) {
+      if (newVal) {
+        const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
+        sessionStorage.setItem("step6.flankingSequence2.name", FastaService.getSequenceName(flankingSequence2Content));
+        sessionStorage.setItem("step6.flankingSequence2.value", FastaService.getFirstSequence(flankingSequence2Content));
+      }
+    }
+  },
+  mounted() {
+    this.email = sessionStorage.getItem("step6.email") ? sessionStorage.getItem("step6.email") : this.email;
+    if (sessionStorage.getItem("step6.flankingSequence1.name") && sessionStorage.getItem("step6.flankingSequence1.value")) {
+      this.flankingSequence1Content = {
+        name: sessionStorage.getItem("step6.flankingSequence1.name"),
+        value: sessionStorage.getItem("step6.flankingSequence1.value")
+      };
+    }
+    if (sessionStorage.getItem("step6.flankingSequence2.name") && sessionStorage.getItem("step6.flankingSequence2.value")) {
+      this.flankingSequence2Content = {
+        name: sessionStorage.getItem("step6.flankingSequence2.name"),
+        value: sessionStorage.getItem("step6.flankingSequence2.value")
+      };
+    }
+    if (sessionStorage.getItem("step6.distance")) {
+      this.distance = sessionStorage.getItem("step6.distance");
+      this.distanceChanged({
+        data: this.distance
+      });
+    }
+  },
   methods: {
     getStepBack() {
       this.goToStep(3);
@@ -120,8 +173,9 @@ export default {
         nextStep: step
       });
     },
-    updateFormValidation: function(id, isValid) {
-      if (!isValid) {
+    updateFormValidation: function(id, isValid, hasNewValue) {
+      this.$validator.errors.clear();
+      if (!isValid && hasNewValue) {
         this.errors.add({
           field: id,
           msg: "Please provide a fasta file according to the following suggestions"
@@ -168,7 +222,7 @@ export default {
     },
     distanceChanged: async function(event) {
       this.length = null;
-      await this.$validator.validate();
+      //await this.$validator.validate();
       if (!this.errors.has("distance") && event.data !== null) {
         try {
           this.$Progress.start();
@@ -189,7 +243,9 @@ export default {
   data: function() {
     return {
       flankingSequence1: null,
+      flankingSequence1Content: null,
       flankingSequence2: null,
+      flankingSequence2Content: null,
       email: null,
       distance: null,
       length: null

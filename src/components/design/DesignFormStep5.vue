@@ -29,7 +29,7 @@
         <div class="form-group col-7">
           <fasta-validator
             :fasta-file="initialSequence"
-            :fasta-content="fastaContent"
+            :fasta-content="initialSequenceContent"
             id="initialSequence"
             :characters-in-line="60"
             @newFastaValidation="updateFormValidation"
@@ -127,7 +127,7 @@ export default {
   mounted() {
     this.email = sessionStorage.getItem("step5.email") ? sessionStorage.getItem("step5.email") : this.email;
     if (sessionStorage.getItem("step5.initialSequence.name") && sessionStorage.getItem("step5.initialSequence.value")) {
-      this.fastaContent = {
+      this.initialSequenceContent = {
         name: sessionStorage.getItem("step5.initialSequence.name"),
         value: sessionStorage.getItem("step5.initialSequence.value")
       };
@@ -136,7 +136,7 @@ export default {
   data: function() {
     return {
       initialSequence: null,
-      fastaContent: null,
+      initialSequenceContent: null,
       email: null
     };
   }

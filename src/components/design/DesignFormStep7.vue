@@ -25,30 +25,36 @@
           <label
             ><strong>{{ $t("views.design.rdStepLabelFS1") }}</strong></label
           >
-          <fasta-uploader name="flankingSequence1" v-validate="'required'" v-model="flankingSequence1" :error="errors.first('flankingSequence1')">
-          </fasta-uploader>
+          <fasta-uploader v-model="flankingSequence1"></fasta-uploader>
           <fasta-validator
             :fasta-file="flankingSequence1"
+            :fasta-content="flankingSequence1Content"
             id="flankingSequence1"
+            name="flankingSequence1"
             :characters-in-line="50"
             :highlight-at-the-end="true"
             :highlighted-characters-amount="100"
             @newFastaValidation="updateFormValidation"
+            :error="errors.first('flankingSequence1')"
+            v-validate="'required'"
           ></fasta-validator>
         </div>
         <div class="form-group col-6">
           <label
             ><strong>{{ $t("views.design.rdStepLabelFS2") }}</strong></label
           >
-          <fasta-uploader name="flankingSequence2" v-validate="'required'" v-model="flankingSequence2" :error="errors.first('flankingSequence2')">
-          </fasta-uploader>
+          <fasta-uploader v-model="flankingSequence2"></fasta-uploader>
           <fasta-validator
             :fasta-file="flankingSequence2"
+            :fasta-content="flankingSequence2Content"
             id="flankingSequence2"
+            name="flankingSequence2"
             :characters-in-line="50"
-            :highlight-at-the-beginning="true"
+            :highlight-at-the-end="true"
             :highlighted-characters-amount="100"
             @newFastaValidation="updateFormValidation"
+            :error="errors.first('flankingSequence2')"
+            v-validate="'required'"
           ></fasta-validator>
         </div>
       </div>
@@ -65,15 +71,19 @@
           <label
             ><strong>{{ $t("views.design.rdStepLabelIS") }}</strong></label
           >
-          <fasta-uploader name="initialSequence" v-validate="'required'" v-model="initialSequence" :error="errors.first('initialSequence')"> </fasta-uploader>
+          <fasta-uploader v-model="initialSequence"> </fasta-uploader>
         </div>
         <div class="form-group col-7">
           <label>&nbsp;</label>
           <fasta-validator
             :fasta-file="initialSequence"
+            :fasta-content="initialSequenceContent"
             id="initialSequence"
             :characters-in-line="60"
             @newFastaValidation="updateFormValidation"
+            name="initialSequence"
+            :error="errors.first('initialSequence')"
+            v-validate="'required'"
           ></fasta-validator>
         </div>
       </div>
@@ -103,6 +113,55 @@ export default {
     FastaUploader,
     FastaValidator
   },
+  watch: {
+    email: function(newVal) {
+      if (newVal) {
+        sessionStorage.setItem("step7.email", newVal);
+      }
+    },
+    initialSequence: async function(newVal) {
+      if (newVal) {
+        const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
+        sessionStorage.setItem("step7.initialSequence.name", FastaService.getSequenceName(initialSequenceContent));
+        sessionStorage.setItem("step7.initialSequence.value", FastaService.getFirstSequence(initialSequenceContent));
+      }
+    },
+    flankingSequence1: async function(newVal) {
+      if (newVal) {
+        const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
+        sessionStorage.setItem("step7.flankingSequence1.name", FastaService.getSequenceName(flankingSequence1Content));
+        sessionStorage.setItem("step7.flankingSequence1.value", FastaService.getFirstSequence(flankingSequence1Content));
+      }
+    },
+    flankingSequence2: async function(newVal) {
+      if (newVal) {
+        const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
+        sessionStorage.setItem("step7.flankingSequence2.name", FastaService.getSequenceName(flankingSequence2Content));
+        sessionStorage.setItem("step7.flankingSequence2.value", FastaService.getFirstSequence(flankingSequence2Content));
+      }
+    }
+  },
+  mounted() {
+    this.email = sessionStorage.getItem("step7.email") ? sessionStorage.getItem("step7.email") : this.email;
+    if (sessionStorage.getItem("step7.initialSequence.name") && sessionStorage.getItem("step7.initialSequence.value")) {
+      this.initialSequenceContent = {
+        name: sessionStorage.getItem("step7.initialSequence.name"),
+        value: sessionStorage.getItem("step7.initialSequence.value")
+      };
+    }
+    if (sessionStorage.getItem("step7.flankingSequence1.name") && sessionStorage.getItem("step7.flankingSequence1.value")) {
+      this.flankingSequence1Content = {
+        name: sessionStorage.getItem("step7.flankingSequence1.name"),
+        value: sessionStorage.getItem("step7.flankingSequence1.value")
+      };
+    }
+    if (sessionStorage.getItem("step7.flankingSequence2.name") && sessionStorage.getItem("step7.flankingSequence2.value")) {
+      this.flankingSequence2Content = {
+        name: sessionStorage.getItem("step7.flankingSequence2.name"),
+        value: sessionStorage.getItem("step7.flankingSequence2.value")
+      };
+    }
+  },
   methods: {
     getStepBack() {
       this.goToStep(3);
@@ -112,8 +171,9 @@ export default {
         nextStep: step
       });
     },
-    updateFormValidation: function(id, isValid) {
-      if (!isValid) {
+    updateFormValidation: function(id, isValid, hasNewValue) {
+      this.$validator.errors.clear();
+      if (!isValid && hasNewValue) {
         this.errors.add({
           field: id,
           msg: "Please provide a fasta file according to the following suggestions"
@@ -161,6 +221,9 @@ export default {
       initialSequence: null,
       flankingSequence1: null,
       flankingSequence2: null,
+      initialSequenceContent: null,
+      flankingSequence1Content: null,
+      flankingSequence2Content: null,
       email: null
     };
   }
