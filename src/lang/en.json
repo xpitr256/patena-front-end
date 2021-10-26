@@ -66,7 +66,13 @@
     },
     "about": {
       "title": "About us",
-      "description": "The Patena Community is a group formed by two institutions: The University of Buenos Aires, the University of La Plata. \n \nWho work here we do it guided by the principles and values that our founder transmitted to us, and mobilized for the only transcendent purpose that marks the direction of our Institutions. "
+      "description": "The Patena Community is a group formed by two institutions: The University of Buenos Aires, the University of La Plata. \n \nWho work here we do it guided by the principles and values that our founder transmitted to us, and mobilized for the only transcendent purpose that marks the direction of our Institutions. ",
+      "personOneName": "Dr. Ignacio E. Sánchez",
+      "personOneDescription":"Researcher who co-organizes courses in Synthetic \n Biology and is  \"Adjunct Professor \" at UADE, for the subject Systems Biology in the Bioinformatics Degree. He was also \"Head of practical work \" in the subjects \"Biological Chemistry I \" and \"Biological Chemistry IIB \" of the Department of Biological Chemistry (FCEyN, University of Buenos Aires) ",
+      "personTwoName": "Dr. Diego U. Ferreiro",
+      "personTwoDescription":"Adjunct Professor in the Department of Chemistry\n              Biological (FCEyN, University of Buenos Aires), in the subject \"Advanced Biochemistry\". He is part of the Department of Biological Chemistry IQUIBICEN\n              Faculty of Exact and Natural Sciences.\n              He was also \"Head of practical work\" in the Department of Physiology and Molecular and Cellular Biology (FCEyN, University of Buenos Aires).",
+      "personThreeName": "Lic. Ignacio Eguinoa",
+      "personThreeDescription":"Programmer analyst graduated from the National University of\n            La Plata. One of the main collaborators of the Patena project with the fruit of his thesis\n              titled \"Implementation of a\n            bioinformatics tool for\n            design of linker sequences \"resulting in the fundamental component of Patena.\n              It was completed in 2015 and\n              directed by Dr. Ignacio E. Sánchez"
     },
     "notFound": {
       "title": "404 - Page not found",
