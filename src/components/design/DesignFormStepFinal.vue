@@ -168,12 +168,12 @@
           <div class="form-check" v-if="!useDefaultSettings">
             <div class="label-check">
               <div class="custom-control custom-checkbox checkbox-lg">
-                <input type="checkbox" class="custom-control-input" id="checkbox-2" v-on:click="changeEnabledNetCharge" />
+                <input type="checkbox" class="custom-control-input" id="checkbox-2" v-model="wantToSelectNetCharge" v-on:click="changeIWantToSelectNetCharge" />
                 <label class="custom-control-label" for="checkbox-2"> {{ $t("views.patenaSettings.labelCheckNetCharge") }}</label>
               </div>
             </div>
           </div>
-          <div class="form-group" v-if="useDefaultSettings || checkDisabledNetCharge == false">
+          <div class="form-group" v-if="useDefaultSettings || wantToSelectNetCharge">
             <div class="alert alert-warning alert-dismissible fade show mt-4" v-show="!useDefaultSettings">
               <strong>{{ $t("views.patenaSettings.important") }}</strong>
               {{ $t("views.patenaSettings.netChargeWarning") }}
@@ -195,10 +195,11 @@
                   v-model="netCharge"
                   :min="-maxNetChargeValue"
                   :max="maxNetChargeValue"
+                  @change="netChargeChanged($event)"
                   tooltip="always"
                   :marks="[-maxNetChargeValue, maxNetChargeValue]"
                   :dotSize="16"
-                  :disabled="useDefaultSettings || checkDisabledNetCharge === true"
+                  :disabled="useDefaultSettings || !wantToSelectNetCharge"
                 ></vue-slider>
               </div>
             </div>
@@ -225,6 +226,7 @@
                       <toggle-button
                         :value="algorithm.active"
                         v-model="algorithms[index][internalIndex].active"
+                        @change="algorithmChange($event)"
                         :color="toogleColor"
                         :class="{ disabled: useDefaultSettings }"
                         :switch-color="switchColor"
@@ -313,7 +315,7 @@ export default {
       totalFrequency: 0,
       avoidUVSilent: false,
       avoidCysteine: false,
-      checkDisabledNetCharge: true,
+      wantToSelectNetCharge: false,
       toogleColor: {
         checked: "#2ecc71",
         unchecked: "#bfbfbf",
@@ -376,7 +378,9 @@ export default {
     };
   },
   async created() {
-    this.setDefaultSettings();
+    if (this.useDefaultSettings || (this.useDefaultSettings === null && sessionStorage.getItem("stepFinal.useDefaultSettings") !== "false")) {
+      this.setDefaultSettings();
+    }
     this.buildDesignTypeMap();
     this.buildCSSsMap();
     if (this.formData.initialSequence.value) {
@@ -397,9 +401,26 @@ export default {
         self.getStepBack();
       }
     });
-
     if (sessionStorage.getItem("stepFinal.useDefaultSettings")) {
       this.useDefaultSettings = sessionStorage.getItem("stepFinal.useDefaultSettings") === "true";
+    }
+    if (sessionStorage.getItem("stepFinal.frequencies")) {
+      this.frequencies = JSON.parse(sessionStorage.getItem("stepFinal.frequencies"));
+    }
+    if (sessionStorage.getItem("stepFinal.avoidCysteine")) {
+      this.avoidCysteine = sessionStorage.getItem("stepFinal.avoidCysteine") === "true";
+    }
+    if (sessionStorage.getItem("stepFinal.avoidUVSilent")) {
+      this.avoidUVSilent = sessionStorage.getItem("stepFinal.avoidUVSilent") === "true";
+    }
+    if (sessionStorage.getItem("stepFinal.algorithms")) {
+      this.algorithms = JSON.parse(sessionStorage.getItem("stepFinal.algorithms"));
+    }
+    if (sessionStorage.getItem("stepFinal.wantToSelectNetCharge")) {
+      this.wantToSelectNetCharge = sessionStorage.getItem("stepFinal.wantToSelectNetCharge") === "true";
+    }
+    if (sessionStorage.getItem("stepFinal.netCharge")) {
+      this.netCharge = sessionStorage.getItem("stepFinal.netCharge");
     }
   },
   methods: {
@@ -410,8 +431,17 @@ export default {
         this.$refs.settingModal.show();
       }
     },
+    clearCustomSettingsFromSession() {
+      sessionStorage.removeItem("stepFinal.avoidUVSilent");
+      sessionStorage.removeItem("stepFinal.avoidCysteine");
+      sessionStorage.removeItem("stepFinal.frequencies");
+      sessionStorage.removeItem("stepFinal.algorithms");
+      sessionStorage.removeItem("stepFinal.netCharge");
+      sessionStorage.removeItem("stepFinal.wantToSelectNetCharge");
+    },
     changeToDefaultSettings: function(event) {
       this.useDefaultSettings = true;
+      this.clearCustomSettingsFromSession();
       this.setDefaultSettings();
     },
     isValidTotalFrequency: function() {
@@ -516,6 +546,7 @@ export default {
       this.designTypeMap.set(4, 1);
     },
     setDefaultSettings() {
+      console.log("setDefaultSettings called");
       this.restoreFrequencies();
       this.restoreNetCharge();
       this.restoreAlgorithms();
@@ -525,7 +556,7 @@ export default {
     },
     restoreNetCharge() {
       this.netCharge = 0;
-      this.checkDisabledNetCharge = true;
+      this.wantToSelectNetCharge = false;
     },
     restoreFrequencies() {
       this.avoidUVSilent = false;
@@ -551,6 +582,13 @@ export default {
         this.disableAllUVFrequencies();
       }
       this.scaleFrequencies();
+      sessionStorage.setItem("stepFinal.avoidUVSilent", this.avoidUVSilent);
+    },
+    algorithmChange(event) {
+      sessionStorage.setItem("stepFinal.algorithms", JSON.stringify(this.algorithms));
+    },
+    netChargeChanged(event) {
+      sessionStorage.setItem("stepFinal.netCharge", this.netCharge);
     },
     changeCysteine() {
       this.avoidCysteine = !this.avoidCysteine;
@@ -568,6 +606,7 @@ export default {
         });
       }
       this.scaleFrequencies();
+      sessionStorage.setItem("stepFinal.avoidCysteine", this.avoidCysteine);
     },
     scaleFrequencies() {
       const frequenciesSum = this.getTotalFrequencies();
@@ -623,6 +662,7 @@ export default {
       );
     },
     checkFrequencies() {
+      sessionStorage.setItem("stepFinal.frequencies", JSON.stringify(this.frequencies));
       const sum = this.getTotalFrequencies();
       this.totalFrequency = sum === 100.0 ? 100 : sum;
     },
@@ -668,7 +708,7 @@ export default {
           algorithms: this.getAlgorithmsDataForBackend()
         };
 
-        if (this.isEnabledNetCharge()) {
+        if (this.wantToSelectNetCharge) {
           data.config.netCharge = this.netCharge;
         }
       }
@@ -705,13 +745,10 @@ export default {
       }
       this.submitInProgress = false;
     },
-    changeEnabledNetCharge: function() {
-      console.log(this.checkDisabledNetCharge);
+    changeIWantToSelectNetCharge: function() {
       this.netCharge = 0;
-      this.checkDisabledNetCharge = !this.checkDisabledNetCharge;
-    },
-    isEnabledNetCharge: function() {
-      return !this.checkDisabledNetCharge;
+      this.wantToSelectNetCharge = !this.wantToSelectNetCharge;
+      sessionStorage.setItem("stepFinal.wantToSelectNetCharge", this.wantToSelectNetCharge);
     }
   }
 };
