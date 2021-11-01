@@ -4,20 +4,20 @@
       <h2>{{ $t("views.components.results.DesignResultHistory.title") }}</h2>
     </div>
     <div>
-      <table class="table">
+      <table class="table text-center">
         <thead>
           <tr>
-            <th style="text-align: center;">
+            <th>
               {{ $t("views.components.results.DesignResultHistory.headers.Pos") }}
             </th>
-            <th style="text-align: center;">
+            <th>
               {{ $t("views.components.results.DesignResultHistory.headers.Before") }}
             </th>
-            <th style="text-align: center;"></th>
-            <th style="text-align: center;">
+            <th></th>
+            <th>
               {{ $t("views.components.results.DesignResultHistory.headers.After") }}
             </th>
-            <th style="text-align: center;">
+            <th>
               {{ $t("views.components.results.DesignResultHistory.headers.Score") }}
             </th>
           </tr>
@@ -69,23 +69,20 @@ export default {
   },
   methods: {
     fillMutationRows() {
-      this.rows = [];
-      let i;
-      for (i = 0; i < this.mutationsHistory.length - 1; i++) {
-        if (this.mutationsHistory[i].previous_residue != undefined) {
-          let index = this.mutationsHistory[i].mutated_position;
-          let beforeSequence =
-            this.mutationsHistory[i].mutated_sequence.substring(0, index) +
-            this.mutationsHistory[i].previous_residue +
-            this.mutationsHistory[i].mutated_sequence.substring(index + 1);
-          this.rows.push({
-            Pos: this.mutationsHistory[i].mutated_position,
-            Before: beforeSequence,
-            After: this.mutationsHistory[i].mutated_sequence,
-            Score: this.mutationsHistory[i].score_after_mutation
-          });
-        }
-      }
+      this.rows = this.mutationsHistory
+        .map(mutation => {
+          if (mutation.previous_residue) {
+            const index = mutation.mutated_position;
+            const beforeSequence = mutation.mutated_sequence.substring(0, index) + mutation.previous_residue + mutation.mutated_sequence.substring(index + 1);
+            return {
+              Pos: mutation.mutated_position,
+              Before: beforeSequence,
+              After: mutation.mutated_sequence,
+              Score: mutation.score_after_mutation
+            };
+          }
+        })
+        .filter(row => row !== undefined);
       this.$Progress.finish();
     }
   },
