@@ -1,9 +1,12 @@
 <template>
   <div>
-    <div>
+    <div class="mb-4">
       <h2>{{ $t("views.components.results.DesignResultHistory.title") }}</h2>
     </div>
-    <div>
+    <div class="alert alert-light" role="alert" v-if="rows.length === 0">
+      {{ $t("views.components.results.DesignResultHistory.noMutation") }}
+    </div>
+    <div v-if="rows.length > 0">
       <table class="table text-center">
         <thead>
           <tr>

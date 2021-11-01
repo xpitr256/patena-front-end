@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     navigate() {
-      router.go(-1);
+      router.push("/results");
     },
     updateMutationsForPage(page) {
       const startIndex = (page - 1) * this.maxItemsPerPage;

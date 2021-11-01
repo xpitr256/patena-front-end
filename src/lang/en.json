@@ -39,6 +39,7 @@
         },
         "DesignResultHistory": {
           "title": "Mutation history",
+          "noMutation": "No mutations were required.",
           "headers": {
             "Pos": "Pos",
             "Before": "Before",
