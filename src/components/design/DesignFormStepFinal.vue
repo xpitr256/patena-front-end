@@ -401,6 +401,53 @@ export default {
         self.getStepBack();
       }
     });
+
+    if (sessionStorage.getItem("step5.initialSequence.value")) {
+      this.formData.initialSequence.value = sessionStorage.getItem("step5.initialSequence.value");
+    }
+    if (sessionStorage.getItem("step5.initialSequence.name")) {
+      this.formData.initialSequence.name = sessionStorage.getItem("step5.initialSequence.name");
+    }
+
+    if (sessionStorage.getItem("step6.flankingSequence1.value")) {
+      this.formData.flankingSequence1.value = sessionStorage.getItem("step6.flankingSequence1.value");
+    }
+    if (sessionStorage.getItem("step6.flankingSequence1.name")) {
+      this.formData.flankingSequence1.name = sessionStorage.getItem("step6.flankingSequence1.name");
+    }
+
+    if (sessionStorage.getItem("step6.flankingSequence2.value")) {
+      this.formData.flankingSequence2.value = sessionStorage.getItem("step6.flankingSequence2.value");
+    }
+    if (sessionStorage.getItem("step6.flankingSequence2.name")) {
+      this.formData.flankingSequence2.name = sessionStorage.getItem("step6.flankingSequence2.name");
+    }
+
+    if (sessionStorage.getItem("step6.distance")) {
+      this.formData.distance = sessionStorage.getItem("step6.distance");
+    }
+
+    if (sessionStorage.getItem("step7.initialSequence.value")) {
+      this.formData.initialSequence.value = sessionStorage.getItem("step7.initialSequence.value");
+    }
+    if (sessionStorage.getItem("step7.initialSequence.name")) {
+      this.formData.initialSequence.name = sessionStorage.getItem("step7.initialSequence.name");
+    }
+
+    if (sessionStorage.getItem("step7.flankingSequence1.value")) {
+      this.formData.flankingSequence1.value = sessionStorage.getItem("step7.flankingSequence1.value");
+    }
+    if (sessionStorage.getItem("step7.flankingSequence1.name")) {
+      this.formData.flankingSequence1.name = sessionStorage.getItem("step7.flankingSequence1.name");
+    }
+
+    if (sessionStorage.getItem("step7.flankingSequence2.value")) {
+      this.formData.flankingSequence2.value = sessionStorage.getItem("step7.flankingSequence2.value");
+    }
+    if (sessionStorage.getItem("step7.flankingSequence2.name")) {
+      this.formData.flankingSequence2.name = sessionStorage.getItem("step7.flankingSequence2.name");
+    }
+
     if (sessionStorage.getItem("stepFinal.useDefaultSettings")) {
       this.useDefaultSettings = sessionStorage.getItem("stepFinal.useDefaultSettings") === "true";
     }
