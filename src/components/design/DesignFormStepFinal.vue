@@ -397,7 +397,7 @@ export default {
   mounted() {
     const self = this;
     window.addEventListener("keyup", function(event) {
-      if (event.key === "Backspace") {
+      if (event.key === "Backspace" && event.target.tagName !== "INPUT") {
         self.getStepBack();
       }
     });
