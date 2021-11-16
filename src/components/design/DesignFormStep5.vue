@@ -95,16 +95,12 @@ export default {
     next: async function() {
       let formIsValid = await this.$validator.validate();
       if (formIsValid) {
-        const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {
             stepFrom: 5,
             email: this.email,
-            initialSequence: {
-              name: FastaService.getSequenceName(initialSequenceContent),
-              value: FastaService.getFirstSequence(initialSequenceContent)
-            }
+            initialSequence: this.initialSequenceContent
           }
         });
       }
@@ -121,6 +117,10 @@ export default {
         const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
         sessionStorage.setItem("step5.initialSequence.name", FastaService.getSequenceName(initialSequenceContent));
         sessionStorage.setItem("step5.initialSequence.value", FastaService.getFirstSequence(initialSequenceContent));
+        this.initialSequenceContent = {
+          name: sessionStorage.getItem("step5.initialSequence.name"),
+          value: sessionStorage.getItem("step5.initialSequence.value")
+        };
       }
     }
   },
@@ -130,7 +130,7 @@ export default {
       if (event.key === "Enter" && self.nextStep) {
         self.next();
       }
-      if (event.key === "Backspace") {
+      if (event.key === "Backspace" && event.target.localName !== "input") {
         self.getStepBack();
       }
     });

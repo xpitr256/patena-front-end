@@ -124,6 +124,10 @@ export default {
         const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
         sessionStorage.setItem("step7.initialSequence.name", FastaService.getSequenceName(initialSequenceContent));
         sessionStorage.setItem("step7.initialSequence.value", FastaService.getFirstSequence(initialSequenceContent));
+        this.initialSequenceContent = {
+          name: sessionStorage.getItem("step7.initialSequence.name"),
+          value: sessionStorage.getItem("step7.initialSequence.value")
+        };
       }
     },
     flankingSequence1: async function(newVal) {
@@ -131,6 +135,10 @@ export default {
         const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
         sessionStorage.setItem("step7.flankingSequence1.name", FastaService.getSequenceName(flankingSequence1Content));
         sessionStorage.setItem("step7.flankingSequence1.value", FastaService.getFirstSequence(flankingSequence1Content));
+        this.flankingSequence1Content = {
+          name: sessionStorage.getItem("step7.flankingSequence1.name"),
+          value: sessionStorage.getItem("step7.flankingSequence1.value")
+        };
       }
     },
     flankingSequence2: async function(newVal) {
@@ -138,6 +146,10 @@ export default {
         const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
         sessionStorage.setItem("step7.flankingSequence2.name", FastaService.getSequenceName(flankingSequence2Content));
         sessionStorage.setItem("step7.flankingSequence2.value", FastaService.getFirstSequence(flankingSequence2Content));
+        this.flankingSequence2Content = {
+          name: sessionStorage.getItem("step7.flankingSequence2.name"),
+          value: sessionStorage.getItem("step7.flankingSequence2.value")
+        };
       }
     }
   },
@@ -147,7 +159,7 @@ export default {
       if (event.key === "Enter" && self.nextStep) {
         self.next();
       }
-      if (event.key === "Backspace") {
+      if (event.key === "Backspace" && event.target.localName !== "input") {
         self.getStepBack();
       }
     });
@@ -200,26 +212,14 @@ export default {
     next: async function() {
       let formIsValid = await this.$validator.validate();
       if (formIsValid) {
-        const initialSequenceContent = await FastaService.getFastaFileContent(this.initialSequence);
-        const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
-        const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {
             stepFrom: 7,
             email: this.email,
-            initialSequence: {
-              name: FastaService.getSequenceName(initialSequenceContent),
-              value: FastaService.getFirstSequence(initialSequenceContent)
-            },
-            flankingSequence1: {
-              name: FastaService.getSequenceName(flankingSequence1Content),
-              value: FastaService.getFirstSequence(flankingSequence1Content)
-            },
-            flankingSequence2: {
-              name: FastaService.getSequenceName(flankingSequence2Content),
-              value: FastaService.getFirstSequence(flankingSequence2Content)
-            }
+            initialSequence: this.initialSequenceContent,
+            flankingSequence1: this.flankingSequence1Content,
+            flankingSequence2: this.flankingSequence2Content
           }
         });
       }

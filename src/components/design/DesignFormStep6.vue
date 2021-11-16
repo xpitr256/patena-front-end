@@ -133,6 +133,10 @@ export default {
         const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
         sessionStorage.setItem("step6.flankingSequence1.name", FastaService.getSequenceName(flankingSequence1Content));
         sessionStorage.setItem("step6.flankingSequence1.value", FastaService.getFirstSequence(flankingSequence1Content));
+        this.flankingSequence1Content = {
+          name: sessionStorage.getItem("step6.flankingSequence1.name"),
+          value: sessionStorage.getItem("step6.flankingSequence1.value")
+        };
       }
     },
     flankingSequence2: async function(newVal) {
@@ -140,6 +144,10 @@ export default {
         const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
         sessionStorage.setItem("step6.flankingSequence2.name", FastaService.getSequenceName(flankingSequence2Content));
         sessionStorage.setItem("step6.flankingSequence2.value", FastaService.getFirstSequence(flankingSequence2Content));
+        this.flankingSequence2Content = {
+          name: sessionStorage.getItem("step6.flankingSequence2.name"),
+          value: sessionStorage.getItem("step6.flankingSequence2.value")
+        };
       }
     }
   },
@@ -149,7 +157,7 @@ export default {
       if (event.key === "Enter" && self.nextStep) {
         self.next();
       }
-      if (event.key === "Backspace") {
+      if (event.key === "Backspace" && event.target.localName !== "input") {
         self.getStepBack();
       }
     });
@@ -194,8 +202,6 @@ export default {
     next: async function() {
       let formIsValid = await this.$validator.validate();
       if (formIsValid) {
-        const flankingSequence1Content = await FastaService.getFastaFileContent(this.flankingSequence1);
-        const flankingSequence2Content = await FastaService.getFastaFileContent(this.flankingSequence2);
         this.$emit("goToNextStep", {
           nextStep: "Final",
           formData: {
@@ -205,14 +211,8 @@ export default {
             initialSequence: {
               name: this.$t("views.design.noInitialSequence")
             },
-            flankingSequence1: {
-              name: FastaService.getSequenceName(flankingSequence1Content),
-              value: FastaService.getFirstSequence(flankingSequence1Content)
-            },
-            flankingSequence2: {
-              name: FastaService.getSequenceName(flankingSequence2Content),
-              value: FastaService.getFirstSequence(flankingSequence2Content)
-            }
+            flankingSequence1: this.flankingSequence1Content,
+            flankingSequence2: this.flankingSequence2Content
           }
         });
       }
