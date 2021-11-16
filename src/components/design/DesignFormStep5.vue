@@ -130,7 +130,7 @@ export default {
       if (event.key === "Enter" && self.nextStep) {
         self.next();
       }
-      if (event.key === "Backspace" && event.target.tagName !== "INPUT" ) {
+      if (event.key === "Backspace" && event.target.tagName !== "INPUT") {
         self.getStepBack();
       }
     });
