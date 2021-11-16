@@ -41,7 +41,15 @@
         <label class="button-label" for="length-button">
           <span>{{ $t("views.patenaSettings.useDefaultSettings") }}</span>
         </label>
-        <input class="hidden radio-label" v-model="useDefaultSettings" v-bind:value="false" type="radio" id="sequence-button" @click="settingsChoiceClick" />
+        <input
+          class="hidden radio-label"
+          v-model="useDefaultSettings"
+          v-bind:value="false"
+          type="radio"
+          id="sequence-button"
+          @click="settingsChoiceClick"
+          @change="settingsChoiceChanged"
+        />
         <label class="button-label" for="sequence-button">
           <span>{{ $t("views.patenaSettings.useCustomSettings") }}</span>
         </label>
@@ -431,6 +439,11 @@ export default {
         this.$refs.settingModal.show();
       }
     },
+    settingsChoiceChanged: function(event) {
+      if (this.useDefaultSettings === false) {
+        this.algorithmChange();
+      }
+    },
     clearCustomSettingsFromSession() {
       sessionStorage.removeItem("stepFinal.avoidUVSilent");
       sessionStorage.removeItem("stepFinal.avoidCysteine");
@@ -546,7 +559,6 @@ export default {
       this.designTypeMap.set(4, 1);
     },
     setDefaultSettings() {
-      console.log("setDefaultSettings called");
       this.restoreFrequencies();
       this.restoreNetCharge();
       this.restoreAlgorithms();
@@ -749,6 +761,7 @@ export default {
       this.netCharge = 0;
       this.wantToSelectNetCharge = !this.wantToSelectNetCharge;
       sessionStorage.setItem("stepFinal.wantToSelectNetCharge", this.wantToSelectNetCharge);
+      this.netChargeChanged();
     }
   }
 };
