@@ -25,7 +25,7 @@
     </div>
 
     <div class="d-flex flex-row-reverse">
-      <button class="btn btn-primary" @click="next" :disabled="nextStep === null">Next <i class="fas fa-chevron-right"></i></button>
+      <button class="btn btn-primary" @click="next" :disabled="nextStep === null">{{ $t("views.design.next") }} <i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
 </template>
